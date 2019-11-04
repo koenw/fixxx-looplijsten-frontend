@@ -1,5 +1,10 @@
 # Fixxx Looplijsten Frontend
 
+- `npm run lint`
+- `npm run test`
+- `npm run build`
+- `npm run start`
+
 ## Original README
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
