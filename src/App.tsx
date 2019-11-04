@@ -1,11 +1,15 @@
-import React from 'react';
+import React from "react"
+import { Header } from "@datapunt/asc-ui"
+import CaseDetail from "./components/CaseDetail"
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Fixxx Looplijsten</h1>
-      </header>
+      <Header
+        tall={false}
+        title="Fixxx Looplijsten"
+        homeLink="/"
+      />
     </div>
   );
 }
