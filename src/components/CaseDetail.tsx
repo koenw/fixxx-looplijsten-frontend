@@ -1,15 +1,9 @@
 import React from "react"
 import CaseDetailSection from "./CaseDetailSection"
-import styled from "styled-components"
-
-const Div = styled.div`
-  margin: 12px;
-  margin-bottom: 200px;
-`
 
 const CaseDetail: React.FC = () => {
   return (
-    <Div>
+    <div>
       <CaseDetailSection
         title="Adres"
         data= {[
@@ -72,7 +66,7 @@ const CaseDetail: React.FC = () => {
           ["eind", "vr 6 mrt 2019"],
           ["peil", "di 2 mrt 2019"]
         ]} />
-    </Div>
+    </div>
   )
 }
 
