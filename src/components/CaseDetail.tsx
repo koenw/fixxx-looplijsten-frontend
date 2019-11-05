@@ -27,8 +27,8 @@ const CaseDetail: React.FC = () => {
         data= {[
           ["datum", "maandag 17 januari 2019"],
           ["anoniem", "Nee"],
-          ["melder naam", "dhr. Van der Meide"],
-          ["melder email", <a href="mailto://j.vandermeide@gmail.com">j.vandermeide@gmail.com</a>],
+          ["melder naam", "dhr. Doey"],
+          ["melder email", <a href="mailto://j.doey@example.com">j.doey@example.com</a>],
           ["melder telefoonnummer", "06 12345678"],
         ]} />
       <CaseDetailSection
