@@ -7,37 +7,59 @@ const Ul = styled.ul`
 `
 
 const Li = styled.li`
-  padding-bottom: 4px;
+  padding-bottom: 24px;
 `
+
+type Woning = {
+  wng_id: number,
+  url: string,
+  address: string,
+  postal_code_area: string,
+  postal_code_street: string,
+  stadium: string
+}
+type Woningen = Woning[]
 
 const Looplijst: React.FC = () => {
 
-  const [items, setItems] = useState([])
+  const [items, setItems] = useState<Woningen>([])
+
   useEffect(() => {
     (async () => {
-      console.log("fetch")
-      const response = await fetch("http://localhost:8000/api/v1/itineraries/", {
-        mode: "no-cors",
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: "Token 956f22c688ead9ebeb9a21487e27197b0985e68a"
-        }
-      })
-      console.log(response)
-    })()
-  })
+      try {
+        const url = "http://localhost:3000/itineraries.json"
+        const response = await fetch(url)
+        /*
+        const url = "http://localhost:8000/api/v1/itineraries/"
+        const response = await fetch(url, {
+          headers: {
+            "Authorization": "Token 8fff9865c2de6970e0586d6e0eb648c736f88e76",
+          }
+        })
+        */
 
-  /*
-  const items = [
-    ["Damstraat 107-I 1011AC", 1],
-    ["Dam 1 1000AA", 2],
-    ["Weststraat 3 1012AD", 3]
-  ]
-  */
+        const json = await response.json()
+        setItems(json.results[0].items)
+      } catch (err) {
+        console.log(err)
+      }
+    })()
+  }, [])
 
   return (
     <Ul>
-      { items.map(item => <Li><Link to={ `/cases/${ item[1] }` }>{ item[0] }</Link></Li>) }
+      { items.map(item => {
+        const hasStadium = item.stadium && item.stadium !== ""
+        return (
+          <Li key={ item.wng_id }>
+            <Link to={ `/cases/${ item.wng_id }` }>{ item.address }</Link>
+            <p>{ `${ item.postal_code_area } ${ item.postal_code_street }`}</p>
+            { hasStadium &&
+              <p>{ item.stadium }</p>
+            }
+          </Li>
+        )
+      } ) }
     </Ul>
   )
 }
