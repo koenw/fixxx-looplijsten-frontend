@@ -1,7 +1,36 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import CaseDetailSection from "./CaseDetailSection"
+import { getUrl } from "../config/domain"
 
-const CaseDetail: React.FC = () => {
+type Props = {
+  caseId: number
+}
+
+type Case = any
+
+const CaseDetail: React.FC<Props> = ({ caseId }) => {
+
+  const [caseItem, setCaseItem] = useState<Case>()
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const url = getUrl(`case/${ caseId }/`)
+        const response = await fetch(url, {
+          headers: {
+            "Authorization": "Token 8d71767439a570cc8d0f9bad2f5aa5066c51d263",
+          }
+        })
+        const json = await response.json()
+        setCaseItem(json)
+      } catch (err) {
+        console.log(err)
+      }
+    })()
+  }, [caseId])
+
+  console.log(caseItem)
+
   return (
     <div>
       <CaseDetailSection
