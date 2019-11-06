@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react"
 import styled from "styled-components"
+import Label from "./Label"
 
 type Value = string | ReactNode
 type KeyValueDetail = string | ReactNode | [string, Value]
@@ -10,11 +11,7 @@ type Props = {
   data: KeyValueDetails
 }
 
-const Label = styled.label`
-  display: inline-block;
-  min-width: 120px;
-  padding-right: 20px;
-  color: #B4B4B4;
+const P = styled.p`
   margin-bottom: 8px;
 `
 
@@ -27,9 +24,13 @@ const CaseDetailSection: React.FC<Props> = ({ title, data }) => {
       }
       { data.map((keyValue, index) => {
           const hasLabel = Array.isArray(keyValue)
-          const isString = typeof keyValue === "string"
           const key = Array.isArray(keyValue) ? keyValue[0] : keyValue
-          const value = Array.isArray(keyValue) ? keyValue[1] : keyValue
+          let value = Array.isArray(keyValue) ? keyValue[1] : keyValue
+          if (typeof value === "boolean") {
+            value = value === true ? "Ja" : "Nee"
+          }
+          const isString = typeof value === "string"
+
           return (
             <div key={ String(key) + index }>
               { hasLabel &&
@@ -40,7 +41,7 @@ const CaseDetailSection: React.FC<Props> = ({ title, data }) => {
               }
               { !hasLabel &&
                 <>
-                  { isString && <p>{ value }</p> }
+                  { isString && <P>{ value }</P> }
                   { !isString && value }
                 </>
               }
