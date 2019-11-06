@@ -25,12 +25,13 @@ const CaseDetailSection: React.FC<Props> = ({ title, data }) => {
       { hasTitle &&
         <h1>{ title }</h1>
       }
-      { data.map(keyValue => {
+      { data.map((keyValue, index) => {
           const hasLabel = Array.isArray(keyValue)
+          const isString = typeof keyValue === "string"
           const key = Array.isArray(keyValue) ? keyValue[0] : keyValue
           const value = Array.isArray(keyValue) ? keyValue[1] : keyValue
           return (
-            <div key={ String(key) }>
+            <div key={ String(key) + index }>
               { hasLabel &&
                 <>
                   <Label>{ key }</Label>
@@ -38,7 +39,10 @@ const CaseDetailSection: React.FC<Props> = ({ title, data }) => {
                 </>
               }
               { !hasLabel &&
-                <p>{ value }</p>
+                <>
+                  { isString && <p>{ value }</p> }
+                  { !isString && value }
+                </>
               }
             </div>
           )

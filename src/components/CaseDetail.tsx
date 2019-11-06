@@ -48,66 +48,66 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
           footer={ { link: `http://www.google.com/maps/place/${ address }, Amsterdam`, title: "Bekijk op Google Maps" }}
         />
         <CaseDetailSection
-          title="Adres"
+          title="Vakantieverhuur"
           data= {[
-            ["straat", "Wingerdweg"],
-            ["huisnummer", "107"],
-            ["toevoeging", "I"],
-            ["postcode", "1032 AC"],
-            ["bestemming", "huurwoning"],
-            ["bekijk op", <><a href="http://citydata.amsterdam.nl">CityData</a> <a href="https://maps.google.com">Google Maps</a></>]
+            ["Aangevraagd", "Ja"],
+            ["Vandaag verhuurd", "Nee"],
+            ["Verhuurd dit jaar", "23 dagen"],
+            ["Shortstay", "Nee"],
+            ["B&B aangemeld", "Nee"]
           ]} />
         <CaseDetailSection
-          title="Verhuurgegevens"
+          title="Woning"
           data= {[
-            ["vakantieverhuur", "Ja"],
-            ["aantal dagen verhuurd", "23"],
-            ["shortstay", "Nee"],
-            ["B&B", "Nee"]
+            ["Bestemming", "Huurwoning"],
+            ["Etage", "2"],
+            ["Aantal kamers", "2"],
+            ["Woonoppervlak", "40 m²"],
+            ["Totaal oppervlak", "100 m²"],
+            ["Huur", "€ 375"]
           ]} />
         <CaseDetailSection
-          title="Melding"
+          title="Melding / aanleiding"
           data= {[
-            ["datum", "maandag 17 januari 2019"],
-            ["anoniem", "Nee"],
-            ["melder naam", "dhr. Doey"],
-            ["melder email", <a href="mailto://j.doey@example.com">j.doey@example.com</a>],
-            ["melder telefoonnummer", "06 12345678"],
-          ]} />
-        <CaseDetailSection
-          title="Toelichting / Bijzonderheden"
-          data= {[
-            ["eigenaar", "Ymere B.V."],
+            ["In behandeling per", "maandag 17 januari 2019"],
+            ["Anonieme melding", "Nee"],
+            ["Melder", "dhr. Doey"],
+            ["Melder email", <a href="mailto://j.doey@example.com">j.doey@example.com</a>],
+            ["Melder telefoonnummer", <a href="tel://06 12345678">06 12345678</a>],
+            ["Eigenaar", "Xmere B.V."],
             ["CityData", "woning, 60m2, 1 bouwlaag"],
             "Je kunt bij de melder aanbellen om binnen te komen, hij woont op 1C. Er staat een blauwe sticker.",
             <>Link van 4 oktober 2019 naar advertentie op AirBnB: <a href="www.airbnb.nl/rooms/123456">www.airbnb.nl/rooms/123456</a></>
           ]} />
         <CaseDetailSection
+          title="Huidige bewoners (2)"
+          data= {[
+            "1. A.D Van Alkemede (Man)",
+            ["Geboren", "26 feb 2019"],
+            ["Woont hier sinds", "26 feb 2016"],
+            "1. Y Van Alkemede (Vrouw)",
+            ["Geboren", "23 feb 1912"],
+            ["Woont hier sinds", "26 feb 2016"],
+          ]} />
+        <hr />
+        <CaseDetailSection
+          title="Vakantieverhuur dit jaar (23)"
+          data= {[
+            ["Checkin", "26 feb 2019"],
+            ["Checkout", "28 feb 2019"],
+            <hr />,
+            ["Checkin", "6 april 2019"],
+            ["Checkout", "12 april 2019"],
+          ]} />
+        <hr />
+        <CaseDetailSection
           title="Stadia"
           data= {[
-            ["stadium", "Onderzoek Buitendienst"],
-            ["medewerker", "S. de Boer"],
-            ["begin", "di 26 feb 2019"],
-            ["eind", "vr 6 mrt 2019"],
-            ["peil", "di 2 mrt 2019"]
-          ]} />
-        <hr />
-        <CaseDetailSection
-          data= {[
-            ["stadium", "Naar Handhaving"],
-            ["medewerker", "S. de Boer"],
-            ["begin", "di 26 feb 2019"],
-            ["eind", "vr 6 mrt 2019"],
-            ["peil", "di 2 mrt 2019"]
-          ]} />
-        <hr />
-        <CaseDetailSection
-          data= {[
-            ["stadium", "Project naar Handhaving"],
-            ["medewerker", "S. de Boer"],
-            ["begin", "di 26 feb 2019"],
-            ["eind", "vr 6 mrt 2019"],
-            ["peil", "di 2 mrt 2019"]
+            ["Stadium", "Project naar Handhaving"],
+            ["Medewerker", "S. de Boer"],
+            ["Begin", "di 26 feb 2019"],
+            ["Eind", "vr 6 mrt 2019"],
+            ["Peil", "di 2 mrt 2019"]
           ]} />
         </>
       }
