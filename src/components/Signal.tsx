@@ -3,6 +3,7 @@ import styled from "styled-components"
 
 type Props = {
   type?: "ISSUE" | "REGULAR"
+  text?: string
 }
 
 const Span = styled.span`
@@ -17,11 +18,11 @@ const Span = styled.span`
   }
 `
 
-const Signal: React.FC<Props> = ({ type = "REGULAR" }) => {
-  const classNames = ["signal", `signal-${ type.toLowerCase }`].join(" ")
-  const text = type === "ISSUE" ? "ISSUE melding" : "melding"
+const Signal: React.FC<Props> = ({ type = "REGULAR", text }) => {
+  const classNames = ["signal", `signal-${ type.toLowerCase() }`].join(" ")
+  const body = text || (type === "ISSUE" ? "ISSUE melding" : "melding")
   return (
-    <Span className={ classNames }>{ text }</Span>
+    <Span className={ classNames }>{ body }</Span>
   )
 }
 

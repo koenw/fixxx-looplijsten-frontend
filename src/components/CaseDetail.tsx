@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import CaseDetailHeader from "./CaseDetailHeader"
 import CaseDetailSection from "./CaseDetailSection"
+import Signal from "./Signal"
 import Hr from "./Hr"
 import { getUrl } from "../config/domain"
 import authToken from "../config/authToken.json"
@@ -44,6 +45,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const address = caseItem ? `${ caseItem.import_adres.sttnaam } ${ caseItem.import_adres.hsnr } ${ caseItem.import_adres.toev }` : ""
   const postalCode = caseItem ? caseItem.import_adres.postcode : ""
   const personCount = caseItem ? caseItem.bwv_personen.length : 0
+  const signalType = caseItem && caseItem.import_stadia.filter((stadium: any) => stadium.sta_oms === "Issuemelding").length > 0 ? "ISSUE" : "REGULAR"
 
   // Vakantieverhuur
   //const showVakantieverhuur = caseItem && caseItem.bwv_vakantieverhuur.length > 0
@@ -117,14 +119,14 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   }).sort((a: any, b: any) => a.num - b.num).reverse() : []
 
   const stadia = stadiums.reduce((acc: any, stadium: any, index: number) => {
-    acc.push(["Stadium", <strong>{ stadium.description }</strong>])
+    const type = stadium.description === "Issuemelding" ? "ISSUE" : "REGULAR"
+    acc.push(["Stadium", <Signal type={ type } text={ stadium.description }></Signal>])
     acc.push(["Start datum", stadium.dateStart])
     acc.push(["Eind datum", stadium.dateEnd])
     acc.push(["Peil datum", stadium.datePeil])
     if (index < stadiums.length - 1) acc.push(<Hr />)
     return acc
   }, [])
-
 
   return (
     <article>
@@ -135,6 +137,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
           postalCode={ postalCode }
           personCount={ personCount }
           footer={ { link: `http://www.google.com/maps/place/${ address }, Amsterdam`, title: "Bekijk op Google Maps" }}
+          signal={ signalType }
         />
         { showVakantieverhuur &&
         <CaseDetailSection
