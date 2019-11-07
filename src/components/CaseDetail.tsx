@@ -3,6 +3,7 @@ import CaseDetailHeader from "./CaseDetailHeader"
 import CaseDetailSection from "./CaseDetailSection"
 import Hr from "./Hr"
 import { getUrl } from "../config/domain"
+import authToken from "../config/authToken.json"
 
 type Props = {
   caseId: number
@@ -20,7 +21,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
         const url = getUrl(`case/${ caseId }/`)
         const response = await fetch(url, {
           headers: {
-            "Authorization": "Token 8d71767439a570cc8d0f9bad2f5aa5066c51d263",
+            "Authorization": `Token ${ authToken }`
           }
         })
         const json = await response.json()
