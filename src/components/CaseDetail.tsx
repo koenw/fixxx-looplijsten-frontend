@@ -121,7 +121,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
     acc.push(["Peil datum", stadium.datePeil])
     if (index < stadiums.length - 1) acc.push(<Hr />)
     return acc
-  }, [])
+  }, []).reverse()
 
 
   return (
