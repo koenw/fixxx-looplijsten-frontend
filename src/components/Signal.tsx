@@ -8,12 +8,12 @@ type Props = {
 const Span = styled.span`
   display: inline-block;
   color: white;
-  background-color: blue;
+  background-color: #004699;
   border-radius: 99px;
   padding: 2px 12px;
   margin-bottom: 8px;
   &.signal-issue {
-    background-color: red;
+    background-color: #EC0000;
   }
 `
 

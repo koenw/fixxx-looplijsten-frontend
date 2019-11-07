@@ -11,6 +11,12 @@ type Props = {
   data: KeyValueDetails
 }
 
+const Section = styled.section`
+  border: 1px solid #B4B4B4;
+  margin-bottom: 24px;
+  padding: 8px;
+`
+
 const P = styled.p`
   margin-bottom: 8px;
 `
@@ -18,7 +24,7 @@ const P = styled.p`
 const CaseDetailSection: React.FC<Props> = ({ title, data }) => {
   const hasTitle = title !== undefined
   return (
-    <section>
+    <Section>
       { hasTitle &&
         <h1>{ title }</h1>
       }
@@ -48,7 +54,7 @@ const CaseDetailSection: React.FC<Props> = ({ title, data }) => {
             </div>
           )
       }) }
-    </section>
+    </Section>
   )
 }
 

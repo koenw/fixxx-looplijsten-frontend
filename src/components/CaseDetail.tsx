@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import CaseDetailHeader from "./CaseDetailHeader"
 import CaseDetailSection from "./CaseDetailSection"
+import Hr from "./Hr"
 import { getUrl } from "../config/domain"
 
 type Props = {
@@ -87,12 +88,12 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
     })
   }) : []
 
-  const stadia = stadiums.reduce((acc: any, stadium: any) => {
+  const stadia = stadiums.reduce((acc: any, stadium: any, index: number) => {
     acc.push(["Stadium", <strong>{ stadium.description }</strong>])
     acc.push(["Start datum", stadium.dateStart])
     acc.push(["Eind datum", stadium.dateEnd])
     acc.push(["Peil datum", stadium.datePeil])
-    acc.push(<hr />)
+    if (index < stadiums.length - 1) acc.push(<Hr />)
     return acc
   }, [])
 
@@ -146,7 +147,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
           data= {[
             ["Checkin", "26 feb 2019"],
             ["Checkout", "28 feb 2019"],
-            <hr />,
+            <Hr />,
             ["Checkin", "6 april 2019"],
             ["Checkout", "12 april 2019"],
           ]} />
