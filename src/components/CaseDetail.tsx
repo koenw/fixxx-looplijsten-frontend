@@ -145,7 +145,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
           data= {[
             ["Aangevraagd", "Ja"],
             ["Vandaag verhuurd", "Nee"],
-            ["Verhuurd dit jaar", "23 dagen"],
+            ["Verhuurd dit jaar", <a href="#vakantieverhuur">23 dagen</a>],
             ["Shortstay", "Nee"],
             ["B&B aangemeld", "Nee"]
           ]} />
@@ -171,10 +171,12 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
             <p dangerouslySetInnerHTML={ { __html: meldingText } }></p>
           ]} />
         <CaseDetailSection
+          id="personen"
           title={ `Huidige bewoners (${ people.length })` }
           data= { bewoners } />
         { showVakantieverhuur &&
         <CaseDetailSection
+          id="vakantieverhuur"
           title="Vakantieverhuur dit jaar (23)"
           data= {[
             ["Checkin", "26 feb 2019"],

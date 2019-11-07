@@ -49,7 +49,7 @@ const CaseDetailHeader: React.FC<Props> = ({ address, postalCode, personCount, f
       <P>{ postalCode }</P>
       <Signal type={ signal } />
       <div>
-        <Label>Ingeschreven</Label><span>{ personText }</span>
+        <Label>Ingeschreven</Label><span><a href="#personen">{ personText }</a></span>
       </div>
       { showFooter &&
         <Footer>

@@ -7,7 +7,8 @@ type KeyValueDetail = string | ReactNode | [string, Value]
 type KeyValueDetails = KeyValueDetail[]
 
 type Props = {
-  title?: string,
+  id?: string
+  title?: string
   data: KeyValueDetails
 }
 
@@ -21,10 +22,10 @@ const P = styled.p`
   margin-bottom: 8px;
 `
 
-const CaseDetailSection: React.FC<Props> = ({ title, data }) => {
+const CaseDetailSection: React.FC<Props> = ({ id = "", title, data }) => {
   const hasTitle = title !== undefined
   return (
-    <Section>
+    <Section id={ id }>
       { hasTitle &&
         <h1>{ title }</h1>
       }
