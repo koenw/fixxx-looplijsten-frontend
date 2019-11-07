@@ -1,6 +1,7 @@
 import React from "react"
 import Signal from "./Signal"
 import Label from "./Label"
+import Footer from "./Footer"
 import styled from "styled-components"
 
 type Props = {
@@ -27,13 +28,6 @@ const H1 = styled.h1`
 
 const P = styled.p`
   margin-bottom: 8px
-`
-
-const Footer = styled.footer`
-  border-top: 1px solid #B4B4B4
-  margin: 0 -8px
-  padding: 12px 0 4px
-  text-align: center
 `
 
 const CaseDetailHeader: React.FC<Props> = ({ address, postalCode, personCount, footer, signal = "REGULAR" }) => {

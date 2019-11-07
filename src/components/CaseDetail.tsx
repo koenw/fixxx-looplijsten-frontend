@@ -58,6 +58,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const woningWoonOppervlak = caseItem ? caseItem.import_wvs[0].vloeroppervlak_totaal : "-"
   const woningTotaalOppervlak = caseItem ? caseItem.import_wvs[0].nuttig_woonoppervlak : "-"
   const woningHuur = caseItem ? caseItem.import_wvs[0].bedrag_huur : 0
+  const woningBagId = caseItem && caseItem.import_adres.a_dam_bag
 
   // Melding
   const meldingStartDate = caseItem && caseItem.bwv_hotline_melding[0] ? removeTime(caseItem.bwv_hotline_melding[0].melding_datum) : ""
@@ -148,7 +149,9 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
             ["Verhuurd dit jaar", <a href="#vakantieverhuur">23 dagen</a>],
             ["Shortstay", "Nee"],
             ["B&B aangemeld", "Nee"]
-          ]} />
+          ]}
+          footer={ { link: `https://data.amsterdam.nl/data/bag/verblijfsobject/id${ woningBagId }/`, title: "Bekijk op City Data" }}
+          />
         }
         <CaseDetailSection
           title="Woning"

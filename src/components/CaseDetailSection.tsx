@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react"
 import styled from "styled-components"
 import Label from "./Label"
+import Footer from "./Footer"
 
 type Value = string | ReactNode
 type KeyValueDetail = string | ReactNode | [string, Value]
@@ -10,6 +11,10 @@ type Props = {
   id?: string
   title?: string
   data: KeyValueDetails
+  footer?: {
+    title: string
+    link: string
+  }
 }
 
 const Section = styled.section`
@@ -22,8 +27,11 @@ const P = styled.p`
   margin-bottom: 8px;
 `
 
-const CaseDetailSection: React.FC<Props> = ({ id = "", title, data }) => {
+const CaseDetailSection: React.FC<Props> = ({ id = "", title, data, footer }) => {
+
   const hasTitle = title !== undefined
+  const showFooter = footer !== undefined
+
   return (
     <Section id={ id }>
       { hasTitle &&
@@ -55,6 +63,11 @@ const CaseDetailSection: React.FC<Props> = ({ id = "", title, data }) => {
             </div>
           )
       }) }
+      { showFooter &&
+        <Footer>
+          <a href={ footer!.link }>{ footer!.title }</a>
+        </Footer>
+      }
     </Section>
   )
 }
