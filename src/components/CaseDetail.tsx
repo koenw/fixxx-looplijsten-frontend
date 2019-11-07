@@ -11,6 +11,8 @@ type Props = {
 
 type Case = any
 
+const replaceNewLines = (text: string) => text.replace("\n", "<br /><br />")
+
 const CaseDetail: React.FC<Props> = ({ caseId }) => {
 
   const [caseItem, setCaseItem] = useState<Case>()
@@ -61,7 +63,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const meldingMelderEmail = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_emailadres : ""
   const meldingMelderPhoneNumber = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_telnr : ""
   const meldingTextRaw = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].situatie_schets : ""
-  const meldingText = meldingTextRaw.replace("\n", "<br /><br />")
+  const meldingText = replaceNewLines(meldingTextRaw)
 
   // Bewoners
   const people = caseItem ? caseItem.bwv_personen.map((person: any) => {
@@ -80,6 +82,29 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
     return acc
   }, [])
 
+  // Logboek
+  const bevindingen = caseItem ? caseItem.bwv_hotline_bevinding.map((item: any) => {
+    console.log(item)
+    return ({
+      name: item.toez_hdr1_code || "",
+      date: item.bevinding_datum,
+      time: item.bevinding_tijd,
+      hit: item.hit === "J",
+      text: item.opmerking
+    })
+  }) : []
+
+  const logboek = bevindingen.reduce((acc: any, item: any, index: number) => {
+    acc.push(["Toezichthouder", <strong>{ item.name }</strong>])
+    acc.push(["Tijd", item.time])
+    acc.push(["Datum", item.date])
+    acc.push(["Hit", item.hit])
+    acc.push(<p dangerouslySetInnerHTML={ { __html: replaceNewLines(item.text) } }></p>)
+    if (index < bevindingen.length - 1) acc.push(<Hr />)
+    return acc
+  }, [])
+
+  // Stadia
   const stadiums = caseItem ? caseItem.import_stadia.map((stadium: any) => {
     return ({
       description: stadium.sta_oms,
@@ -97,6 +122,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
     if (index < stadiums.length - 1) acc.push(<Hr />)
     return acc
   }, [])
+
 
   return (
     <article>
@@ -153,6 +179,9 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
             ["Checkout", "12 april 2019"],
           ]} />
         }
+        <CaseDetailSection
+          title="Logboek"
+          data= { logboek } />
         <CaseDetailSection
           title="Stadia"
           data= { stadia } />
