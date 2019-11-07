@@ -12,6 +12,7 @@ type Props = {
 type Case = any
 
 const replaceNewLines = (text: string) => text.replace("\n", "<br /><br />")
+const removeTime = (text: string) => text.slice(0, -9)
 
 const CaseDetail: React.FC<Props> = ({ caseId }) => {
 
@@ -57,7 +58,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const woningHuur = caseItem ? caseItem.import_wvs[0].bedrag_huur : 0
 
   // Melding
-  const meldingStartDate = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melding_datum.slice(0, -9) : ""
+  const meldingStartDate = caseItem && caseItem.bwv_hotline_melding[0] ? removeTime(caseItem.bwv_hotline_melding[0].melding_datum) : ""
   const meldingAnoniem = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_anoniem === "J" : false
   const meldingMelderNaam = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_naam : ""
   const meldingMelderEmail = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_emailadres : ""
@@ -84,15 +85,15 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
 
   // Logboek
   const bevindingen = caseItem ? caseItem.bwv_hotline_bevinding.map((item: any) => {
-    console.log(item)
     return ({
       name: item.toez_hdr1_code || "",
-      date: item.bevinding_datum,
+      date: removeTime(item.bevinding_datum),
       time: item.bevinding_tijd,
       hit: item.hit === "J",
-      text: item.opmerking
+      text: item.opmerking,
+      num: parseInt(item.volgnr_bevinding, 10)
     })
-  }) : []
+  }).sort((a: any, b: any) => a.num - b.num).reverse() : []
 
   const logboek = bevindingen.reduce((acc: any, item: any, index: number) => {
     acc.push(["Toezichthouder", <strong>{ item.name }</strong>])
@@ -110,9 +111,10 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
       description: stadium.sta_oms,
       dateStart: stadium.begindatum,
       dateEnd: stadium.einddatum,
-      datePeil: stadium.peildatum
+      datePeil: stadium.peildatum,
+      num: parseInt(stadium.sta_nr, 10)
     })
-  }) : []
+  }).sort((a: any, b: any) => a.num - b.num).reverse() : []
 
   const stadia = stadiums.reduce((acc: any, stadium: any, index: number) => {
     acc.push(["Stadium", <strong>{ stadium.description }</strong>])
@@ -121,7 +123,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
     acc.push(["Peil datum", stadium.datePeil])
     if (index < stadiums.length - 1) acc.push(<Hr />)
     return acc
-  }, []).reverse()
+  }, [])
 
 
   return (
