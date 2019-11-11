@@ -45,7 +45,6 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const address = caseItem ? `${ caseItem.import_adres.sttnaam } ${ caseItem.import_adres.hsnr } ${ caseItem.import_adres.toev }` : ""
   const postalCode = caseItem ? caseItem.import_adres.postcode : ""
   const personCount = caseItem ? caseItem.bwv_personen.length : 0
-  const signalType = caseItem && caseItem.import_stadia.filter((stadium: any) => stadium.sta_oms === "Issuemelding").length > 0 ? "ISSUE" : "REGULAR"
 
   // Vakantieverhuur
   //const showVakantieverhuur = caseItem && caseItem.bwv_vakantieverhuur.length > 0
@@ -129,6 +128,8 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
     return acc
   }, [])
 
+  const lastStadia = stadiums.length ? stadiums[0].description : undefined
+
   return (
     <article>
     { show &&
@@ -138,7 +139,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
           postalCode={ postalCode }
           personCount={ personCount }
           footer={ { link: `http://www.google.com/maps/place/${ address }, Amsterdam`, title: "Bekijk op Google Maps" }}
-          signal={ signalType }
+          signal={ lastStadia }
         />
         { showVakantieverhuur &&
         <CaseDetailSection
