@@ -7,14 +7,14 @@ type Props = {
 }
 
 const Span = styled.span`
-  display: inline-block;
-  color: white;
-  background-color: #004699;
-  border-radius: 99px;
-  padding: 2px 12px;
-  margin-bottom: 8px;
+  display: inline-block
+  color: white
+  background-color: #004699
+  border-radius: 99px
+  padding: 2px 12px
+  margin-bottom: 8px
   &.signal-issue {
-    background-color: #EC0000;
+    background-color: #EC0000
   }
 `
 

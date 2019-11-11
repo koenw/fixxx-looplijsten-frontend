@@ -18,13 +18,13 @@ type Props = {
 }
 
 const Section = styled.section`
-  border: 1px solid #B4B4B4;
-  margin-bottom: 24px;
-  padding: 8px;
+  border: 1px solid #B4B4B4
+  margin-bottom: 24px
+  padding: 8px
 `
 
 const P = styled.p`
-  margin-bottom: 8px;
+  margin-bottom: 8px
 `
 
 const CaseDetailSection: React.FC<Props> = ({ id = "", title, data, footer }) => {

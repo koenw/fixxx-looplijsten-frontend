@@ -5,11 +5,11 @@ import { getUrl } from "../config/domain"
 import authToken from "../config/authToken.json"
 
 const Ul = styled.ul`
-  list-style: none;
+  list-style: none
 `
 
 const Li = styled.li`
-  padding-bottom: 24px;
+  padding-bottom: 24px
 `
 
 type Woning = {
