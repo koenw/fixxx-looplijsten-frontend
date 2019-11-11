@@ -16,7 +16,7 @@ const App: React.FC = () => {
       <div className="App">
         <Header
           tall={ false }
-          title="Fixxx Looplijsten"
+          title="Looplijsten vakantieverhuur"
           homeLink="/"
         />
         <Main>
@@ -28,7 +28,7 @@ const App: React.FC = () => {
         </Main>
       </div>
     </ThemeProvider>
-  );
+  )
 }
 
 export default App
