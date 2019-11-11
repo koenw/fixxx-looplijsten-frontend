@@ -4,7 +4,6 @@ ENV DIR /var/www
 
 WORKDIR $DIR
 COPY . $DIR
-RUN npm ls -la
 RUN npm install .
 RUN npm run build
 
