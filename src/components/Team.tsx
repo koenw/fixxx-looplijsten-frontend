@@ -62,7 +62,7 @@ const Team: React.FC<Props> = ({ id }) => {
         console.log(err)
       }
     })()
-  }, [])
+  }, [id])
 
   const [itineraries, setItineraries] = useState([])
   const [date, setDate] = useState<string>()
@@ -87,7 +87,7 @@ const Team: React.FC<Props> = ({ id }) => {
         console.log(err)
       }
     })()
-  }, [])
+  }, [id])
 
   console.log(team, itineraries, date)
 
