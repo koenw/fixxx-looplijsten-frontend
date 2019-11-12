@@ -40,6 +40,7 @@ const currentDate = () => {
 const Time = styled.time`
   display: block
   margin-bottom: 12px
+  color: #B4B4B4
 `
 
 const Team: React.FC<Props> = ({ id }) => {
@@ -56,7 +57,6 @@ const Team: React.FC<Props> = ({ id }) => {
           }
         })
         const json = await response.json()
-        console.log(json)
         setTeam(json)
       } catch (err) {
         console.log(err)
@@ -89,8 +89,6 @@ const Team: React.FC<Props> = ({ id }) => {
     })()
   }, [id])
 
-  console.log(team, itineraries, date)
-
   const hasLoaded = team !== undefined && itineraries.length > 0 && date !== undefined
 
   return (
@@ -102,7 +100,7 @@ const Team: React.FC<Props> = ({ id }) => {
           <Time>{ date }</Time>
           { itineraries.map((itinerary: Itinerary) => (
             <div key={ itinerary.address }>
-              <Link to={ `/cases/${ itinerary.wng_id || 1 }`}>{ itinerary.address }</Link>
+              <Link to={ `/teams/${ team!.id }/cases/${ itinerary.wng_id || 1 }`}>{ itinerary.address }</Link>
               <p>{ itinerary.postal_code_area }{ itinerary.postal_code_street }</p>
               <div>
                 <Signal text={ itinerary.stadium } />

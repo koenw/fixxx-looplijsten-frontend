@@ -39,8 +39,6 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const showLoading = caseItem == null
   const show = !showLoading
 
-  console.log(caseItem)
-
   // Header
   const address = caseItem ? `${ caseItem.import_adres.sttnaam } ${ caseItem.import_adres.hsnr } ${ caseItem.import_adres.toev }` : ""
   const postalCode = caseItem ? caseItem.import_adres.postcode : ""
@@ -151,7 +149,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
             ["Shortstay", "Nee"],
             ["B&B aangemeld", "Nee"]
           ]}
-          footer={ { link: `https://data.amsterdam.nl/data/bag/verblijfsobject/id${ woningBagId }/`, title: "Bekijk op City Data" }}
+          footer={ { link: `https://data.amsterdam.nl/data/bag/verblijfsobject/id${ woningBagId }/`, title: "Bekijk op Data & informatie" }}
           />
         }
         <CaseDetailSection

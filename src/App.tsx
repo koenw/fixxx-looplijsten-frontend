@@ -26,6 +26,7 @@ const App: React.FC = () => {
             <TeamsPage path="/" />
             <TeamsPage path="/teams" />
             <TeamPage path="/teams/:teamId" />
+            <CasePage path="/teams/:teamId/cases/:caseId" />
             <CasePage path="cases/:caseId" />
             <NotFoundPage default />
           </Router>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { getUrl } from "../config/domain"
 import authToken from "../config/authToken.json"
+import { Link } from "@reach/router"
 
 type User = {
   username: string,
@@ -30,7 +31,6 @@ const Teams: React.FC<Props> = () => {
           }
         })
         const json = await response.json()
-        console.log(json)
         setTeams(json)
       } catch (err) {
         console.log(err)
@@ -41,8 +41,8 @@ const Teams: React.FC<Props> = () => {
   return (
     <div className="Teams">
       { teams.map(({ id, members }) => (
-        <article>
-          <h1><a href={ `/teams/${ id }` }>{ members.map(member => member.first_name).join(" & ") }</a></h1>
+        <article key={ id }>
+          <h1><Link to={ `/teams/${ id }` }>{ members.map(member => member.first_name).join(" & ") }</Link></h1>
         </article>
       )) }
     </div>
