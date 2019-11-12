@@ -1,5 +1,7 @@
 #!groovy
 
+String PROJECT = "fixxx-looplijsten-frontend"
+
 def tryStep(String message, Closure block, Closure tearDown = null) {
     try {
         block();
@@ -19,6 +21,17 @@ def tryStep(String message, Closure block, Closure tearDown = null) {
 node {
     stage("Checkout") {
         checkout scm
+    }
+
+    stage("Lint") {
+        tryStep "lint start", {
+            sh "docker-compose -p ${PROJECT} up --exit-code-from lint"
+        }
+        always {
+            tryStep "lint stop", {
+                sh "docker-compose -p ${PROJECT} down -v || true"
+            }
+        }
     }
 
 

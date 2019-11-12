@@ -6,3 +6,7 @@ services:
     build: .
     ports:
       - "7000:7000"
+  lint:
+    build:
+      context: .
+    command: npm run lint
