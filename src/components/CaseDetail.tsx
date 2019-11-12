@@ -22,7 +22,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   useEffect(() => {
     (async () => {
       try {
-        const url = getUrl(`case/${ caseId }/`)
+        const url = getUrl(`cases/${ caseId }/`)
         const response = await fetch(url, {
           headers: {
             "Authorization": `Token ${ authToken }`

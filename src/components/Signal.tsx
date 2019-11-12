@@ -21,9 +21,9 @@ const Span = styled.span`
 const Signal: React.FC<Props> = ({ type = "REGULAR", text }) => {
   const classNames = ["signal", `signal-${ type.toLowerCase() }`].join(" ")
   const body = text || (type === "ISSUE" ? "ISSUE melding" : "melding")
-  return (
-    <Span className={ classNames }>{ body }</Span>
-  )
+  const trimmedText = text === undefined ? "" : text.trim()
+  const hasBody = trimmedText !== ""
+  return hasBody ? <Span className={ classNames }>{ body }</Span> : null
 }
 
 export default Signal

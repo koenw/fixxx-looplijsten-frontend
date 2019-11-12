@@ -3,6 +3,8 @@ import styled from "styled-components"
 import { ThemeProvider, Header } from "@datapunt/asc-ui"
 import { Router } from "@reach/router"
 import HomePage from "./pages/HomePage"
+import TeamsPage from "./pages/TeamsPage"
+import TeamPage from "./pages/TeamPage"
 import CasePage from "./pages/CasePage"
 import NotFoundPage from "./pages/NotFoundPage"
 
@@ -21,7 +23,9 @@ const App: React.FC = () => {
         />
         <Main>
           <Router>
-            <HomePage path="/" />
+            <TeamsPage path="/" />
+            <TeamsPage path="/teams" />
+            <TeamPage path="/teams/:teamId" />
             <CasePage path="cases/:caseId" />
             <NotFoundPage default />
           </Router>

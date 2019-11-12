@@ -12,13 +12,14 @@ const CasePage: React.FC<Props> = ({ caseId }) => {
   const id = parseInt(caseId!, 10)
   const showCaseDetail = !Number.isNaN(id)
   const crumbs = [
-    { text: "Looplijsten", path: "/" },
+    { text: "Teams", path: "/" },
+    { text: "Looplijst", path: "/team/TODO-teamId" },
     { text: "Case" }
   ]
 
   return (
     <>
-      <BreadCrumbs items={ crumbs }/>
+      <BreadCrumbs items={ crumbs } />
       { showCaseDetail &&
         <CaseDetail caseId={ id } />
       }
