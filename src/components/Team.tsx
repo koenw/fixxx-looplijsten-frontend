@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react"
 import { Link } from "@reach/router"
 import Signal from "./Signal"
 import Hr from "./Hr"
+import DateButton from "./DateButton"
+import { ButtonBar } from "@datapunt/asc-ui"
 import styled from "styled-components"
 import { getUrl } from "../config/domain"
 import authToken from "../config/authToken.json"
@@ -37,10 +39,8 @@ const currentDate = () => {
   return `${ date.getFullYear() }-${ date.getMonth() + 1 }-${ date.getDate() }`
 }
 
-const Time = styled.time`
-  display: block
+const ButtonBarWrap = styled.div`
   margin-bottom: 12px
-  color: #B4B4B4
 `
 
 const Team: React.FC<Props> = ({ id }) => {
@@ -64,8 +64,14 @@ const Team: React.FC<Props> = ({ id }) => {
     })()
   }, [id])
 
-  const [itineraries, setItineraries] = useState([])
+  const [teamItineraries, setTeamItineraries] = useState([])
   const [date, setDate] = useState<string>()
+
+  console.log(date)
+  if (date === undefined) {
+    const today = currentDate()
+    setDate(today)
+  }
 
   useEffect(() => {
     (async () => {
@@ -77,27 +83,28 @@ const Team: React.FC<Props> = ({ id }) => {
           }
         })
         const json = await response.json()
-        const today = currentDate()
-        const jsonToday = json.find((item: any) => item.date === today)
-        if (jsonToday) {
-          setItineraries(jsonToday.items)
-          setDate(jsonToday.date)
-        }
+        setTeamItineraries(json)
       } catch (err) {
         console.log(err)
       }
     })()
   }, [id])
 
-  const hasLoaded = team !== undefined && itineraries.length > 0 && date !== undefined
+  const hasLoaded = team !== undefined && teamItineraries.length > 0 && date !== undefined
+  const dates: string[] = teamItineraries ? teamItineraries.map((itinerary: any) => itinerary.date).sort() : []
+  const result: any = teamItineraries.find((teamItinerary: any) => teamItinerary.date === date)
+  const itineraries = result ? result.items : []
 
   return (
     <div className="Team">
       { hasLoaded &&
         <>
-          <h1>Team { team!.id }</h1>
-          <h2>{ team!.members.map(member => member.first_name).join(" & ") }</h2>
-          <Time>{ date }</Time>
+          <h1>{ team!.members.map(member => member.first_name).join(" & ") }</h1>
+          <ButtonBarWrap>
+            <ButtonBar>
+              { dates.map(d => <DateButton key={ d } date={ d } onClick={ () => setDate(d) } active={ d === date } />) }
+            </ButtonBar>
+          </ButtonBarWrap>
           { itineraries.map((itinerary: Itinerary) => (
             <div key={ itinerary.address }>
               <Link to={ `/teams/${ team!.id }/cases/${ itinerary.wng_id || 1 }`}>{ itinerary.address }</Link>
