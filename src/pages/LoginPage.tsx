@@ -1,5 +1,6 @@
 import React from "react"
 import { RouteComponentProps } from "@reach/router"
+import { navigate } from "@reach/router"
 import { getAuthUrl } from "../config/domain"
 import { Button } from "@datapunt/asc-ui"
 import styled from "styled-components"
@@ -32,8 +33,8 @@ const Input = styled.input`
   }
 `
 
-type Props = RouteComponentProps
-const submit = async (event: React.MouseEvent<HTMLElement>) => {
+const submit = async (event: React.FormEvent<HTMLElement>) => {
+  event.preventDefault();
 
   const email = document.getElementById('email-input') as HTMLInputElement;
   const password = document.getElementById('password-input') as HTMLInputElement;
@@ -50,14 +51,21 @@ const submit = async (event: React.MouseEvent<HTMLElement>) => {
     const login_response = await response;
     const login_json = await login_response.json();
 
+    // Handle error responses
     if (login_response.status === 400) {
-      const message = document.getElementById('message')
-      if (message) {
-        message.innerHTML = 'Login Failed: ' + login_json.non_field_errors + ' ';
+      const message = document.getElementById('error_message')
+      if (message && login_json.non_field_errors) {
+        message.innerHTML = 'Login Failed: ' + login_json.non_field_errors;
+      }
+      else if (message) {
+        message.innerHTML = 'Login Failed';
       }
     }
+
+    // Handle if login is succesful
     else if (login_response.status === 200) {
-      document.cookie = `token=${login_json.token}`;
+      localStorage.setItem('token', login_json.token);
+      navigate('/');
     }
   }
 
@@ -65,13 +73,16 @@ const submit = async (event: React.MouseEvent<HTMLElement>) => {
 
 }
 
-const LoginPage: React.FC<Props> = () => {
+const LoginPage: React.FC<RouteComponentProps> = () => {
   return (
     <LoginContainer>
-      <Input type="text" name="email" id="email-input" placeholder="email" />
-      <Input type="password" name="password" id="password-input" placeholder="password" />
-      <Button onClick={(event: React.MouseEvent<HTMLElement>) => submit(event)} >Submit</Button>
-      <Error id="message"></Error>
+      <form onSubmit={submit}>
+        <Input type="text" name="email" id="email-input" placeholder="email" />
+        <Input type="password" name="password" id="password-input" placeholder="password" />
+        <Button onClick={submit} >Submit</Button>
+        <Error id="error_message"></Error>
+      </form>
+
     </LoginContainer >
   )
 }
