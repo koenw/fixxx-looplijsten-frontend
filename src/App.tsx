@@ -7,6 +7,7 @@ import TeamsPage from "./pages/TeamsPage"
 import TeamPage from "./pages/TeamPage"
 import CasePage from "./pages/CasePage"
 import NotFoundPage from "./pages/NotFoundPage"
+import LoginPage from "./pages/LoginPage"
 
 const Main = styled.main`
   margin: 12px
@@ -28,6 +29,7 @@ const App: React.FC = () => {
             <TeamPage path="/teams/:teamId" />
             <CasePage path="/teams/:teamId/cases/:caseId" />
             <CasePage path="cases/:caseId" />
+            <LoginPage path="login" />
             <NotFoundPage default />
           </Router>
         </Main>
