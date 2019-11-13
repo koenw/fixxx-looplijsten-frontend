@@ -6,7 +6,7 @@ import BreadCrumbs from "../components/BreadCrumbs"
 type Props = RouteComponentProps
 
 const TeamsPage: React.FC<Props> = () => {
-  const crumbs = [{ text: "Teams" }]
+  const crumbs = [{ text: "Alle teams" }]
   return (
     <>
       <BreadCrumbs items={ crumbs }/>

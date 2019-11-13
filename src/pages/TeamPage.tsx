@@ -9,7 +9,7 @@ type Props = RouteComponentProps & {
 
 const TeamPage: React.FC<Props> = ({ teamId }) => {
 
-  const crumbs = [{ text: "Teams", path: "/" }, { text: "Team" }]
+  const crumbs = [{ text: "Alle teams", path: "/" }, { text: "Looplijst" }]
 
   const id = parseInt(teamId!, 10)
   const showTeam = !Number.isNaN(id)

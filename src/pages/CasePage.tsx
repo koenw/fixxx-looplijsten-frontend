@@ -11,8 +11,8 @@ type Props = RouteComponentProps & {
 const CasePage: React.FC<Props> = ({ teamId, caseId }) => {
 
   const crumbs = [
-    { text: "Teams", path: "/" },
-    { text: "Case" }
+    { text: "Alle teams", path: "/" },
+    { text: "Adres" }
   ]
   if (teamId) {
     const id = parseInt(teamId, 10)
