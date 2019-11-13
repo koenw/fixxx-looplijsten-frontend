@@ -10,8 +10,6 @@ type Props = {
   caseId: number
 }
 
-type Case = any
-
 const replaceNewLines = (text: string) => text.replace("\n", "<br /><br />")
 const removeTime = (text: string) => text.slice(0, -9)
 
@@ -48,7 +46,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const meldingStartDate = caseItem && caseItem.bwv_hotline_melding[0] ? formatDate(removeTime(caseItem.bwv_hotline_melding[0].melding_datum), true)! : ""
   const meldingAnoniem = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_anoniem === "J" : false
   const meldingMelderNaam = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_naam : ""
-  const meldingMelderEmail = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_emailadres : ""
+  //const meldingMelderEmail = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_emailadres : ""
   const meldingMelderPhoneNumber = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_telnr : ""
   const meldingTextRaw = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].situatie_schets : ""
   const meldingText = replaceNewLines(meldingTextRaw)

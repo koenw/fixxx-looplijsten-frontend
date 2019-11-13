@@ -3,21 +3,6 @@ import { Link } from "@reach/router"
 import useFetch from "../hooks/useFetch"
 import Hr from "./Hr"
 
-type User = {
-  username: string,
-  first_name: string,
-  last_name: string
-}
-type Users = User[]
-type Team = {
-  id: number,
-  name: string,
-  members: User[]
-}
-type Teams = Team[]
-
-
-
 const Teams: React.FC = () => {
 
   const teams: Teams = useFetch("teams", true)!

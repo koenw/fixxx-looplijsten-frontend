@@ -7,29 +7,6 @@ import Signal from "./Signal"
 import Hr from "./Hr"
 import DateButton from "./DateButton"
 
-type User = {
-  username: string
-  first_name: string
-  last_name: string
-}
-type Users = User[]
-type Team = {
-  id: number
-  name: string
-  members: User[]
-}
-type OptionalTeam = Team | undefined
-type Teams = Team[]
-
-type Itinerary = {
-  id: string
-  wng_id: string
-  stadium: string
-  address: string
-  postal_code_area: string
-  postal_code_street: string
-}
-type Itineraries = Itinerary[]
 
 type Props = {
   id: number
