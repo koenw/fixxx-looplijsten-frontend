@@ -1,5 +1,6 @@
 import React from "react"
 import { Button } from "@datapunt/asc-ui"
+import formatDate from "../utils/formatDate"
 
 type Props = {
   date: string
@@ -13,7 +14,7 @@ const DateButton: React.FC<Props> = ({ date, active, onClick }) => {
 
   return (
     <Button variant={ variant } onClick={ onClick }>
-      <time>{ date }</time>
+      <time>{ formatDate(date, true) }</time>
     </Button>
   )
 }

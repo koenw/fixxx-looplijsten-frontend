@@ -4,6 +4,7 @@ import CaseDetailHeader from "./CaseDetailHeader"
 import CaseDetailSection from "./CaseDetailSection"
 import Signal from "./Signal"
 import Hr from "./Hr"
+import formatDate from "../utils/formatDate"
 
 type Props = {
   caseId: number
@@ -44,7 +45,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const woningBagId = caseItem && caseItem.import_adres.a_dam_bag
 
   // Melding
-  const meldingStartDate = caseItem && caseItem.bwv_hotline_melding[0] ? removeTime(caseItem.bwv_hotline_melding[0].melding_datum) : ""
+  const meldingStartDate = caseItem && caseItem.bwv_hotline_melding[0] ? formatDate(removeTime(caseItem.bwv_hotline_melding[0].melding_datum), true)! : ""
   const meldingAnoniem = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_anoniem === "J" : false
   const meldingMelderNaam = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_naam : ""
   const meldingMelderEmail = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_emailadres : ""
@@ -58,8 +59,8 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
       name: person.naam,
       initials: person.voorletters,
       sex: person.geslacht,
-      born: person.geboortedatum.slice(0, -9),
-      livingSince: person.vestigingsdatum_adres.slice(0, -9)
+      born: formatDate(person.geboortedatum.slice(0, -9))!,
+      livingSince: formatDate(person.vestigingsdatum_adres.slice(0, -9))!
     })
   }) : []
   const bewoners = people.reduce((acc: any, person: any, index: number) => {
@@ -73,7 +74,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const bevindingen = caseItem ? caseItem.bwv_hotline_bevinding.map((item: any) => {
     return ({
       name: item.toez_hdr1_code || "",
-      date: removeTime(item.bevinding_datum),
+      date: formatDate(removeTime(item.bevinding_datum), true)!,
       time: item.bevinding_tijd,
       hit: item.hit === "J",
       text: item.opmerking,
@@ -95,9 +96,9 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const stadiums = caseItem ? caseItem.import_stadia.map((stadium: any) => {
     return ({
       description: stadium.sta_oms,
-      dateStart: stadium.begindatum,
-      dateEnd: stadium.einddatum,
-      datePeil: stadium.peildatum,
+      dateStart: formatDate(stadium.begindatum, true)!,
+      dateEnd: formatDate(stadium.einddatum, true)!,
+      datePeil: formatDate(stadium.peildatum, true)!,
       num: parseInt(stadium.sta_nr, 10)
     })
   }).sort((a: any, b: any) => a.num - b.num).reverse() : []
@@ -171,11 +172,11 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
           id="vakantieverhuur"
           title="Vakantieverhuur dit jaar (23)"
           data= {[
-            ["Checkin", "26 feb 2019"],
-            ["Checkout", "28 feb 2019"],
+            ["Checkin", "vr 26 feb 2019"],
+            ["Checkout", "zo 28 feb 2019"],
             <Hr />,
-            ["Checkin", "6 april 2019"],
-            ["Checkout", "12 april 2019"],
+            ["Checkin", "ma 6 april 2019"],
+            ["Checkout", "za 12 april 2019"],
           ]} />
         }
         <CaseDetailSection
