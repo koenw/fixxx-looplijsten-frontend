@@ -2,9 +2,14 @@ import React from "react"
 import { RouteComponentProps } from "@reach/router"
 import { navigate } from "@reach/router"
 import { getAuthUrl } from "../config/domain"
-import { Button } from "@datapunt/asc-ui"
+import { Button, Heading } from "@datapunt/asc-ui"
 import styled from "styled-components"
 
+
+const Form = styled.form`
+  width: 100%;
+  max-width: 300px;
+`;
 
 const Error = styled.p`
   margin: 18px 0 0 0;
@@ -13,6 +18,11 @@ const Error = styled.p`
 
 const LoginContainer = styled.div`
   margin: 32px 0 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;  
+  height: 75vh;
 `;
 
 const Input = styled.input`
@@ -24,7 +34,6 @@ const Input = styled.input`
   line-height: 18px;
   padding: 10px;
   width: 100%;
-  max-width: 300px;
   margin: 0 0 18px 0;
   display: block;
   &:focus {
@@ -76,12 +85,13 @@ const submit = async (event: React.FormEvent<HTMLElement>) => {
 const LoginPage: React.FC<RouteComponentProps> = () => {
   return (
     <LoginContainer>
-      <form onSubmit={submit}>
+      <Form onSubmit={submit}>
+        <h1>Wonen looplijsten login</h1>
         <Input type="text" name="email" id="email-input" placeholder="email" />
         <Input type="password" name="password" id="password-input" placeholder="password" />
         <Button onClick={submit} >Submit</Button>
         <Error id="error_message"></Error>
-      </form>
+      </Form>
     </LoginContainer >
   )
 }
