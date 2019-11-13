@@ -4,7 +4,7 @@ ENV DIR /var/www
 
 WORKDIR $DIR
 COPY . $DIR
-RUN npm install .
+RUN npm install --unsafe-perm .
 RUN npm run build
 
 EXPOSE 7000
