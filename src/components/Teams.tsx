@@ -1,48 +1,19 @@
-import React, { useState, useEffect } from "react"
-import { getUrl } from "../config/domain"
-import authToken from "../config/authToken.json"
+import React from "react"
 import { Link } from "@reach/router"
+import useFetch from "../hooks/useFetch"
+import Hr from "./Hr"
 
-type User = {
-  username: string,
-  first_name: string,
-  last_name: string
-}
-type Users = User[]
-type Team = {
-  id: number,
-  members: User[]
-}
-type Teams = Team[]
+const Teams: React.FC = () => {
 
-type Props = {}
-
-const Teams: React.FC<Props> = () => {
-
-  const [teams, setTeams] = useState<Teams>([])
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const url = getUrl("teams/")
-        const response = await fetch(url, {
-          headers: {
-            "Authorization": `Token ${ authToken }`
-          }
-        })
-        const json = await response.json()
-        setTeams(json)
-      } catch (err) {
-        console.log(err)
-      }
-    })()
-  }, [])
+  const teams: Teams = useFetch("teams", true)!
 
   return (
     <div className="Teams">
-      { teams.map(({ id, members }) => (
+      { teams.map(({ id, name, members }) => (
         <article key={ id }>
-          <h1><Link to={ `/teams/${ id }` }>{ members.map(member => member.first_name).join(" & ") }</Link></h1>
+          <h1><Link to={ `/teams/${ id }` }>{ name }</Link></h1>
+          <p>{ members.map(member => member.first_name).join(", ") }</p>
+          <Hr />
         </article>
       )) }
     </div>

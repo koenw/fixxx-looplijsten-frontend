@@ -1,32 +1,12 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Link } from "@reach/router"
+import styled from "styled-components"
+import useFetch from "../hooks/useFetch"
+import { ButtonBar } from "@datapunt/asc-ui"
 import Signal from "./Signal"
 import Hr from "./Hr"
-import styled from "styled-components"
-import { getUrl } from "../config/domain"
-import authToken from "../config/authToken.json"
+import DateButton from "./DateButton"
 
-type User = {
-  username: string,
-  first_name: string,
-  last_name: string
-}
-type Users = User[]
-type Team = {
-  id: number,
-  members: User[]
-}
-type Teams = Team[]
-
-type Itinerary = {
-  id: string,
-  wng_id: string,
-  stadium: string,
-  address: string,
-  postal_code_area: string
-  postal_code_street: string
-}
-type Itineraries = Itinerary[]
 
 type Props = {
   id: number
@@ -37,67 +17,46 @@ const currentDate = () => {
   return `${ date.getFullYear() }-${ date.getMonth() + 1 }-${ date.getDate() }`
 }
 
-const Time = styled.time`
-  display: block
-  margin-bottom: 12px
-  color: #B4B4B4
+const H1 = styled.h1`
+  font-size: 24px
+  margin-top: 24px
+`
+const P = styled.p`
+  margin-bottom: 24px
+`
+
+const ButtonBarWrap = styled.div`
+  margin-bottom: 36px
 `
 
 const Team: React.FC<Props> = ({ id }) => {
 
-  const [team, setTeam] = useState<Team>()
+  const team: OptionalTeam = useFetch(`teams/${ id }`)
+  const teamItineraries = useFetch(`team-itineraries/${ id }`, true)
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const url = getUrl(`teams/${ id }/`)
-        const response = await fetch(url, {
-          headers: {
-            "Authorization": `Token ${ authToken }`
-          }
-        })
-        const json = await response.json()
-        setTeam(json)
-      } catch (err) {
-        console.log(err)
-      }
-    })()
-  }, [id])
-
-  const [itineraries, setItineraries] = useState([])
   const [date, setDate] = useState<string>()
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const url = getUrl(`team-itineraries/${ id }/`)
-        const response = await fetch(url, {
-          headers: {
-            "Authorization": `Token ${ authToken }`
-          }
-        })
-        const json = await response.json()
-        const today = currentDate()
-        const jsonToday = json.find((item: any) => item.date === today)
-        if (jsonToday) {
-          setItineraries(jsonToday.items)
-          setDate(jsonToday.date)
-        }
-      } catch (err) {
-        console.log(err)
-      }
-    })()
-  }, [id])
+  if (date === undefined) {
+    const today = currentDate()
+    setDate(today)
+  }
 
-  const hasLoaded = team !== undefined && itineraries.length > 0 && date !== undefined
+  const hasLoaded = team !== undefined && teamItineraries.length > 0 && date !== undefined
+  const dates: string[] = teamItineraries ? teamItineraries.map((itinerary: any) => itinerary.date).sort() : []
+  const result: any = teamItineraries.find((teamItinerary: any) => teamItinerary.date === date)
+  const itineraries = result ? result.items : []
 
   return (
     <div className="Team">
       { hasLoaded &&
         <>
-          <h1>Team { team!.id }</h1>
-          <h2>{ team!.members.map(member => member.first_name).join(" & ") }</h2>
-          <Time>{ date }</Time>
+          <H1>{ team!.name }</H1>
+          <P>{ team!.members.map(member => member.first_name).join(", ") }</P>
+          <ButtonBarWrap>
+            <ButtonBar>
+              { dates.map(d => <DateButton key={ d } date={ d } onClick={ () => setDate(d) } active={ d === date } />) }
+            </ButtonBar>
+          </ButtonBarWrap>
           { itineraries.map((itinerary: Itinerary) => (
             <div key={ itinerary.address }>
               <Link to={ `/teams/${ team!.id }/cases/${ itinerary.wng_id || 1 }`}>{ itinerary.address }</Link>

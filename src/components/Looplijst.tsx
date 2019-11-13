@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "@reach/router"
 import styled from "styled-components"
-import { getUrl } from "../config/domain"
-import authToken from "../config/authToken.json"
+import useFetch from "../hooks/useFetch"
 
 const Ul = styled.ul`
   list-style: none
@@ -24,24 +23,7 @@ type Woningen = Woning[]
 
 const Looplijst: React.FC = () => {
 
-  const [items, setItems] = useState<Woningen>([])
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const url = getUrl("itineraries/")
-        const response = await fetch(url, {
-          headers: {
-            "Authorization": `Token ${ authToken }`
-          }
-        })
-        const json = await response.json()
-        setItems(json.results[0].items)
-      } catch (err) {
-        console.error(err)
-      }
-    })()
-  }, [])
+  const items: Woningen = useFetch("itineraries", true)
 
   return (
     <Ul>

@@ -8,6 +8,10 @@ type Props = {
   address: string
   postalCode: string
   personCount: number
+  caseNumber: number
+  caseCount: number
+  openCaseCount: number
+  caseOpening: string
   signal?: string
   footer?: {
     title: string
@@ -30,7 +34,7 @@ const P = styled.p`
   margin-bottom: 8px
 `
 
-const CaseDetailHeader: React.FC<Props> = ({ address, postalCode, personCount, footer, signal }) => {
+const CaseDetailHeader: React.FC<Props> = ({ address, postalCode, personCount, caseNumber, caseCount, openCaseCount, caseOpening, footer, signal }) => {
   const showFooter = footer !== undefined
   const personText =
     personCount === 0 ? "-" :
@@ -49,6 +53,15 @@ const CaseDetailHeader: React.FC<Props> = ({ address, postalCode, personCount, f
       }
       <div>
         <Label>Ingeschreven</Label><span><a href="#personen">{ personText }</a></span>
+      </div>
+      <div>
+        <Label>Zaaknummer</Label><span><strong>{ caseNumber }</strong> van { caseCount }</span>
+      </div>
+      <div>
+        <Label>Open zaken</Label><span>{ openCaseCount }</span>
+      </div>
+      <div>
+        <Label>Soort, reden</Label><span>{ caseOpening }</span>
       </div>
       { showFooter &&
         <Footer>
