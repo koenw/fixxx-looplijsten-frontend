@@ -1,5 +1,6 @@
 import React from "react"
 import useFetch from "../hooks/useFetch"
+import { Spinner } from "@datapunt/asc-ui"
 import CaseDetailHeader from "./CaseDetailHeader"
 import CaseDetailSection from "./CaseDetailSection"
 import Signal from "./Signal"
@@ -15,10 +16,10 @@ const removeTime = (text: string) => text.slice(0, -9)
 
 const CaseDetail: React.FC<Props> = ({ caseId }) => {
 
-  const caseItem = useFetch(`cases/${ caseId }`)
+  const [isFetching, caseItem] = useFetch(`cases/${ caseId }`)
 
-  const showLoading = caseItem == null
-  const show = !showLoading
+  const showSpinner = isFetching
+  const show = !isFetching
 
   // Header
   const address = caseItem ? `${ caseItem.import_adres.sttnaam } ${ caseItem.import_adres.hsnr } ${ caseItem.import_adres.toev }` : ""
@@ -114,9 +115,12 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const lastStadia = stadiums.length ? stadiums[0].description : undefined
 
   return (
-    <article>
+    <div className="CaseDetail">
+    { showSpinner &&
+      <Spinner size={ 60 } />
+    }
     { show &&
-      <>
+      <article>
         <CaseDetailHeader
           address={ address }
           postalCode={ postalCode }
@@ -183,9 +187,10 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
         <CaseDetailSection
           title="Stadia"
           data= { stadia } />
-        </>
+      </article>
       }
-    </article>
+    }
+    </div>
   )
 }
 

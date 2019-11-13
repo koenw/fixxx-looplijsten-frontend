@@ -22,3 +22,13 @@ declare type Itinerary = {
   postal_code_street: string
 }
 declare type Itineraries = Itinerary[]
+
+declare type Case = {
+  import_adres: any
+  bwv_hotline_bevinding: any
+  bwv_tmp: any
+  bwv_hotline_melding: any
+  bwv_personen: any
+  import_stadia: any
+  import_wvs: any
+}
