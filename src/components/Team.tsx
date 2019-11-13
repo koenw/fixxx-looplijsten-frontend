@@ -8,23 +8,24 @@ import Hr from "./Hr"
 import DateButton from "./DateButton"
 
 type User = {
-  username: string,
-  first_name: string,
+  username: string
+  first_name: string
   last_name: string
 }
 type Users = User[]
 type Team = {
-  id: number,
+  id: number
+  name: string
   members: User[]
 }
 type OptionalTeam = Team | undefined
 type Teams = Team[]
 
 type Itinerary = {
-  id: string,
-  wng_id: string,
-  stadium: string,
-  address: string,
+  id: string
+  wng_id: string
+  stadium: string
+  address: string
   postal_code_area: string
   postal_code_street: string
 }
@@ -42,6 +43,8 @@ const currentDate = () => {
 const H1 = styled.h1`
   font-size: 24px
   margin-top: 24px
+`
+const P = styled.p`
   margin-bottom: 24px
 `
 
@@ -70,7 +73,8 @@ const Team: React.FC<Props> = ({ id }) => {
     <div className="Team">
       { hasLoaded &&
         <>
-          <H1>{ team!.members.map(member => member.first_name).join(" & ") }</H1>
+          <H1>{ team!.name }</H1>
+          <P>{ team!.members.map(member => member.first_name).join(", ") }</P>
           <ButtonBarWrap>
             <ButtonBar>
               { dates.map(d => <DateButton key={ d } date={ d } onClick={ () => setDate(d) } active={ d === date } />) }

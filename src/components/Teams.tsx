@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "@reach/router"
 import useFetch from "../hooks/useFetch"
+import Hr from "./Hr"
 
 type User = {
   username: string,
@@ -10,9 +11,12 @@ type User = {
 type Users = User[]
 type Team = {
   id: number,
+  name: string,
   members: User[]
 }
 type Teams = Team[]
+
+
 
 const Teams: React.FC = () => {
 
@@ -20,9 +24,11 @@ const Teams: React.FC = () => {
 
   return (
     <div className="Teams">
-      { teams.map(({ id, members }) => (
+      { teams.map(({ id, name, members }) => (
         <article key={ id }>
-          <h1><Link to={ `/teams/${ id }` }>{ members.map(member => member.first_name).join(" & ") }</Link></h1>
+          <h1><Link to={ `/teams/${ id }` }>{ name }</Link></h1>
+          <p>{ members.map(member => member.first_name).join(", ") }</p>
+          <Hr />
         </article>
       )) }
     </div>
