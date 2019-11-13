@@ -39,8 +39,14 @@ const currentDate = () => {
   return `${ date.getFullYear() }-${ date.getMonth() + 1 }-${ date.getDate() }`
 }
 
+const H1 = styled.h1`
+  font-size: 24px
+  margin-top: 24px
+  margin-bottom: 24px
+`
+
 const ButtonBarWrap = styled.div`
-  margin-bottom: 12px
+  margin-bottom: 36px
 `
 
 const Team: React.FC<Props> = ({ id }) => {
@@ -64,7 +70,7 @@ const Team: React.FC<Props> = ({ id }) => {
     <div className="Team">
       { hasLoaded &&
         <>
-          <h1>{ team!.members.map(member => member.first_name).join(" & ") }</h1>
+          <H1>{ team!.members.map(member => member.first_name).join(" & ") }</H1>
           <ButtonBarWrap>
             <ButtonBar>
               { dates.map(d => <DateButton key={ d } date={ d } onClick={ () => setDate(d) } active={ d === date } />) }

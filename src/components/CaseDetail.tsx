@@ -158,7 +158,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
             ["In behandeling per", meldingStartDate],
             ["Anonieme melding", meldingAnoniem],
             ["Melder", meldingMelderNaam],
-            ["Melder email", <a href={ "mailto://" + meldingMelderEmail }>{ meldingMelderEmail }</a>],
+            //["Melder email", <a href={ "mailto://" + meldingMelderEmail }>{ meldingMelderEmail }</a>],
             ["Melder telefoonnummer", <a href={ "tel://" + meldingMelderPhoneNumber }>{ meldingMelderPhoneNumber }</a>],
             <p dangerouslySetInnerHTML={ { __html: meldingText } }></p>
           ]} />
