@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Link } from "@reach/router"
+import styled from "styled-components"
+import useFetch from "../hooks/useFetch"
+import { ButtonBar } from "@datapunt/asc-ui"
 import Signal from "./Signal"
 import Hr from "./Hr"
 import DateButton from "./DateButton"
-import { ButtonBar } from "@datapunt/asc-ui"
-import styled from "styled-components"
-import { getUrl } from "../config/domain"
-import authToken from "../config/authToken.json"
 
 type User = {
   username: string,
@@ -18,6 +17,7 @@ type Team = {
   id: number,
   members: User[]
 }
+type OptionalTeam = Team | undefined
 type Teams = Team[]
 
 type Itinerary = {
@@ -45,50 +45,15 @@ const ButtonBarWrap = styled.div`
 
 const Team: React.FC<Props> = ({ id }) => {
 
-  const [team, setTeam] = useState<Team>()
+  const team: OptionalTeam = useFetch(`teams/${ id }`)
+  const teamItineraries = useFetch(`team-itineraries/${ id }`, true)
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const url = getUrl(`teams/${ id }/`)
-        const response = await fetch(url, {
-          headers: {
-            "Authorization": `Token ${ authToken }`
-          }
-        })
-        const json = await response.json()
-        setTeam(json)
-      } catch (err) {
-        console.log(err)
-      }
-    })()
-  }, [id])
-
-  const [teamItineraries, setTeamItineraries] = useState([])
   const [date, setDate] = useState<string>()
 
-  console.log(date)
   if (date === undefined) {
     const today = currentDate()
     setDate(today)
   }
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const url = getUrl(`team-itineraries/${ id }/`)
-        const response = await fetch(url, {
-          headers: {
-            "Authorization": `Token ${ authToken }`
-          }
-        })
-        const json = await response.json()
-        setTeamItineraries(json)
-      } catch (err) {
-        console.log(err)
-      }
-    })()
-  }, [id])
 
   const hasLoaded = team !== undefined && teamItineraries.length > 0 && date !== undefined
   const dates: string[] = teamItineraries ? teamItineraries.map((itinerary: any) => itinerary.date).sort() : []

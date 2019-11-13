@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
+import useFetch from "../hooks/useFetch"
 import CaseDetailHeader from "./CaseDetailHeader"
 import CaseDetailSection from "./CaseDetailSection"
 import Signal from "./Signal"
 import Hr from "./Hr"
-import { getUrl } from "../config/domain"
-import authToken from "../config/authToken.json"
 
 type Props = {
   caseId: number
@@ -17,24 +16,7 @@ const removeTime = (text: string) => text.slice(0, -9)
 
 const CaseDetail: React.FC<Props> = ({ caseId }) => {
 
-  const [caseItem, setCaseItem] = useState<Case>()
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const url = getUrl(`cases/${ caseId }/`)
-        const response = await fetch(url, {
-          headers: {
-            "Authorization": `Token ${ authToken }`
-          }
-        })
-        const json = await response.json()
-        setCaseItem(json)
-      } catch (err) {
-        console.log(err)
-      }
-    })()
-  }, [caseId])
+  const caseItem = useFetch(`cases/${ caseId }`)
 
   const showLoading = caseItem == null
   const show = !showLoading

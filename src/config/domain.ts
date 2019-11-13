@@ -6,5 +6,6 @@ export default config
 
 export const getUrl = (path: string) => {
   const { domain, basePath } = config
-  return `${ domain}${ basePath }${ path }`
+  const shouldAppendSlash = path.substr(-1) !== "/"
+  return `${ domain}${ basePath }${ path }${ shouldAppendSlash ? "/" : "" }`
 }

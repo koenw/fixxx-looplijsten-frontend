@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react"
-import { getUrl } from "../config/domain"
-import authToken from "../config/authToken.json"
+import React from "react"
 import { Link } from "@reach/router"
+import useFetch from "../hooks/useFetch"
 
 type User = {
   username: string,
@@ -15,28 +14,9 @@ type Team = {
 }
 type Teams = Team[]
 
-type Props = {}
+const Teams: React.FC = () => {
 
-const Teams: React.FC<Props> = () => {
-
-  const [teams, setTeams] = useState<Teams>([])
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const url = getUrl("teams/")
-        const response = await fetch(url, {
-          headers: {
-            "Authorization": `Token ${ authToken }`
-          }
-        })
-        const json = await response.json()
-        setTeams(json)
-      } catch (err) {
-        console.log(err)
-      }
-    })()
-  }, [])
+  const teams: Teams = useFetch("teams", true)!
 
   return (
     <div className="Teams">
