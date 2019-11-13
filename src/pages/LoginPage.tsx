@@ -82,7 +82,6 @@ const LoginPage: React.FC<RouteComponentProps> = () => {
         <Button onClick={submit} >Submit</Button>
         <Error id="error_message"></Error>
       </form>
-
     </LoginContainer >
   )
 }

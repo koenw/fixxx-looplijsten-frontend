@@ -6,7 +6,7 @@ import { ButtonBar } from "@datapunt/asc-ui"
 import Signal from "./Signal"
 import Hr from "./Hr"
 import DateButton from "./DateButton"
-
+import { Spinner } from "@datapunt/asc-ui"
 
 type Props = {
   id: number
@@ -31,8 +31,12 @@ const ButtonBarWrap = styled.div`
 
 const Team: React.FC<Props> = ({ id }) => {
 
-  const team: OptionalTeam = useFetch(`teams/${ id }`)
-  const teamItineraries = useFetch(`team-itineraries/${ id }`, true)
+  const [isFetchingTeam, team] = useFetch(`teams/${ id }`) as [boolean, OptionalTeam]
+  const [isFetchingTeamItineraries, teamItineraries] = useFetch(`team-itineraries/${ id }`, true) as [boolean, any]
+
+  const isFetching = isFetchingTeam || isFetchingTeamItineraries
+  const showSpinner = isFetching
+  const show = !isFetching
 
   const [date, setDate] = useState<string>()
 
@@ -41,14 +45,16 @@ const Team: React.FC<Props> = ({ id }) => {
     setDate(today)
   }
 
-  const hasLoaded = team !== undefined && teamItineraries.length > 0 && date !== undefined
   const dates: string[] = teamItineraries ? teamItineraries.map((itinerary: any) => itinerary.date).sort() : []
   const result: any = teamItineraries.find((teamItinerary: any) => teamItinerary.date === date)
   const itineraries = result ? result.items : []
 
   return (
     <div className="Team">
-      { hasLoaded &&
+      { showSpinner &&
+        <Spinner size={ 60 } />
+      }
+      { show &&
         <>
           <H1>{ team!.name }</H1>
           <P>{ team!.members.map(member => member.first_name).join(", ") }</P>

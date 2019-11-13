@@ -4,8 +4,9 @@ import { navigate } from "@reach/router"
 
 const useFetch = (path: string, plural = false): any => {
 
-  const defaultState = plural ? [] : undefined
+  const [isFetching, setIsFetching] = useState(true)
 
+  const defaultState = plural ? [] : undefined
   const [data, setData] = useState(defaultState)
 
   useEffect(() => {
@@ -27,13 +28,16 @@ const useFetch = (path: string, plural = false): any => {
           setData(json)
         }
 
+        setIsFetching(false)
+
       } catch (err) {
         console.error(err)
+        setIsFetching(false)
       }
     })()
   }, [path])
 
-  return data
+  return [isFetching, data]
 }
 
 export default useFetch
