@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import { getUrl } from "../config/domain"
-import authToken from "../config/authToken.json"
+import { navigate } from "@reach/router"
 
-const useFetch = (path: string, plural = false) : any => {
+const useFetch = (path: string, plural = false): any => {
 
   const [isFetching, setIsFetching] = useState(true)
 
@@ -13,14 +13,23 @@ const useFetch = (path: string, plural = false) : any => {
     (async () => {
       try {
         const url = getUrl(path)
+        const authToken = localStorage.getItem('token')
         const response = await fetch(url, {
           headers: {
             "Authorization": `Token ${ authToken }`
           }
         })
-        const json = await response.json()
-        setData(json)
+
+        if (response.status === 403) {
+          navigate('/login')
+        }
+        else {
+          const json = await response.json()
+          setData(json)
+        }
+
         setIsFetching(false)
+
       } catch (err) {
         console.error(err)
         setIsFetching(false)
