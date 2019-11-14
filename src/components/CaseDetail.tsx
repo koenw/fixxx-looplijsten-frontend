@@ -12,7 +12,7 @@ type Props = {
 }
 
 const replaceNewLines = (text: string) => text.replace("\n", "<br /><br />")
-const removeTime = (text: string) => text.slice(0, -9)
+const removeTime = (text: string) => text.replace(/\s[0-9]{2}:[0-9]{2}:[0-9]{2}$/, "")
 
 const CaseDetail: React.FC<Props> = ({ caseId }) => {
 
