@@ -8,6 +8,7 @@ import TeamPage from "./pages/TeamPage"
 import CasePage from "./pages/CasePage"
 import NotFoundPage from "./pages/NotFoundPage"
 import LoginPage from "./pages/LoginPage"
+import Logout from "./components/Logout"
 
 const Main = styled.main`
   margin: 12px
@@ -18,9 +19,10 @@ const App: React.FC = () => {
     <ThemeProvider>
       <div className="App">
         <Header
-          tall={ false }
+          tall={false}
           title="Looplijsten vakantieverhuur"
           homeLink="/"
+          navigation={<Logout />}
         />
         <Main>
           <Router>
