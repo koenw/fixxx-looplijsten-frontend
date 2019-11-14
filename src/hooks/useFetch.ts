@@ -13,10 +13,10 @@ const useFetch = (path: string, plural = false): any => {
     (async () => {
       try {
         const url = getUrl(path)
-        const authToken = localStorage.getItem('token');
+        const authToken = localStorage.getItem('token')
         const response = await fetch(url, {
           headers: {
-            "Authorization": `Token ${authToken}`
+            "Authorization": `Token ${ authToken }`
           }
         })
 
