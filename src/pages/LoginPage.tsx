@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ChangeEvent, FormEvent, useState } from "react"
 import { RouteComponentProps } from "@reach/router"
 import { navigate } from "@reach/router"
 import { getAuthUrl } from "../config/domain"
@@ -41,57 +41,57 @@ const Input = styled.input`
   }
 `
 
-const submit = async (event: React.FormEvent<HTMLElement>) => {
-  event.preventDefault()
+const LoginPage: React.FC<RouteComponentProps> = () => {
 
-  const email = document.getElementById('email-input') as HTMLInputElement
-  const password = document.getElementById('password-input') as HTMLInputElement
-  if (email && password) {
+  const [email, setEmail] = useState("")
+  const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value)
+  }
+  const [password, setPassword] = useState("")
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value)
+  }
+
+  const [errorMessage, setErrorMessage] = useState("")
+
+  const onSubmit = async (event: FormEvent) => {
+
+    event.preventDefault()
+
     const url = getAuthUrl()
     const response = await fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({ username: email.value, password: password.value })
+      body: JSON.stringify({ username: email, password })
     })
-    const login_response = await response
-    const login_json = await login_response.json()
+    const json = await response.json()
 
     // Handle error responses
-    if (login_response.status === 400) {
-      const message = document.getElementById('error_message')
-      if (message && login_json.non_field_errors) {
-        message.innerHTML = 'Login Failed: ' + login_json.non_field_errors
-      }
-      else if (message) {
-        message.innerHTML = 'Login Failed'
-      }
+    if (response.status === 400) {
+      const message = `Login failed${ json.non_field_errors ? `: ${ json.non_field_errors }` : "" }`
+      setErrorMessage(message)
     }
 
-    // Handle if login is succesful
-    else if (login_response.status === 200) {
-      localStorage.setItem('token', login_json.token)
-      navigate('/')
+    // Handle successful login
+    else if (response.status === 200) {
+      localStorage.setItem("token", json.token)
+      navigate("/")
     }
   }
 
-  return event
-
-}
-
-const LoginPage: React.FC<RouteComponentProps> = () => {
   return (
     <LoginContainer>
-      <Form onSubmit={ submit }>
+      <Form onSubmit={ onSubmit }>
         <h1>Looplijsten vakantieverhuur login</h1>
-        <Input type="text" name="email" id="email-input" placeholder="email" />
-        <Input type="password" name="password" id="password-input" placeholder="password" />
-        <Button onClick={submit} >Submit</Button>
-        <Error id="error_message"></Error>
+        <Input type="email" placeholder="email" value={ email } onChange={ onChangeEmail } />
+        <Input type="password" placeholder="wachtwoord" value={ password } onChange={ onChangePassword } />
+        <Error>{ errorMessage }</Error>
+        <Button>Inloggen</Button>
       </Form>
-    </LoginContainer >
+    </LoginContainer>
   )
 }
 
