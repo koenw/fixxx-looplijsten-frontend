@@ -4,9 +4,7 @@ import { getUrl } from "../config/domain"
 import authToken from "../utils/authToken"
 
 const navigateToLogin = () => {
-  const pathname = encodeURIComponent(window.location.pathname)
   navigate("/login")
-  //navigate(`/login?redirect=${ pathname }`)
 }
 
 const useFetch = (path: string, plural = false) : [any, boolean, ErrorMessage] => {
@@ -19,8 +17,14 @@ const useFetch = (path: string, plural = false) : [any, boolean, ErrorMessage] =
 
   useEffect(() => {
 
+    let abortController: AbortController
+
     (async () => {
+
       try {
+
+        abortController = new AbortController()
+        const signal = abortController.signal
 
         const url = getUrl(path)
         const token = authToken.get()
@@ -30,6 +34,7 @@ const useFetch = (path: string, plural = false) : [any, boolean, ErrorMessage] =
         }
         else {
           const response = await fetch(url, {
+            signal,
             headers: {
               "Authorization": `Token ${ token }`
             }
@@ -55,6 +60,10 @@ const useFetch = (path: string, plural = false) : [any, boolean, ErrorMessage] =
         setIsFetching(false)
       }
     })()
+
+    return () => {
+      abortController.abort()
+    }
   }, [path])
 
   return [data, isFetching, error]
