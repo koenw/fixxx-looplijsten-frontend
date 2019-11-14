@@ -189,7 +189,6 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
           data= { stadia } />
       </article>
       }
-    }
     </div>
   )
 }
