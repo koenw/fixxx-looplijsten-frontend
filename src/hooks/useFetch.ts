@@ -3,6 +3,11 @@ import { navigate } from "@reach/router"
 import { getUrl } from "../config/domain"
 import authToken from "../utils/authToken"
 
+const navigateToLogin = () => {
+  const pathname = encodeURIComponent(window.location.pathname)
+  navigate('/login')
+}
+
 const useFetch = (path: string, plural = false): [any, boolean, ErrorMessage] => {
 
   const [isFetching, setIsFetching] = useState(true)
@@ -17,7 +22,10 @@ const useFetch = (path: string, plural = false): [any, boolean, ErrorMessage] =>
       try {
         const url = getUrl(path)
         const token = authToken.get()
-        if (token === undefined) return
+        if (token === undefined) {
+          navigateToLogin()
+          return
+        }
         const response = await fetch(url, {
           headers: {
             "Authorization": `Token ${ token }`
@@ -25,7 +33,7 @@ const useFetch = (path: string, plural = false): [any, boolean, ErrorMessage] =>
         })
 
         if (response.status === 403) {
-          navigate("/login")
+          navigateToLogin()
         }
         else if (response.ok) {
           const json = await response.json()
