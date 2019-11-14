@@ -16,7 +16,7 @@ const removeTime = (text: string) => text.slice(0, -9)
 
 const CaseDetail: React.FC<Props> = ({ caseId }) => {
 
-  const [isFetching, caseItem] = useFetch(`cases/${ caseId }`)
+  const [isFetching, caseItem] = useFetch(`cases/${ caseId }`) as [boolean, OptionalCase]
 
   const showSpinner = isFetching
   const show = !isFetching

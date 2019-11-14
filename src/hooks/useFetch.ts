@@ -10,10 +10,11 @@ const useFetch = (path: string, plural = false): any => {
   const [data, setData] = useState(defaultState)
 
   useEffect(() => {
+
     (async () => {
       try {
         const url = getUrl(path)
-        const authToken = localStorage.getItem('token')
+        const authToken = localStorage.getItem("token")
         const response = await fetch(url, {
           headers: {
             "Authorization": `Token ${ authToken }`
@@ -21,7 +22,7 @@ const useFetch = (path: string, plural = false): any => {
         })
 
         if (response.status === 403) {
-          navigate('/login')
+          navigate("/login")
         }
         else {
           const json = await response.json()

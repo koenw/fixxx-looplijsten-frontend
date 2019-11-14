@@ -22,7 +22,7 @@ const Teams: React.FC = () => {
             <p>{ members.map(member => member.first_name).join(", ") }</p>
             <Hr />
           </article>
-        )) 
+        ))
       }
     </div>
   )

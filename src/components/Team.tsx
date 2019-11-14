@@ -36,7 +36,7 @@ const Team: React.FC<Props> = ({ id }) => {
 
   const isFetching = isFetchingTeam || isFetchingTeamItineraries
   const showSpinner = isFetching
-  const show = !isFetching
+  const show = !isFetching && team !== undefined
 
   const [date, setDate] = useState<string>()
 

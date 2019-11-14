@@ -32,3 +32,4 @@ declare type Case = {
   import_stadia: any
   import_wvs: any
 }
+declare type OptionalCase = Case | undefined
