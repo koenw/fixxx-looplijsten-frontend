@@ -1,9 +1,10 @@
 import React, { ChangeEvent, FormEvent, useState } from "react"
 import { RouteComponentProps } from "@reach/router"
 import { navigate } from "@reach/router"
-import { getAuthUrl } from "../config/domain"
 import { Button } from "@datapunt/asc-ui"
 import styled from "styled-components"
+import { getAuthUrl } from "../config/domain"
+import authToken from "../utils/authToken"
 
 const Form = styled.form`
   width: 100%
@@ -77,7 +78,7 @@ const LoginPage: React.FC<RouteComponentProps> = () => {
 
     // Handle successful login
     else if (response.status === 200) {
-      localStorage.setItem("token", json.token)
+      authToken.set(json.token)
       navigate("/")
     }
   }

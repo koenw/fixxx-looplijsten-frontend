@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
-import { getUrl } from "../config/domain"
 import { navigate } from "@reach/router"
+import { getUrl } from "../config/domain"
+import authToken from "../utils/authToken"
 
 const useFetch = (path: string, plural = false): [any, boolean, ErrorMessage] => {
 
@@ -15,10 +16,11 @@ const useFetch = (path: string, plural = false): [any, boolean, ErrorMessage] =>
     (async () => {
       try {
         const url = getUrl(path)
-        const authToken = localStorage.getItem("token")
+        const token = authToken.get()
+        if (token === undefined) return
         const response = await fetch(url, {
           headers: {
-            "Authorization": `Token ${ authToken }`
+            "Authorization": `Token ${ token }`
           }
         })
 
