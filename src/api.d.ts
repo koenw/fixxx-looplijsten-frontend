@@ -33,3 +33,6 @@ declare type Case = {
   import_wvs: any
 }
 declare type OptionalCase = Case | undefined
+
+declare type OptionalString = string | undefined
+declare type ErrorMessage = OptionalString

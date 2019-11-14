@@ -31,8 +31,8 @@ const ButtonBarWrap = styled.div`
 
 const Team: React.FC<Props> = ({ id }) => {
 
-  const [isFetchingTeam, team] = useFetch(`teams/${ id }`) as [boolean, OptionalTeam]
-  const [isFetchingTeamItineraries, teamItineraries] = useFetch(`team-itineraries/${ id }`, true) as [boolean, any]
+  const [team, isFetchingTeam] = useFetch(`teams/${ id }`) as [Team, boolean, ErrorMessage]
+  const [teamItineraries, isFetchingTeamItineraries] = useFetch(`team-itineraries/${ id }`, true) as [any, boolean, ErrorMessage]
 
   const isFetching = isFetchingTeam || isFetchingTeamItineraries
   const showSpinner = isFetching

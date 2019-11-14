@@ -2,9 +2,10 @@ import { useState, useEffect } from "react"
 import { getUrl } from "../config/domain"
 import { navigate } from "@reach/router"
 
-const useFetch = (path: string, plural = false): any => {
+const useFetch = (path: string, plural = false): [any, boolean, ErrorMessage] => {
 
   const [isFetching, setIsFetching] = useState(true)
+  const [error, setError] = useState<ErrorMessage>()
 
   const defaultState = plural ? [] : undefined
   const [data, setData] = useState(defaultState)
@@ -24,21 +25,24 @@ const useFetch = (path: string, plural = false): any => {
         if (response.status === 403) {
           navigate("/login")
         }
-        else {
+        else if (response.ok) {
           const json = await response.json()
           setData(json)
         }
-
-        setIsFetching(false)
+        else {
+          setError(`Error: HTTP ${ response.status }`)
+        }
 
       } catch (err) {
         console.error(err)
+        setError(err)
+      } finally {
         setIsFetching(false)
       }
     })()
   }, [path])
 
-  return [isFetching, data]
+  return [data, isFetching, error]
 }
 
 export default useFetch

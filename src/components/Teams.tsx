@@ -6,7 +6,7 @@ import { Spinner } from "@datapunt/asc-ui"
 
 const Teams: React.FC = () => {
 
-  const [isFetching, teams] = useFetch("teams", true) as [boolean, Teams]
+  const [teams, isFetching] = useFetch("teams", true) as [Teams, boolean, ErrorMessage]
   const showSpinner = isFetching
   const show = !isFetching
 
