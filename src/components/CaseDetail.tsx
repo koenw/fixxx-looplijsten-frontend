@@ -6,12 +6,11 @@ import CaseDetailSection from "./CaseDetailSection"
 import Signal from "./Signal"
 import Hr from "./Hr"
 import formatDate from "../utils/formatDate"
+import replaceNewLines from "../utils/replaceNewLines"
 
 type Props = {
   caseId: number
 }
-
-const replaceNewLines = (text: string) => text.replace("\n", "<br /><br />")
 
 const CaseDetail: React.FC<Props> = ({ caseId }) => {
 
@@ -49,7 +48,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   //const meldingMelderEmail = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_emailadres : ""
   const meldingMelderPhoneNumber = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_telnr : ""
   const meldingTextRaw = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].situatie_schets : ""
-  const meldingText = replaceNewLines(meldingTextRaw)
+  const meldingText = replaceNewLines(meldingTextRaw, "<br /><br />")
 
   // Bewoners
   const people = caseItem ? caseItem.bwv_personen.map((person: any) => {
@@ -85,7 +84,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
     acc.push(["Tijd", item.time])
     acc.push(["Datum", item.date])
     acc.push(["Hit", item.hit])
-    acc.push(<p dangerouslySetInnerHTML={ { __html: replaceNewLines(item.text) } }></p>)
+    acc.push(<p dangerouslySetInnerHTML={ { __html: replaceNewLines(item.text, "<br /><br />") } }></p>)
     if (index < bevindingen.length - 1) acc.push(<Hr />)
     return acc
   }, [])
