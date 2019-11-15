@@ -12,7 +12,6 @@ type Props = {
 }
 
 const replaceNewLines = (text: string) => text.replace("\n", "<br /><br />")
-const removeTime = (text: string) => text.replace(/\s[0-9]{2}:[0-9]{2}:[0-9]{2}$/, "")
 
 const CaseDetail: React.FC<Props> = ({ caseId }) => {
 
@@ -44,7 +43,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const woningBagId = caseItem && caseItem.import_adres.a_dam_bag
 
   // Melding
-  const meldingStartDate = caseItem && caseItem.bwv_hotline_melding[0] ? formatDate(removeTime(caseItem.bwv_hotline_melding[0].melding_datum), true)! : ""
+  const meldingStartDate = caseItem && caseItem.bwv_hotline_melding[0] ? formatDate(caseItem.bwv_hotline_melding[0].melding_datum, true)! : ""
   const meldingAnoniem = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_anoniem === "J" : false
   const meldingMelderNaam = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_naam : ""
   //const meldingMelderEmail = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_emailadres : ""
@@ -73,7 +72,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const bevindingen = caseItem ? caseItem.bwv_hotline_bevinding.map((item: any) => {
     return ({
       name: item.toez_hdr1_code || "",
-      date: formatDate(removeTime(item.bevinding_datum), true)!,
+      date: formatDate(item.bevinding_datum, true)!,
       time: item.bevinding_tijd,
       hit: item.hit === "J",
       text: item.opmerking,
