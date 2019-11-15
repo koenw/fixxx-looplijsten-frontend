@@ -1,13 +1,13 @@
 declare type User = {
-  username: string,
-  first_name: string,
+  username: string
+  first_name: string
   last_name: string
 }
 declare type Users = User[]
 
 declare type Team = {
-  id: number,
-  name: string,
+  id: number
+  name: string
   members: Users
 }
 declare type OptionalTeam = Team | undefined
