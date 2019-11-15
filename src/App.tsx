@@ -1,13 +1,13 @@
 import React from "react"
 import styled from "styled-components"
-import { ThemeProvider, Header } from "@datapunt/asc-ui"
+import { ThemeProvider } from "@datapunt/asc-ui"
+import HeaderWrap from "./components/HeaderWrap"
 import { Router } from "@reach/router"
 import TeamsPage from "./pages/TeamsPage"
 import TeamPage from "./pages/TeamPage"
 import CasePage from "./pages/CasePage"
 import NotFoundPage from "./pages/NotFoundPage"
 import LoginPage from "./pages/LoginPage"
-import Logout from "./components/Logout"
 
 const Main = styled.main`
   margin: 12px
@@ -17,12 +17,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider>
       <div className="App">
-        <Header
-          tall={false}
-          title="Looplijsten vakantieverhuur"
-          homeLink="/"
-          navigation={<Logout />}
-        />
+        <HeaderWrap />
         <Main>
           <Router>
             <TeamsPage path="/" />

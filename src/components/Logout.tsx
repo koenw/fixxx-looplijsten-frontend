@@ -7,9 +7,8 @@ import authToken from "../utils/authToken"
 const Div = styled.div`
   margin-right: 8px
 `
-type Props = {}
 
-const Logout: React.FC<Props> = () => {
+const Logout: React.FC = () => {
 
   const onClick = () => {
     authToken.clear()
