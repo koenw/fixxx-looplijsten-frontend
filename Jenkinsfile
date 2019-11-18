@@ -77,7 +77,7 @@ if (BRANCH == "master") {
     }
 
     stage('Waiting for approval') {
-        slackSend channel: '#ci-channel', color: 'warning', message: 'SHV-monitor is waiting for Production Release - please confirm'
+        slackSend channel: '#ci-channel', color: 'warning', message: 'Looplijsten frontend is waiting for Production Release - please confirm'
         input "Deploy to Production?"
     }
 
