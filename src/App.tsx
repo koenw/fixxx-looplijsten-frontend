@@ -3,11 +3,11 @@ import styled from "styled-components"
 import { ThemeProvider } from "@datapunt/asc-ui"
 import HeaderWrap from "./components/HeaderWrap"
 import { Router } from "@reach/router"
-import TeamsPage from "./pages/TeamsPage"
-import TeamPage from "./pages/TeamPage"
 import CasePage from "./pages/CasePage"
 import NotFoundPage from "./pages/NotFoundPage"
 import LoginPage from "./pages/LoginPage"
+import ItinerariesPage from "./pages/ItinerariesPage"
+import SearchPage from "./pages/SearchPage"
 
 const Main = styled.main`
   margin: 12px
@@ -20,10 +20,8 @@ const App: React.FC = () => {
         <HeaderWrap />
         <Main>
           <Router>
-            <TeamsPage path="/" />
-            <TeamsPage path="/teams" />
-            <TeamPage path="/teams/:teamId" />
-            <CasePage path="/teams/:teamId/cases/:caseId" />
+            <ItinerariesPage path="/" />
+            <SearchPage path="/zoeken" />
             <CasePage path="/cases/:caseId" />
             <LoginPage path="/login" />
             <NotFoundPage default />

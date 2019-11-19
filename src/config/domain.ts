@@ -1,3 +1,5 @@
+import queryParams from "../utils/queryParams"
+
 const config = {
   domain: "http://localhost:8000/",
   basePath: "api/v1/",
@@ -5,10 +7,11 @@ const config = {
 }
 export default config
 
-export const getUrl = (path: string) => {
+export const getUrl = (path: string, params?: QueryParams) => {
   const { domain, basePath } = config
   const shouldAppendSlash = path.substr(-1) !== "/"
-  return `${ domain }${ basePath }${ path }${ shouldAppendSlash ? "/" : "" }`
+  const url = `${ domain }${ basePath }${ path }${ shouldAppendSlash ? "/" : "" }`
+  return `${ url }${ params ? queryParams(params) : "" }`
 }
 
 export const getAuthUrl = () => {

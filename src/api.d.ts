@@ -36,3 +36,6 @@ declare type OptionalCase = Case | undefined
 
 declare type OptionalString = string | undefined
 declare type ErrorMessage = OptionalString
+
+declare type SearchResult = any
+declare type SearchResults = SearchResult[]
