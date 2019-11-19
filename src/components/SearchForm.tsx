@@ -3,22 +3,23 @@ import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import useOnChangeState from "../hooks/useOnChangeState"
 import { getUrl } from "../config/domain"
+import Input from "./Input"
 
 type Props = {
   setResults: Dispatch<SetStateAction<never[]>>
 }
 
-const Input = styled.input`
-  height: 39px
+const InputSearchForm = styled(Input)`
+  height: 44px
   margin-right: 4px
   vertical-align: top
 `
 
-const InputPostalCode = styled(Input)`
+const InputPostalCode = styled(InputSearchForm)`
   width: 120px
 `
 
-const InputNumber = styled(Input)`
+const InputNumber = styled(InputSearchForm)`
   width: 40px
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
@@ -27,7 +28,7 @@ const InputNumber = styled(Input)`
   }
 `
 
-const InputAddition = styled(Input)`
+const InputAddition = styled(InputSearchForm)`
   width: 40px
 `
 
