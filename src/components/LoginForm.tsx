@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, FormEvent, useState } from "react"
+import React, { FC, FormEvent, useState } from "react"
 import useOnChangeState from "../hooks/useOnChangeState"
 import { navigate } from "@reach/router"
 import styled from "styled-components"

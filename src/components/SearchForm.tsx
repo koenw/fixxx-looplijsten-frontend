@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, Dispatch, SetStateAction } from "react"
+import React, { FC, FormEvent } from "react"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Search } from "@datapunt/asc-assets"
@@ -26,12 +26,6 @@ const InputWrap = styled.div`
 const Input = styled(InputBase)`
   height: 44px
   width: calc(100% - 4px)
-`
-
-const InputSearchForm = styled(Input)`
-  height: 44px
-  margin-right: 4px
-  vertical-align: top
 `
 
 const InputWrapPostalCode = styled(InputWrap)`
