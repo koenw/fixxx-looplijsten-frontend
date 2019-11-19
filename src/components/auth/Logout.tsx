@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { navigate } from "@reach/router"
-import authToken from "../utils/authToken"
+import authToken from "../../utils/authToken"
 import { Logout as LogoutIcon } from "@datapunt/asc-assets"
 
 const Div = styled.div`

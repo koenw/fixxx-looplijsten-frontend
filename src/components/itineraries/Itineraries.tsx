@@ -1,8 +1,8 @@
 import React, { FC } from "react"
 import { Spinner } from "@datapunt/asc-ui"
 import Itinerary from "./Itinerary"
-import ErrorMessage from "./ErrorMessage"
-import useFetch from "../hooks/useFetch"
+import ErrorMessage from "../global/ErrorMessage"
+import useFetch from "../../hooks/useFetch"
 
 const Itineraries: FC = () => {
 

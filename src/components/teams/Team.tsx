@@ -1,10 +1,10 @@
 import React, { useState } from "react"
 import { Link } from "@reach/router"
 import styled from "styled-components"
-import useFetch from "../hooks/useFetch"
+import useFetch from "../../hooks/useFetch"
 import { ButtonBar } from "@datapunt/asc-ui"
-import Signal from "./Signal"
-import Hr from "./Hr"
+import Signal from "../global/Signal"
+import Hr from "../styled/Hr"
 import DateButton from "./DateButton"
 import { Spinner } from "@datapunt/asc-ui"
 

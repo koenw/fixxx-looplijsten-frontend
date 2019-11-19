@@ -2,9 +2,9 @@ import React, { FC, FormEvent } from "react"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Search } from "@datapunt/asc-assets"
-import useOnChangeState from "../hooks/useOnChangeState"
-import { getUrl } from "../config/domain"
-import InputBase from "./Input"
+import useOnChangeState from "../../hooks/useOnChangeState"
+import { getUrl } from "../../config/domain"
+import InputBase from "../styled/Input"
 
 type Props = {
   setResults: SetState

@@ -1,7 +1,7 @@
 import React from "react"
 import { RouteComponentProps } from "@reach/router"
-import Itineraries from "../components/Itineraries"
-import Navigation from "../components/Navigation"
+import Itineraries from "../components/itineraries/Itineraries"
+import Navigation from "../components/global/Navigation"
 
 const ItinerariesPage: React.FC<RouteComponentProps> = () => {
   return (

@@ -1,12 +1,12 @@
 import React from "react"
-import useFetch from "../hooks/useFetch"
+import useFetch from "../../hooks/useFetch"
 import { Spinner } from "@datapunt/asc-ui"
 import CaseDetailHeader from "./CaseDetailHeader"
 import CaseDetailSection from "./CaseDetailSection"
-import Signal from "./Signal"
-import Hr from "./Hr"
-import formatDate from "../utils/formatDate"
-import replaceNewLines from "../utils/replaceNewLines"
+import Signal from "../global/Signal"
+import Hr from "../styled/Hr"
+import formatDate from "../../utils/formatDate"
+import replaceNewLines from "../../utils/replaceNewLines"
 
 type Props = {
   caseId: number

@@ -1,6 +1,6 @@
 import React from "react"
-import CaseDetail from "../components/CaseDetail"
-import BreadCrumbs from "../components/BreadCrumbs"
+import CaseDetail from "../components/cases/CaseDetail"
+import BreadCrumbs from "../components/global/BreadCrumbs"
 import { RouteComponentProps } from "@reach/router"
 
 type Props = RouteComponentProps & {

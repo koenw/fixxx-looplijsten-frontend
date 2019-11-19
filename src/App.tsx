@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { ThemeProvider } from "@datapunt/asc-ui"
-import HeaderWrap from "./components/HeaderWrap"
+import HeaderWrap from "./components/global/HeaderWrap"
 import { Router } from "@reach/router"
 import CasePage from "./pages/CasePage"
 import NotFoundPage from "./pages/NotFoundPage"

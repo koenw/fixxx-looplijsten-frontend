@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react"
 import styled from "styled-components"
-import Label from "./Label"
+import Label from "../styled/Label"
 import Footer from "./Footer"
 
 type Value = string | ReactNode

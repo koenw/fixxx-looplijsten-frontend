@@ -1,13 +1,13 @@
 import React, { FC, FormEvent, useState } from "react"
-import useOnChangeState from "../hooks/useOnChangeState"
+import useOnChangeState from "../../hooks/useOnChangeState"
 import { navigate } from "@reach/router"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Login as LoginIcon } from "@datapunt/asc-assets"
-import { getAuthUrl } from "../config/domain"
-import authToken from "../utils/authToken"
-import ErrorMessage from "./ErrorMessage"
-import Input from "./Input"
+import { getAuthUrl } from "../../config/domain"
+import authToken from "../../utils/authToken"
+import ErrorMessage from "../global/ErrorMessage"
+import Input from "../styled/Input"
 
 const Form = styled.form`
   width: 100%
