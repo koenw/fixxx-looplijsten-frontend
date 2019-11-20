@@ -5,6 +5,7 @@ import { Search } from "@datapunt/asc-assets"
 import useOnChangeState from "../../hooks/useOnChangeState"
 import { getUrl } from "../../config/domain"
 import InputBase from "../styled/Input"
+import authToken from "../../utils/authToken"
 
 type Props = {
   setResults: SetState
@@ -62,14 +63,16 @@ const SearchForm: FC<Props> = ({ setResults }) => {
     try {
       const params = { postalCode, streetNumber, suffix }
       const url = getUrl("search", params)
+      const token = authToken.get()
       const response = await fetch(url, {
         headers: {
           Accept: "application/json",
+          Authorization: `Token ${ token }`,
           "Content-Type": "application/json"
         }
       })
       const json = await response.json()
-      console.log(json)
+      setResults(json)
     } catch (err) {
       console.error(err)
     }
