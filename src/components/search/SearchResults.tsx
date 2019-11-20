@@ -29,7 +29,7 @@ const SearchResults: FC<Props> = ({ results }) => {
 
     const url = getUrl("itineraries/items")
     const token = authToken.get()
-    const response = await fetch(url, {
+    await fetch(url, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -38,8 +38,6 @@ const SearchResults: FC<Props> = ({ results }) => {
       },
       body: JSON.stringify({ id })
     })
-    const json = await response.json()
-    console.log(response)
   }
 
   return (

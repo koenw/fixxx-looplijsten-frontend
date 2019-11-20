@@ -1,4 +1,4 @@
-import React, { FC, FormEvent } from "react"
+import React, { FC, FormEvent, useState } from "react"
 import { Spinner } from "@datapunt/asc-ui"
 import Itinerary from "./Itinerary"
 import ErrorMessage from "../global/ErrorMessage"
@@ -16,14 +16,14 @@ const Div = styled.div`
 
 const Itineraries: FC = () => {
 
+  const [deleted, setDeleted] = useState<number[]>([])
   const [result, isFetching, errorMessage] = useFetch("itineraries") as [any, boolean, ErrorMessage]
-  console.log(result)
   const itineraries: Itineraries = result !== undefined ? result[0].items : []
+  const nonDeletedItineraries = itineraries.filter(itinerary => !deleted.includes(parseInt(itinerary.id, 10)))
   const showSpinner = isFetching
   const showError = errorMessage !== undefined
   const show = !showSpinner && !showError
-  const hasItineraries = itineraries.length > 0
-  console.log(itineraries)
+  const hasItineraries = nonDeletedItineraries.length > 0
 
   const onClick = (id: number) => (async (event: FormEvent) => {
 
@@ -39,6 +39,9 @@ const Itineraries: FC = () => {
         "Content-Type": "application/json"
       }
     })
+    if (response.ok) {
+      setDeleted(deleted.concat(id))
+    }
   })
 
   const emptyText = "Je looplijst is leeg. Zoek adressen om aan je looplijst toe te voegen."
@@ -51,7 +54,7 @@ const Itineraries: FC = () => {
       { show &&
         (
           hasItineraries ?
-            itineraries.map(({ id }) => (
+            nonDeletedItineraries.map(({ id }) => (
               <Div key={ id }>
                 <Itinerary itinerary={ { id, address: `Damweg ${ id }`, postal_code: "1234AA", stadium: "Issuemelding" } } />
                 <DeleteButton onClick={ onClick(parseInt(id, 10)) } />
