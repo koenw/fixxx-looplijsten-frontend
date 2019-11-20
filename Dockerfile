@@ -8,5 +8,6 @@ RUN npm ci --unsafe-perm .
 RUN npm run build
 
 EXPOSE 7000
+EXPOSE 443
 
-CMD npm run serve
+CMD npm run serve-production
