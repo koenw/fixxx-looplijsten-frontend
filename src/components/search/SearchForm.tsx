@@ -22,6 +22,7 @@ const Label = styled.label`
 
 const InputWrap = styled.div`
   display: inline-block
+  width: 90px
 `
 const Input = styled(InputBase)`
   height: 44px
@@ -29,11 +30,10 @@ const Input = styled(InputBase)`
 `
 
 const InputWrapPostalCode = styled(InputWrap)`
-  width: calc(100% - 198px)
+  width: calc(100% - 234px)
 `
 
 const InputWrapStreetNumber = styled(InputWrap)`
-  width: 72px
   input {
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {
@@ -41,10 +41,6 @@ const InputWrapStreetNumber = styled(InputWrap)`
       margin: 0
     }
   }
-`
-
-const InputWrapSuffix = styled(InputWrap)`
-  width: 72px
 `
 
 const ButtonWrap = styled.div`
@@ -105,14 +101,14 @@ const SearchForm: FC<Props> = ({ setResults }) => {
           onChange={ onChangeStreetNumber }
           />
       </InputWrapStreetNumber>
-      <InputWrapSuffix>
-        <Label>toev.</Label>
+      <InputWrap>
+        <Label>hslt.&nbsp;/&nbsp;etage</Label>
         <Input
           type="text"
           value={ suffix }
           onChange={ onChangeSuffix }
           />
-      </InputWrapSuffix>
+      </InputWrap>
       <ButtonWrap>
         <SearchButton variant="secondary" iconSize={ 24 } icon={ <Search /> } />
       </ButtonWrap>
