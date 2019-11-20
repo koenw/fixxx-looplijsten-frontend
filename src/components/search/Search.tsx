@@ -4,7 +4,6 @@ import SearchResults from "./SearchResults"
 
 const Search: FC = () => {
   const [results, setResults] = useState([])
-  console.log(results)
   return (
     <div className="Search">
       <SearchForm setResults={ setResults } />
