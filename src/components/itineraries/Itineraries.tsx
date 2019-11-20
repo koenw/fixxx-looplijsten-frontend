@@ -7,7 +7,8 @@ import useFetch from "../../hooks/useFetch"
 const Itineraries: FC = () => {
 
   const [result, isFetching, errorMessage] = useFetch("itineraries") as [any, boolean, ErrorMessage]
-  const itineraries = result !== undefined ? result.results : []
+  console.log(result)
+  const itineraries = result !== undefined ? result[0].items : []
   const showSpinner = isFetching
   const showError = errorMessage !== undefined
   const show = !showSpinner && !showError
