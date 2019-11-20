@@ -54,12 +54,15 @@ const Itineraries: FC = () => {
       { show &&
         (
           hasItineraries ?
-            nonDeletedItineraries.map(({ id }) => (
-              <Div key={ id }>
-                <Itinerary itinerary={ { id, address: `Damweg ${ id }`, postal_code: "1234AA", stadium: "Issuemelding" } } />
-                <DeleteButton onClick={ onClick(parseInt(id, 10)) } />
-              </Div>
-            ))
+            nonDeletedItineraries.map(({ id, case: caseItem }) => {
+              const { address = "Dummystraat 3", postal_code = "1234DD", stadium = "Issuemelding" } = caseItem || {}
+              return (
+                <Div key={ id }>
+                  <Itinerary itinerary={ { id, address, postal_code, stadium } } />
+                  <DeleteButton onClick={ onClick(parseInt(id, 10)) } />
+                </Div>
+              )
+            })
             :
             <p>{ emptyText }</p>
         )

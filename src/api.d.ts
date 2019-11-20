@@ -15,9 +15,11 @@ declare type Teams = Team[]
 
 declare type Itinerary = {
   id: string
-  address: string
-  stadium: string
-  postal_code: string
+  case: {
+    address: string
+    postal_code: string
+    stadium: string
+  }
   wng_id: string
   postal_code_area: string
   postal_code_street: string

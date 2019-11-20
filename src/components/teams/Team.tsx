@@ -63,7 +63,7 @@ const Team: React.FC<Props> = ({ id }) => {
               { dates.map(d => <DateButton key={ d } date={ d } onClick={ () => setDate(d) } active={ d === date } />) }
             </ButtonBar>
           </ButtonBarWrap>
-          { itineraries.map((itinerary: Itinerary) => (
+          { itineraries.map((itinerary: any) => (
             <div key={ itinerary.address }>
               <Link to={ `/teams/${ team!.id }/cases/${ itinerary.wng_id || 1 }`}>{ itinerary.address }</Link>
               <p>{ itinerary.postal_code_area }{ itinerary.postal_code_street }</p>
