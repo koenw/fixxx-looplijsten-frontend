@@ -1,3 +1,7 @@
+declare type Id = number
+declare type OptionalId = Id | undefined
+declare type Ids = Id[]
+
 declare type User = {
   username: string
   first_name: string
@@ -6,7 +10,7 @@ declare type User = {
 declare type Users = User[]
 
 declare type Team = {
-  id: number
+  id: Id
   name: string
   members: Users
 }
@@ -14,7 +18,7 @@ declare type OptionalTeam = Team | undefined
 declare type Teams = Team[]
 
 declare type Itinerary = {
-  id: string
+  id: Id
   case: {
     address: string
     postal_code: string

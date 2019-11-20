@@ -16,16 +16,16 @@ const Div = styled.div`
 
 const Itineraries: FC = () => {
 
-  const [deleted, setDeleted] = useState<number[]>([])
+  const [deleted, setDeleted] = useState<Ids>([])
   const [result, isFetching, errorMessage] = useFetch("itineraries") as [any, boolean, ErrorMessage]
-  const itineraries: Itineraries = result !== undefined ? result[0].items : []
-  const nonDeletedItineraries = itineraries.filter(itinerary => !deleted.includes(parseInt(itinerary.id, 10)))
+  const itineraries: Itineraries = result !== undefined ? result.items : []
+  const nonDeletedItineraries = itineraries.filter(itinerary => !deleted.includes(itinerary.id))
   const showSpinner = isFetching
   const showError = errorMessage !== undefined
   const show = !showSpinner && !showError
   const hasItineraries = nonDeletedItineraries.length > 0
 
-  const onClick = (id: number) => (async (event: FormEvent) => {
+  const onClick = (id: Id) => (async (event: FormEvent) => {
 
     event.preventDefault()
 
@@ -59,7 +59,7 @@ const Itineraries: FC = () => {
               return (
                 <Div key={ id }>
                   <Itinerary itinerary={ { id, address, postal_code, stadium } } />
-                  <DeleteButton onClick={ onClick(parseInt(id, 10)) } />
+                  <DeleteButton onClick={ onClick(id) } />
                 </Div>
               )
             })
