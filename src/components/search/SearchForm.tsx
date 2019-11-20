@@ -87,6 +87,7 @@ const SearchForm: FC<Props> = ({ setResults }) => {
           pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}"
           title="Geldige postcodes zijn 1234AA of 1234 aa"
           required
+          autoFocus
           value={ postalCode }
           onChange={ onChangePostalCode }
           />
