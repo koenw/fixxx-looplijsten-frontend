@@ -6,7 +6,7 @@ import { getUrl } from "../../config/domain"
 import authToken from "../../utils/authToken"
 
 type Props = {
-  results: SearchResults
+  results?: SearchResults
 }
 
 const Div = styled.div`
@@ -20,10 +20,10 @@ const P = styled.p`
 
 const SearchResults: FC<Props> = ({ results }) => {
 
-  const showResults = results.length > 0
-  const isEmpty = !showResults
+  const showResults = results && results.length > 0
+  const showEmpty = results && results.length === 0
 
-  const onClick = (id: number) => (async (event: FormEvent) => {
+  const onClick = (id: number) => async (event: FormEvent) => {
 
     event.preventDefault()
 
@@ -40,20 +40,20 @@ const SearchResults: FC<Props> = ({ results }) => {
     })
     const json = await response.json()
     console.log(response)
-  })
+  }
 
   return (
     <div className="SearchResults">
     {
       showResults &&
-      results.map(result => (
+      results!.map(result => (
         <Div key={ result.id }>
           <Itinerary itinerary={ result } />
           <AddButton onClick={ onClick(result.id) } />
         </Div>
       ))
     }
-    { isEmpty &&
+    { showEmpty &&
       <P>Geen resultaten</P>
     }
     </div>

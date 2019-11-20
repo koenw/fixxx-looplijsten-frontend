@@ -3,7 +3,7 @@ import SearchForm from "./SearchForm"
 import SearchResults from "./SearchResults"
 
 const Search: FC = () => {
-  const [results, setResults] = useState([])
+  const [results, setResults] = useState<SearchResults | undefined>()
   return (
     <div className="Search">
       <SearchForm setResults={ setResults } />
