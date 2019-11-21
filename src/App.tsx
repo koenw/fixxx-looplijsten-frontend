@@ -8,6 +8,7 @@ import NotFoundPage from "./pages/NotFoundPage"
 import LoginPage from "./pages/LoginPage"
 import ItinerariesPage from "./pages/ItinerariesPage"
 import SearchPage from "./pages/SearchPage"
+import ParsePage from "./pages/ParsePage"
 
 const Main = styled.main`
   margin: 15px
@@ -22,6 +23,7 @@ const App: React.FC = () => {
           <Router>
             <ItinerariesPage path="/" />
             <SearchPage path="/zoeken" />
+            <ParsePage path="/parse" />
             <CasePage path="/cases/:caseId" />
             <LoginPage path="/login" />
             <NotFoundPage default />

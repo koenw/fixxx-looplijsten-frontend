@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react"
 
-type ChangeEventInput = ChangeEvent<HTMLInputElement>
+type Element = HTMLInputElement | HTMLTextAreaElement
+type ChangeEventInput = ChangeEvent<Element>
 type OnChangeHandler = (a: ChangeEventInput) => void
 
 const useOnChangeState = (defaultState = "") : [string, OnChangeHandler]=> {

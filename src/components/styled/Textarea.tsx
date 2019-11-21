@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export default styled.input`
+export default styled.textarea`
   box-sizing: border-box
   border: 1px solid rgb(118, 118, 118);
   font-size: 1rem
