@@ -6,8 +6,8 @@ WORKDIR $DIR
 COPY . $DIR
 RUN npm ci --unsafe-perm .
 RUN npm run build
+RUN ls -lahF ./build
 
 EXPOSE 7000
-EXPOSE 443
 
-CMD npm run serve-production
+CMD npm run serve
