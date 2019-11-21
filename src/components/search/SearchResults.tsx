@@ -1,4 +1,4 @@
-import React, { FC, FormEvent } from "react"
+import React, { FC, FormEvent, useState } from "react"
 import Itinerary from "../itineraries/Itinerary"
 import AddButton from "../itineraries/AddButton"
 import styled from "styled-components"
@@ -20,6 +20,9 @@ const P = styled.p`
 
 const SearchResults: FC<Props> = ({ results }) => {
 
+  const [disabled, setDisabled] = useState<Ids>([])
+  const isDisabled = (id: Id) => disabled.includes(id)
+
   const showResults = results && results.length > 0
   const showEmpty = results && results.length === 0
 
@@ -38,18 +41,23 @@ const SearchResults: FC<Props> = ({ results }) => {
       },
       body: JSON.stringify({ id })
     })
+    setDisabled(disabled.concat(id))
   }
 
   return (
     <div className="SearchResults">
     {
       showResults &&
-      results!.map(result => (
-        <Div key={ result.id }>
-          <Itinerary itinerary={ result } />
-          <AddButton onClick={ onClick(result.id) } />
-        </Div>
-      ))
+      results!.map(result => {
+        const { id } = result
+        const disabled = isDisabled(id)
+        return (
+          <Div key={ id }>
+            <Itinerary itinerary={ result } />
+            <AddButton onClick={ onClick(id) } disabled={ disabled } />
+          </Div>
+        )
+      })
     }
     { showEmpty &&
       <P>Geen resultaten</P>

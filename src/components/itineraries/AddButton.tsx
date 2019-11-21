@@ -5,9 +5,10 @@ import noop from "../../utils/noop"
 
 type Props = {
   onClick?: any
+  disabled: boolean
 }
 
-const AddButton: FC<Props> = ({ onClick = noop }) => {
-  return (<Button onClick={ onClick } size={ 60 } variant="blank" icon={ <Enlarge /> } />)
+const AddButton: FC<Props> = ({ onClick = noop, disabled = false }) => {
+  return (<Button onClick={ onClick } size={ 60 } variant="blank" icon={ <Enlarge /> } disabled={ disabled } />)
 }
 export default AddButton
