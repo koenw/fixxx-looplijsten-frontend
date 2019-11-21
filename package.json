@@ -26,7 +26,7 @@
     "test": "react-scripts test",
     "lint": "./node_modules/.bin/eslint src/**/*.{ts,tsx}",
     "eject": "react-scripts eject",
-    "serve": "./node_modules/.bin/serve -p 7000 build",
+    "serve": "./node_modules/.bin/serve -p 7000 -s build",
     "serve-production": "./node_modules/.bin/serve -p 433 build"
   },
   "eslintConfig": {
