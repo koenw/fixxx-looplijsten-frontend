@@ -11,7 +11,8 @@ import DeleteButton from "../itineraries/DeleteButton"
 const Div = styled.div`
   display: flex
   justify-content: space-between
-  margin-top: 12px
+  margin-top: 24px
+  border-bottom: 4px solid #767676
 `
 
 const Itineraries: FC = () => {

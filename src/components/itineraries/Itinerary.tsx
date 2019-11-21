@@ -1,14 +1,20 @@
 import React, { FC } from "react"
 import { Link } from "@reach/router"
-import Signal from "../global/Signal"
 import styled from "styled-components"
+import Signal from "../global/Signal"
 
 type Props = {
   itinerary: any
 }
 
 const Article = styled.article`
-  margin-bottom: 24px
+  margin-bottom: 12px
+`
+const H1 = styled.h1`
+  a {
+    font-size: 20px
+    line-height: 28px
+  }
 `
 
 const Itinerary: FC<Props> = ({ itinerary }) => {
@@ -18,7 +24,7 @@ const Itinerary: FC<Props> = ({ itinerary }) => {
 
   return (
     <Article className="Itinerary">
-      <Link to={ to }>{ address }</Link>
+      <H1><Link to={ to }>{ address }</Link></H1>
       <p>{ postalCode }</p>
       <Signal text={ stadium } />
     </Article>

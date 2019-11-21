@@ -13,6 +13,7 @@ const Div = styled.div`
   display: flex
   justify-content: space-between
   margin-top: 12px
+  border-bottom: 4px solid #767676
 `
 const P = styled.p`
   margin-top: 12px
