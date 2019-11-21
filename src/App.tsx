@@ -10,7 +10,7 @@ import ItinerariesPage from "./pages/ItinerariesPage"
 import SearchPage from "./pages/SearchPage"
 
 const Main = styled.main`
-  margin: 12px
+  margin: 15px
 `
 
 const App: React.FC = () => {

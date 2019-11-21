@@ -24,6 +24,7 @@ const Li = styled.li`
 const LiSearch = styled.li`
   width: 24px
   height: 24px
+  margin-right: 16px
 `
 
 const Navigation: FC = () => {
