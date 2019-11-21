@@ -77,7 +77,7 @@ const ParseForm: FC = () => {
   return (
     <div className="ParseForm">
       <Form onSubmit={ onSubmit }>
-        <Textarea rows={ 16 } onChange={ onChangeValue } />
+        <Textarea rows={ 16 } onChange={ onChangeValue } autoFocus />
         <ButtonWrap>
           <Button variant="secondary" size={ 60 } icon={ <Search /> } />
         </ButtonWrap>
