@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useState } from "react"
+import React, { FC, useState } from "react"
 import { Spinner } from "@datapunt/asc-ui"
 import Itinerary from "./Itinerary"
 import ErrorMessage from "../global/ErrorMessage"
@@ -25,9 +25,7 @@ const Itineraries: FC = () => {
   const show = !showSpinner && !showError
   const hasItineraries = nonDeletedItineraries.length > 0
 
-  const onClick = (id: Id) => (async (event: FormEvent) => {
-
-    event.preventDefault()
+  const onClick = (id: Id) => (async () => {
 
     const url = getUrl(`itineraries/items/${ id }`)
     const token = authToken.get()
