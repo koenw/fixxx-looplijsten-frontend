@@ -9,7 +9,7 @@ const HeaderWrap: React.FC = () => {
   return (
     <Location>
     { ({ location }) => {
-      const showLogout = location.pathname !== "/login"
+      const showLogout = location.pathname !== to("/login")
       const navigation = showLogout ? <Logout /> : null
       return (
         <Header
