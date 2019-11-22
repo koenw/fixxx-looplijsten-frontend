@@ -50,12 +50,12 @@ const SearchResults: FC<Props> = ({ results }) => {
     {
       showResults &&
       results!.map(result => {
-        const { id } = result
-        const disabled = isDisabled(id)
+        const { case_id } = result
+        const disabled = isDisabled(case_id)
         return (
-          <Div key={ id }>
+          <Div key={ case_id }>
             <Itinerary itinerary={ result } />
-            <AddButton onClick={ onClick(id) } disabled={ disabled } />
+            <AddButton onClick={ onClick(case_id) } disabled={ disabled } />
           </Div>
         )
       })
