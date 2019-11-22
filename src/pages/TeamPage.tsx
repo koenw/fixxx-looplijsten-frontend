@@ -1,7 +1,7 @@
 import React from "react"
 import { RouteComponentProps } from "@reach/router"
-import Team from "../components/Team"
-import BreadCrumbs from "../components/BreadCrumbs"
+import Team from "../components/teams/Team"
+import BreadCrumbs from "../components/global/BreadCrumbs"
 
 type Props = RouteComponentProps & {
   teamId?: string

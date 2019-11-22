@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "@reach/router"
-import useFetch from "../hooks/useFetch"
-import Hr from "./Hr"
+import useFetch from "../../hooks/useFetch"
+import Hr from "../styled/Hr"
 import { Spinner } from "@datapunt/asc-ui"
 
 const Teams: React.FC = () => {

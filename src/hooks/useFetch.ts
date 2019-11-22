@@ -54,7 +54,7 @@ const useFetch = (path: string, plural = false) : [any, boolean, ErrorMessage] =
       }
       catch (err) {
         console.error(err)
-        setError(err)
+        setError(err.toString())
       }
       finally {
         setIsFetching(false)

@@ -1,6 +1,6 @@
 import React from "react"
 import { Button } from "@datapunt/asc-ui"
-import formatDate from "../utils/formatDate"
+import formatDate from "../../utils/formatDate"
 
 type Props = {
   date: string

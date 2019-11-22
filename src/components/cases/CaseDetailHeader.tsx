@@ -1,6 +1,6 @@
 import React from "react"
-import Signal from "./Signal"
-import Label from "./Label"
+import Signal from "../global/Signal"
+import Label from "../styled/Label"
 import Footer from "./Footer"
 import styled from "styled-components"
 

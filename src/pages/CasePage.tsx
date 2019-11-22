@@ -1,6 +1,6 @@
 import React from "react"
-import CaseDetail from "../components/CaseDetail"
-import BreadCrumbs from "../components/BreadCrumbs"
+import CaseDetail from "../components/cases/CaseDetail"
+import Navigation from "../components/global/Navigation"
 import { RouteComponentProps } from "@reach/router"
 
 type Props = RouteComponentProps & {
@@ -10,21 +10,12 @@ type Props = RouteComponentProps & {
 
 const CasePage: React.FC<Props> = ({ teamId, caseId }) => {
 
-  const crumbs = [
-    { text: "Alle teams", path: "/" },
-    { text: "Adres" }
-  ]
-  if (teamId) {
-    const id = parseInt(teamId, 10)
-    crumbs.splice(1, 0, { text: "Looplijst", path: `/teams/${ id }` })
-  }
-
   const id = parseInt(caseId!, 10)
   const showCaseDetail = !Number.isNaN(id)
 
   return (
     <>
-      <BreadCrumbs items={ crumbs } />
+      <Navigation />
       { showCaseDetail &&
         <CaseDetail caseId={ id } />
       }

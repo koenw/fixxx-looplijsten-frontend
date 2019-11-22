@@ -1,6 +1,6 @@
 import React from "react"
 import { Header } from "@datapunt/asc-ui"
-import Logout from "./Logout"
+import Logout from "../auth/Logout"
 import { Location } from "@reach/router"
 
 const HeaderWrap: React.FC = () => {

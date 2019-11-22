@@ -2,7 +2,8 @@ import React from "react"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { navigate } from "@reach/router"
-import authToken from "../utils/authToken"
+import authToken from "../../utils/authToken"
+import { Logout as LogoutIcon } from "@datapunt/asc-assets"
 
 const Div = styled.div`
   margin-right: 8px
@@ -17,7 +18,11 @@ const Logout: React.FC = () => {
 
   return (
     <Div className="Logout">
-      <Button variant="textButton" onClick={ onClick }>Logout</Button>
+      <Button
+        variant="blank"
+        iconLeft={ <LogoutIcon /> }
+        onClick={ onClick }
+        >Uitloggen</Button>
     </Div>
   )
 }
