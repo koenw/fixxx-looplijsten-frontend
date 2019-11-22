@@ -1,8 +1,9 @@
 import React from "react"
-import styled from "styled-components"
-import { ThemeProvider } from "@datapunt/asc-ui"
-import HeaderWrap from "./components/global/HeaderWrap"
 import { Router } from "@reach/router"
+import { ThemeProvider } from "@datapunt/asc-ui"
+import styled from "styled-components"
+import { getBasepath } from "./config/domain"
+import HeaderWrap from "./components/global/HeaderWrap"
 import CasePage from "./pages/CasePage"
 import NotFoundPage from "./pages/NotFoundPage"
 import LoginPage from "./pages/LoginPage"
@@ -15,12 +16,13 @@ const Main = styled.main`
 `
 
 const App: React.FC = () => {
+  const basepath = getBasepath()
   return (
     <ThemeProvider>
       <div className="App">
         <HeaderWrap />
         <Main>
-          <Router>
+          <Router basepath={ basepath }>
             <ItinerariesPage path="/" />
             <SearchPage path="/zoeken" />
             <ParsePage path="/parse" />
