@@ -2,6 +2,7 @@ import React from "react"
 import { Header } from "@datapunt/asc-ui"
 import Logout from "../auth/Logout"
 import { Location } from "@reach/router"
+import { to } from "../../config/domain"
 
 const HeaderWrap: React.FC = () => {
 
@@ -14,7 +15,7 @@ const HeaderWrap: React.FC = () => {
         <Header
           tall={ false }
           title="Looplijsten vakantieverhuur"
-          homeLink="/"
+          homeLink={ to("/") }
           navigation={ navigation }
         />
       )

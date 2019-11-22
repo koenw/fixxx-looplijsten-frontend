@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { navigate } from "@reach/router"
+import { to } from "../../config/domain"
 import authToken from "../../utils/authToken"
 import { Logout as LogoutIcon } from "@datapunt/asc-assets"
 
@@ -13,7 +14,7 @@ const Logout: React.FC = () => {
 
   const onClick = () => {
     authToken.clear()
-    navigate('/login')
+    navigate(to("/login"))
   }
 
   return (

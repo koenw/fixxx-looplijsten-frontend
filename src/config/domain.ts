@@ -30,4 +30,5 @@ export const getAuthUrl = () => {
   return `${ domain }${ pathPrefix }${ authPath }`
 }
 
-export const getBasepath = () => hostname === "acc.straatnotes.amsterdam.nl" || hostname === "straatnotes.amsterdam.nl" ? "/looplijsten" : "/"
+export const getBasepath = () => hostname === "acc.straatnotes.amsterdam.nl" || hostname === "straatnotes.amsterdam.nl" ? "/looplijsten" : ""
+export const to = (path: string) => `${ getBasepath() }${ path[0] !== "/" ? "/" : "" }${ path }`

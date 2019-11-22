@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "@reach/router"
 import styled from "styled-components"
+import { to } from "../../config/domain"
 
 type Crumb = {
   text: string,
@@ -35,7 +36,7 @@ const Span = styled.span`
 `
 
 const BreadCrumbs: React.FC<Props> = ({ items }) => {
-  const children = items.map(({ text, path }) => (<Span key={ text }>{ path ? <Link to={ path }>{ text }</Link> : text }</Span>))
+  const children = items.map(({ text, path }) => (<Span key={ text }>{ path ? <Link to={ to(path) }>{ text }</Link> : text }</Span>))
   return (
     <Div className="BreadCrumbs">
       { children }

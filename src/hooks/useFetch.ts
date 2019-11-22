@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react"
 import { navigate } from "@reach/router"
-import { getUrl } from "../config/domain"
+import { getUrl, to } from "../config/domain"
 import authToken from "../utils/authToken"
 
 const navigateToLogin = () => {
-  navigate("/login")
+  navigate(to("/login"))
 }
 
 const useFetch = (path: string, plural = false) : [any, boolean, ErrorMessage] => {

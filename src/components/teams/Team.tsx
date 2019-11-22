@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Link } from "@reach/router"
+import { to } from "../../config/domain"
 import styled from "styled-components"
 import useFetch from "../../hooks/useFetch"
 import { ButtonBar } from "@datapunt/asc-ui"
@@ -65,7 +66,7 @@ const Team: React.FC<Props> = ({ id }) => {
           </ButtonBarWrap>
           { itineraries.map((itinerary: any) => (
             <div key={ itinerary.address }>
-              <Link to={ `/teams/${ team!.id }/cases/${ itinerary.wng_id || 1 }`}>{ itinerary.address }</Link>
+              <Link to={ to(`/teams/${ team!.id }/cases/${ itinerary.wng_id || 1 }`) }>{ itinerary.address }</Link>
               <p>{ itinerary.postal_code_area }{ itinerary.postal_code_street }</p>
               <div>
                 <Signal text={ itinerary.stadium } />

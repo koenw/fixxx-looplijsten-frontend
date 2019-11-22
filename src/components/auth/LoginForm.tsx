@@ -1,6 +1,7 @@
 import React, { FC, FormEvent, useState } from "react"
 import useOnChangeState from "../../hooks/useOnChangeState"
 import { navigate } from "@reach/router"
+import { to } from "../../config/domain"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Login as LoginIcon } from "@datapunt/asc-assets"
@@ -61,7 +62,7 @@ const LoginForm: FC = () => {
     // Handle successful login
     else if (response.status === 200) {
       authToken.set(json.token)
-      navigate("/")
+      navigate(to("/"))
     }
   }
 

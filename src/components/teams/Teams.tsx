@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "@reach/router"
+import { to } from "../../config/domain"
 import useFetch from "../../hooks/useFetch"
 import Hr from "../styled/Hr"
 import { Spinner } from "@datapunt/asc-ui"
@@ -18,7 +19,7 @@ const Teams: React.FC = () => {
       { show &&
         teams.map(({ id, name, members }) => (
           <article key={ id }>
-            <h1><Link to={ `/teams/${ id }` }>{ name }</Link></h1>
+            <h1><Link to={ to(`/teams/${ id }`) }>{ name }</Link></h1>
             <p>{ members.map(member => member.first_name).join(", ") }</p>
             <Hr />
           </article>

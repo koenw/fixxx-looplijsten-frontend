@@ -2,6 +2,7 @@ import React, { FC, useState } from "react"
 import SearchForm from "./SearchForm"
 import SearchResults from "./SearchResults"
 import { Link } from "@reach/router"
+import { to } from "../../config/domain"
 import styled from "styled-components"
 
 const Div = styled.div`
@@ -20,7 +21,7 @@ const Search: FC = () => {
     <div className="Search">
       <SearchForm setResults={ setResults } />
       <Div>
-        <Link to="/parse">Geavanceerd</Link>
+        <Link to={ to("/parse") }>Geavanceerd</Link>
       </Div>
       <SearchResults results={ results } />
     </div>

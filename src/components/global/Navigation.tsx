@@ -2,6 +2,7 @@ import React, { FC } from "react"
 import { Link } from "@reach/router"
 import styled from "styled-components"
 import { Search as SearchIcon } from "@datapunt/asc-assets"
+import { to } from "../../config/domain"
 
 const Nav = styled.nav`
   background-color: #E6E6E6
@@ -31,8 +32,8 @@ const Navigation: FC = () => {
   return (
     <Nav>
       <Ul>
-        <Li><Link to="/">Mijn looplijst</Link></Li>
-        <LiSearch><Link to="/zoeken"><SearchIcon /></Link></LiSearch>
+        <Li><Link to={ to("/") }>Mijn looplijst</Link></Li>
+        <LiSearch><Link to={ to("/zoeken") }><SearchIcon /></Link></LiSearch>
       </Ul>
     </Nav>
   )
