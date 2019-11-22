@@ -19,15 +19,22 @@ const H1 = styled.h1`
 `
 
 const Itinerary: FC<Props> = ({ itinerary }) => {
+  const {
+    case_id: id,
+    street_name: streetName,
+    street_number: streetNumber,
+    suffix,
+    postal_code: postalCode,
+    stadium }
+    = itinerary
 
-  const { id, address, postal_code: postalCode, stadium } = itinerary
-  const linkTo = to(`/cases/${ id }`)
+  const linkTo = to(`/cases/${id}`)
 
   return (
     <Article className="Itinerary">
-      <H1><Link to={ linkTo }>{ address }</Link></H1>
-      <p>{ postalCode }</p>
-      <Signal text={ stadium } />
+      <H1><Link to={linkTo}>{streetName} {streetNumber} {suffix}</Link></H1>
+      <p>{postalCode}</p>
+      <Signal text={stadium} />
     </Article>
   )
 }

@@ -72,7 +72,7 @@ const SearchForm: FC<Props> = ({ setResults }) => {
         }
       })
       const json = await response.json()
-      setResults(json)
+      setResults(json['cases'])
     } catch (err) {
       console.error(err)
     }
