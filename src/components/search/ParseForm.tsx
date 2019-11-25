@@ -39,7 +39,7 @@ const parse = (text: string) => {
 }
 
 const fetchOne = (item: any) : Promise<any> => {
-  const params = { postalCode: item[0], streetNumber: item[1] }
+  const params = { postalCode: item[0].toUpperCase(), streetNumber: item[1], suffix: "" }
   const url = getUrl("search", params)
   const token = authToken.get()
   return fetch(url, {
