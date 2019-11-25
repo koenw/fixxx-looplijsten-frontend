@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "looplijsten/login", "destination": "/looplijsten/index.html" }
+  ]
+}

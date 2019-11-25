@@ -6,6 +6,7 @@ WORKDIR $DIR
 COPY . $DIR
 RUN npm ci --unsafe-perm .
 RUN npm run build
+RUN cp serve.json build/
 
 # tmp hack to make path work
 RUN mkdir -p build/looplijsten
