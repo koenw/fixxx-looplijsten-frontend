@@ -19,7 +19,7 @@ const Itineraries: FC = () => {
 
   const [deleted, setDeleted] = useState<Ids>([])
   const [result, isFetching, errorMessage] = useFetch("itineraries") as [any, boolean, ErrorMessage]
-  const itineraries: Itineraries = result !== undefined ? result.items : []
+  const itineraries: Itineraries = result !== undefined && Array.isArray(result.items) ? result.items : []
   const nonDeletedItineraries = itineraries.filter(itinerary => !deleted.includes(itinerary.id))
   const showSpinner = isFetching
   const showError = errorMessage !== undefined
