@@ -1,5 +1,7 @@
 {
   "rewrites": [
-    { "source": "looplijsten/login", "destination": "/looplijsten/index.html" }
+    { "source": "looplijsten/login", "destination": "/looplijsten/index.html" },
+    { "source": "looplijsten/zoeken", "destination": "/looplijsten/index.html" },
+    { "source": "looplijsten/parse", "destination": "/looplijsten/index.html" }
   ]
 }
