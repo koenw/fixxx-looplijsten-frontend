@@ -53,11 +53,10 @@ const Itineraries: FC = () => {
       { show &&
         (
           hasItineraries ?
-            nonDeletedItineraries.map(({ id, case: caseItem }) => {
-              const { address = "Dummystraat 3", postal_code = "1234DD", stadium = "Issuemelding" } = caseItem || {}
+            nonDeletedItineraries.map(({ id, case: { bwv_data } }) => {
               return (
                 <Div key={ id }>
-                  <Itinerary itinerary={ { id, address, postal_code, stadium } } />
+                  <Itinerary itinerary={ bwv_data } />
                   <DeleteButton onClick={ onClick(id) } />
                 </Div>
               )

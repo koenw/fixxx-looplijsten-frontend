@@ -54,8 +54,8 @@ const SearchButton = styled(Button)`
 
 const SearchForm: FC<Props> = ({ setResults }) => {
 
-  const [postalCode, onChangePostalCode] = useOnChangeState("1234AA")
-  const [streetNumber, onChangeStreetNumber] = useOnChangeState("1")
+  const [postalCode, onChangePostalCode] = useOnChangeState("")
+  const [streetNumber, onChangeStreetNumber] = useOnChangeState("")
   const [suffix, onChangeSuffix] = useOnChangeState()
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
@@ -72,7 +72,7 @@ const SearchForm: FC<Props> = ({ setResults }) => {
         }
       })
       const json = await response.json()
-      setResults(json)
+      setResults(json.cases)
     } catch (err) {
       console.error(err)
     }

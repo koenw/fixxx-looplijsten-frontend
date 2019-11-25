@@ -9,15 +9,11 @@ type Props = RouteComponentProps & {
 }
 
 const CasePage: React.FC<Props> = ({ teamId, caseId }) => {
-
-  const id = parseInt(caseId!, 10)
-  const showCaseDetail = !Number.isNaN(id)
-
   return (
     <>
       <Navigation />
-      { showCaseDetail &&
-        <CaseDetail caseId={ id } />
+      { caseId &&
+        <CaseDetail caseId={ caseId } />
       }
     </>
   )
