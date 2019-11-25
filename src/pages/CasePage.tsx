@@ -12,8 +12,8 @@ const CasePage: React.FC<Props> = ({ teamId, caseId }) => {
   return (
     <>
       <Navigation />
-      {caseId &&
-        <CaseDetail caseId={caseId} />
+      { caseId &&
+        <CaseDetail caseId={ caseId } />
       }
     </>
   )

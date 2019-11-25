@@ -13,20 +13,21 @@ type Props = {
 }
 
 const CaseDetail: React.FC<Props> = ({ caseId }) => {
-  const [caseItem, isFetching] = useFetch(`cases/${caseId}`) as [Case, boolean, ErrorMessage]
+  const [caseItem, isFetching] = useFetch(`cases/${ caseId }`) as [Case, boolean, ErrorMessage]
+  console.log(caseItem)
 
   const showSpinner = isFetching
   const show = !isFetching
-  console.log('TEST', caseItem)
 
   // Header
-  const address = caseItem ? `${caseItem.import_adres.sttnaam} ${caseItem.import_adres.hsnr} ${caseItem.import_adres.toev}` : ""
+  const address = caseItem ? `${ caseItem.import_adres.sttnaam } ${ caseItem.import_adres.hsnr } ${ caseItem.import_adres.toev }` : ""
   const postalCode = caseItem ? caseItem.import_adres.postcode : ""
   const personCount = caseItem ? caseItem.bwv_personen.length : 0
-  const caseNumber = 0//caseItem ? caseItem.bwv_tmp.case_number : 0
-  const caseCount = 0//caseItem ? caseItem.bwv_tmp.num_cases : 1
-  const openCaseCount = 0//caseItem ? caseItem.bwv_tmp.num_open_cases : 1
-  const caseOpening = '-'//caseItem ? caseItem.bwv_tmp.openings_reden : "-"
+  // @TODO: Get data from backend
+  const caseNumber = 0 //caseItem ? caseItem.bwv_tmp.case_number : 0
+  const caseCount = 0 //caseItem ? caseItem.bwv_tmp.num_cases : 1
+  const openCaseCount = 0 //caseItem ? caseItem.bwv_tmp.num_open_cases : 1
+  const caseOpening = '-' //caseItem ? caseItem.bwv_tmp.openings_reden : "-"
 
   // Vakantieverhuur
   //const showVakantieverhuur = caseItem && caseItem.bwv_vakantieverhuur.length > 0

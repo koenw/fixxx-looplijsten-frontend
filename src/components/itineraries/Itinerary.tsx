@@ -25,16 +25,16 @@ const Itinerary: FC<Props> = ({ itinerary }) => {
     street_number: streetNumber,
     suffix,
     postal_code: postalCode,
-    stadium }
-    = itinerary
+    stadium
+  } = itinerary
 
-  const linkTo = to(`/cases/${id}`)
+  const linkTo = to(`/cases/${ id }`)
 
   return (
     <Article className="Itinerary">
-      <H1><Link to={linkTo}>{streetName} {streetNumber} {suffix}</Link></H1>
-      <p>{postalCode}</p>
-      <Signal text={stadium} />
+      <H1><Link to={ linkTo }>{ streetName } { streetNumber } { suffix }</Link></H1>
+      <p>{ postalCode }</p>
+      <Signal text={ stadium } />
     </Article>
   )
 }
