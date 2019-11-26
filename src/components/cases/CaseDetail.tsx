@@ -8,10 +8,13 @@ import ErrorMessage from "../global/ErrorMessage"
 import Hr from "../styled/Hr"
 import formatDate from "../../utils/formatDate"
 import replaceNewLines from "../../utils/replaceNewLines"
+import replaceUrls from "../../utils/replaceUrls"
 
 type Props = {
   caseId: string
 }
+
+const parseMeldingText = (text: string) => replaceNewLines(replaceUrls(text), "<br /><br />")
 
 const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const [caseItem, isFetching, errorMessage] = useFetch(`cases/${ caseId }`) as [Case, boolean, ErrorMessage]
@@ -51,7 +54,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   //const meldingMelderEmail = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_emailadres : ""
   const meldingMelderPhoneNumber = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_telnr : ""
   const meldingTextRaw = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].situatie_schets : ""
-  const meldingText = replaceNewLines(meldingTextRaw, "<br /><br />")
+  const meldingText = parseMeldingText(meldingTextRaw)
 
   // Bewoners
   const people = caseItem ? caseItem.bwv_personen.map((person: any) => {
