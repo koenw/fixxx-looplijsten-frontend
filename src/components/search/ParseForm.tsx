@@ -1,5 +1,5 @@
 import React, { FC, useState, FormEvent } from "react"
-import { Button } from "@datapunt/asc-ui"
+import { Button, Spinner } from "@datapunt/asc-ui"
 import { Search } from "@datapunt/asc-assets"
 import styled from "styled-components"
 import TextareaBase from "../styled/Textarea"
@@ -67,12 +67,21 @@ const fetchAll = async (items: any[]) => {
 const ParseForm: FC = () => {
   const [results, setResults] = useState<SearchResults | undefined>()
   const [value, onChangeValue] = useOnChangeState()
+  const [showSpinner, setShowSpinner] = useState(false)
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
+    setShowSpinner(true)
     const results = parse(value)
     const itineraries = await fetchAll(results)
-    const uniqueItineraries = itineraries.filter((itinerary: any, index: number, arr: any) => arr.map((itinerary: any) => itinerary["id"]).indexOf(itinerary["id"]) === index)
+    const uniqueItineraries = itineraries
+      .map((itinerary: any) => itinerary.cases)
+      .flat(1)
+      .filter((itinerary: any, index: number, arr: any) =>
+        arr.map((itinerary: any) => itinerary.case_id)
+          .indexOf(itinerary.case_id) === index
+      )
     setResults(uniqueItineraries)
+    setShowSpinner(false)
   }
   return (
     <div className="ParseForm">
@@ -82,6 +91,9 @@ const ParseForm: FC = () => {
           <Button variant="secondary" size={ 60 } icon={ <Search /> } />
         </ButtonWrap>
       </Form>
+      { showSpinner &&
+        <Spinner size={ 60 } />
+      }
       <SearchResults results={ results } />
     </div>
   )
