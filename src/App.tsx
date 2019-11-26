@@ -4,12 +4,13 @@ import { ThemeProvider } from "@datapunt/asc-ui"
 import styled from "styled-components"
 import { getBasepath } from "./config/domain"
 import HeaderWrap from "./components/global/HeaderWrap"
-import CasePage from "./pages/CasePage"
-import NotFoundPage from "./pages/NotFoundPage"
-import LoginPage from "./pages/LoginPage"
 import ItinerariesPage from "./pages/ItinerariesPage"
 import SearchPage from "./pages/SearchPage"
 import ParsePage from "./pages/ParsePage"
+import CasePage from "./pages/CasePage"
+import NotePage from "./pages/NotePage"
+import LoginPage from "./pages/LoginPage"
+import NotFoundPage from "./pages/NotFoundPage"
 
 const Main = styled.main`
   margin: 15px
@@ -27,6 +28,7 @@ const App: React.FC = () => {
             <SearchPage path="/zoeken" />
             <ParsePage path="/parse" />
             <CasePage path="/cases/:caseId" />
+            <NotePage path="/notes/:itineraryId" />
             <LoginPage path="/login" />
             <NotFoundPage default />
           </Router>

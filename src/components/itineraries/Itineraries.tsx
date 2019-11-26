@@ -6,13 +6,20 @@ import useFetch from "../../hooks/useFetch"
 import { getUrl } from "../../config/domain"
 import authToken from "../../utils/authToken"
 import styled from "styled-components"
+import NoteButton from "../itineraries/NoteButton"
 import DeleteButton from "../itineraries/DeleteButton"
+import { navigate } from "@reach/router"
+import { to } from "../../config/domain"
 
 const Div = styled.div`
   display: flex
   justify-content: space-between
   margin-top: 24px
   border-bottom: 4px solid #767676
+`
+
+const ButtonWrap = styled.div`
+  display: flex
 `
 
 const Itineraries: FC = () => {
@@ -54,10 +61,14 @@ const Itineraries: FC = () => {
         (
           hasItineraries ?
             nonDeletedItineraries.map(({ id, case: { bwv_data } }) => {
+              const note = window.localStorage.getItem(`itinerary_${ id }`) || undefined
               return (
                 <Div key={ id }>
-                  <Itinerary itinerary={ bwv_data } />
-                  <DeleteButton onClick={ onClick(id) } />
+                  <Itinerary itinerary={ bwv_data } note={ note } />
+                  <ButtonWrap>
+                    <NoteButton onClick={ () => navigate(to(`/notes/${ id }`)) } />
+                    <DeleteButton onClick={ onClick(id) } />
+                  </ButtonWrap>
                 </Div>
               )
             })
