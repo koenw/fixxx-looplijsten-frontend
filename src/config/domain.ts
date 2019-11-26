@@ -1,10 +1,14 @@
+import parseLocationSearch from "../utils/parseLocationSearch"
 import queryParams from "../utils/queryParams"
 
 const hostname = window.location.hostname
+const api = parseLocationSearch(window.location.search).api
+const isAcc = api === "acc"
 
 const domain =
   hostname === "acc.straatnotes.amsterdam.nl" ? "https://acc.api.straatnotes.amsterdam.nl/" :
   hostname === "straatnotes.amsterdam.nl" ? "https://api.straatnotes.amsterdam.nl/" :
+  isAcc ? "https://acc.api.straatnotes.amsterdam.nl/" :
   "http://localhost:8000/"
 const basePath = "api/v1/"
 const authPath = "api-token-auth/"

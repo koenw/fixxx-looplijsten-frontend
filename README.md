@@ -1,9 +1,16 @@
 # Fixxx Looplijsten Frontend
 
+## commands
+
 - `npm run lint`
 - `npm run test`
 - `npm run build`
 - `npm run start`
+
+## development
+
+Add `?api=acc` to url. Eg. http://localhost:3000/?api=acc to connect to acceptation API.
+
 
 ## Original README
 
