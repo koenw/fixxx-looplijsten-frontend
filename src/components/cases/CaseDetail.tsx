@@ -26,10 +26,10 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const postalCode = caseItem ? caseItem.import_adres.postcode : ""
   const personCount = caseItem ? caseItem.bwv_personen.length : 0
   // @TODO: Get data from backend
-  const caseNumber = caseItem && caseItem.bwv_tmp ? caseItem.bwv_tmp.case_number : 0
-  const caseCount = caseItem  && caseItem.bwv_tmp ? caseItem.bwv_tmp.num_cases : 1
-  const openCaseCount = caseItem && caseItem.bwv_tmp ? caseItem.bwv_tmp.num_open_cases : 1
-  const caseOpening = caseItem && caseItem.bwv_tmp ? caseItem.bwv_tmp.openings_reden : "-"
+  const caseNumber = caseItem && caseItem.bwv_tmp ? caseItem.bwv_tmp.case_number : undefined
+  const caseCount = caseItem  && caseItem.bwv_tmp ? caseItem.bwv_tmp.num_cases : undefined
+  const openCaseCount = caseItem && caseItem.bwv_tmp ? caseItem.bwv_tmp.num_open_cases : undefined
+  const caseOpening = caseItem && caseItem.bwv_tmp ? caseItem.bwv_tmp.openings_reden : undefined
 
   // Vakantieverhuur
   //const showVakantieverhuur = caseItem && caseItem.bwv_vakantieverhuur.length > 0
