@@ -8,10 +8,10 @@ type Props = {
   address: string
   postalCode: string
   personCount: number
-  caseNumber: number
-  caseCount: number
-  openCaseCount: number
-  caseOpening: string
+  caseNumber?: number
+  caseCount?: number
+  openCaseCount?: number
+  caseOpening?: string
   signal?: string
   footer?: {
     title: string
@@ -32,6 +32,10 @@ const H1 = styled.h1`
 
 const P = styled.p`
   margin-bottom: 8px
+`
+
+const InvalidSpan = styled.span`
+  color: red
 `
 
 const CaseDetailHeader: React.FC<Props> = ({ address, postalCode, personCount, caseNumber, caseCount, openCaseCount, caseOpening, footer, signal }) => {
@@ -55,13 +59,25 @@ const CaseDetailHeader: React.FC<Props> = ({ address, postalCode, personCount, c
         <Label>Ingeschreven</Label><span><a href="#personen">{ personText }</a></span>
       </div>
       <div>
-        <Label>Zaaknummer</Label><span><strong>{ caseNumber }</strong> van { caseCount }</span>
+        <Label>Zaaknummer</Label>
+        { caseNumber !== undefined && caseCount !== undefined ?
+          <span><strong>{ caseNumber }</strong> van { caseCount }</span> :
+          <InvalidSpan>-</InvalidSpan>
+        }
       </div>
       <div>
-        <Label>Open zaken</Label><span>{ openCaseCount }</span>
+        <Label>Open zaken</Label>
+        { openCaseCount !== undefined ?
+          <span>{ openCaseCount }</span> :
+          <InvalidSpan>-</InvalidSpan>
+        }
       </div>
       <div>
-        <Label>Soort, reden</Label><span>{ caseOpening }</span>
+        <Label>Soort, reden</Label>
+        { caseOpening !== undefined ?
+          <span>{ caseOpening }</span> :
+          <InvalidSpan>-</InvalidSpan>
+        }
       </div>
       { showFooter &&
         <Footer>
