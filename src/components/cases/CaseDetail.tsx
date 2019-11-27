@@ -82,10 +82,10 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
 
   const meldingenData = meldingen && meldingen.reduce((acc: any, item: any, index: number) => {
     const { datum, anoniem, naam, telnr, text } = item
-    acc.push(["In behandeling per", datum])
+    acc.push(["In behandeling per", datum || "-"])
     acc.push(["Anonieme melding", anoniem])
-    acc.push(["Melder", naam])
-    acc.push(["Melder telefoonnummer", <a href={ "tel://" + telnr }>{ telnr }</a>])
+    acc.push(["Melder", naam || "-"])
+    acc.push(["Melder telefoonnummer", telnr ? <a href={ "tel://" + telnr }>{ telnr }</a> : "-"])
     acc.push(<p dangerouslySetInnerHTML={ { __html: text } }></p>)
     if (index < meldingen.length - 1) acc.push(<Hr />)
     return acc
