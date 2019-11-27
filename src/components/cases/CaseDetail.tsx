@@ -57,9 +57,8 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
     caseItem.bag_data.gebruiksdoelen[0].omschrijving_plus :
     undefined
   const woningEtage = undefined
-  const woningKamers = caseItem ? parseInt(caseItem.import_adres.kmrs, 10) : 0
-  const woningWoonOppervlak = caseItem && caseItem.bag_data ? caseItem.bag_data.oppervlakte : "-"
-  const woningTotaalOppervlak = caseItem  && caseItem.bag_data ? caseItem.bag_data.oppervlakte : "-"
+  const woningKamers = caseItem && caseItem.bag_data ? caseItem.bag_data.aantal_kamers : 0
+  const woningOppervlak = caseItem && caseItem.bag_data ? caseItem.bag_data.oppervlakte : 0
   const woningBagId = caseItem && caseItem.bag_data ? caseItem.bag_data.verblijfsobjectidentificatie : null
 
   // Melding
@@ -190,8 +189,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
             ["Bestemming", woningBestemming],
             ["Etage", woningEtage],
             ["Aantal kamers", woningKamers > 0 ? woningKamers : "-"],
-            ["Woonoppervlak", woningWoonOppervlak > 0 ? woningWoonOppervlak + " m²" : "-"],
-            ["Totaal oppervlak", woningTotaalOppervlak > 0 ? woningTotaalOppervlak + " m²" : "-"]
+            ["Woonoppervlak", woningOppervlak > 0 ? woningOppervlak + " m²" : "-"],
           ]}
           footer={ woningBagId ? { link: `https://data.amsterdam.nl/data/bag/verblijfsobject/id${ woningBagId }/`, title: "Bekijk op Data & informatie" } : undefined }
           />
