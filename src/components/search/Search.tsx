@@ -21,7 +21,7 @@ const Search: FC = () => {
     <div className="Search">
       <SearchForm setResults={ setResults } />
       <Div>
-        <Link to={ to("/parse") }>Geavanceerd</Link>
+        <Link to={ to("/parse") }>Copy + paste TamTam looplijst</Link>
       </Div>
       <SearchResults results={ results } />
     </div>
