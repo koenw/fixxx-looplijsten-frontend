@@ -9,6 +9,7 @@ import Hr from "../styled/Hr"
 import formatDate from "../../utils/formatDate"
 import replaceNewLines from "../../utils/replaceNewLines"
 import replaceUrls from "../../utils/replaceUrls"
+import isBetweenDates from "../../utils/isBetweenDates"
 
 type Props = {
   caseId: string
@@ -36,10 +37,16 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
 
   // Vakantieverhuur
   const vakantieverNotifiedRentals = caseItem && caseItem.vakantie_verhuur ? caseItem.vakantie_verhuur.notified_rentals : []
-  const vakantieverhuurNotified = caseItem && caseItem.vakantie_verhuur ? caseItem.vakantie_verhuur.notified_rentals.length > 0 : undefined
+  const vakantieverhuurNotified = vakantieverNotifiedRentals.length > 0
   const vakantieverhuurDays = caseItem && caseItem.vakantie_verhuur ? caseItem.vakantie_verhuur.rented_days : 0
-  const vakantieverhuurToday = caseItem && caseItem.vakantie_verhuur ? caseItem.vakantie_verhuur.notified_rentals.length > 0 : undefined
-  const showVakantieverhuur = caseItem && caseItem.vakantie_verhuur && caseItem.vakantie_verhuur.notified_rentals.length > 0
+  const vakantieverhuurToday = (() => {
+    const l = vakantieverNotifiedRentals.length
+    if (l === 0) return false
+    const last = vakantieverNotifiedRentals[l - 1]
+    return isBetweenDates(new Date(last.check_in), new Date(last.check_out), new Date())
+  })()
+
+  const showVakantieverhuur = vakantieverNotifiedRentals.length > 0
 
   // Woning
   const woningBestemming =
