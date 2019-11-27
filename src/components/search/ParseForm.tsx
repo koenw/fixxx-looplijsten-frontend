@@ -21,7 +21,7 @@ const Textarea = styled(TextareaBase)`
 
 const parse = (text: string) => {
   const lines = text.split(/\r?\n/)
-  const regExpPostalCode = /[1-9][0-9]{3}[A-Z]{2}/
+  const regExpPostalCode = /[1-9][0-9]{3}\s?[A-Za-z]{2}/
   const results: any = []
   lines.forEach(line => {
     const match = line.match(regExpPostalCode)
@@ -30,8 +30,8 @@ const parse = (text: string) => {
     const parts = line.split(regExpPostalCode)
     const address = parts.length ? parts[0] : undefined
     if (address === undefined) return
-    const match1 = address.match(/\d+/)
-    const streetNumber = match1 ? match1[0] : undefined
+    const match1 = address.match(/\s([1-9][0-9]*)\s/)
+    const streetNumber = match1 ? match1[1] : undefined
     if (streetNumber === undefined) return
     results.push([postalCode, streetNumber])
   })
