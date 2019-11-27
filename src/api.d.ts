@@ -39,6 +39,7 @@ declare type Case = {
   bwv_personen: any
   import_stadia: any
   import_wvs: any
+  vakantie_verhuur: any
 }
 declare type OptionalCase = Case | undefined
 

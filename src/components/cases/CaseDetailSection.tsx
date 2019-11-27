@@ -2,6 +2,7 @@ import React, { ReactNode } from "react"
 import styled from "styled-components"
 import Label from "../styled/Label"
 import Footer from "./Footer"
+import InvalidDataSpan from "../global/InvalidDataSpan"
 
 type Value = string | ReactNode
 type KeyValueDetail = string | ReactNode | [string, Value]
@@ -45,13 +46,17 @@ const CaseDetailSection: React.FC<Props> = ({ id = "", title, data, footer }) =>
             value = value === true ? "Ja" : "Nee"
           }
           const isString = typeof value === "string"
+          const isUndefined = value === undefined
 
           return (
             <div key={ String(key) + index }>
               { hasLabel &&
                 <>
                   <Label>{ key }</Label>
-                  <span>{ value }</span>
+                  { isUndefined ?
+                    <InvalidDataSpan /> :
+                    <span>{ value }</span>
+                  }
                 </>
               }
               { !hasLabel &&

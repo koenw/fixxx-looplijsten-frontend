@@ -1,8 +1,9 @@
-import React from "react"
+import React, { FC } from "react"
+import styled from "styled-components"
 import Signal from "../global/Signal"
+import InvalidDataSpan from "../global/InvalidDataSpan"
 import Label from "../styled/Label"
 import Footer from "./Footer"
-import styled from "styled-components"
 
 type Props = {
   address: string
@@ -34,11 +35,7 @@ const P = styled.p`
   margin-bottom: 8px
 `
 
-const InvalidSpan = styled.span`
-  color: red
-`
-
-const CaseDetailHeader: React.FC<Props> = ({ address, postalCode, personCount, caseNumber, caseCount, openCaseCount, caseOpening, footer, signal }) => {
+const CaseDetailHeader: FC<Props> = ({ address, postalCode, personCount, caseNumber, caseCount, openCaseCount, caseOpening, footer, signal }) => {
   const showFooter = footer !== undefined
   const personText =
     personCount === 0 ? "-" :
@@ -62,21 +59,21 @@ const CaseDetailHeader: React.FC<Props> = ({ address, postalCode, personCount, c
         <Label>Zaaknummer</Label>
         { caseNumber !== undefined && caseCount !== undefined ?
           <span><strong>{ caseNumber }</strong> van { caseCount }</span> :
-          <InvalidSpan>-</InvalidSpan>
+          <InvalidDataSpan />
         }
       </div>
       <div>
         <Label>Open zaken</Label>
         { openCaseCount !== undefined ?
           <span>{ openCaseCount }</span> :
-          <InvalidSpan>-</InvalidSpan>
+          <InvalidDataSpan />
         }
       </div>
       <div>
         <Label>Soort, reden</Label>
         { caseOpening !== undefined ?
           <span>{ caseOpening }</span> :
-          <InvalidSpan>-</InvalidSpan>
+          <InvalidDataSpan />
         }
       </div>
       { showFooter &&

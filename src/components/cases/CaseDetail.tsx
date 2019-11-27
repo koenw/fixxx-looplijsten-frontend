@@ -35,7 +35,11 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const caseOpening = caseItem && caseItem.bwv_tmp ? caseItem.bwv_tmp.openings_reden : undefined
 
   // Vakantieverhuur
-  //const showVakantieverhuur = caseItem && caseItem.bwv_vakantieverhuur.length > 0
+  const vakantieverNotifiedRentals = caseItem && caseItem.vakantie_verhuur ? caseItem.vakantie_verhuur.notified_rentals : []
+  const vakantieverhuurNotified = caseItem && caseItem.vakantie_verhuur ? caseItem.vakantie_verhuur.notified_rentals.length > 0 : undefined
+  const vakantieverhuurDays = caseItem && caseItem.vakantie_verhuur ? caseItem.vakantie_verhuur.rented_days : 0
+  const vakantieverhuurToday = caseItem && caseItem.vakantie_verhuur ? caseItem.vakantie_verhuur.notified_rentals.length > 0 : undefined
+  //const showVakantieverhuur = caseItem && caseItem.vakantie_verhuur && caseItem.vakantie_verhuur.notified_rentals.length > 0
   const showVakantieverhuur = true
 
   // Woning
@@ -44,14 +48,12 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const woningKamers = caseItem ? parseInt(caseItem.import_adres.kmrs, 10) : 0
   const woningWoonOppervlak = caseItem ? caseItem.import_wvs.vloeroppervlak_totaal : "-"
   const woningTotaalOppervlak = caseItem ? caseItem.import_wvs.nuttig_woonoppervlak : "-"
-  //const woningHuur = caseItem ? caseItem.import_wvs.bedrag_huur : 0
   const woningBagId = caseItem && caseItem.import_adres.a_dam_bag
 
   // Melding
   const meldingStartDate = caseItem && caseItem.bwv_hotline_melding[0] ? formatDate(caseItem.bwv_hotline_melding[0].melding_datum, true)! : ""
   const meldingAnoniem = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_anoniem === "J" : false
   const meldingMelderNaam = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_naam : ""
-  //const meldingMelderEmail = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_emailadres : ""
   const meldingMelderPhoneNumber = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_telnr : ""
   const meldingTextRaw = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].situatie_schets : ""
   const meldingText = parseMeldingText(meldingTextRaw)
@@ -133,42 +135,42 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
           caseCount={ caseCount }
           openCaseCount={ openCaseCount }
           caseOpening={ caseOpening }
-          footer={ { link: `http://www.google.com/maps/place/${ address }, Amsterdam`, title: "Bekijk op Google Maps" }}
+          footer={ { link: `http://www.google.com/maps/place/${ address }, Amsterdam`, title: "Bekijk op Google Maps" } }
           signal={ lastStadia }
         />
         { showVakantieverhuur &&
         <CaseDetailSection
           title="Vakantieverhuur"
-          data= {[
-            ["Aangevraagd", "Ja"],
-            ["Vandaag verhuurd", "Nee"],
-            ["Verhuurd dit jaar", <a href="#vakantieverhuur">23 dagen</a>],
-            ["Shortstay", "Nee"],
-            ["B&B aangemeld", "Nee"]
+          data={[
+            ["Aangevraagd", vakantieverhuurNotified],
+            ["Vandaag verhuurd", vakantieverhuurToday],
+            ["Verhuurd dit jaar", <a href="#vakantieverhuur">{ vakantieverhuurDays } dagen</a>],
+            ["Shortstay", undefined],
+            ["B&B aangemeld", undefined]
           ]}
-          footer={ { link: `https://data.amsterdam.nl/data/bag/verblijfsobject/id${ woningBagId }/`, title: "Bekijk op Data & informatie" }}
           />
         }
         <CaseDetailSection
           title="Woning"
-          data= {[
+          data={[
             ["Bestemming", woningBestemming],
             ["Etage", woningEtage],
             ["Aantal kamers", woningKamers > 0 ? woningKamers : "-"],
             ["Woonoppervlak", woningWoonOppervlak > 0 ? woningWoonOppervlak + " m²" : "-"],
-            ["Totaal oppervlak", woningTotaalOppervlak > 0 ? woningTotaalOppervlak + " m²" : "-"],
-            //["Huur", woningHuur > 0 ? "€ " + woningHuur : "-"]
-          ]} />
+            ["Totaal oppervlak", woningTotaalOppervlak > 0 ? woningTotaalOppervlak + " m²" : "-"]
+          ]}
+          footer={ { link: `https://data.amsterdam.nl/data/bag/verblijfsobject/id${ woningBagId }/`, title: "Bekijk op Data & informatie" } }
+          />
         <CaseDetailSection
           title="Melding / aanleiding"
-          data= {[
+          data={[
             ["In behandeling per", meldingStartDate],
             ["Anonieme melding", meldingAnoniem],
             ["Melder", meldingMelderNaam],
-            //["Melder email", <a href={ "mailto://" + meldingMelderEmail }>{ meldingMelderEmail }</a>],
             ["Melder telefoonnummer", <a href={ "tel://" + meldingMelderPhoneNumber }>{ meldingMelderPhoneNumber }</a>],
             <p dangerouslySetInnerHTML={ { __html: meldingText } }></p>
-          ]} />
+          ]}
+          />
         <CaseDetailSection
           id="personen"
           title={ `Huidige bewoners (${ people.length })` }
@@ -176,14 +178,9 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
         { showVakantieverhuur &&
         <CaseDetailSection
           id="vakantieverhuur"
-          title="Vakantieverhuur dit jaar (23)"
-          data= {[
-            ["Checkin", "vr 26 feb 2019"],
-            ["Checkout", "zo 28 feb 2019"],
-            <Hr />,
-            ["Checkin", "ma 6 april 2019"],
-            ["Checkout", "za 12 april 2019"],
-          ]} />
+          title={ `Vakantieverhuur dit jaar (${ vakantieverhuurDays })` }
+          data={ vakantieverNotifiedRentals }
+          />
         }
         <CaseDetailSection
           title="Logboek"
