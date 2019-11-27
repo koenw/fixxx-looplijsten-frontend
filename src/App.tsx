@@ -3,6 +3,7 @@ import { Router } from "@reach/router"
 import { ThemeProvider } from "@datapunt/asc-ui"
 import styled from "styled-components"
 import { getBasepath } from "./config/domain"
+import Anonymous from "./components/global/Anonymous"
 import HeaderWrap from "./components/global/HeaderWrap"
 import CasePage from "./pages/CasePage"
 import NotFoundPage from "./pages/NotFoundPage"
@@ -19,6 +20,7 @@ const App: React.FC = () => {
   const basepath = getBasepath()
   return (
     <ThemeProvider>
+      <Anonymous />
       <div className="App">
         <HeaderWrap />
         <Main>
