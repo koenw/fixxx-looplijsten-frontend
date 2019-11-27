@@ -184,7 +184,13 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
         <CaseDetailSection
           id="vakantieverhuur"
           title={ `Vakantieverhuur dit jaar (${ vakantieverhuurDays })` }
-          data={ vakantieverNotifiedRentals }
+          data={
+            vakantieverNotifiedRentals
+              .reverse()
+              .map((o: { check_in: string, check_out: string }) => [["Check out", formatDate(o.check_out)], ["Check in", formatDate(o.check_in)], <Hr />])
+              .flat(1)
+              .slice(0, -1) // remove last Hr
+            }
           />
         }
         <CaseDetailSection
