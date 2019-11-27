@@ -63,12 +63,34 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const woningBagId = caseItem && caseItem.bag_data ? caseItem.bag_data.verblijfsobjectidentificatie : null
 
   // Melding
-  const meldingStartDate = caseItem && caseItem.bwv_hotline_melding[0] ? formatDate(caseItem.bwv_hotline_melding[0].melding_datum, true)! : ""
-  const meldingAnoniem = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_anoniem === "J" : false
-  const meldingMelderNaam = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_naam : ""
-  const meldingMelderPhoneNumber = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].melder_telnr : ""
-  const meldingTextRaw = caseItem && caseItem.bwv_hotline_melding[0] ? caseItem.bwv_hotline_melding[0].situatie_schets : ""
-  const meldingText = parseMeldingText(meldingTextRaw)
+  const meldingen = caseItem && caseItem.bwv_hotline_melding.map((melding: any) => {
+    const {
+      melding_datum: datum,
+      melding_anoniem: anoniem,
+      melder_naam: naam,
+      melder_telnr: telnr,
+      situatie_schets: text
+    } = melding
+
+    return {
+      datum: datum ? formatDate(datum, true)! : undefined,
+      anoniem: anoniem === "J",
+      naam,
+      telnr,
+      text: parseMeldingText(text || "")
+    }
+  }).reverse()
+
+  const meldingenData = meldingen && meldingen.reduce((acc: any, item: any, index: number) => {
+    const { datum, anoniem, naam, telnr, text } = item
+    acc.push(["In behandeling per", datum])
+    acc.push(["Anonieme melding", anoniem])
+    acc.push(["Melder", naam])
+    acc.push(["Melder telefoonnummer", <a href={ "tel://" + telnr }>{ telnr }</a>])
+    acc.push(<p dangerouslySetInnerHTML={ { __html: text } }></p>)
+    if (index < meldingen.length - 1) acc.push(<Hr />)
+    return acc
+  }, [])
 
   // Bewoners
   const people = caseItem ? caseItem.bwv_personen.map((person: any) => {
@@ -174,14 +196,8 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
           footer={ woningBagId ? { link: `https://data.amsterdam.nl/data/bag/verblijfsobject/id${ woningBagId }/`, title: "Bekijk op Data & informatie" } : undefined }
           />
         <CaseDetailSection
-          title="Melding / aanleiding"
-          data={[
-            ["In behandeling per", meldingStartDate],
-            ["Anonieme melding", meldingAnoniem],
-            ["Melder", meldingMelderNaam],
-            ["Melder telefoonnummer", <a href={ "tel://" + meldingMelderPhoneNumber }>{ meldingMelderPhoneNumber }</a>],
-            <p dangerouslySetInnerHTML={ { __html: meldingText } }></p>
-          ]}
+          title="Meldingen / aanleiding"
+          data={ meldingenData }
           />
         <CaseDetailSection
           id="personen"
