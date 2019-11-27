@@ -43,12 +43,18 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const showVakantieverhuur = true
 
   // Woning
-  const woningBestemming = caseItem ? caseItem.import_adres.sbw_omschr : "-"
-  const woningEtage = "-" // ?
+  const woningBestemming =
+    caseItem &&
+    caseItem.bag_data &&
+    caseItem.bag_data.gebruiksdoelen &&
+    caseItem.bag_data.gebruiksdoelen.length ?
+    caseItem.bag_data.gebruiksdoelen[0].omschrijving_plus :
+    undefined
+  const woningEtage = undefined
   const woningKamers = caseItem ? parseInt(caseItem.import_adres.kmrs, 10) : 0
-  const woningWoonOppervlak = caseItem ? caseItem.import_wvs.vloeroppervlak_totaal : "-"
-  const woningTotaalOppervlak = caseItem ? caseItem.import_wvs.nuttig_woonoppervlak : "-"
-  const woningBagId = caseItem && caseItem.import_adres.a_dam_bag
+  const woningWoonOppervlak = caseItem && caseItem.bag_data ? caseItem.bag_data.oppervlakte : "-"
+  const woningTotaalOppervlak = caseItem  && caseItem.bag_data ? caseItem.bag_data.oppervlakte : "-"
+  const woningBagId = caseItem && caseItem.bag_data ? caseItem.bag_data.verblijfsobjectidentificatie : null
 
   // Melding
   const meldingStartDate = caseItem && caseItem.bwv_hotline_melding[0] ? formatDate(caseItem.bwv_hotline_melding[0].melding_datum, true)! : ""
@@ -64,8 +70,8 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
       name: person.naam,
       initials: person.voorletters,
       sex: person.geslacht,
-      born: formatDate(person.geboortedatum.slice(0, -9))!,
-      livingSince: formatDate(person.vestigingsdatum_adres.slice(0, -9))!
+      born: person.geboortedatum ? formatDate(person.geboortedatum.slice(0, -9))! : undefined,
+      livingSince: person.vestigingsdatum_adres ? formatDate(person.vestigingsdatum_adres.slice(0, -9))! : undefined
     })
   }) : []
   const bewoners = people.reduce((acc: any, person: any, index: number) => {
@@ -159,7 +165,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
             ["Woonoppervlak", woningWoonOppervlak > 0 ? woningWoonOppervlak + " m²" : "-"],
             ["Totaal oppervlak", woningTotaalOppervlak > 0 ? woningTotaalOppervlak + " m²" : "-"]
           ]}
-          footer={ { link: `https://data.amsterdam.nl/data/bag/verblijfsobject/id${ woningBagId }/`, title: "Bekijk op Data & informatie" } }
+          footer={ woningBagId ? { link: `https://data.amsterdam.nl/data/bag/verblijfsobject/id${ woningBagId }/`, title: "Bekijk op Data & informatie" } : undefined }
           />
         <CaseDetailSection
           title="Melding / aanleiding"

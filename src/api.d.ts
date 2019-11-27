@@ -32,6 +32,7 @@ declare type Itinerary = {
 declare type Itineraries = Itinerary[]
 
 declare type Case = {
+  bag_data: any
   import_adres: any
   bwv_hotline_bevinding: any
   bwv_tmp: any
