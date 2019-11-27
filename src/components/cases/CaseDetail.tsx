@@ -39,8 +39,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const vakantieverhuurNotified = caseItem && caseItem.vakantie_verhuur ? caseItem.vakantie_verhuur.notified_rentals.length > 0 : undefined
   const vakantieverhuurDays = caseItem && caseItem.vakantie_verhuur ? caseItem.vakantie_verhuur.rented_days : 0
   const vakantieverhuurToday = caseItem && caseItem.vakantie_verhuur ? caseItem.vakantie_verhuur.notified_rentals.length > 0 : undefined
-  //const showVakantieverhuur = caseItem && caseItem.vakantie_verhuur && caseItem.vakantie_verhuur.notified_rentals.length > 0
-  const showVakantieverhuur = true
+  const showVakantieverhuur = caseItem && caseItem.vakantie_verhuur && caseItem.vakantie_verhuur.notified_rentals.length > 0
 
   // Woning
   const woningBestemming =
@@ -107,9 +106,9 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const stadiums = caseItem ? caseItem.import_stadia.map((stadium: any) => {
     return ({
       description: stadium.sta_oms,
-      dateStart: formatDate(stadium.begindatum, true)!,
-      dateEnd: formatDate(stadium.einddatum, true)!,
-      datePeil: formatDate(stadium.peildatum, true)!,
+      dateStart: stadium.begindatum ? formatDate(stadium.begindatum, true)! : "-",
+      dateEnd: stadium.einddatum ? formatDate(stadium.einddatum, true)! : "-",
+      datePeil: stadium.peildatum ? formatDate(stadium.peildatum, true)! : "-",
       num: parseInt(stadium.sta_nr, 10)
     })
   }).sort((a: any, b: any) => a.num - b.num).reverse() : []
