@@ -102,7 +102,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
     })
   }) : []
   const bewoners = people.reduce((acc: any, person: any, index: number) => {
-    acc.push((index + 1) + ". " + person.initials + " " + person.name + " (" + person.sex + ")")
+    acc.push(<span className="anonymous">{ (index + 1) + ". " + person.initials + " " + person.name + " (" + person.sex + ")" }</span>)
     acc.push(["Geboren", person.born])
     acc.push(["Woont hier sinds", person.livingSince])
     return acc
@@ -121,11 +121,11 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   }).sort((a: any, b: any) => a.num - b.num).reverse() : []
 
   const logboek = bevindingen.reduce((acc: any, item: any, index: number) => {
-    acc.push(["Toezichthouder", <strong>{ item.name }</strong>])
+    acc.push(["Toezichthouder", <strong className="anonymous">{ item.name }</strong>])
     acc.push(["Tijd", item.time])
     acc.push(["Datum", item.date])
     acc.push(["Hit", item.hit])
-    acc.push(<p dangerouslySetInnerHTML={ { __html: replaceNewLines(item.text, "<br /><br />") } }></p>)
+    acc.push(<p className="anonymous" dangerouslySetInnerHTML={ { __html: replaceNewLines(item.text, "<br /><br />") } }></p>)
     if (index < bevindingen.length - 1) acc.push(<Hr />)
     return acc
   }, [])

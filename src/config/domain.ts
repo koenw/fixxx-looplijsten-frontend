@@ -1,5 +1,6 @@
 import parseLocationSearch from "../utils/parseLocationSearch"
 import queryParams from "../utils/queryParams"
+import pick from "../utils/pick"
 
 const hostname = window.location.hostname
 const api = parseLocationSearch(window.location.search).api
@@ -35,4 +36,9 @@ export const getAuthUrl = () => {
 }
 
 export const getBasepath = () => hostname === "acc.straatnotes.amsterdam.nl" || hostname === "straatnotes.amsterdam.nl" ? "/looplijsten" : ""
-export const to = (path: string) => `${ getBasepath() }${ path[0] !== "/" ? "/" : "" }${ path }`
+export const to = (path: string) => {
+  const forwardParams = ["api", "anonymous"]
+  const params = parseLocationSearch(window.location.search)
+  const queryParamsString = queryParams(pick(params, forwardParams))
+  return `${ getBasepath() }${ path[0] !== "/" ? "/" : "" }${ path }${ queryParamsString }`
+}
