@@ -24,6 +24,7 @@ const Itinerary: FC<Props> = ({ itinerary }) => {
     street_name: streetName,
     street_number: streetNumber,
     suffix,
+    suffix_letter,
     postal_code: postalCode,
     stadium
   } = itinerary
@@ -32,7 +33,7 @@ const Itinerary: FC<Props> = ({ itinerary }) => {
 
   return (
     <Article className="Itinerary">
-      <H1><Link to={ linkTo }>{ streetName } { streetNumber } { suffix }</Link></H1>
+      <H1><Link to={ linkTo }>{ streetName } { streetNumber } { suffix }{ suffix_letter }</Link></H1>
       <p>{ postalCode }</p>
       <Signal text={ stadium } />
     </Article>

@@ -26,6 +26,7 @@ declare type Itinerary = {
       stadium: string
       street_number: number
       suffix: string
+      suffix_letter: string
     }
   }
 }
