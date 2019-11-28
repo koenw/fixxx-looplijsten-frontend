@@ -84,9 +84,9 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
     const { datum, anoniem, naam, telnr, text } = item
     acc.push(["In behandeling per", datum || "-"])
     acc.push(["Anonieme melding", anoniem])
-    acc.push(["Melder", naam || "-"])
-    acc.push(["Melder telefoonnummer", telnr ? <a href={ "tel://" + telnr }>{ telnr }</a> : "-"])
-    acc.push(<p dangerouslySetInnerHTML={ { __html: text } }></p>)
+    acc.push(["Melder", <p className="anonymous"> { naam }</p> || "-"])
+    acc.push(["Melder telefoonnummer", telnr ? <a className="anonymous" href={ "tel://" + telnr }>{ telnr }</a> : "-"])
+    acc.push(<p className="anonymous" dangerouslySetInnerHTML={ { __html: text } }></p>)
     if (index < meldingen.length - 1) acc.push(<Hr />)
     return acc
   }, [])
@@ -103,7 +103,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   }) : []
   const bewoners = people.reduce((acc: any, person: any, index: number) => {
     acc.push(<span className="anonymous">{ (index + 1) + ". " + person.initials + " " + person.name + " (" + person.sex + ")" }</span>)
-    acc.push(["Geboren", person.born])
+    acc.push(["Geboren", <span className="anonymous">{ person.born }</span>])
     acc.push(["Woont hier sinds", person.livingSince])
     return acc
   }, [])
