@@ -30,16 +30,17 @@ const parse = (text: string) => {
     const parts = line.split(regExpPostalCode)
     const address = parts.length ? parts[0] : undefined
     if (address === undefined) return
-    const match1 = address.match(/\s([1-9][0-9]*)\s/)
-    const streetNumber = match1 ? match1[1] : undefined
-    if (streetNumber === undefined) return
-    results.push([postalCode, streetNumber])
+    const matchAddress = address.match(/\s([1-9][0-9]*)\s(.*)/)
+    if (matchAddress == null) return
+    const streetNumber = matchAddress[1]
+    const streetSuffix = matchAddress[2].trim() || undefined
+    results.push([postalCode, streetNumber, streetSuffix])
   })
   return results
 }
 
 const fetchOne = (item: any) : Promise<any> => {
-  const params = { postalCode: item[0].toUpperCase(), streetNumber: item[1], suffix: "" }
+  const params = { postalCode: item[0].toUpperCase(), streetNumber: item[1], suffix: item[2] || "" }
   const url = getUrl("search", params)
   const token = authToken.get()
   return fetch(url, {
