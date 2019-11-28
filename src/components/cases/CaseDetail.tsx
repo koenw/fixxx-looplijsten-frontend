@@ -118,7 +118,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   // Logboek
   const bevindingen = caseItem ? caseItem.bwv_hotline_bevinding.map((item: any) => {
     return ({
-      name: item.toez_hdr1_code || "",
+      name: [item.toez_hdr1_code, item.toez_hdr2_code].filter(i => i != null).join(", "),
       date: formatDate(item.bevinding_datum, true)!,
       time: item.bevinding_tijd,
       hit: item.hit === "J",
