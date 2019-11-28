@@ -61,7 +61,8 @@ const SearchForm: FC<Props> = ({ setResults }) => {
     event.preventDefault()
 
     try {
-      const params = { postalCode, streetNumber, suffix }
+      const postalCodeStrict = postalCode.replace(/\s/g, "")
+      const params = { postalCode: postalCodeStrict, streetNumber, suffix }
       const url = getUrl("search", params)
       const token = authToken.get()
       const response = await fetch(url, {

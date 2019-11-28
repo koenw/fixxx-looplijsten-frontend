@@ -25,7 +25,7 @@ const parse = (text: string) => {
   const results: any = []
   lines.forEach(line => {
     const match = line.match(regExpPostalCode)
-    const postalCode = match ? match[0] : undefined
+    const postalCode = match ? match[0].replace(/\s/g, "") : undefined
     if (postalCode === undefined) return
     const parts = line.split(regExpPostalCode)
     const address = parts.length ? parts[0] : undefined
