@@ -21,6 +21,7 @@ declare type Itinerary = {
   id: Id
   case: {
     bwv_data: {
+      case_id: string
       street_name: string
       postal_code: string
       stadium: string

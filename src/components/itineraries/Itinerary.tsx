@@ -6,6 +6,7 @@ import Signal from "../global/Signal"
 
 type Props = {
   itinerary: any
+  note?: string
 }
 
 const Article = styled.article`
@@ -17,8 +18,15 @@ const H1 = styled.h1`
     line-height: 28px
   }
 `
+const Note = styled.p`
+  font-family: serif
+  font-size: 24px
+  color: lightgray
+  font-style: italic
+`
 
-const Itinerary: FC<Props> = ({ itinerary }) => {
+const Itinerary: FC<Props> = ({ itinerary, note }) => {
+
   const {
     case_id: id,
     street_name: streetName,
@@ -29,6 +37,8 @@ const Itinerary: FC<Props> = ({ itinerary }) => {
     stadium
   } = itinerary
 
+  const showNote = note !== undefined
+
   const linkTo = to(`/cases/${ id }`)
 
   return (
@@ -36,6 +46,9 @@ const Itinerary: FC<Props> = ({ itinerary }) => {
       <H1><Link to={ linkTo }>{ streetName } { streetNumber } { suffix }{ suffix_letter }</Link></H1>
       <p>{ postalCode }</p>
       <Signal text={ stadium } />
+      { showNote &&
+        <Note>{ note }</Note>
+      }
     </Article>
   )
 }
