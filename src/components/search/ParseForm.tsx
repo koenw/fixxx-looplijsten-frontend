@@ -1,4 +1,4 @@
-import React, { FC, useState, FormEvent } from "react"
+import React, { FC, useState, useContext, FormEvent } from "react"
 import { Button, Spinner } from "@datapunt/asc-ui"
 import { Search } from "@datapunt/asc-assets"
 import styled from "styled-components"
@@ -7,6 +7,7 @@ import useOnChangeState from "../../hooks/useOnChangeState"
 import { getUrl } from "../../config/domain"
 import authToken from "../../utils/authToken"
 import SearchResults from "./SearchResults"
+import stateContext from "../../contexts/StateContext"
 
 const ButtonWrap = styled.div`
   display: flex
@@ -65,12 +66,21 @@ const fetchAll = async (items: any[]) => {
 }
 
 const ParseForm: FC = () => {
+
+  const {
+    state: {
+      parse: parseState,
+      setParse
+    }
+  } = useContext(stateContext)
+
   const [results, setResults] = useState<SearchResults | undefined>()
-  const [value, onChangeValue] = useOnChangeState()
+  const [value, onChangeValue] = useOnChangeState(parseState)
   const [showSpinner, setShowSpinner] = useState(false)
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
     setShowSpinner(true)
+    setParse(value)
     const results = parse(value)
     const itineraries = await fetchAll(results)
     const uniqueItineraries = itineraries
@@ -86,7 +96,7 @@ const ParseForm: FC = () => {
   return (
     <div className="ParseForm">
       <Form onSubmit={ onSubmit }>
-        <Textarea rows={ 16 } onChange={ onChangeValue } autoFocus />
+        <Textarea rows={ 16 } value={ value } onChange={ onChangeValue } autoFocus />
         <ButtonWrap>
           <Button variant="secondary" size={ 60 } icon={ <Search /> } />
         </ButtonWrap>

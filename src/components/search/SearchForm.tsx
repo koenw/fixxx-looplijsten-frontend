@@ -1,4 +1,4 @@
-import React, { FC, FormEvent } from "react"
+import React, { FC, FormEvent, useContext } from "react"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Search } from "@datapunt/asc-assets"
@@ -6,6 +6,7 @@ import useOnChangeState from "../../hooks/useOnChangeState"
 import { getUrl } from "../../config/domain"
 import InputBase from "../styled/Input"
 import authToken from "../../utils/authToken"
+import stateContext from "../../contexts/StateContext"
 
 type Props = {
   setResults: SetState
@@ -54,11 +55,25 @@ const SearchButton = styled(Button)`
 
 const SearchForm: FC<Props> = ({ setResults }) => {
 
-  const [postalCode, onChangePostalCode] = useOnChangeState("")
-  const [streetNumber, onChangeStreetNumber] = useOnChangeState("")
-  const [suffix, onChangeSuffix] = useOnChangeState()
+
+  const {
+    state: {
+      search: {
+        postalCode: postalCodeState,
+        streetNumber: streetNumberState,
+        suffix: suffixState
+      },
+      setSearch
+    }
+  } = useContext(stateContext)
+
+  const [postalCode, onChangePostalCode] = useOnChangeState(postalCodeState)
+  const [streetNumber, onChangeStreetNumber] = useOnChangeState(streetNumberState)
+  const [suffix, onChangeSuffix] = useOnChangeState(suffixState)
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
+
+    setSearch(postalCode, streetNumber, suffix)
 
     try {
       const params = { postalCode, streetNumber, suffix }
