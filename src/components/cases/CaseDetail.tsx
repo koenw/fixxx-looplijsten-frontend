@@ -18,6 +18,7 @@ type Props = {
 const parseMeldingText = (text: string) => replaceNewLines(replaceUrls(text), "<br /><br />")
 
 const CaseDetail: React.FC<Props> = ({ caseId }) => {
+
   const [caseItem, isFetching, errorMessage] = useFetch(`cases/${ caseId }`) as [Case, boolean, ErrorMessage]
   console.log(caseItem)
 
@@ -41,7 +42,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
   const vakantieverhuurDays = caseItem && caseItem.vakantie_verhuur ? caseItem.vakantie_verhuur.rented_days : 0
   const vakantieverhuurToday = (() => {
     const l = vakantieverNotifiedRentals.length
-    if (l === 0) return false
+    if (l === 0) return "-"
     const last = vakantieverNotifiedRentals[l - 1]
     return isBetweenDates(new Date(last.check_in), new Date(last.check_out), new Date())
   })()
@@ -171,18 +172,16 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
           footer={ { link: `http://www.google.com/maps/place/${ address }, Amsterdam`, title: "Bekijk op Google Maps" } }
           signal={ lastStadia }
         />
-        { showVakantieverhuur &&
         <CaseDetailSection
           title="Vakantieverhuur"
           data={[
             ["Aangevraagd", vakantieverhuurNotified],
             ["Vandaag verhuurd", vakantieverhuurToday],
-            ["Verhuurd dit jaar", <a href="#vakantieverhuur">{ vakantieverhuurDays } dagen</a>],
+            ["Verhuurd dit jaar", vakantieverhuurDays > 0 ? <a href="#vakantieverhuur">{ vakantieverhuurDays } dagen</a> : "-"],
             ["Shortstay", undefined],
             ["B&B aangemeld", undefined]
           ]}
           />
-        }
         <CaseDetailSection
           title="Woning"
           data={[
