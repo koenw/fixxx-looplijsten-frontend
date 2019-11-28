@@ -53,7 +53,7 @@ const CaseDetailHeader: FC<Props> = ({ address, postalCode, personCount, caseNum
         <Signal type={ signalType } text={ signal } />
       }
       <div>
-        <Label>Ingeschreven</Label><span><a href="#personen">{ personText }</a></span>
+        <Label>Ingeschreven</Label><span>{ personCount > 0 ? <a href="#personen">{ personText }</a> : personText }</span>
       </div>
       <div>
         <Label>Zaaknummer</Label>

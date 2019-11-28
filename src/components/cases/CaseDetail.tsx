@@ -113,6 +113,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
     acc.push(["Woont hier sinds", person.livingSince])
     return acc
   }, [])
+  const showBewoners = personCount > 0
 
   // Logboek
   const bevindingen = caseItem ? caseItem.bwv_hotline_bevinding.map((item: any) => {
@@ -201,10 +202,12 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
           title="Meldingen / aanleiding"
           data={ meldingenData }
           />
-        <CaseDetailSection
-          id="personen"
-          title={ `Huidige bewoners (${ people.length })` }
-          data= { bewoners } />
+        { showBewoners &&
+          <CaseDetailSection
+            id="personen"
+            title={ `Huidige bewoners (${ people.length })` }
+            data= { bewoners } />
+        }
         { showVakantieverhuur &&
         <CaseDetailSection
           id="vakantieverhuur"
