@@ -1,4 +1,5 @@
 import React from "react"
+import styled from "styled-components"
 import useFetch from "../../hooks/useFetch"
 import { Spinner } from "@datapunt/asc-ui"
 import CaseDetailHeader from "./CaseDetailHeader"
@@ -15,7 +16,11 @@ type Props = {
   caseId: string
 }
 
-const parseMeldingText = (text: string) => replaceNewLines(replaceUrls(text), "<br /><br />")
+const HrSpaced = styled(Hr)`
+  margin: 24px 0
+`
+
+const parseMeldingText = (text: string) => replaceNewLines(replaceUrls(text.trim()), "<br /><br />")
 
 const CaseDetail: React.FC<Props> = ({ caseId }) => {
 
@@ -88,7 +93,7 @@ const CaseDetail: React.FC<Props> = ({ caseId }) => {
     acc.push(["Melder", <p className="anonymous"> { naam }</p> || "-"])
     acc.push(["Melder telefoonnummer", telnr ? <a className="anonymous" href={ "tel://" + telnr }>{ telnr }</a> : "-"])
     acc.push(<p className="anonymous" dangerouslySetInnerHTML={ { __html: text } }></p>)
-    if (index < meldingen.length - 1) acc.push(<Hr />)
+    if (index < meldingen.length - 1) acc.push(<HrSpaced />)
     return acc
   }, [])
 
