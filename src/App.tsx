@@ -28,6 +28,8 @@ const App: React.FC = () => {
           <HeaderWrap />
           <Main>
             <Router basepath={ basepath }>
+              // Make sure to also add these paths to `/serve.json` file
+              // This is required for reloading URLs
               <ItinerariesPage path="/" />
               <SearchPage path="/zoeken" />
               <ParsePage path="/parse" />
