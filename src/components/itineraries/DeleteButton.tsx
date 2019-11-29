@@ -8,7 +8,7 @@ type Props = {
 }
 
 const DeleteButton: FC<Props> = ({ onClick = noop }) => {
-  const confirmText = "Weet je zeker dat je deze case wilt verwijderen?"
+  const confirmText = "Weet je zeker dat je dit adres wilt verwijderen?"
   const onClickConfirm = () => {
     if (window.confirm(confirmText)) onClick()
   }
