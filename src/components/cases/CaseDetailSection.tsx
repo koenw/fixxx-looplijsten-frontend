@@ -46,7 +46,7 @@ const CaseDetailSection: React.FC<Props> = ({ id = "", title, data, footer }) =>
             value = value === true ? "Ja" : "Nee"
           }
           const isString = typeof value === "string"
-          const isUndefined = value === undefined
+          const isUndefined = value == null
 
           return (
             <div key={ String(key) + index }>

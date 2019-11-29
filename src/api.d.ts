@@ -33,16 +33,70 @@ declare type Itinerary = {
 }
 declare type Itineraries = Itinerary[]
 
+declare type CaseId = string
+type ImportAdres = {
+  sttnaam: string
+  hsnr: string
+  toev: string | null
+  hsltr: string | null
+  postcode: string
+}
+type BWVPersoon = {
+  naam: string
+  voorletters: string
+  geslacht: "M" | "V"
+  geboortedatum: string
+  vestigingsdatum_adres: string
+}
+type BWVPersonen = BWVPersoon[]
+type BWVTmp = {
+  case_number: string | null
+  num_cases: string | null
+  num_open_cases: number | null
+  openings_reden: string | null
+}
+type VakantieVerhuur = {
+  notified_rentals: [{ check_in: string, check_out: string }]
+  rented_days: number
+}
+type BagData = {
+  gebruiksdoelen: [{ omschrijving_plus: string }]
+  aantal_kamers: number | null
+  oppervlakte: number | null
+  verblijfsobjectidentificatie: string | null
+}
+type BWVHotlineMelding = {
+  melding_datum: string
+  melding_anoniem: "J" | "N"
+  melder_naam: string
+  melder_telnr: string
+  situatie_schets: string
+}
+type BWVHotlineBevinding = {
+  toez_hdr1_code: string
+  toez_hdr2_code: string
+  bevinding_datum: string
+  bevinding_tijd: string
+  hit: "J" | "N"
+  opmerking: string
+  volgnr_bevinding: string
+}
+type ImportStadia = {
+  sta_oms: string
+  begindatum: string
+  einddatum: string
+  peildatum: string
+  sta_nr: string
+}
 declare type Case = {
-  bag_data: any
-  import_adres: any
-  bwv_hotline_bevinding: any
-  bwv_tmp: any
-  bwv_hotline_melding: any
-  bwv_personen: any
-  import_stadia: any
-  import_wvs: any
-  vakantie_verhuur: any
+  bag_data: BagData
+  import_adres: ImportAdres
+  bwv_hotline_bevinding: BWVHotlineBevinding[]
+  bwv_tmp: BWVTmp
+  bwv_hotline_melding: BWVHotlineMelding[]
+  bwv_personen: BWVPersonen
+  import_stadia: ImportStadia[]
+  vakantie_verhuur: VakantieVerhuur
 }
 declare type OptionalCase = Case | undefined
 

@@ -1,5 +1,5 @@
 import React from "react"
-import CaseDetail from "../components/cases/CaseDetail"
+import Case from "../components/cases/Case"
 import Navigation from "../components/global/Navigation"
 import { RouteComponentProps } from "@reach/router"
 
@@ -12,9 +12,7 @@ const CasePage: React.FC<Props> = ({ teamId, caseId }) => {
   return (
     <>
       <Navigation />
-      { caseId &&
-        <CaseDetail caseId={ caseId } />
-      }
+      <Case caseId={ caseId! } />
     </>
   )
 }
