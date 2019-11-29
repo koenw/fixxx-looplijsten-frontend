@@ -5,7 +5,7 @@ import styled from "styled-components"
 import Signal from "../global/Signal"
 
 type Props = {
-  itinerary: any
+  itinerary: BWVData
   note?: string
 }
 

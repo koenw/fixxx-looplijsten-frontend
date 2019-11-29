@@ -1,16 +1,16 @@
-import React, { FC } from "react"
+import React, { FC, MouseEvent } from "react"
 import { Button } from "@datapunt/asc-ui"
 import { TrashBin } from "@datapunt/asc-assets"
 import noop from "../../utils/noop"
 
 type Props = {
-  onClick?: any
+  onClick?: (a: MouseEvent<HTMLButtonElement>) => void
 }
 
 const DeleteButton: FC<Props> = ({ onClick = noop }) => {
   const confirmText = "Weet je zeker dat je dit adres wilt verwijderen?"
-  const onClickConfirm = () => {
-    if (window.confirm(confirmText)) onClick()
+  const onClickConfirm = (event: MouseEvent<HTMLButtonElement>) => {
+    if (window.confirm(confirmText)) onClick(event)
   }
   return (<Button onClick={ onClickConfirm } size={ 60 } variant="blank" icon={ <TrashBin /> } />)
 }

@@ -20,7 +20,9 @@ const Textarea = styled(TextareaBase)`
   width: 100%
 `
 
-const parse = (text: string) => {
+type SearchQueryParams = [string, string, string | undefined]
+
+const parse = (text: string) : SearchQueryParams[] => {
   const lines = text.split(/\r?\n/)
   const regExpPostalCode = /[1-9][0-9]{3}\s?[A-Za-z]{2}/
   const results: any = []
@@ -40,7 +42,7 @@ const parse = (text: string) => {
   return results
 }
 
-const fetchOne = (item: any) : Promise<any> => {
+const fetchOne = (item: SearchQueryParams) : Promise<any> => {
   const params = { postalCode: item[0].toUpperCase(), streetNumber: item[1], suffix: item[2] || "" }
   const url = getUrl("search", params)
   const token = authToken.get()
@@ -53,7 +55,7 @@ const fetchOne = (item: any) : Promise<any> => {
   })
 }
 
-const fetchAll = async (items: any[]) => {
+const fetchAll = async (items: SearchQueryParams[]) : Promise<SearchResults | undefined> => {
 
   const promises = items.map(item => fetchOne(item))
 
@@ -83,7 +85,7 @@ const ParseForm: FC = () => {
     setShowSpinner(true)
     setParse(value)
     const results = parse(value)
-    const itineraries = await fetchAll(results)
+    const itineraries = await fetchAll(results) || []
     const uniqueItineraries = itineraries
       .map((itinerary: any) => itinerary.cases)
       .flat(1)

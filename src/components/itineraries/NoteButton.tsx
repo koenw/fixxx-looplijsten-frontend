@@ -1,10 +1,10 @@
-import React, { FC } from "react"
+import React, { FC, MouseEvent } from "react"
 import { Button } from "@datapunt/asc-ui"
 import { DocumentText } from "@datapunt/asc-assets"
 import noop from "../../utils/noop"
 
 type Props = {
-  onClick?: any
+  onClick?: (a: MouseEvent<HTMLButtonElement>) => void
   disabled?: boolean
 }
 

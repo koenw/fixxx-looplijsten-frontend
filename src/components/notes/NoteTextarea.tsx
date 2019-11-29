@@ -5,7 +5,6 @@ import TextareaBase from "../styled/Textarea"
 type Props = {
   text: string
   onChange: (a: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
-  ref?: any
 }
 
 const Textarea = styled(TextareaBase)`

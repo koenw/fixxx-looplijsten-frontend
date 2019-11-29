@@ -2,38 +2,30 @@ declare type Id = number
 declare type OptionalId = Id | undefined
 declare type Ids = Id[]
 
-declare type User = {
-  username: string
-  first_name: string
-  last_name: string
-}
-declare type Users = User[]
+declare type CaseId = string
+declare type CaseIds = CaseId[]
 
-declare type Team = {
-  id: Id
-  name: string
-  members: Users
+declare type BWVData = {
+  case_id: CaseId
+  street_name: string
+  postal_code: string
+  stadium: string
+  street_number: number
+  suffix: string | null
+  suffix_letter: string | null
 }
-declare type OptionalTeam = Team | undefined
-declare type Teams = Team[]
-
 declare type Itinerary = {
   id: Id
   case: {
-    bwv_data: {
-      case_id: string
-      street_name: string
-      postal_code: string
-      stadium: string
-      street_number: number
-      suffix: string
-      suffix_letter: string
-    }
+    bwv_data: BWVData
   }
+  notes: []
 }
 declare type Itineraries = Itinerary[]
 
-declare type CaseId = string
+declare type SearchResult = BWVData
+declare type SearchResults = SearchResult[]
+
 type ImportAdres = {
   sttnaam: string
   hsnr: string
@@ -102,6 +94,3 @@ declare type OptionalCase = Case | undefined
 
 declare type OptionalString = string | undefined
 declare type ErrorMessage = OptionalString
-
-declare type SearchResult = any
-declare type SearchResults = SearchResult[]

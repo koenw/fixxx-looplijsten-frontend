@@ -21,13 +21,13 @@ const P = styled.p`
 
 const SearchResults: FC<Props> = ({ results }) => {
 
-  const [disabled, setDisabled] = useState<Ids>([])
-  const isDisabled = (id: Id) => disabled.includes(id)
+  const [disabled, setDisabled] = useState<CaseIds>([])
+  const isDisabled = (id: CaseId) => disabled.includes(id)
 
   const showResults = results && results.length > 0
   const showEmpty = results && results.length === 0
 
-  const onClick = (id: number) => async (event: FormEvent) => {
+  const onClick = (id: CaseId) => async (event: FormEvent) => {
 
     event.preventDefault()
 
