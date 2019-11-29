@@ -18,8 +18,15 @@ const Main = styled.main`
   margin: 15px
 `
 
+/* Be careful!
+ * Make sure to also add the paths to `/serve.json` file
+ * This is required for reloading URLs on acceptatie and production
+ */
+
 const App: React.FC = () => {
+
   const basepath = getBasepath()
+
   return (
     <StateProvider>
       <ThemeProvider>
@@ -28,8 +35,6 @@ const App: React.FC = () => {
           <HeaderWrap />
           <Main>
             <Router basepath={ basepath }>
-              // Make sure to also add these paths to `/serve.json` file
-              // This is required for reloading URLs
               <ItinerariesPage path="/" />
               <SearchPage path="/zoeken" />
               <ParsePage path="/parse" />
