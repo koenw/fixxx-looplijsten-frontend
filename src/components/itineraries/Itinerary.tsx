@@ -10,15 +10,24 @@ type Props = {
 }
 
 const Article = styled.article`
-  margin-bottom: 12px
-`
-const H1 = styled.h1`
+  width: 100%
   a {
-    font-size: 20px
-    line-height: 28px
+    display: block
+    margin-bottom: 0
+    padding: 24px 0
   }
 `
+const H1 = styled.h1`
+  font-size: 20px
+  line-height: 28px
+  color: black
+`
+const P = styled.p`
+  color: black
+  font-weight: normal
+`
 const Note = styled.p`
+  margin-bottom: 0
   font-family: serif
   font-size: 24px
   color: lightgray
@@ -43,12 +52,16 @@ const Itinerary: FC<Props> = ({ itinerary, note }) => {
 
   return (
     <Article className="Itinerary">
-      <H1><Link to={ linkTo }>{ streetName } { streetNumber } { suffix }{ suffix_letter }</Link></H1>
-      <p>{ postalCode }</p>
-      <Signal text={ stadium } />
-      { showNote &&
-        <Note>{ note }</Note>
-      }
+      <Link to={ linkTo }>
+        <div>
+          <H1>{ streetName } { streetNumber } { suffix }{ suffix_letter }</H1>
+          <P>{ postalCode }</P>
+          <Signal text={ stadium } />
+          { showNote &&
+            <Note>{ note }</Note>
+          }
+        </div>
+      </Link>
     </Article>
   )
 }

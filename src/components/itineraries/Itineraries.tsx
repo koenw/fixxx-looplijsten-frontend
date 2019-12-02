@@ -14,12 +14,15 @@ import { to } from "../../config/domain"
 const Div = styled.div`
   display: flex
   justify-content: space-between
-  margin-top: 24px
   border-bottom: 4px solid #767676
 `
 
 const ButtonWrap = styled.div`
   display: flex
+  margin: 24px 0
+  button {
+    margin-left: 12px
+  }
 `
 
 const Itineraries: FC = () => {
