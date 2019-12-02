@@ -4,6 +4,7 @@ import CaseDetailHeader from "./CaseDetailHeader"
 import CaseDetailSection from "./CaseDetailSection"
 import Signal from "../global/Signal"
 import Hr from "../styled/Hr"
+import MailtoAnchor from "./MailtoAnchor"
 import formatDate from "../../utils/formatDate"
 import replaceNewLines from "../../utils/replaceNewLines"
 import replaceUrls from "../../utils/replaceUrls"
@@ -41,7 +42,6 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
   ).length > 0 : "-"
   const showVakantieverhuur = vakantieverhuurNotified
 
-
   // Woning
   const hasBagData = (caseItem.bag_data as BagDataError).error === undefined
   const bagData = caseItem.bag_data as BagData
@@ -51,6 +51,18 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
   const woningKamers = hasBagData && bagData.aantal_kamers ? bagData.aantal_kamers : 0
   const woningOppervlak = hasBagData && bagData.oppervlakte ? bagData.oppervlakte : 0
   const woningBagId = hasBagData ? bagData.verblijfsobjectidentificatie : undefined
+  const mailtoAnchor = <MailtoAnchor
+    address={ address }
+    postalCode={ postalCode }
+    gebruiksdoel={ woningBestemming }
+    etage={ woningEtage }
+    aantalKamers= { woningKamers }
+    oppervlak={ woningOppervlak }
+    />
+  const woningFooter =
+    woningBagId ?
+      { link: `https://data.amsterdam.nl/data/bag/verblijfsobject/id${ woningBagId }/`, title: "Bekijk op Data & informatie" } :
+      undefined
 
   // Melding
   const meldingen = caseItem.bwv_hotline_melding.map(melding => {
@@ -175,8 +187,9 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
           ["Etage", woningEtage],
           ["Aantal kamers", woningKamers > 0 ? woningKamers : "-"],
           ["Woonoppervlak", woningOppervlak > 0 ? woningOppervlak + " m²" : "-"],
+          mailtoAnchor
         ]}
-        footer={ woningBagId ? { link: `https://data.amsterdam.nl/data/bag/verblijfsobject/id${ woningBagId }/`, title: "Bekijk op Data & informatie" } : undefined }
+        footer={ woningFooter }
         />
       <CaseDetailSection
         title="Meldingen / aanleiding"

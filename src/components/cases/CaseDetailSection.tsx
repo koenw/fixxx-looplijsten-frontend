@@ -12,10 +12,7 @@ type Props = {
   id?: string
   title?: string
   data: KeyValueDetails
-  footer?: {
-    title: string
-    link: string
-  }
+  footer?: { title: string, link: string }
 }
 
 const Section = styled.section`

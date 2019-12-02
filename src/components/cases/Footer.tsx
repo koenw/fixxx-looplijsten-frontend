@@ -5,5 +5,8 @@ const Footer = styled.footer`
   margin: 0 -8px
   padding: 12px 0 4px
   text-align: center
+  a {
+    margin-top: 8px
+  }
 `
 export default Footer
