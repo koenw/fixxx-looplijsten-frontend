@@ -51,11 +51,14 @@ type VakantieVerhuur = {
   notified_rentals: [{ check_in: string, check_out: string }]
   rented_days: number
 }
-type BagData = {
+declare type BagData = {
   gebruiksdoelen: [{ omschrijving_plus: string }]
   aantal_kamers: number | null
   oppervlakte: number | null
   verblijfsobjectidentificatie: string | null
+}
+type BagDataError = {
+  error: string
 }
 type BWVHotlineMelding = {
   melding_datum: string
@@ -81,7 +84,7 @@ type ImportStadia = {
   sta_nr: string
 }
 declare type Case = {
-  bag_data: BagData
+  bag_data: BagData | BagDataError
   import_adres: ImportAdres
   bwv_hotline_bevinding: BWVHotlineBevinding[]
   bwv_tmp: BWVTmp

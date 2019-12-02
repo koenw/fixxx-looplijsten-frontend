@@ -54,7 +54,7 @@ const Itinerary: FC<Props> = ({ itinerary, note }) => {
     <Article className="Itinerary">
       <Link to={ linkTo }>
         <div>
-          <H1>{ streetName } { streetNumber } { suffix }{ suffix_letter }</H1>
+          <H1>{ streetName } { streetNumber } { suffix_letter }{ suffix }</H1>
           <P>{ postalCode }</P>
           <Signal text={ stadium } />
           { showNote &&

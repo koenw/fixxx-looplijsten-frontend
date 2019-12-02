@@ -24,7 +24,7 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
   console.log(caseItem)
 
   // Header
-  const address = `${ caseItem.import_adres.sttnaam } ${ caseItem.import_adres.hsnr } ${ caseItem.import_adres.toev || "" }${ caseItem.import_adres.hsltr || "" }`
+  const address = `${ caseItem.import_adres.sttnaam } ${ caseItem.import_adres.hsnr } ${ caseItem.import_adres.hsltr || "" }${ caseItem.import_adres.toev || "" }`
   const postalCode = caseItem.import_adres.postcode
   const personCount = caseItem.bwv_personen.length
   const caseNumber = caseItem.bwv_tmp.case_number !== null ? parseInt(caseItem.bwv_tmp.case_number, 10) : undefined
@@ -43,11 +43,14 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
 
 
   // Woning
-  const woningBestemming = caseItem.bag_data.gebruiksdoelen.length ? caseItem.bag_data.gebruiksdoelen[0].omschrijving_plus : undefined
+  const hasBagData = (caseItem.bag_data as BagDataError).error === undefined
+  const bagData = caseItem.bag_data as BagData
+  const gebruiksdoelen = hasBagData ? bagData.gebruiksdoelen : undefined
+  const woningBestemming = gebruiksdoelen && gebruiksdoelen.length ? gebruiksdoelen[0].omschrijving_plus : undefined
   const woningEtage = undefined
-  const woningKamers = caseItem.bag_data.aantal_kamers || 0
-  const woningOppervlak = caseItem.bag_data.oppervlakte || 0
-  const woningBagId = caseItem.bag_data.verblijfsobjectidentificatie
+  const woningKamers = hasBagData && bagData.aantal_kamers ? bagData.aantal_kamers : 0
+  const woningOppervlak = hasBagData && bagData.oppervlakte ? bagData.oppervlakte : 0
+  const woningBagId = hasBagData ? bagData.verblijfsobjectidentificatie : undefined
 
   // Melding
   const meldingen = caseItem.bwv_hotline_melding.map(melding => {
@@ -177,7 +180,7 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
         />
       <CaseDetailSection
         title="Meldingen / aanleiding"
-        data={ meldingenData }
+        data={ meldingenData.length ? meldingenData : ["-"] }
         />
       { showBewoners &&
         <CaseDetailSection
@@ -200,7 +203,7 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
       }
       <CaseDetailSection
         title="Logboek"
-        data= { logboek } />
+        data= { logboek.length ? logboek : ["-"] } />
       <CaseDetailSection
         title="Stadia"
         data= { stadia } />
