@@ -40,6 +40,7 @@ const App: React.FC = () => {
               <ParsePage path="/parse" />
               <CasePage path="/cases/:caseId" />
               <NotePage path="/notes/:itineraryId" />
+              <NotePage path="/notes/:itineraryId/:id" />
               <LoginPage path="/login" />
               <NotFoundPage default />
             </Router>

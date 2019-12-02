@@ -14,12 +14,18 @@ declare type BWVData = {
   suffix: string | null
   suffix_letter: string | null
 }
+declare type Note = {
+  id: Id
+  itinerary_item: Id
+  text: string
+}
+declare type Notes = Note[]
 declare type Itinerary = {
   id: Id
   case: {
     bwv_data: BWVData
   }
-  notes: []
+  notes: Notes
 }
 declare type Itineraries = Itinerary[]
 

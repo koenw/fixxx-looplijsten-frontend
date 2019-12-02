@@ -2,9 +2,11 @@ import React, { FC, FormEvent, MouseEvent } from "react"
 import NoteTextarea from "./NoteTextarea"
 import { Button } from "@datapunt/asc-ui"
 import styled from "styled-components"
+import { getUrl } from "../../config/domain"
 import useOnChangeState from "../../hooks/useOnChangeState"
 import { navigate } from "@reach/router"
 import { to } from "../../config/domain"
+import authToken from "../../utils/authToken"
 
 const ButtonWrap = styled.div`
   display: flex
@@ -16,29 +18,55 @@ const ButtonWrap = styled.div`
 
 type Props = {
   itineraryId: Id
+  id?: Id
+  value: string
 }
 
-const NoteForm: FC<Props> = ({ itineraryId }) => {
+const save = (itineraryId: Id, text: string, id?: Id) => {
 
-  const key = `itinerary_${ itineraryId }`
-  const defaultState = window.localStorage.getItem(key) || ""
-  const [text, onChangeText] = useOnChangeState(defaultState)
+  const path = `notes/${ id || "" }`
+  const url = getUrl(path)
+  const method = text === "" ? "DELETE" : id !== undefined ? "PUT" : "POST"
 
-  const onSubmit = (event: FormEvent) => {
+  const token = authToken.get()
+  return fetch(url, {
+    method,
+    headers: {
+      Authorization: `Token ${ token }`,
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ itinerary_item: itineraryId, text })
+  })
+}
+
+const NoteForm: FC<Props> = ({ itineraryId, id, value }) => {
+
+  const [text, onChangeText] = useOnChangeState(value)
+
+  const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
-    window.localStorage.setItem(key, text)
-    navigate(to("/"))
+    const response = await save(itineraryId, text.trim(), id)
+    if (response.ok) {
+      navigate(to("/"))
+    } else {
+      alert("Opslaan mislukt")
+    }
   }
 
   const showButton = text === ""
 
   const nawText = "NAW"
 
-  const onClick = (event: MouseEvent<HTMLButtonElement>) => {
+  const onClick = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     event.stopPropagation()
-    window.localStorage.setItem(key, nawText)
-    navigate(to("/"))
+    const response = await save(itineraryId, nawText, id)
+    if (response.ok) {
+      navigate(to("/"))
+    } else {
+      alert("Opslaan mislukt")
+    }
   }
 
   return (

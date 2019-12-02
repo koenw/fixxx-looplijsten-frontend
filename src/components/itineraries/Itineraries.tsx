@@ -63,13 +63,17 @@ const Itineraries: FC = () => {
       { show &&
         (
           hasItineraries ?
-            nonDeletedItineraries.map(({ id, case: { bwv_data } }) => {
-              const note = window.localStorage.getItem(`itinerary_${ id }`) || undefined
+            nonDeletedItineraries.map(({ id, case: { bwv_data }, notes }) => {
+
+              const noteId = notes[0] && notes[0].id
+              const noteText = notes[0] && notes[0].text
+              const notePath = `/notes/${ id }/${ noteId || "" }`
+
               return (
                 <Div key={ id }>
-                  <Itinerary itinerary={ bwv_data } note={ note } />
+                  <Itinerary itinerary={ bwv_data } note={ noteText } />
                   <ButtonWrap>
-                    <NoteButton onClick={ () => navigate(to(`/notes/${ id }`)) } />
+                    <NoteButton onClick={ () => navigate(to(notePath)) } />
                     <DeleteButton onClick={ onClick(id) } />
                   </ButtonWrap>
                 </Div>

@@ -7,7 +7,7 @@ const navigateToLogin = () => {
   navigate(to("/login"))
 }
 
-const useFetch = (path: string, plural = false) : [any, boolean, ErrorMessage] => {
+const useFetch = (path: string, plural = false, immediateReturn = false) : [any, boolean, ErrorMessage] => {
 
   const [isFetching, setIsFetching] = useState(true)
   const [error, setError] = useState<ErrorMessage>()
@@ -16,6 +16,11 @@ const useFetch = (path: string, plural = false) : [any, boolean, ErrorMessage] =
   const [data, setData] = useState(defaultState)
 
   useEffect(() => {
+
+    if (immediateReturn) {
+      setIsFetching(false)
+      return
+    }
 
     let abortController: AbortController
 
@@ -62,9 +67,10 @@ const useFetch = (path: string, plural = false) : [any, boolean, ErrorMessage] =
     })()
 
     return () => {
+      if (abortController === undefined) return
       abortController.abort()
     }
-  }, [path])
+  }, [path, immediateReturn])
 
   return [data, isFetching, error]
 }
