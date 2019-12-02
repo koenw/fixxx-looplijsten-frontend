@@ -15,6 +15,9 @@ const Div = styled.div`
   margin-top: 12px
   border-bottom: 4px solid #767676
 `
+const ButtonWrap = styled.div`
+  margin: 24px 0
+`
 const P = styled.p`
   margin-top: 12px
 `
@@ -55,7 +58,9 @@ const SearchResults: FC<Props> = ({ results }) => {
         return (
           <Div key={ case_id }>
             <Itinerary itinerary={ result } />
-            <AddButton onClick={ onClick(case_id) } disabled={ disabled } />
+            <ButtonWrap>
+              <AddButton onClick={ onClick(case_id) } disabled={ disabled } />
+            </ButtonWrap>
           </Div>
         )
       })

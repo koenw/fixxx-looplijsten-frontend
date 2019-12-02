@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useContext } from "react"
+import React, { FC, FormEvent, useContext, useEffect } from "react"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Search } from "@datapunt/asc-assets"
@@ -53,8 +53,26 @@ const SearchButton = styled(Button)`
   margin-top: 24px
 `
 
-const SearchForm: FC<Props> = ({ setResults }) => {
+const get = async (postalCode: string, streetNumber: string, suffix: string) => {
 
+  try {
+    const params = { postalCode, streetNumber, suffix }
+    const url = getUrl("search", params)
+    const token = authToken.get()
+    const response = await fetch(url, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Token ${ token }`,
+        "Content-Type": "application/json"
+      }
+    })
+    return await response.json()
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+const SearchForm: FC<Props> = ({ setResults }) => {
 
   const {
     state: {
@@ -70,28 +88,22 @@ const SearchForm: FC<Props> = ({ setResults }) => {
   const [postalCode, onChangePostalCode] = useOnChangeState(postalCodeState)
   const [streetNumber, onChangeStreetNumber] = useOnChangeState(streetNumberState)
   const [suffix, onChangeSuffix] = useOnChangeState(suffixState)
+
+  const search = async () => {
+    if (postalCode === "" || streetNumber === "") return
+    const json = await get(postalCode.replace(/\s/g, ""), streetNumber, suffix)
+    if (json) setResults(json.cases)
+  }
+
+  useEffect(() => {
+    search()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
-
     setSearch(postalCode, streetNumber, suffix)
-
-    try {
-      const postalCodeStrict = postalCode.replace(/\s/g, "")
-      const params = { postalCode: postalCodeStrict, streetNumber, suffix }
-      const url = getUrl("search", params)
-      const token = authToken.get()
-      const response = await fetch(url, {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Token ${ token }`,
-          "Content-Type": "application/json"
-        }
-      })
-      const json = await response.json()
-      setResults(json.cases)
-    } catch (err) {
-      console.error(err)
-    }
+    search()
   }
 
   return (
@@ -100,8 +112,8 @@ const SearchForm: FC<Props> = ({ setResults }) => {
         <Label>postcode</Label>
         <Input
           type="text"
-          pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}"
-          title="Geldige postcodes zijn 1234AA of 1234 aa"
+          pattern="\s*[1-9][0-9]{3}\s?[a-zA-Z]{2}\s*"
+          title="Geldige postcodes zijn in de 1234AA of 1234 aa"
           required
           autoFocus
           value={ postalCode }

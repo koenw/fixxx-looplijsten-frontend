@@ -1,4 +1,4 @@
-import React, { FC, useState, useContext, FormEvent } from "react"
+import React, { FC, useState, useContext, useEffect, FormEvent } from "react"
 import { Button, Spinner } from "@datapunt/asc-ui"
 import { Search } from "@datapunt/asc-assets"
 import styled from "styled-components"
@@ -80,10 +80,9 @@ const ParseForm: FC = () => {
   const [results, setResults] = useState<SearchResults | undefined>()
   const [value, onChangeValue] = useOnChangeState(parseState)
   const [showSpinner, setShowSpinner] = useState(false)
-  const onSubmit = async (event: FormEvent) => {
-    event.preventDefault()
-    setShowSpinner(true)
-    setParse(value)
+
+  const search = async () => {
+    if (value.trim() === "") return
     const results = parse(value)
     const itineraries = await fetchAll(results) || []
     const uniqueItineraries = itineraries
@@ -94,8 +93,20 @@ const ParseForm: FC = () => {
           .indexOf(itinerary.case_id) === index
       )
     setResults(uniqueItineraries)
+  }
+
+  useEffect(() => {
+    search()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const onSubmit = async (event: FormEvent) => {
+    event.preventDefault()
+    setShowSpinner(true)
+    setParse(value)
+    await search()
     setShowSpinner(false)
   }
+
   return (
     <div className="ParseForm">
       <Form onSubmit={ onSubmit }>
