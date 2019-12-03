@@ -18,6 +18,8 @@ const StateProvider: FC<Props> = ({ children }) => {
 
   const [parse, setParse] = useState("")
 
+  const [itineraries, setItineraries] = useState<Itineraries>([])
+
   const value = {
     state: {
       search: {
@@ -27,7 +29,9 @@ const StateProvider: FC<Props> = ({ children }) => {
       },
       setSearch,
       parse,
-      setParse
+      setParse,
+      itineraries,
+      setItineraries
     }
   }
 

@@ -1,3 +1,5 @@
+declare type Index = number
+
 declare type Id = number
 declare type OptionalId = Id | undefined
 declare type Ids = Id[]
@@ -26,6 +28,7 @@ declare type Itinerary = {
     bwv_data: BWVData
   }
   notes: Notes
+  position: number
 }
 declare type Itineraries = Itinerary[]
 

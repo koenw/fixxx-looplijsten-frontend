@@ -11,13 +11,14 @@ type Value = {
     },
     setSearch: (a: string, b: string, c: string) => void
     parse: string
-    setParse: (a: string) => void
+    setParse: (a: string) => void,
+    itineraries: Itineraries,
+    setItineraries: (a: Itineraries) => void
   }
 }
 
 const value = {
   state: {
-    //itineraries: [],
     search: {
       postalCode: "",
       streetNumber: "",
@@ -25,7 +26,9 @@ const value = {
     },
     setSearch: noop,
     parse: "",
-    setParse: noop
+    setParse: noop,
+    itineraries: [],
+    setItineraries: noop
   }
 } as Value
 

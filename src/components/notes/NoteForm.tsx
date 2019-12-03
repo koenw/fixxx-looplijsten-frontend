@@ -2,10 +2,10 @@ import React, { FC, FormEvent, MouseEvent } from "react"
 import NoteTextarea from "./NoteTextarea"
 import { Button } from "@datapunt/asc-ui"
 import styled from "styled-components"
-import { getUrl } from "../../config/domain"
 import useOnChangeState from "../../hooks/useOnChangeState"
 import { navigate } from "@reach/router"
 import { to } from "../../config/domain"
+import { getUrl } from "../../config/domain"
 import authToken from "../../utils/authToken"
 
 const ButtonWrap = styled.div`
