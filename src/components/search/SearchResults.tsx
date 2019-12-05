@@ -43,7 +43,7 @@ const SearchResults: FC<Props> = ({ results }) => {
         Authorization: `Token ${ token }`,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ id })
+      body: JSON.stringify({ id, position: Math.random() * 10000 })
     })
     setDisabled(disabled.concat(id))
   }
