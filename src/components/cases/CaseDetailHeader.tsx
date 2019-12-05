@@ -70,7 +70,7 @@ const CaseDetailHeader: FC<Props> = ({ address, postalCode, personCount, caseNum
         }
       </div>
       <div>
-        <Label>Soort, reden</Label>
+        <Label>Openingsreden</Label>
         { caseOpening !== undefined ?
           <span>{ caseOpening }</span> :
           <InvalidDataSpan />

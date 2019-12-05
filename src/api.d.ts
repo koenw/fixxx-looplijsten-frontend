@@ -15,6 +15,7 @@ declare type BWVData = {
   street_number: number
   suffix: string | null
   suffix_letter: string | null
+  case_reason: string
 }
 declare type Note = {
   id: Id

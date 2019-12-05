@@ -26,12 +26,15 @@ const P = styled.p`
   color: black
   font-weight: normal
 `
+const PostalCode = styled(P)`
+  font-weight: bold
+`
 const Note = styled.p`
   margin-bottom: 0
-  font-family: serif
-  font-size: 24px
-  color: lightgray
-  font-style: italic
+  font-size: 16px
+  line-height: 1.3em
+  color: gray
+  font-weight: normal
 `
 
 const Itinerary: FC<Props> = ({ itinerary, note }) => {
@@ -43,10 +46,18 @@ const Itinerary: FC<Props> = ({ itinerary, note }) => {
     suffix,
     suffix_letter,
     postal_code: postalCode,
-    stadium
+    stadium,
+    case_reason: caseReason
   } = itinerary
 
   const showNote = note !== undefined
+  const maxLength = 48
+  const noteString = note ?
+    note!.length > maxLength ?
+    `${ note!.substring(0, maxLength).trim() }…` :
+    note! :
+    undefined
+  console.log(note!.length, noteString!.length)
 
   const linkTo = to(`/cases/${ id }`)
 
@@ -55,10 +66,11 @@ const Itinerary: FC<Props> = ({ itinerary, note }) => {
       <Link to={ linkTo }>
         <div>
           <H1>{ streetName } { streetNumber } { suffix_letter }{ suffix }</H1>
-          <P>{ postalCode }</P>
+          <PostalCode>{ postalCode }</PostalCode>
+          <P>{ caseReason }</P>
           <Signal text={ stadium } />
           { showNote &&
-            <Note>{ note }</Note>
+            <Note>{ noteString }</Note>
           }
         </div>
       </Link>
