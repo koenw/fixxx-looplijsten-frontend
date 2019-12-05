@@ -9,6 +9,7 @@ import formatDate from "../../utils/formatDate"
 import replaceNewLines from "../../utils/replaceNewLines"
 import replaceUrls from "../../utils/replaceUrls"
 import isBetweenDates from "../../utils/isBetweenDates"
+import displayAddress from "../../utils/displayAddress"
 
 type Props = {
   caseItem: Case
@@ -25,7 +26,7 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
   console.log(caseItem)
 
   // Header
-  const address = `${ caseItem.import_adres.sttnaam } ${ caseItem.import_adres.hsnr } ${ caseItem.import_adres.hsltr || "" }${ caseItem.import_adres.toev || "" }`
+  const address = displayAddress(caseItem.import_adres.sttnaam, caseItem.import_adres.hsnr, caseItem.import_adres.hsltr || undefined, caseItem.import_adres.toev || undefined)
   const postalCode = caseItem.import_adres.postcode
   const personCount = caseItem.bwv_personen.length
   const caseNumber = caseItem.bwv_tmp.case_number !== null ? parseInt(caseItem.bwv_tmp.case_number, 10) : undefined

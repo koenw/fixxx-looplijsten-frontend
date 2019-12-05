@@ -3,6 +3,7 @@ import { Link } from "@reach/router"
 import { to } from "../../config/domain"
 import styled from "styled-components"
 import Signal from "../global/Signal"
+import displayAddress from "../../utils/displayAddress"
 
 type Props = {
   itinerary: BWVData
@@ -50,6 +51,7 @@ const Itinerary: FC<Props> = ({ itinerary, note }) => {
     case_reason: caseReason
   } = itinerary
 
+  const address = displayAddress(streetName, streetNumber, suffix_letter || undefined, suffix || undefined)
   const showNote = note !== undefined
   const maxLength = 48
   const noteString = note ?
@@ -64,7 +66,7 @@ const Itinerary: FC<Props> = ({ itinerary, note }) => {
     <Article className="Itinerary">
       <Link to={ linkTo }>
         <div>
-          <H1>{ streetName } { streetNumber } { suffix_letter }{ suffix }</H1>
+          <H1>{ address }</H1>
           <PostalCode>{ postalCode }</PostalCode>
           <P>{ caseReason }</P>
           <Signal text={ stadium } />
