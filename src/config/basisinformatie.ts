@@ -32,5 +32,5 @@ Vriendelijke groet,
 
 Gemeente Amsterdam
 Afdeling Wonen
-Telefoon: 020 2514192 (dit is de handhavingstelefoon)
+Telefoon: 020 2514192
 `.replace(/\n/g, escape("\r\n"))
