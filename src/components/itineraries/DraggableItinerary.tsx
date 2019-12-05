@@ -21,10 +21,10 @@ const Div = styled.div`
 `
 
 const ButtonWrap = styled.div`
-  display: flex
+  width: 60px
   margin: 24px 0
-  button {
-    margin-left: 12px
+  button:first-child {
+    margin-bottom: 24px
   }
 `
 
