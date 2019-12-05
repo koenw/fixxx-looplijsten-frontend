@@ -57,7 +57,6 @@ const Itinerary: FC<Props> = ({ itinerary, note }) => {
     `${ note!.substring(0, maxLength).trim() }…` :
     note! :
     undefined
-  console.log(note!.length, noteString!.length)
 
   const linkTo = to(`/cases/${ id }`)
 
