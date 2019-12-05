@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { navigate } from "@reach/router"
@@ -10,7 +10,7 @@ const Div = styled.div`
   margin-right: 8px
 `
 
-const Logout: React.FC = () => {
+const Logout: FC = () => {
 
   const onClick = () => {
     authToken.clear()

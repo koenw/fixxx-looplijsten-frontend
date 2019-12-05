@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import { Router } from "@reach/router"
 import { ThemeProvider } from "@datapunt/asc-ui"
 import StateProvider from "./components/providers/StateProvider"
@@ -23,7 +23,7 @@ const Main = styled.main`
  * This is required for reloading URLs on acceptatie and production
  */
 
-const App: React.FC = () => {
+const App: FC = () => {
 
   const basepath = getBasepath()
 

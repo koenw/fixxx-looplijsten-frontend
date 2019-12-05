@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import styled from "styled-components"
 
 type Props = {
@@ -18,7 +18,7 @@ const Span = styled.span`
   }
 `
 
-const Signal: React.FC<Props> = ({ type = "REGULAR", text }) => {
+const Signal: FC<Props> = ({ type = "REGULAR", text }) => {
   const classNames = ["signal", `signal-${ type.toLowerCase() }`].join(" ")
   const body = text || (type === "ISSUE" ? "ISSUE melding" : "melding")
   const trimmedText = text === undefined ? "" : text.trim()

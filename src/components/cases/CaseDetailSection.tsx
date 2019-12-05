@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react"
+import React, { FC, ReactNode } from "react"
 import styled from "styled-components"
 import Label from "../styled/Label"
 import Footer from "./Footer"
@@ -25,7 +25,7 @@ const P = styled.p`
   margin-bottom: 8px
 `
 
-const CaseDetailSection: React.FC<Props> = ({ id = "", title, data, footer }) => {
+const CaseDetailSection: FC<Props> = ({ id = "", title, data, footer }) => {
 
   const hasTitle = title !== undefined
   const showFooter = footer !== undefined
