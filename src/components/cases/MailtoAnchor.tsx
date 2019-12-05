@@ -12,7 +12,7 @@ type Props = {
 
 const MailtoAnchor: FC<Props> = ({ address, postalCode, gebruiksdoel, etage, aantalKamers, oppervlak }) => {
   const href = `mailto:${ email }?subject=${ subject }&body=${ body(address, postalCode, gebruiksdoel, etage, aantalKamers, oppervlak) }`
-  const text = "Meld afwijkingen"
+  const text = "Meld BAG afwijkingen"
   return <p><a href={ href }>{ text }</a></p>
 }
 export default MailtoAnchor
