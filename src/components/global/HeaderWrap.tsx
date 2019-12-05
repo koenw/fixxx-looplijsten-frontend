@@ -14,7 +14,7 @@ const HeaderWrap: React.FC = () => {
       return (
         <Header
           tall={ false }
-          title="Looplijsten vakantieverhuur"
+          title="Toezicht op pad"
           homeLink={ to("/") }
           navigation={ navigation }
         />
