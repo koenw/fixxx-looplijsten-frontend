@@ -7,6 +7,13 @@ declare type Ids = Id[]
 declare type CaseId = string
 declare type CaseIds = CaseId[]
 
+declare type StreetName = string
+declare type StreetNumber = number
+declare type StreetSuffix = string
+declare type Address = [StreetName, StreetNumber, StreetSuffix | undefined]
+declare type PostalCode = string
+declare type Stadium = string
+
 declare type BWVData = {
   case_id: CaseId
   street_name: string

@@ -9,6 +9,7 @@ import authToken from "../../utils/authToken"
 import SearchResults from "./SearchResults"
 import stateContext from "../../contexts/StateContext"
 import AddAllButton from "./AddAllButton"
+import parseAddressLine from "../../utils/parseAddressLine"
 
 const ButtonWrap = styled.div`
   display: flex
@@ -24,26 +25,12 @@ const Textarea = styled(TextareaBase)`
   width: 100%
 `
 
-type SearchQueryParams = [string, string, string | undefined]
+type SearchQueryParams = [PostalCode, StreetNumber, StreetSuffix | undefined]
+type OptionalSearchQueryParams = SearchQueryParams | undefined
 
-const parse = (text: string) : SearchQueryParams[] => {
+const parse = (text: string) : OptionalSearchQueryParams[] => {
   const lines = text.split(/\r?\n/)
-  const regExpPostalCode = /[1-9][0-9]{3}\s?[A-Za-z]{2}/
-  const results: any = []
-  lines.forEach(line => {
-    const match = line.match(regExpPostalCode)
-    const postalCode = match ? match[0].replace(/\s/g, "") : undefined
-    if (postalCode === undefined) return
-    const parts = line.split(regExpPostalCode)
-    const address = parts.length ? parts[0] : undefined
-    if (address === undefined) return
-    const matchAddress = address.match(/\s([1-9][0-9]*)\s(.*)/)
-    if (matchAddress == null) return
-    const streetNumber = matchAddress[1]
-    const streetSuffix = matchAddress[2].trim() || undefined
-    results.push([postalCode, streetNumber, streetSuffix])
-  })
-  return results
+  return lines.map(line => parseAddressLine(line))
 }
 
 const fetchOne = (item: SearchQueryParams) : Promise<any> => {
@@ -88,7 +75,7 @@ const ParseForm: FC = () => {
 
   const search = async () => {
     if (value.trim() === "") return
-    const results = parse(value)
+    const results = parse(value).filter(params => params !== undefined) as SearchQueryParams[]
     const itineraries = await fetchAll(results) || []
     const uniqueItineraries = itineraries
       .map((itinerary: any) => itinerary.cases)
