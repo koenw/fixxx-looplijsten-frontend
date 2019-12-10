@@ -32,9 +32,9 @@ const StateProvider: FC<Props> = ({ children }) => {
   }
   const moveItinerary = (index: Index, newIndex: Index) => {
 
-    const patch = async (caseId: CaseId, position: number) => {
+    const patch = async (id: Id, position: number) => {
       try {
-        const path = `itineraries/items/${ caseId }`
+        const path = `itineraries/items/${ id }`
         const url = getUrl(path)
         const token = authToken.get()
         return fetch(url, {
@@ -44,7 +44,7 @@ const StateProvider: FC<Props> = ({ children }) => {
             Accept: "application/json",
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ position, case: { caseId } })
+          body: JSON.stringify({ position })
         })
       } catch (err) {
         console.error(err)
@@ -58,7 +58,7 @@ const StateProvider: FC<Props> = ({ children }) => {
     const position = currentNextPosition ? currentPrevPosition + (currentNextPosition - currentPrevPosition) / 2 : reorderedItineraries[length - 1].position + 10
     reorderedItineraries[newIndex].position = position
     setItineraries(reorderedItineraries)
-    const id = reorderedItineraries[newIndex].case.bwv_data.case_id
+    const id = reorderedItineraries[newIndex].id
     patch(id, position)
   }
   const removeAllItineraries = () => {
