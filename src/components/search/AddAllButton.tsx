@@ -7,5 +7,5 @@ type Props = {
 }
 
 const AddAllButton: FC<Props> = ({ onClick }) =>
-  <Button onClick={ onClick } variant="blank" iconLeft={ <Enlarge /> }>Voeg alles toe</Button>
+  <Button onClick={ onClick } variant="blank" iconLeft={ <Enlarge /> }>Voeg alles toe aan Mijn looplijst</Button>
 export default AddAllButton
