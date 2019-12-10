@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react"
+import React, { FC, useContext } from "react"
 import { Draggable } from "react-beautiful-dnd"
 import { navigate } from "@reach/router"
 import { getUrl, to } from "../../config/domain"
@@ -7,6 +7,7 @@ import styled from "styled-components"
 import NoteButton from "../itineraries/NoteButton"
 import DeleteButton from "../itineraries/DeleteButton"
 import Itinerary from "./Itinerary"
+import stateContext from "../../contexts/StateContext"
 
 type Props = {
   itinerary: Itinerary
@@ -30,12 +31,16 @@ const ButtonWrap = styled.div`
 
 const DraggableItinerary: FC<Props> = ({ itinerary, index }) => {
 
+  const {
+    state: {
+      removeItinerary
+    }
+  } = useContext(stateContext)
+
   const { id, case: { bwv_data }, notes } = itinerary
   const noteId = notes[0] && notes[0].id
   const noteText = notes[0] && notes[0].text
   const notePath = `/notes/${ id }/${ noteId || "" }`
-
-  const [isDeleted, setIsDeleted] = useState(false)
 
   const onClick = async () => {
 
@@ -51,7 +56,7 @@ const DraggableItinerary: FC<Props> = ({ itinerary, index }) => {
         }
       })
       if (response.ok) {
-        setIsDeleted(true)
+        removeItinerary(itinerary)
       }
     } catch (err) {
       console.error(err)
@@ -59,30 +64,25 @@ const DraggableItinerary: FC<Props> = ({ itinerary, index }) => {
   }
 
   return (
-    <>
-    { !isDeleted ?
-      <div className="DraggableItinerary">
-        <Draggable key={ String(id) } draggableId={ String(id) } index={ index }>
-        { (provided, snapshot) => (
-          <div
-            ref={ provided.innerRef }
-            { ...provided.draggableProps }
-            { ...provided.dragHandleProps }>
-            <Div>
-              <Itinerary itinerary={ bwv_data } note={ noteText } />
-              <ButtonWrap>
-                <NoteButton onClick={ () => navigate(to(notePath)) } />
-                <DeleteButton onClick={ onClick } />
-              </ButtonWrap>
-            </Div>
-          </div>
-        ) }
-        </Draggable>
-      </div>
-      :
-      null
-    }
-    </>
+    <div className="DraggableItinerary">
+      <Draggable key={ String(id) } draggableId={ String(id) } index={ index }>
+      { (provided, snapshot) => (
+        <div
+          ref={ provided.innerRef }
+          { ...provided.draggableProps }
+          { ...provided.dragHandleProps }
+        >
+          <Div>
+            <Itinerary itinerary={ bwv_data } note={ noteText } />
+            <ButtonWrap>
+              <NoteButton onClick={ () => navigate(to(notePath)) } />
+              <DeleteButton onClick={ onClick } />
+            </ButtonWrap>
+          </Div>
+        </div>
+      ) }
+      </Draggable>
+    </div>
   )
 }
 export default DraggableItinerary

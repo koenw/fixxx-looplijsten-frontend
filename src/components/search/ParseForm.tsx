@@ -10,6 +10,7 @@ import SearchResults from "./SearchResults"
 import stateContext from "../../contexts/StateContext"
 import AddAllButton from "./AddAllButton"
 import parseAddressLine from "../../utils/parseAddressLine"
+import promiseSerial from "../../utils/promiseSerial"
 
 const ButtonWrap = styled.div`
   display: flex
@@ -64,7 +65,9 @@ const ParseForm: FC = () => {
   const {
     state: {
       parse: parseState,
-      setParse
+      setParse,
+      hasItinerary,
+      addItinerary
     }
   } = useContext(stateContext)
 
@@ -108,20 +111,26 @@ const ParseForm: FC = () => {
     const save = async (id: CaseId) => {
       const url = getUrl("itineraries/items")
       const token = authToken.get()
-      await fetch(url, {
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           Accept: "application/json",
           Authorization: `Token ${ token }`,
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ id, position: Math.random() * 10000 })
+        body: JSON.stringify({ id })
       })
+      if (response.ok) {
+        return await response.json() as Itinerary
+      }
     }
-    results.forEach(async result => {
-      const { case_id } = result
-      await save(case_id)
-    })
+
+    const filteredResults = results.filter(result => !hasItinerary(result.case_id))
+    if (filteredResults.length === 0) return
+    const funcs = filteredResults.map(result => () => save(result.case_id))
+    const resolved = await promiseSerial(funcs)
+    const itineraries = resolved.filter((result: Itinerary | undefined) => result !== undefined) as Itineraries
+    addItinerary(itineraries)
   }
 
   const addAllButton = <AddAllButtonWrap><AddAllButton onClick={ onClick } /></AddAllButtonWrap>

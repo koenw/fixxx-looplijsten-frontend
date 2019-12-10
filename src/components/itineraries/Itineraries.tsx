@@ -1,8 +1,8 @@
-import React, { FC } from "react"
+import React, { FC, useContext } from "react"
 import { Spinner } from "@datapunt/asc-ui"
-import useFetch from "../../hooks/useFetch"
 import ErrorMessage from "../global/ErrorMessage"
 import DroppableItineraries from "./DroppableItineraries"
+import stateContext from "../../contexts/StateContext"
 
 type Result = {
   id: Id,
@@ -12,8 +12,14 @@ type Result = {
 
 const Itineraries: FC = () => {
 
-  const [result, isFetching, errorMessage] = useFetch("itineraries") as [Result, boolean, ErrorMessage]
-  const itineraries = result !== undefined && Array.isArray(result.items) ? result.items : []
+  const {
+    state: {
+      itineraries,
+      itinerariesIsFetching: isFetching,
+      itinerariesErrorMessage: errorMessage
+    }
+  } = useContext(stateContext)
+
   const showSpinner = isFetching
   const showError = errorMessage !== undefined
   const show = !showSpinner && !showError

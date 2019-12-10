@@ -1,8 +1,9 @@
-import React, { FC } from "react"
+import React, { FC, useContext } from "react"
 import { Link } from "@reach/router"
 import styled from "styled-components"
 import { Search as SearchIcon } from "@datapunt/asc-assets"
 import { to } from "../../config/domain"
+import stateContext from "../../contexts/StateContext"
 
 const Nav = styled.nav`
   background-color: #E6E6E6
@@ -29,10 +30,20 @@ const LiSearch = styled.li`
 `
 
 const Navigation: FC = () => {
+
+  const {
+    state: {
+      itineraries
+    }
+  } = useContext(stateContext)
+
+  const numItineraries = itineraries ? itineraries.length : 0
+  const showCounter = numItineraries > 0
+
   return (
     <Nav>
       <Ul>
-        <Li><Link to={ to("/") }>Mijn looplijst</Link></Li>
+        <Li><Link to={ to("/") }>Mijn looplijst { showCounter && `(${ numItineraries })` }</Link></Li>
         <LiSearch><Link to={ to("/zoeken") }><SearchIcon /></Link></LiSearch>
       </Ul>
     </Nav>

@@ -8,12 +8,18 @@ type Value = {
       postalCode: string
       streetNumber: string
       suffix: string
-    },
+    }
     setSearch: (a: string, b: string, c: string) => void
     parse: string
-    setParse: (a: string) => void,
-    itineraries: Itineraries,
+    setParse: (a: string) => void
+    itineraries: Itineraries
+    itinerariesIsFetching: boolean,
+    itinerariesErrorMessage: ErrorMessage,
     setItineraries: (a: Itineraries) => void
+    hasItinerary: (a: CaseId) => boolean
+    addItinerary: (a: Itinerary | Itineraries) => void
+    removeItinerary: (a: Itinerary) => void
+    moveItinerary: (a: Index, b: Index) => void
   }
 }
 
@@ -28,7 +34,13 @@ const value = {
     parse: "",
     setParse: noop,
     itineraries: [],
-    setItineraries: noop
+    itinerariesIsFetching: false,
+    itinerariesErrorMessage: undefined,
+    setItineraries: noop,
+    hasItinerary: () => false,
+    addItinerary: noop,
+    removeItinerary: noop,
+    moveItinerary: noop
   }
 } as Value
 

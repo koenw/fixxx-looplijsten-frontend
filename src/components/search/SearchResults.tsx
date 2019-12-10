@@ -1,9 +1,10 @@
-import React, { FC, FormEvent, useState } from "react"
+import React, { FC, FormEvent, useContext } from "react"
 import Itinerary from "../itineraries/Itinerary"
 import AddButton from "../itineraries/AddButton"
 import styled from "styled-components"
 import { getUrl } from "../../config/domain"
 import authToken from "../../utils/authToken"
+import stateContext from "../../contexts/StateContext"
 
 type Props = {
   results?: SearchResults
@@ -21,11 +22,19 @@ const ButtonWrap = styled.div`
 const P = styled.p`
   margin-top: 12px
 `
+const Span = styled.span`
+  margin: 12px
+  white-space: nowrap
+`
 
 const SearchResults: FC<Props> = ({ results }) => {
 
-  const [disabled, setDisabled] = useState<CaseIds>([])
-  const isDisabled = (id: CaseId) => disabled.includes(id)
+  const {
+    state: {
+      hasItinerary,
+      addItinerary
+    }
+  } = useContext(stateContext)
 
   const showResults = results && results.length > 0
   const showEmpty = results && results.length === 0
@@ -36,16 +45,19 @@ const SearchResults: FC<Props> = ({ results }) => {
 
     const url = getUrl("itineraries/items")
     const token = authToken.get()
-    await fetch(url, {
+    const response = await fetch(url, {
       method: "POST",
       headers: {
         Accept: "application/json",
         Authorization: `Token ${ token }`,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ id, position: Math.random() * 10000 })
+      body: JSON.stringify({ id })
     })
-    setDisabled(disabled.concat(id))
+    if (response.ok) {
+      const itinerary = await response.json() as Itinerary
+      addItinerary(itinerary)
+    }
   }
 
   return (
@@ -53,13 +65,20 @@ const SearchResults: FC<Props> = ({ results }) => {
     {
       showResults &&
       results!.map(result => {
-        const { case_id } = result
-        const disabled = isDisabled(case_id)
+        const { case_id: caseId } = result
+        const isItinerary = hasItinerary(caseId)
+        const showButton = isItinerary === false
+        const showIsItinerary = isItinerary
         return (
-          <Div key={ case_id }>
+          <Div key={ caseId }>
             <Itinerary itinerary={ result } />
             <ButtonWrap>
-              <AddButton onClick={ onClick(case_id) } disabled={ disabled } />
+              { showButton &&
+                <AddButton onClick={ onClick(caseId) } disabled={ isItinerary } />
+              }
+              { showIsItinerary &&
+                <Span>In looplijst</Span>
+              }
             </ButtonWrap>
           </Div>
         )
