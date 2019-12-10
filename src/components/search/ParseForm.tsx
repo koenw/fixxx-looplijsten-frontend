@@ -74,7 +74,9 @@ const ParseForm: FC = () => {
   const [results, setResults] = useState<SearchResults | undefined>()
   const [value, onChangeValue] = useOnChangeState(parseState)
   const [showSpinner, setShowSpinner] = useState(false)
-  const showAddAllButton = results && results.length > 0
+  const hasResults = results && results.length > 0
+  const showResults = hasResults && !showSpinner
+  const showAddAllButton = showResults
 
   const search = async () => {
     if (value.trim() === "") return
@@ -149,7 +151,9 @@ const ParseForm: FC = () => {
       { showAddAllButton &&
         addAllButton
       }
-      <SearchResults results={ results } />
+      { showResults &&
+        <SearchResults results={ results } />
+      }
       { showAddAllButton &&
         addAllButton
       }

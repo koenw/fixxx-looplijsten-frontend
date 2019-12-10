@@ -19,6 +19,7 @@ type Value = {
     hasItinerary: (a: CaseId) => boolean
     addItinerary: (a: Itinerary | Itineraries) => void
     removeItinerary: (a: Itinerary) => void
+    removeAllItineraries: () => void
     moveItinerary: (a: Index, b: Index) => void
   }
 }
@@ -40,6 +41,7 @@ const value = {
     hasItinerary: () => false,
     addItinerary: noop,
     removeItinerary: noop,
+    removeAllItineraries: noop,
     moveItinerary: noop
   }
 } as Value

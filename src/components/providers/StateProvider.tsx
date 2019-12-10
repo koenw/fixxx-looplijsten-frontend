@@ -61,6 +61,26 @@ const StateProvider: FC<Props> = ({ children }) => {
     const id = reorderedItineraries[newIndex].case.bwv_data.case_id
     patch(id, position)
   }
+  const removeAllItineraries = () => {
+    const del = async (id: Id) => {
+      try {
+        const url = getUrl(`itineraries/items/${ id }`)
+        const token = authToken.get()
+        return await fetch(url, {
+          method: "Delete",
+          headers: {
+            Accept: "application/json",
+            Authorization: `Token ${ token }`,
+            "Content-Type": "application/json"
+          }
+        })
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    const promises = itineraries.map(itinerary => del(itinerary.id))
+    Promise.all(promises).then(() => setItineraries([]))
+  }
 
   type Result = {
     id: Id
@@ -93,6 +113,7 @@ const StateProvider: FC<Props> = ({ children }) => {
       hasItinerary,
       addItinerary,
       removeItinerary,
+      removeAllItineraries,
       moveItinerary
     }
   }
