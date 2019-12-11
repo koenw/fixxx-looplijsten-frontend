@@ -63,6 +63,7 @@ const LoginForm: FC = () => {
     else if (response.status === 200) {
       authToken.set(json.token)
       navigate(to("/"))
+      window.location.reload()
     }
   }
 

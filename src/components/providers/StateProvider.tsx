@@ -104,6 +104,10 @@ const StateProvider: FC<Props> = ({ children }) => {
     }
   }
 
+  const clearState = () => {
+    setItineraries([])
+  }
+
   const value = {
     state: {
       search: {
@@ -123,7 +127,9 @@ const StateProvider: FC<Props> = ({ children }) => {
       removeItinerary,
       removeAllItineraries,
       moveItinerary,
-      updateItineraryNote
+      updateItineraryNote,
+
+      clearState
     }
   }
 
