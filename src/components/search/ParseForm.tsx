@@ -3,6 +3,7 @@ import { Button, Spinner } from "@datapunt/asc-ui"
 import { Search } from "@datapunt/asc-assets"
 import styled from "styled-components"
 import TextareaBase from "../styled/Textarea"
+import Hr from "../styled/Hr"
 import useOnChangeState from "../../hooks/useOnChangeState"
 import { getUrl } from "../../config/domain"
 import authToken from "../../utils/authToken"
@@ -170,7 +171,11 @@ const ParseForm: FC = () => {
     addItinerary(itineraries)
   }
 
-  const addAllButton = <AddAllButtonWrap><AddAllButton onClick={ onClick } /></AddAllButtonWrap>
+  const AddAll: FC = () => (
+    <AddAllButtonWrap>
+      <AddAllButton onClick={ onClick } />
+    </AddAllButtonWrap>
+  )
 
   return (
     <div className="ParseForm">
@@ -184,13 +189,16 @@ const ParseForm: FC = () => {
         <Spinner size={ 60 } />
       }
       { showAddAllButton &&
-        addAllButton
+        <>
+          <AddAll />
+          <Hr />
+        </>
       }
       { showResults &&
         <SearchResults results={ results } />
       }
       { showAddAllButton &&
-        addAllButton
+        <AddAll />
       }
     </div>
   )
