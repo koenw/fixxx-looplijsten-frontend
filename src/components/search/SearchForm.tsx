@@ -92,7 +92,7 @@ const SearchForm: FC<Props> = ({ setResults }) => {
   const search = async () => {
     if (postalCode === "" || streetNumber === "") return
     const json = await get(postalCode.replace(/\s/g, ""), streetNumber, suffix)
-    if (json) setResults(json.cases)
+    if (json) setResults([{ success: true, data: json }])
   }
 
   useEffect(() => {
