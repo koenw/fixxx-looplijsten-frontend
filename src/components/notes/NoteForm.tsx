@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, MouseEvent } from "react"
+import React, { FC, useContext, FormEvent, MouseEvent } from "react"
 import NoteTextarea from "./NoteTextarea"
 import { Button } from "@datapunt/asc-ui"
 import styled from "styled-components"
@@ -7,6 +7,7 @@ import { navigate } from "@reach/router"
 import { to } from "../../config/domain"
 import { getUrl } from "../../config/domain"
 import authToken from "../../utils/authToken"
+import stateContext from "../../contexts/StateContext"
 
 const ButtonWrap = styled.div`
   display: flex
@@ -42,11 +43,20 @@ const save = (itineraryId: Id, text: string, id?: Id) => {
 
 const NoteForm: FC<Props> = ({ itineraryId, id, value }) => {
 
+  const {
+    state: {
+      updateItineraryNote
+    }
+  } = useContext(stateContext)
+
   const [text, onChangeText] = useOnChangeState(value)
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
-    const response = await save(itineraryId, text.trim(), id)
+    const trimmedText = text.trim()
+    const response = await save(itineraryId, trimmedText, id)
+    const note = await response.json()
+    updateItineraryNote(note.itinerary_item, note.id, note.text)
     if (response.ok) {
       navigate(to("/"))
     } else {
@@ -62,6 +72,8 @@ const NoteForm: FC<Props> = ({ itineraryId, id, value }) => {
     event.preventDefault()
     event.stopPropagation()
     const response = await save(itineraryId, nawText, id)
+    const note = await response.json()
+    updateItineraryNote(note.itinerary_item, note.id, note.text)
     if (response.ok) {
       navigate(to("/"))
     } else {

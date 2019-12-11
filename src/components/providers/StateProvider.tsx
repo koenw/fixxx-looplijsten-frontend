@@ -81,6 +81,14 @@ const StateProvider: FC<Props> = ({ children }) => {
     const promises = itineraries.map(itinerary => del(itinerary.id))
     Promise.all(promises).then(() => setItineraries([]))
   }
+  const updateItineraryNote = (itineraryId: Id, id: Id, text: string) => {
+    const index = itineraries.findIndex(itinerary => itinerary.id === itineraryId)
+    if (index === -1) return
+    const clone = [...itineraries]
+    const note = { itinerary_item: itineraryId, id, text }
+    clone[index].notes[0] = note
+    setItineraries(clone)
+  }
 
   type Result = {
     id: Id
@@ -114,7 +122,8 @@ const StateProvider: FC<Props> = ({ children }) => {
       addItinerary,
       removeItinerary,
       removeAllItineraries,
-      moveItinerary
+      moveItinerary,
+      updateItineraryNote
     }
   }
 

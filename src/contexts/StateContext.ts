@@ -21,6 +21,7 @@ type Value = {
     removeItinerary: (a: Itinerary) => void
     removeAllItineraries: () => void
     moveItinerary: (a: Index, b: Index) => void
+    updateItineraryNote: (a: Id, b: Id, c: string) => void
   }
 }
 
@@ -42,7 +43,8 @@ const value = {
     addItinerary: noop,
     removeItinerary: noop,
     removeAllItineraries: noop,
-    moveItinerary: noop
+    moveItinerary: noop,
+    updateItineraryNote: noop
   }
 } as Value
 
