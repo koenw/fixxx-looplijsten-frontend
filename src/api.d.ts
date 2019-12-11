@@ -43,7 +43,9 @@ declare type Itineraries = Itinerary[]
 declare type SearchResult = {
   success: boolean
   error?: string
-  data?: BWVData
+  data?: {
+    cases: BWVData[]
+  }
 }
 declare type SearchResults = SearchResult[]
 

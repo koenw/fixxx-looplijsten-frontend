@@ -5,6 +5,7 @@ import styled from "styled-components"
 import { getUrl } from "../../config/domain"
 import authToken from "../../utils/authToken"
 import stateContext from "../../contexts/StateContext"
+import EmptySearchResult from "./EmptySearchResult"
 
 type Props = {
   results?: SearchResults
@@ -65,26 +66,33 @@ const SearchResults: FC<Props> = ({ results }) => {
     {
       showResults &&
       results!.map(result => {
-        if (result.success && result.data !== undefined) {
-          const { data, data: { case_id: caseId } } = result
-          const isItinerary = hasItinerary(caseId)
-          const showButton = isItinerary === false
-          const showIsItinerary = isItinerary
-          return (
-            <Div key={ caseId }>
-              <Itinerary itinerary={ data } />
-              <ButtonWrap>
-                { showButton &&
-                  <AddButton onClick={ onClick(caseId) } disabled={ isItinerary } />
-                }
-                { showIsItinerary &&
-                  <Span>In looplijst</Span>
-                }
-              </ButtonWrap>
-            </Div>
-          )
+        const { success, data, error } = result
+        if (success && data !== undefined) {
+          const { cases } = data
+          if (cases.length) {
+            const itinerary = cases[0]
+            const { case_id: caseId } = itinerary
+            const isItinerary = hasItinerary(caseId)
+            const showButton = isItinerary === false
+            const showIsItinerary = isItinerary
+            return (
+              <Div key={ caseId }>
+                <Itinerary itinerary={ itinerary } />
+                <ButtonWrap>
+                  { showButton &&
+                    <AddButton onClick={ onClick(caseId) } disabled={ isItinerary } />
+                  }
+                  { showIsItinerary &&
+                    <Span>In looplijst</Span>
+                  }
+                </ButtonWrap>
+              </Div>
+            )
+          } else {
+            return <EmptySearchResult text={ error } />
+          }
         } else {
-          return <Div><div><h1>Geen zoekresultaat</h1><p>{ result.error }</p></div></Div>
+          return <EmptySearchResult text={ error } />
         }
       })
     }

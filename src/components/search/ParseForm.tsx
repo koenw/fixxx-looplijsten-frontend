@@ -26,24 +26,31 @@ const Textarea = styled(TextareaBase)`
   width: 100%
 `
 
+type ParseResult = {
+  success: boolean
+  raw: string
+  params?: SearchQueryParams
+}
+type ParseResults = ParseResult[]
 type SearchQueryParams = [PostalCode, StreetNumber, StreetSuffix | undefined]
 type OptionalSearchQueryParams = SearchQueryParams | undefined
 
 type FetchResult = { cases: BWVData[] }
 type FetchResults = FetchResult[]
 
-const toSearchResult = (data?: BWVData, error?: string) : SearchResult => {
+const toSearchResult = (data?: { cases: BWVData[] }, error?: string) : SearchResult => {
   const success = data !== undefined
-  return {
-    success,
-    data,
-    error
-  }
+  return { success, data, error }
 }
 
-const parse = (text: string) : OptionalSearchQueryParams[] => {
+const parse = (text: string) : ParseResults => {
   const lines = text.split(/\r?\n/)
-  return lines.map(line => parseAddressLine(line))
+  return lines.map(line => {
+    const params = parseAddressLine(line)
+    const success = params !== undefined
+    const raw = line
+    return { success, raw, params }
+  })
 }
 
 const fetchOne = (item: SearchQueryParams) : Promise<Response> => {
@@ -59,13 +66,27 @@ const fetchOne = (item: SearchQueryParams) : Promise<Response> => {
   })
 }
 
-const fetchAll = async (items: SearchQueryParams[]) : Promise<FetchResults> => {
+const awaitSearchResult = async (result: ParseResult) : Promise<SearchResult> => {
+  if (result.success === false) return toSearchResult(undefined, result.raw)
+  try {
+    const params = result.params!
+    const response = await fetchOne(params)
+    const json = await response.json()
+    return json.cases.length > 0 ?
+      toSearchResult(json) :
+      toSearchResult(undefined, `postcode: ${ params[0] }, huisnummer: ${ params[1] }, toevoeging: ${ params[2] || "" }`)
+  } catch (err) {
+    console.error(err)
+  }
+  return toSearchResult(undefined, "Fetch error")
+}
 
-  const promises = items.map(item => fetchOne(item))
+const fetchResults = async (results: ParseResults) : Promise<SearchResults> => {
+
+  const promises = results.map(result => awaitSearchResult(result))
 
   try {
-    const results = await Promise.all(promises)
-    return await Promise.all(results.map(result => result.json()))
+    return await Promise.all(promises)
   } catch (err) {
     console.error(err)
   }
@@ -92,14 +113,9 @@ const ParseForm: FC = () => {
 
   const search = async () => {
     if (value.trim() === "") return
-    const results = parse(value).filter(params => params !== undefined) as SearchQueryParams[]
-    const fetchResults = await fetchAll(results) || []
-    const itineraries = fetchResults.map((fetchResult, index) =>
-      fetchResult.cases.length > 0 ?
-        toSearchResult(fetchResult.cases[0]) :
-        toSearchResult(undefined, `Query: ${ results[index][0] }, ${ results[index][1]}, ${ results[index][2] }`))
-
-    setResults(itineraries)
+    const parseResults = parse(value)
+    const results = await fetchResults(parseResults)
+    setResults(results)
   }
 
   useEffect(() => {
@@ -137,9 +153,18 @@ const ParseForm: FC = () => {
       }
     }
 
-    const filteredResults = results.filter(result => result.data && !hasItinerary(result.data.case_id))
-    if (filteredResults.length === 0) return
-    const funcs = filteredResults.map(result => () => save(result.data!.case_id))
+    const caseIds = results.reduce((acc, item) => {
+      if (item.data === undefined) return acc
+      item.data.cases.forEach(caseItem => {
+        const { case_id: caseId } = caseItem
+        if (hasItinerary(caseId)) return
+        acc.push(caseId)
+      })
+      return acc
+    }, [] as CaseIds)
+    if (caseIds.length === 0) return
+
+    const funcs = caseIds.map(caseId => () => save(caseId))
     const resolved = await promiseSerial(funcs)
     const itineraries = resolved.filter((result: Itinerary | undefined) => result !== undefined) as Itineraries
     addItinerary(itineraries)
