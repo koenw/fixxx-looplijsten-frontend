@@ -28,7 +28,7 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
   // Header
   const address = displayAddress(caseItem.import_adres.sttnaam, caseItem.import_adres.hsnr, caseItem.import_adres.hsltr || undefined, caseItem.import_adres.toev || undefined)
   const postalCode = caseItem.import_adres.postcode
-  const personCount = caseItem.bwv_personen.length
+  const personCount = caseItem.bwv_personen.length || 0
   const caseNumber = caseItem.bwv_tmp.case_number !== null ? parseInt(caseItem.bwv_tmp.case_number, 10) : undefined
   const caseCount =  caseItem.bwv_tmp.num_cases !== null ? parseInt(caseItem.bwv_tmp.num_cases, 10) : undefined
   const openCaseCount = caseItem.bwv_tmp.num_open_cases !== null ? caseItem.bwv_tmp.num_open_cases : undefined
@@ -96,7 +96,7 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
   }, [])
 
   // Bewoners
-  const people = caseItem.bwv_personen.map(person => {
+  const people = Array.isArray(caseItem.bwv_personen) ? caseItem.bwv_personen.map(person => {
     return ({
       name: person.naam,
       initials: person.voorletters,
@@ -104,7 +104,7 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
       born: person.geboortedatum ? formatDate(person.geboortedatum.slice(0, -9))! : undefined,
       livingSince: person.vestigingsdatum_adres ? formatDate(person.vestigingsdatum_adres.slice(0, -9))! : undefined
     })
-  })
+  }) : []
   const bewoners = people.reduce((acc: any, person, index) => {
     acc.push(<span className="anonymous">{ (index + 1) + ". " + person.initials + " " + person.name + " (" + person.sex + ")" }</span>)
     acc.push(["Geboren", <span className="anonymous">{ person.born }</span>])
