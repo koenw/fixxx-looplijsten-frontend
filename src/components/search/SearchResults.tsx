@@ -65,23 +65,27 @@ const SearchResults: FC<Props> = ({ results }) => {
     {
       showResults &&
       results!.map(result => {
-        const { case_id: caseId } = result
-        const isItinerary = hasItinerary(caseId)
-        const showButton = isItinerary === false
-        const showIsItinerary = isItinerary
-        return (
-          <Div key={ caseId }>
-            <Itinerary itinerary={ result } />
-            <ButtonWrap>
-              { showButton &&
-                <AddButton onClick={ onClick(caseId) } disabled={ isItinerary } />
-              }
-              { showIsItinerary &&
-                <Span>In looplijst</Span>
-              }
-            </ButtonWrap>
-          </Div>
-        )
+        if (result.success && result.data !== undefined) {
+          const { data, data: { case_id: caseId } } = result
+          const isItinerary = hasItinerary(caseId)
+          const showButton = isItinerary === false
+          const showIsItinerary = isItinerary
+          return (
+            <Div key={ caseId }>
+              <Itinerary itinerary={ data } />
+              <ButtonWrap>
+                { showButton &&
+                  <AddButton onClick={ onClick(caseId) } disabled={ isItinerary } />
+                }
+                { showIsItinerary &&
+                  <Span>In looplijst</Span>
+                }
+              </ButtonWrap>
+            </Div>
+          )
+        } else {
+          return <Div><div><h1>Geen zoekresultaat</h1><p>{ result.error }</p></div></Div>
+        }
       })
     }
     { showEmpty &&

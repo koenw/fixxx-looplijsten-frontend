@@ -29,12 +29,24 @@ const Textarea = styled(TextareaBase)`
 type SearchQueryParams = [PostalCode, StreetNumber, StreetSuffix | undefined]
 type OptionalSearchQueryParams = SearchQueryParams | undefined
 
+type FetchResult = { cases: BWVData[] }
+type FetchResults = FetchResult[]
+
+const toSearchResult = (data?: BWVData, error?: string) : SearchResult => {
+  const success = data !== undefined
+  return {
+    success,
+    data,
+    error
+  }
+}
+
 const parse = (text: string) : OptionalSearchQueryParams[] => {
   const lines = text.split(/\r?\n/)
   return lines.map(line => parseAddressLine(line))
 }
 
-const fetchOne = (item: SearchQueryParams) : Promise<any> => {
+const fetchOne = (item: SearchQueryParams) : Promise<Response> => {
   const params = { postalCode: item[0].toUpperCase(), streetNumber: item[1], suffix: item[2] || "" }
   const url = getUrl("search", params)
   const token = authToken.get()
@@ -47,17 +59,17 @@ const fetchOne = (item: SearchQueryParams) : Promise<any> => {
   })
 }
 
-const fetchAll = async (items: SearchQueryParams[]) : Promise<SearchResults | undefined> => {
+const fetchAll = async (items: SearchQueryParams[]) : Promise<FetchResults> => {
 
   const promises = items.map(item => fetchOne(item))
 
   try {
     const results = await Promise.all(promises)
-    const jsons = await Promise.all(results.map(result => result.json()))
-    return jsons.reduce((acc, cur) => acc.concat(cur), [])
+    return await Promise.all(results.map(result => result.json()))
   } catch (err) {
     console.error(err)
   }
+  return []
 }
 
 const ParseForm: FC = () => {
@@ -81,15 +93,13 @@ const ParseForm: FC = () => {
   const search = async () => {
     if (value.trim() === "") return
     const results = parse(value).filter(params => params !== undefined) as SearchQueryParams[]
-    const itineraries = await fetchAll(results) || []
-    const uniqueItineraries = itineraries
-      .map((itinerary: any) => itinerary.cases)
-      .flat(1)
-      .filter((itinerary: any, index: number, arr: any) =>
-        arr.map((itinerary: any) => itinerary.case_id)
-          .indexOf(itinerary.case_id) === index
-      )
-    setResults(uniqueItineraries)
+    const fetchResults = await fetchAll(results) || []
+    const itineraries = fetchResults.map((fetchResult, index) =>
+      fetchResult.cases.length > 0 ?
+        toSearchResult(fetchResult.cases[0]) :
+        toSearchResult(undefined, `Query: ${ results[index][0] }, ${ results[index][1]}, ${ results[index][2] }`))
+
+    setResults(itineraries)
   }
 
   useEffect(() => {
@@ -127,9 +137,9 @@ const ParseForm: FC = () => {
       }
     }
 
-    const filteredResults = results.filter(result => !hasItinerary(result.case_id))
+    const filteredResults = results.filter(result => result.data && !hasItinerary(result.data.case_id))
     if (filteredResults.length === 0) return
-    const funcs = filteredResults.map(result => () => save(result.case_id))
+    const funcs = filteredResults.map(result => () => save(result.data!.case_id))
     const resolved = await promiseSerial(funcs)
     const itineraries = resolved.filter((result: Itinerary | undefined) => result !== undefined) as Itineraries
     addItinerary(itineraries)

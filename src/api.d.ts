@@ -40,7 +40,11 @@ declare type Itinerary = {
 }
 declare type Itineraries = Itinerary[]
 
-declare type SearchResult = BWVData
+declare type SearchResult = {
+  success: boolean
+  error?: string
+  data?: BWVData
+}
 declare type SearchResults = SearchResult[]
 
 type ImportAdres = {
