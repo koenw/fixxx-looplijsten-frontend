@@ -46,8 +46,8 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
   // Woning
   const hasBagData = (caseItem.bag_data as BagDataError).error === undefined
   const bagData = caseItem.bag_data as BagData
-  const gebruiksdoelen = hasBagData ? bagData.gebruiksdoelen : undefined
-  const woningBestemming = gebruiksdoelen && gebruiksdoelen.length ? gebruiksdoelen[0].omschrijving_plus : undefined
+  const gebruiksdoel = hasBagData ? bagData.gebruiksdoel : undefined
+  const woningBestemming = gebruiksdoel && gebruiksdoel.length ? gebruiksdoel[0] : undefined
   const woningEtage = undefined
   const woningKamers = hasBagData && bagData.aantal_kamers ? bagData.aantal_kamers : 0
   const woningOppervlak = hasBagData && bagData.oppervlakte ? bagData.oppervlakte : 0
