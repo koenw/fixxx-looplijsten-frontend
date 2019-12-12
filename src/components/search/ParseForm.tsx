@@ -45,13 +45,16 @@ const toSearchResult = (data?: { cases: BWVData[] }, error?: string) : SearchRes
 }
 
 const parse = (text: string) : ParseResults => {
-  const lines = text.split(/\r?\n/)
-  return lines.map(line => {
-    const params = parseAddressLine(line)
-    const success = params !== undefined
-    const raw = line
-    return { success, raw, params }
-  })
+  return text
+    .split(/\r?\n/) // split into lines
+    .map(line => line.trim()) // trim lines
+    .filter(line => line !== "") // remove empty lines
+    .map(line => { // parse lines
+      const params = parseAddressLine(line)
+      const success = params !== undefined
+      const raw = line
+      return { success, raw, params }
+    })
 }
 
 const fetchOne = (item: SearchQueryParams) : Promise<Response> => {
