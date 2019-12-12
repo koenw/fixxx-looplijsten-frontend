@@ -17,6 +17,9 @@ const ButtonWrap = styled.div`
   justify-content: flex-end
   margin-top: 24px
 `
+const ButtonWrapBottom = styled(ButtonWrap)`
+  margin-top: -44px
+`
 
 const Itineraries: FC = () => {
 
@@ -37,7 +40,8 @@ const Itineraries: FC = () => {
   const emptyText = "Je looplijst is leeg. Zoek adressen om aan je looplijst toe te voegen."
 
   const onClick = () => removeAllItineraries()
-  const removeAllButton = <ButtonWrap><RemoveAllButton onClick={ onClick } /></ButtonWrap>
+  const RemoveAllButtonTop: FC = () => <ButtonWrap><RemoveAllButton onClick={ onClick } /></ButtonWrap>
+  const RemoveAllButtonBottom: FC = () => <ButtonWrapBottom><RemoveAllButton onClick={ onClick } /></ButtonWrapBottom>
 
   return (
     <div className="Itineraries">
@@ -47,9 +51,9 @@ const Itineraries: FC = () => {
       { show && (
           hasItineraries ?
             <>
-              { removeAllButton }
+              <RemoveAllButtonTop />
               <DroppableItineraries itineraries={ itineraries } />
-              { removeAllButton }
+              <RemoveAllButtonBottom />
             </> :
             <p>{ emptyText }</p>
         )

@@ -1,11 +1,19 @@
 import React, { FC, useContext } from "react"
 import { DragDropContext, Droppable } from "react-beautiful-dnd"
+import styled from "styled-components"
 import DraggableItinerary from "./DraggableItinerary"
 import stateContext from "../../contexts/StateContext"
 
 type Props = {
   itineraries: Itineraries
 }
+
+const Div = styled.div`
+  margin: -169px -15px 0
+`
+const DroppableInner = styled.div`
+  padding: 169px 15px 68px
+`
 
 const DroppableItineraries: FC<Props> = ({ itineraries }) => {
 
@@ -22,12 +30,12 @@ const DroppableItineraries: FC<Props> = ({ itineraries }) => {
   }
 
   return (
-    <div className="DroppableItineraries">
+    <Div className="DroppableItineraries">
       <DragDropContext onDragEnd={ onDragEnd }>
         <Droppable droppableId="itineraries">
         {
           (provided, snapshot) =>
-            <div
+            <DroppableInner
               ref={ provided.innerRef }
               { ...provided.droppableProps }
             >
@@ -35,11 +43,11 @@ const DroppableItineraries: FC<Props> = ({ itineraries }) => {
                   <DraggableItinerary key={ itinerary.id } itinerary={ itinerary } index={ index } />)
               }
               { provided.placeholder }
-            </div>
+            </DroppableInner>
         }
         </Droppable>
       </DragDropContext>
-    </div>
+    </Div>
   )
 }
 export default DroppableItineraries
