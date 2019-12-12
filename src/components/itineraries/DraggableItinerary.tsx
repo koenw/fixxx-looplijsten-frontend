@@ -57,6 +57,8 @@ const DraggableItinerary: FC<Props> = ({ itinerary, index }) => {
       })
       if (response.ok) {
         removeItinerary(itinerary)
+      } else {
+        alert("Verwijderen mislukt")
       }
     } catch (err) {
       console.error(err)
