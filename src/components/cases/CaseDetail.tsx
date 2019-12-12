@@ -50,7 +50,8 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
   const woningBestemming = gebruiksdoel && gebruiksdoel.length ? gebruiksdoel[0] : undefined
   const woningEtage = undefined
   const woningKamers = hasBagData && bagData.aantal_kamers ? bagData.aantal_kamers : 0
-  const woningOppervlak = hasBagData && bagData.oppervlakte ? bagData.oppervlakte : 0
+  const woningOppervlak =
+    hasBagData && bagData.oppervlakte && bagData.oppervlakte > 1 ? bagData.oppervlakte : 0
   const woningBagId = hasBagData ? bagData.verblijfsobjectidentificatie : undefined
   const mailtoAnchor = <MailtoAnchor
     address={ address }
