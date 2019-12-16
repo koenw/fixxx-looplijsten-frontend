@@ -15,13 +15,15 @@ const Logout: FC = () => {
 
   const {
     state: {
-      clearState
+      itinerariesActions: {
+        clear
+      }
     }
   } = useContext(stateContext)
 
   const onClick = () => {
     authToken.clear()
-    clearState()
+    clear()
     navigate(to("/login"))
   }
 

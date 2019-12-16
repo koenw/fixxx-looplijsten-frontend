@@ -104,7 +104,9 @@ const ParseForm: FC = () => {
       parse: parseState,
       setParse,
       hasItinerary,
-      addItinerary
+      itinerariesActions: {
+        add
+      }
     }
   } = useContext(stateContext)
 
@@ -140,23 +142,7 @@ const ParseForm: FC = () => {
 
     if (results === undefined) return
 
-    const save = async (id: CaseId) => {
-      const url = getUrl("itineraries/items")
-      const token = authToken.get()
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          Authorization: `Token ${ token }`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ id })
-      })
-      if (response.ok) {
-        return await response.json() as Itinerary
-      }
-    }
-
+    // get case ids from search results
     const caseIds = results.reduce((acc, item) => {
       if (item.data === undefined) return acc
       item.data.cases.forEach(caseItem => {
@@ -168,13 +154,12 @@ const ParseForm: FC = () => {
     }, [] as CaseIds)
     if (caseIds.length === 0) return
 
-    const funcs = caseIds.map(caseId => () => save(caseId))
-    const resolved = await promiseSerial(funcs)
-    const itineraries = resolved.filter((result: Itinerary | undefined) => result !== undefined) as Itineraries
-    addItinerary(itineraries)
+    // sequentially add each case to itineraries, so order is maintained
+    const funcs = caseIds.map(caseId => async () => add(caseId))
+    await promiseSerial(funcs)
   }
 
-  const AddAll: FC = () => (
+  const AddAll = () => (
     <AddAllButtonWrap>
       <AddAllButton onClick={ onClick } />
     </AddAllButtonWrap>

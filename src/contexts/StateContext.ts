@@ -3,28 +3,21 @@ import noop from "../utils/noop"
 
 type Value = {
   state: {
-    //itineraries: Itineraries
     search: {
       postalCode: string
       streetNumber: string
       suffix: string
     }
     setSearch: (a: string, b: string, c: string) => void
+
     parse: string
     setParse: (a: string) => void
-    itineraries: Itineraries
-    itinerariesIsFetching: boolean,
-    itinerariesErrorMessage: ErrorMessage,
-    setItineraries: (a: Itineraries) => void
-    hasItinerary: (a: CaseId) => boolean
-    addItinerary: (a: Itinerary | Itineraries) => void
-    removeItinerary: (a: Itinerary) => void
-    removeAllItineraries: () => void
-    moveItinerary: (a: Index, b: Index) => void
-    updateItineraryNote: (a: Id, b: Id, c: string) => void
-    clearState: () => void
 
-    isAnonymous: boolean,
+    hasItinerary: (a: CaseId) => boolean
+    itinerariesState: ItinerariesState
+    itinerariesActions: ItinerariesActions
+
+    isAnonymous: boolean
     toggleIsAnonymous: () => void
   }
 }
@@ -37,23 +30,26 @@ const value = {
       suffix: ""
     },
     setSearch: noop,
+
     parse: "",
     setParse: noop,
-    itineraries: [],
-    itinerariesIsFetching: false,
-    itinerariesErrorMessage: undefined,
-    setItineraries: noop,
-    hasItinerary: () => false,
-    addItinerary: noop,
-    removeItinerary: noop,
-    removeAllItineraries: noop,
-    moveItinerary: noop,
-    updateItineraryNote: noop,
 
-    clearState: noop,
+    hasItinerary: () => false,
+    itinerariesState: {
+      itineraries: [],
+      isInitialized: false,
+      isUpdating: false
+    },
+    itinerariesActions: {
+      add: noop,
+      move: noop,
+      remove: noop,
+      setNote: async () => false,
+      clear: noop
+    },
 
     isAnonymous: false,
-    toggleIsAnonymous: noop
+    toggleIsAnonymous: noop,
   }
 } as Value
 

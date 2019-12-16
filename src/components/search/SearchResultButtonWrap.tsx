@@ -1,7 +1,5 @@
 import React, { FC, useContext, FormEvent } from "react"
 import stateContext from "../../contexts/StateContext"
-import { getUrl } from "../../config/domain"
-import authToken from "../../utils/authToken"
 import IconButton from "../global/IconButton"
 import styled from "styled-components"
 
@@ -26,55 +24,27 @@ const SearchResultButtonWrap: FC<Props> = ({ caseId }) => {
 
   const {
     state: {
-      itineraries,
       hasItinerary,
-      addItinerary,
-      removeItinerary
+      itinerariesState: {
+        itineraries
+      },
+      itinerariesActions: {
+        add,
+        remove
+      }
     }
   } = useContext(stateContext)
 
-  const onClickAdd = (id: CaseId) => async (event: FormEvent) => {
-
+  const onClickAdd = (event: FormEvent) => {
     event.preventDefault()
-
-    const url = getUrl("itineraries/items")
-    const token = authToken.get()
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Token ${ token }`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ id })
-    })
-    if (response.ok) {
-      const itinerary = await response.json() as Itinerary
-      addItinerary(itinerary)
-    }
+    add(caseId)
   }
 
-  const onClickRemove = (id: CaseId) => async (event: FormEvent) => {
-
+  const onClickRemove = (event: FormEvent) => {
     event.preventDefault()
-
-    const itinerary = itineraries.find(itinerary => itinerary.case.bwv_data.case_id === id)
+    const itinerary = itineraries.find(itinerary => itinerary.case.bwv_data.case_id === caseId)
     if (itinerary === undefined) return
-
-    const url = getUrl(`itineraries/items/${ itinerary.id }`)
-    const token = authToken.get()
-    const response = await fetch(url, {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Token ${ token }`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ id })
-    })
-    if (response.ok) {
-      removeItinerary(itinerary)
-    }
+    remove(itinerary.id)
   }
 
   const isItinerary = hasItinerary(caseId)
@@ -84,12 +54,12 @@ const SearchResultButtonWrap: FC<Props> = ({ caseId }) => {
   return (
     <div className="SearchResultButtonWrap">
       { showAddButton &&
-        <IconButton icon="Enlarge" onClick={ onClickAdd(caseId) } />
+        <IconButton icon="Enlarge" onClick={ onClickAdd } />
       }
       { showRemoveButton &&
         <Div>
           <span>In lijst</span>
-          <IconButton icon="TrashBin" onClick={ onClickRemove(caseId) } size={ 40 } border={ false } />
+          <IconButton icon="TrashBin" onClick={ onClickRemove } size={ 40 } border={ false } />
         </Div>
       }
     </div>
