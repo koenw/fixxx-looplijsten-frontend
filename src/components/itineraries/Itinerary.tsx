@@ -8,6 +8,7 @@ import displayAddress from "../../utils/displayAddress"
 type Props = {
   itinerary: BWVData
   note?: string
+  showAddress?: boolean
 }
 
 const Article = styled.article`
@@ -37,8 +38,11 @@ const Note = styled.p`
   color: gray
   font-weight: normal
 `
+const Div = styled.div`
+  margin-left: 18px
+`
 
-const Itinerary: FC<Props> = ({ itinerary, note }) => {
+const Itinerary: FC<Props> = ({ itinerary, note, showAddress = true }) => {
 
   const {
     case_id: id,
@@ -66,13 +70,19 @@ const Itinerary: FC<Props> = ({ itinerary, note }) => {
     <Article className="Itinerary">
       <Link to={ linkTo }>
         <div>
-          <H1>{ address }</H1>
-          <PostalCode>{ postalCode }</PostalCode>
-          <P>{ caseReason }</P>
-          <Signal text={ stadium } />
-          { showNote &&
-            <Note>{ noteString }</Note>
+          { showAddress &&
+            <>
+              <H1>{ address }</H1>
+              <PostalCode>{ postalCode }</PostalCode>
+            </>
           }
+          <Div>
+            <P>{ caseReason }</P>
+            <Signal text={ stadium } />
+            { showNote &&
+              <Note>{ noteString }</Note>
+            }
+          </Div>
         </div>
       </Link>
     </Article>
