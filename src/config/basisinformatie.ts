@@ -4,6 +4,7 @@ export const body = (
   address: string,
   postalCode: string,
   gebruiksdoel?: string,
+  aantalBouwlagen?: number,
   etage?: number,
   aantalKamers?: number,
   oppervlak?: number
@@ -18,6 +19,7 @@ ${ postalCode } Amsterdam
 Ons systeem toont bij dit adres op dit moment de volgende gegevens uit BAG:
 
 Gebruiksdoel: ${ gebruiksdoel || "-" }
+Aantal bouwlagen: ${ aantalBouwlagen || "-"}
 Etage: ${ etage || "-" }
 Aantal kamers: ${ aantalKamers || "-" }
 Oppervlak: ${ oppervlak ? `${ oppervlak } m² ` : "-" }
