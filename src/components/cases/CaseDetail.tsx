@@ -48,7 +48,8 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
   const bagData = caseItem.bag_data as BagData
   const gebruiksdoel = hasBagData ? bagData.gebruiksdoel : undefined
   const woningBestemming = gebruiksdoel && gebruiksdoel.length ? gebruiksdoel[0] : undefined
-  const woningEtage = undefined
+  const woningBouwlagen = hasBagData && bagData.bouwlagen ? bagData.bouwlagen : undefined
+  const woningEtage = hasBagData && bagData.verdieping_toegang != null ? bagData.verdieping_toegang : undefined
   const woningKamers = hasBagData && bagData.aantal_kamers ? bagData.aantal_kamers : 0
   const woningOppervlak =
     hasBagData && bagData.oppervlakte && bagData.oppervlakte > 1 ? bagData.oppervlakte : 0
@@ -87,7 +88,7 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
 
   const meldingenData = meldingen.reduce((acc: any, item, index) => {
     const { datum, anoniem, naam, telnr, text } = item
-    acc.push(["In behandeling per", datum || "-"])
+    acc.push(["Datum melding", datum || "-"])
     acc.push(["Anonieme melding", anoniem])
     acc.push(["Melder", <p className="anonymous"> { naam }</p> || "-"])
     acc.push(["Melder telefoonnummer", telnr ? <a className="anonymous" href={ "tel://" + telnr }>{ telnr }</a> : "-"])
@@ -175,9 +176,8 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
       <CaseDetailSection
         title="Vakantieverhuur"
         data={[
-          ["Aangevraagd", vakantieverhuurNotified],
           ["Vandaag verhuurd", vakantieverhuurToday],
-          ["Verhuurd dit jaar", vakantieverhuurDays > 0 ? <a href="#vakantieverhuur">{ vakantieverhuurDays } dagen</a> : "-"],
+          [`Dagen verhuurd ${ new Date().getFullYear() }`, vakantieverhuurDays > 0 ? <a href="#vakantieverhuur">{ vakantieverhuurDays } dagen</a> : "-"],
           ["Shortstay", undefined],
           ["B&B aangemeld", undefined]
         ]}
@@ -185,8 +185,9 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
       <CaseDetailSection
         title="Woning"
         data={[
-          ["Bestemming", woningBestemming],
-          ["Etage", woningEtage],
+          ["Gebruiksdoel", woningBestemming],
+          ["Aantal bouwlagen", woningBouwlagen !== undefined ? woningBouwlagen : "-"],
+          ["Etage", woningEtage !== undefined ? woningEtage : "-"],
           ["Aantal kamers", woningKamers > 0 ? woningKamers : "-"],
           ["Woonoppervlak", woningOppervlak > 0 ? woningOppervlak + " m²" : "-"],
           mailtoAnchor
