@@ -7,9 +7,7 @@ type Props = {
   stadium: Stadium
 }
 
-const Div = styled.div`
-  margin-left: 12px
-`
+const Div = styled.div``
 const P = styled.p`
   font-weight: normal
   color: black

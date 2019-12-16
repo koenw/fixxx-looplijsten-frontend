@@ -38,9 +38,6 @@ const Note = styled.p`
   color: gray
   font-weight: normal
 `
-const Div = styled.div`
-  margin-left: 18px
-`
 
 const Itinerary: FC<Props> = ({ itinerary, note, showAddress = true }) => {
 
@@ -76,13 +73,13 @@ const Itinerary: FC<Props> = ({ itinerary, note, showAddress = true }) => {
               <PostalCode>{ postalCode }</PostalCode>
             </>
           }
-          <Div>
+          <div>
             <P>{ caseReason }</P>
             <Signal text={ stadium } />
             { showNote &&
               <Note>{ noteString }</Note>
             }
-          </Div>
+          </div>
         </div>
       </Link>
     </Article>

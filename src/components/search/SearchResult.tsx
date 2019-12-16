@@ -8,7 +8,7 @@ type Props = {
 }
 
 const Div = styled.div`
-  padding: 8px 0
+  padding: 20px 0 8px
   border-bottom: 4px solid #767676
 `
 

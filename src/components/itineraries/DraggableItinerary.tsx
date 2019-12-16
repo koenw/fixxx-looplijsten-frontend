@@ -4,8 +4,7 @@ import { navigate } from "@reach/router"
 import { getUrl, to } from "../../config/domain"
 import authToken from "../../utils/authToken"
 import styled from "styled-components"
-import NoteButton from "../itineraries/NoteButton"
-import DeleteButton from "../itineraries/DeleteButton"
+import IconButton from "../global/IconButton"
 import Itinerary from "./Itinerary"
 import stateContext from "../../contexts/StateContext"
 
@@ -77,8 +76,8 @@ const DraggableItinerary: FC<Props> = ({ itinerary, index }) => {
           <Div>
             <Itinerary itinerary={ bwv_data } note={ noteText } />
             <ButtonWrap>
-              <NoteButton onClick={ () => navigate(to(notePath)) } />
-              <DeleteButton onClick={ onClick } />
+              <IconButton icon="DocumentText" onClick={ () => navigate(to(notePath)) } />
+              <IconButton icon="TrashBin" onClick={ onClick } />
             </ButtonWrap>
           </Div>
         </div>
