@@ -31,11 +31,25 @@ const Button = styled.button`
   text-align: center
   width: 100%
   padding: 0
-  padding-top: 9px
+  padding-top: 4px
+`
+
+const Img = styled.img`
+  vertical-align: middle
+  width: 50%
+  height: 50%
 `
 
 const EyeButton: FC<Props> = ({ onClick, isOpen }) => {
-  const emoji = isOpen ? "👁" : "🕶️"
-  return <Span><Button onClick={ onClick }>️{ emoji }</Button></Span>
+  const name = isOpen ? "eye" : "eye-disabled"
+  const filename = `${ name }@2x.png`
+  const src = `/icons/${ filename }`
+  return (
+    <Span>
+      <Button onClick={ onClick }>️
+        <Img src={ src } alt="" />
+      </Button>
+    </Span>
+  )
 }
 export default EyeButton
