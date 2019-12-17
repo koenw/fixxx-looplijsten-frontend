@@ -1,5 +1,6 @@
 import React, { FC, FormEvent } from "react"
 import styled from "styled-components"
+import { getBasepath } from "../../config/domain"
 
 type Props = {
   onClick: (a: FormEvent) => void
@@ -43,7 +44,7 @@ const Img = styled.img`
 const EyeButton: FC<Props> = ({ onClick, isOpen }) => {
   const name = isOpen ? "eye" : "eye-disabled"
   const filename = `${ name }@2x.png`
-  const src = `/icons/${ filename }`
+  const src = `${ getBasepath() }/icons/${ filename }`
   return (
     <Span>
       <Button onClick={ onClick }>️
