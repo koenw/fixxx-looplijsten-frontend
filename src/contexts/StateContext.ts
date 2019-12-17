@@ -23,6 +23,9 @@ type Value = {
     moveItinerary: (a: Index, b: Index) => void
     updateItineraryNote: (a: Id, b: Id, c: string) => void
     clearState: () => void
+
+    isAnonymous: boolean,
+    toggleIsAnonymous: () => void
   }
 }
 
@@ -47,7 +50,10 @@ const value = {
     moveItinerary: noop,
     updateItineraryNote: noop,
 
-    clearState: noop
+    clearState: noop,
+
+    isAnonymous: false,
+    toggleIsAnonymous: noop
   }
 } as Value
 

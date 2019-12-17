@@ -1,9 +1,10 @@
-import React, { FC, ReactNode, useState } from "react"
+import React, { FC, ReactNode, useState, useEffect } from "react"
 import StateContext from '../../contexts/StateContext'
 import useFetch from "../../hooks/useFetch"
 import moveInArray from "../../utils/moveInArray"
 import { getUrl } from "../../config/domain"
 import authToken from "../../utils/authToken"
+import parseLocationSearch from "../../utils/parseLocationSearch"
 
 type Props = {
   children: ReactNode
@@ -108,6 +109,16 @@ const StateProvider: FC<Props> = ({ children }) => {
     setItineraries([])
   }
 
+  const [isAnonymous, setIsAnonymous] = useState(false)
+  useEffect(() => {
+    const anonymous = parseLocationSearch(window.location.search).anonymous
+    const isAnonymous = anonymous === "1"
+    setIsAnonymous(isAnonymous)
+  }, [])
+  const toggleIsAnonymous = () => {
+    setIsAnonymous(!isAnonymous)
+  }
+
   const value = {
     state: {
       search: {
@@ -129,7 +140,10 @@ const StateProvider: FC<Props> = ({ children }) => {
       moveItinerary,
       updateItineraryNote,
 
-      clearState
+      clearState,
+
+      isAnonymous,
+      toggleIsAnonymous
     }
   }
 

@@ -16,6 +16,7 @@ type Props = {
 }
 
 const Section = styled.section`
+  overflow: hidden
   border: 1px solid #B4B4B4
   margin-bottom: 24px
   padding: 8px
