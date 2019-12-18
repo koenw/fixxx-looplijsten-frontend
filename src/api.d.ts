@@ -95,6 +95,8 @@ type BWVHotlineMelding = {
 type BWVHotlineBevinding = {
   toez_hdr1_code: string
   toez_hdr2_code: string
+  toez_hdr1_naam: string
+  toez_hdr2_naam: string
   bevinding_datum: string
   bevinding_tijd: string
   hit: "J" | "N"

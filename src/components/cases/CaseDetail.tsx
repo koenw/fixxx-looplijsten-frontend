@@ -119,7 +119,7 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
   // Logboek
   const bevindingen = caseItem.bwv_hotline_bevinding.map(item => {
     return ({
-      name: [item.toez_hdr1_code, item.toez_hdr2_code].filter(i => i != null).join(", "),
+      name: [item.toez_hdr1_naam, item.toez_hdr2_naam].filter(i => i != null).join(", "),
       date: formatDate(item.bevinding_datum, true)!,
       time: item.bevinding_tijd,
       hit: item.hit === "J",
