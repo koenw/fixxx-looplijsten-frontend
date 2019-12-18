@@ -210,7 +210,7 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
         id="vakantieverhuur"
         title={ `Vakantieverhuur dit jaar (${ vakantieverhuurDays })` }
         data={
-          vakantieverNotifiedRentals
+          [...vakantieverNotifiedRentals] // reverse is mutable
             .reverse()
             .map((o: { check_in: string, check_out: string }) => [["Check out", formatDate(o.check_out)], ["Check in", formatDate(o.check_in)], <Hr />])
             .flat(1)
