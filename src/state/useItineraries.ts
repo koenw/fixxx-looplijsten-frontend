@@ -8,6 +8,7 @@ import reducer, {
   createRemove,
   createSetNote,
   createClear } from "./reducer"
+import { get, post, put, patch, del } from "../utils/fetch"
 import { getUrl } from "../config/domain"
 import authToken from "../utils/authToken"
 import calculateNewPosition from "../utils/calculateNewPosition"
@@ -18,72 +19,30 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
   useEffect(() => {
     (async () => {
-      try {
-        const url = getUrl("itineraries")
-        const token = authToken.get()
-        const headers = { Authorization: `Token ${ token }` }
-        const response = await fetch(url, { headers })
-        const data = await response.json()
-        const itineraries = data.items as Itineraries
-        dispatch(initialize(itineraries))
-      } catch (err) {
-        console.error(err)
-      }
+      const result = await get("itineraries")
+      if (result === undefined) return
+      const itineraries = result.items as Itineraries
+      dispatch(initialize(itineraries))
     })()
   }, [])
 
   const add = (caseId: CaseId) => {
-
     (async () => {
-      try {
-        const url = getUrl("itineraries/items")
-        const token = authToken.get()
-        const response = await fetch(url, {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            Authorization: `Token ${ token }`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ id: caseId })
-        })
-        if (response.ok) {
-          const data = await response.json()
-          const newItinerary = data as Itinerary
-          const newItineraries = [newItinerary] as Itineraries
-          dispatch(createAdd(newItineraries))
-        }
-      } catch (err) {
-        console.error(err)
-      }
+      const result = await post("itineraries/items", { id: caseId })
+      if (result === undefined) return
+      const itinerary = result as Itinerary
+      const itineraries = [itinerary] as Itineraries
+      dispatch(createAdd(itineraries))
     })()
   }
 
   const move = (index: Index, newIndex: Index) => {
 
-    const patch = async (id: Id, position: number) => {
-      try {
-        const path = `itineraries/items/${ id }`
-        const url = getUrl(path)
-        const token = authToken.get()
-        const response = await fetch(url, {
-          method: "PATCH",
-          headers: {
-            Authorization: `Token ${ token }`,
-            Accept: "application/json",
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ position })
-        })
-        if (response.ok) {
-          const itinerary = await response.json()
-          dispatch(createUpdate(id, itinerary))
-        } else {
-          console.error(response)
-        }
-      } catch (err) {
-        console.error(err)
-      }
+    const patchPosition = async (id: Id, position: number) => {
+      const result = await patch(`itineraries/items/${ id }`, { position })
+      if (result === undefined) return
+      const itinerary = result as Itinerary
+      dispatch(createUpdate(id, itinerary))
     }
 
     dispatch(createMove(index, newIndex))
@@ -91,66 +50,28 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
     const { itineraries } = itinerariesState
     const position = calculateNewPosition(itineraries, index, newIndex)
     const id = itineraries[index].id
-    patch(id, position)
+    patchPosition(id, position)
   }
 
   const remove = (id: Id) => {
 
-    const del = async () => {
-      try {
-        const url = getUrl(`itineraries/items/${ id }`)
-        const token = authToken.get()
-        const response = await fetch(url, {
-          method: "Delete",
-          headers: {
-            Accept: "application/json",
-            Authorization: `Token ${ token }`,
-            "Content-Type": "application/json"
-          }
-        })
-        if (response.ok) {
-          dispatch(createRemove(id))
-        }
-      } catch (err) {
-        console.error(err)
-      }
-    }
-
-    del()
+    (async () => {
+      await del(`itineraries/items/${ id }`)
+      dispatch(createRemove(id))
+    })()
   }
 
   const setNote = async (itineraryId: Id, text: string, id?: Id) => {
 
-    try {
-      const path = `notes/${ id || "" }`
-      const url = getUrl(path)
-      const method = text === "" ? "DELETE" : id !== undefined ? "PUT" : "POST"
-      const token = authToken.get()
-      const response = await fetch(url, {
-        method,
-        headers: {
-          Authorization: `Token ${ token }`,
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ itinerary_item: itineraryId, text })
-      })
-      if (response.ok) {
-        let text = ""
-        let noteId = id
-        if (method !== "DELETE") {
-          const note = await response.json()
-          text = note.text
-          noteId = note.id
-        }
-        dispatch(createSetNote(itineraryId, noteId!, text))
-        return true
-      }
-      return false
-    } catch (err) {
-      console.error(err)
-      return false
-    }
+    const path = `notes/${ id || "" }`
+    const method = text === "" ? del : id !== undefined ? put : post
+    const body = { itinerary_item: itineraryId, text }
+    const result = await method(path, body)
+    if (method !== del && result === undefined) return false
+    const newText = result ? result.text : ""
+    const noteId = result ? result.id : id
+    dispatch(createSetNote(itineraryId, noteId!, newText))
+    return true
   }
 
   const clear = () => dispatch(createClear())
