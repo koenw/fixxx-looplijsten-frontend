@@ -25,32 +25,22 @@ const Span = styled.span`
 
 const Button = styled.button`
   cursor: pointer
-  font-size: 48px
   background: none
   border: none
   outline: none
-  text-align: center
   width: 100%
+  height: 100%
   padding: 0
-  padding-top: 4px
-`
-
-const Img = styled.img`
-  vertical-align: middle
-  width: 50%
-  height: 50%
+  background-repeat: no-repeat
+  background-position: center
+  background-size: 36px
 `
 
 const EyeButton: FC<Props> = ({ onClick, isOpen }) => {
   const name = isOpen ? "eye" : "eye-disabled"
   const filename = `${ name }@2x.png`
   const src = `${ getBasepath() }/icons/${ filename }`
-  return (
-    <Span>
-      <Button onClick={ onClick }>️
-        <Img src={ src } alt="" />
-      </Button>
-    </Span>
-  )
+  const style = { backgroundImage: `url(${ src })` }
+  return <Span><Button onClick={ onClick } style={ style }>️</Button></Span>
 }
 export default EyeButton
