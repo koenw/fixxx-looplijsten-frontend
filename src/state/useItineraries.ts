@@ -7,7 +7,7 @@ import reducer, {
   createMove,
   createRemove,
   createSetNote,
-  createClear } from "./reducer"
+  createClear } from "./itinerariesReducer"
 import { get, post, put, patch, del } from "../utils/fetch"
 import calculateNewPosition from "../utils/calculateNewPosition"
 
