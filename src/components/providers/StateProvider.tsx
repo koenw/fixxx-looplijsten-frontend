@@ -13,6 +13,7 @@ const StateProvider: FC<Props> = ({ children }) => {
   const [postalCode, setPostalCode] = useState("")
   const [streetNumber, setStreetNumber] = useState("")
   const [suffix, setSuffix] = useState("")
+  const search = { postalCode, streetNumber, suffix }
   const setSearch = (postalCode: string, streetNumber: string, suffix: string) => {
     setPostalCode(postalCode)
     setStreetNumber(streetNumber)
@@ -28,32 +29,29 @@ const StateProvider: FC<Props> = ({ children }) => {
 
   // anonymous
   const [isAnonymous, setIsAnonymous] = useState(false)
+  const toggleIsAnonymous = () => {
+    setIsAnonymous(!isAnonymous)
+  }
   useEffect(() => {
     const anonymous = parseLocationSearch(window.location.search).anonymous
     const isAnonymous = anonymous === "1"
     setIsAnonymous(isAnonymous)
   }, [])
-  const toggleIsAnonymous = () => {
-    setIsAnonymous(!isAnonymous)
-  }
 
   const value = {
     state: {
-      search: {
-        postalCode,
-        streetNumber,
-        suffix
-      },
+      search,
       setSearch,
+
       parse,
       setParse,
 
-      isAnonymous,
-      toggleIsAnonymous,
-
       hasItinerary,
       itinerariesState,
-      itinerariesActions
+      itinerariesActions,
+
+      isAnonymous,
+      toggleIsAnonymous,
     }
   }
 
