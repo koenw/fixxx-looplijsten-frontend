@@ -12,6 +12,7 @@ RUN cp serve.json build/
 RUN mkdir -p build/looplijsten
 RUN cp build/*.* build/looplijsten/
 RUN cp -r build/static build/looplijsten/
+RUN cp -r build/icons build/looplijsten/
 
 EXPOSE 7000
 
