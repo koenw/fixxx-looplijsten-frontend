@@ -46,19 +46,23 @@ const Itineraries: FC = () => {
   const emptyText = "Je looplijst is leeg. Zoek adressen om aan je looplijst toe te voegen."
 
   const onClick = () => itineraries.map(itinerary => remove(itinerary.id))
+  const Buttons = () => (
+    <>
+      <MapsButton itineraries={ itineraries } />
+      <RemoveAllButton onClick={ onClick } />
+    </>
+  )
   const ButtonsTop = () => (
     <>
       <ButtonWrap>
-        <MapsButton itineraries={ itineraries } />
-        <RemoveAllButton onClick={ onClick } />
+        <Buttons />
       </ButtonWrap>
       <Hr />
     </>
   )
   const ButtonsBottom = () => (
     <ButtonWrapBottom>
-      <MapsButton itineraries={ itineraries } />
-      <RemoveAllButton onClick={ onClick } />
+      <Buttons />
     </ButtonWrapBottom>
   )
 
