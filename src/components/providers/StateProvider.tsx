@@ -1,6 +1,7 @@
 import React, { FC, ReactNode, useState, useEffect } from "react"
 import StateContext from '../../contexts/StateContext'
 import parseLocationSearch from "../../utils/parseLocationSearch"
+import useAuth from "../../state/useAuth"
 import useItineraries from "../../state/useItineraries"
 
 type Props = {
@@ -8,6 +9,9 @@ type Props = {
 }
 
 const StateProvider: FC<Props> = ({ children }) => {
+
+  // auth
+  const [auth, authActions] = useAuth() as [AuthState, AuthActions]
 
   // search
   const [postalCode, setPostalCode] = useState("")
@@ -38,8 +42,17 @@ const StateProvider: FC<Props> = ({ children }) => {
     setIsAnonymous(isAnonymous)
   }, [])
 
+  // clear
+  const clear = () => {
+    itinerariesActions.clear()
+    authActions.clear()
+  }
+
   const value = {
     state: {
+      auth,
+      authActions,
+
       search,
       setSearch,
 
@@ -52,6 +65,8 @@ const StateProvider: FC<Props> = ({ children }) => {
 
       isAnonymous,
       toggleIsAnonymous,
+
+      clear
     }
   }
 

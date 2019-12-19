@@ -3,6 +3,9 @@ import noop from "../utils/noop"
 
 type Value = {
   state: {
+    auth: AuthState,
+    authActions: AuthActions,
+
     search: {
       postalCode: string
       streetNumber: string
@@ -19,11 +22,23 @@ type Value = {
 
     isAnonymous: boolean
     toggleIsAnonymous: () => void
+
+    clear: () => void
   }
 }
 
 const value = {
   state: {
+    auth: {
+      isInitialized: false,
+      authToken: undefined
+    },
+    authActions: {
+      authenticate: (a: string, b: string) => {},
+      unAuthenticate: noop,
+      clear: noop
+    },
+
     search: {
       postalCode: "",
       streetNumber: "",
@@ -50,6 +65,8 @@ const value = {
 
     isAnonymous: false,
     toggleIsAnonymous: noop,
+
+    clear: noop
   }
 } as Value
 

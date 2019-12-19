@@ -1,11 +1,8 @@
-type Token = string
-type OptionalToken = Token | undefined
-
 const key = "vakantieverhuur-looplijsten-token"
 const regExp = /^[0-9a-f]{40}$/
 
 export default {
-  get: () : OptionalToken => {
+  get: () : OptionalAuthToken => {
     try {
       return localStorage.getItem(key) || undefined
     } catch (err) {
@@ -13,7 +10,7 @@ export default {
       return undefined
     }
   },
-  set: (token: Token) : boolean => {
+  set: (token: AuthToken) : boolean => {
     if (regExp.test(token) === false) return false
     try {
       localStorage.setItem(key, token)

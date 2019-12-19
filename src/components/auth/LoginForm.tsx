@@ -1,14 +1,13 @@
-import React, { FC, FormEvent, useState } from "react"
+import React, { FC, FormEvent, useState, useContext } from "react"
 import useOnChangeState from "../../hooks/useOnChangeState"
 import { navigate } from "@reach/router"
 import { to } from "../../config/domain"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Login as LoginIcon } from "@datapunt/asc-assets"
-import { getAuthUrl } from "../../config/domain"
-import authToken from "../../utils/authToken"
 import ErrorMessage from "../global/ErrorMessage"
 import Input from "../styled/Input"
+import StateContext from "../../contexts/StateContext"
 
 const Form = styled.form`
   width: 100%
@@ -32,6 +31,14 @@ const InputLoginForm = styled(Input)`
 
 const LoginForm: FC = () => {
 
+  const {
+    state: {
+      authActions: {
+        authenticate
+      }
+    }
+  } = useContext(StateContext)
+
   const [email, onChangeEmail] = useOnChangeState()
   const [password, onChangePassword] = useOnChangeState()
   const [errorMessage, setErrorMessage] = useState("")
@@ -39,7 +46,10 @@ const LoginForm: FC = () => {
   const onSubmit = async (event: FormEvent) => {
 
     event.preventDefault()
+    const result = authenticate(email, password)
+    navigate(to("/"))
 
+    /*
     setErrorMessage("")
 
     const url = getAuthUrl()
@@ -65,6 +75,7 @@ const LoginForm: FC = () => {
       navigate(to("/"))
       window.location.reload()
     }
+    */
   }
 
   const showErrorMessage = errorMessage !== ""

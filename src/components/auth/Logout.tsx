@@ -3,7 +3,6 @@ import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { navigate } from "@reach/router"
 import { to } from "../../config/domain"
-import authToken from "../../utils/authToken"
 import { Logout as LogoutIcon } from "@datapunt/asc-assets"
 import stateContext from "../../contexts/StateContext"
 
@@ -15,14 +14,11 @@ const Logout: FC = () => {
 
   const {
     state: {
-      itinerariesActions: {
-        clear
-      }
+      clear
     }
   } = useContext(stateContext)
 
   const onClick = () => {
-    authToken.clear()
     clear()
     navigate(to("/login"))
   }
