@@ -9,8 +9,6 @@ import reducer, {
   createSetNote,
   createClear } from "./reducer"
 import { get, post, put, patch, del } from "../utils/fetch"
-import { getUrl } from "../config/domain"
-import authToken from "../utils/authToken"
 import calculateNewPosition from "../utils/calculateNewPosition"
 
 const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
