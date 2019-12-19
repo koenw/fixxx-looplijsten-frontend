@@ -24,8 +24,8 @@ const StateProvider: FC<Props> = ({ children }) => {
   const [parse, setParse] = useState("")
 
   // itineraries
-  const [itinerariesState, itinerariesActions] = useItineraries() as [ItinerariesState, ItinerariesActions]
-  const hasItinerary = (caseId: CaseId) => itinerariesState.itineraries.filter(itinerary => itinerary.case.bwv_data.case_id === caseId).length > 0
+  const [itineraries, itinerariesActions] = useItineraries() as [ItinerariesState, ItinerariesActions]
+  const hasItinerary = (caseId: CaseId) => itineraries.itineraries.filter(itinerary => itinerary.case.bwv_data.case_id === caseId).length > 0
 
   // anonymous
   const [isAnonymous, setIsAnonymous] = useState(false)
@@ -47,7 +47,7 @@ const StateProvider: FC<Props> = ({ children }) => {
       setParse,
 
       hasItinerary,
-      itinerariesState,
+      itineraries,
       itinerariesActions,
 
       isAnonymous,

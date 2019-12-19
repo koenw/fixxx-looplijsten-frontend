@@ -33,7 +33,7 @@ const Navigation: FC = () => {
 
   const {
     state: {
-      itinerariesState: {
+      itineraries: {
         itineraries
       }
     }

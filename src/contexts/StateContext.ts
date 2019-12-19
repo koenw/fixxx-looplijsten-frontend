@@ -14,7 +14,7 @@ type Value = {
     setParse: (a: string) => void
 
     hasItinerary: (a: CaseId) => boolean
-    itinerariesState: ItinerariesState
+    itineraries: ItinerariesState
     itinerariesActions: ItinerariesActions
 
     isAnonymous: boolean
@@ -35,7 +35,7 @@ const value = {
     setParse: noop,
 
     hasItinerary: () => false,
-    itinerariesState: {
+    itineraries: {
       itineraries: [],
       isInitialized: false,
       isUpdating: false

@@ -27,7 +27,7 @@ const Itineraries: FC = () => {
 
   const {
     state: {
-      itinerariesState: {
+      itineraries: {
         itineraries,
         isInitialized
       },

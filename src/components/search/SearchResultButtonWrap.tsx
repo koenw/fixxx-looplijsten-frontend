@@ -25,7 +25,7 @@ const SearchResultButtonWrap: FC<Props> = ({ caseId }) => {
   const {
     state: {
       hasItinerary,
-      itinerariesState: {
+      itineraries: {
         itineraries
       },
       itinerariesActions: {

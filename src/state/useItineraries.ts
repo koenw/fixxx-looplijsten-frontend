@@ -15,7 +15,7 @@ import calculateNewPosition from "../utils/calculateNewPosition"
 
 const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
-  const [itinerariesState, dispatch] = useReducer(reducer, initialState as never)
+  const [itineraries, dispatch] = useReducer(reducer, initialState as never)
 
   useEffect(() => {
     (async () => {
@@ -47,9 +47,9 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
     dispatch(createMove(index, newIndex))
 
-    const { itineraries } = itinerariesState
-    const position = calculateNewPosition(itineraries, index, newIndex)
-    const id = itineraries[index].id
+    const { itineraries: items } = itineraries
+    const position = calculateNewPosition(items, index, newIndex)
+    const id = items[index].id
     patchPosition(id, position)
   }
 
@@ -76,6 +76,6 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
   const clear = () => dispatch(createClear())
 
-  return [itinerariesState, { add, move, remove, setNote, clear }]
+  return [itineraries, { add, move, remove, setNote, clear }]
 }
 export default useItineraries
