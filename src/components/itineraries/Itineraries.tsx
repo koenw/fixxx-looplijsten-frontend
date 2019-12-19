@@ -4,7 +4,9 @@ import { Spinner } from "@datapunt/asc-ui"
 import ErrorMessage from "../global/ErrorMessage"
 import DroppableItineraries from "./DroppableItineraries"
 import stateContext from "../../contexts/StateContext"
+import MapsButton from "./MapsButton"
 import RemoveAllButton from "./RemoveAllButton"
+import Hr from "../styled/Hr"
 
 type Result = {
   id: Id,
@@ -14,7 +16,7 @@ type Result = {
 
 const ButtonWrap = styled.div`
   display: flex
-  justify-content: flex-end
+  justify-content: space-between
   margin-top: 24px
 `
 const ButtonWrapBottom = styled(ButtonWrap)`
@@ -40,8 +42,21 @@ const Itineraries: FC = () => {
   const emptyText = "Je looplijst is leeg. Zoek adressen om aan je looplijst toe te voegen."
 
   const onClick = () => removeAllItineraries()
-  const RemoveAllButtonTop: FC = () => <ButtonWrap><RemoveAllButton onClick={ onClick } /></ButtonWrap>
-  const RemoveAllButtonBottom: FC = () => <ButtonWrapBottom><RemoveAllButton onClick={ onClick } /></ButtonWrapBottom>
+  const ButtonsTop = () => (
+    <>
+      <ButtonWrap>
+        <MapsButton itineraries={ itineraries } />
+        <RemoveAllButton onClick={ onClick } />
+      </ButtonWrap>
+      <Hr />
+    </>
+  )
+  const ButtonsBottom = () => (
+    <ButtonWrapBottom>
+      <MapsButton itineraries={ itineraries } />
+      <RemoveAllButton onClick={ onClick } />
+    </ButtonWrapBottom>
+  )
 
   return (
     <div className="Itineraries">
@@ -51,9 +66,9 @@ const Itineraries: FC = () => {
       { show && (
           hasItineraries ?
             <>
-              <RemoveAllButtonTop />
+              <ButtonsTop />
               <DroppableItineraries itineraries={ itineraries } />
-              <RemoveAllButtonBottom />
+              <ButtonsBottom />
             </> :
             <p>{ emptyText }</p>
         )
