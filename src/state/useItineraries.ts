@@ -8,7 +8,7 @@ import reducer, {
   createRemove,
   createSetNote,
   createClear } from "./itinerariesReducer"
-import { get, post, put, patch, del } from "../utils/fetch"
+import { get, post, put, patch, del, notOk } from "../utils/fetch"
 import calculateNewPosition from "../utils/calculateNewPosition"
 
 const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
@@ -17,8 +17,8 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
   useEffect(() => {
     (async () => {
-      const result = await get("itineraries")
-      if (result === undefined) return
+      const [response, result] = await get("itineraries")
+      if (notOk(response)) return
       const itineraries = result.items as Itineraries
       dispatch(initialize(itineraries))
     })()
@@ -26,8 +26,8 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
   const add = (caseId: CaseId) => {
     (async () => {
-      const result = await post("itineraries/items", { id: caseId })
-      if (result === undefined) return
+      const [response, result] = await post("itineraries/items", { id: caseId })
+      if (notOk(response)) return
       const itinerary = result as Itinerary
       const itineraries = [itinerary] as Itineraries
       dispatch(createAdd(itineraries))
@@ -37,8 +37,8 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
   const move = (index: Index, newIndex: Index) => {
 
     const patchPosition = async (id: Id, position: number) => {
-      const result = await patch(`itineraries/items/${ id }`, { position })
-      if (result === undefined) return
+      const [response, result] = await patch(`itineraries/items/${ id }`, { position })
+      if (notOk(response)) return
       const itinerary = result as Itinerary
       dispatch(createUpdate(id, itinerary))
     }
@@ -54,7 +54,8 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
   const remove = (id: Id) => {
 
     (async () => {
-      await del(`itineraries/items/${ id }`)
+      const [response] = await del(`itineraries/items/${ id }`)
+      if (notOk(response)) return
       dispatch(createRemove(id))
     })()
   }
@@ -64,8 +65,8 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
     const path = `notes/${ id || "" }`
     const method = text === "" ? del : id !== undefined ? put : post
     const body = { itinerary_item: itineraryId, text }
-    const result = await method(path, body)
-    if (method !== del && result === undefined) return false
+    const [response, result] = await method(path, body)
+    if (notOk(response)) return false
     const newText = result ? result.text : ""
     const noteId = result ? result.id : id
     dispatch(createSetNote(itineraryId, noteId!, newText))
