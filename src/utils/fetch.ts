@@ -23,8 +23,6 @@ const getHeaders = (token?: AuthToken, body?: Body) => {
 const fetch = async (url: URL, method: Method = "GET", body?: Body, parseResponse = true) : Promise<Return> => {
   try {
     const token = authToken.get()
-    const hasToken = token !== undefined
-    const hasBody = body !== undefined
     const headers = getHeaders(token, body)
     const bodyString = body ? JSON.stringify(body) : undefined
     const response = await window.fetch(url, { method, headers, body: bodyString })
