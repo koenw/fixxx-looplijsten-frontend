@@ -28,8 +28,9 @@ const Itineraries: FC = () => {
   const {
     state: {
       itineraries: {
-        itineraries,
-        isInitialized
+        isFetching,
+        isInitialized,
+        itineraries
       },
       itinerariesActions: {
         initialize,
@@ -38,7 +39,7 @@ const Itineraries: FC = () => {
     }
   } = useContext(stateContext)
 
-  if (!isInitialized) initialize()
+  if (!isInitialized && !isFetching) initialize()
 
   const showSpinner = !isInitialized
   const errorMessage = undefined

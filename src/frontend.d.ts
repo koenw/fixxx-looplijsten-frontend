@@ -1,6 +1,6 @@
 declare type ItinerariesState = {
+  isFetching: boolean
   isInitialized: boolean
-  isUpdating: boolean
   itineraries: Itineraries
 }
 

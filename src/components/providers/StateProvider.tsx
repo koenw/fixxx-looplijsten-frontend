@@ -33,9 +33,8 @@ const StateProvider: FC<Props> = ({ children }) => {
 
   // anonymous
   const [isAnonymous, setIsAnonymous] = useState(false)
-  const toggleIsAnonymous = () => {
-    setIsAnonymous(!isAnonymous)
-  }
+  const toggleIsAnonymous = () => setIsAnonymous(!isAnonymous)
+
   useEffect(() => {
     const anonymous = parseLocationSearch(window.location.search).anonymous
     const isAnonymous = anonymous === "1"

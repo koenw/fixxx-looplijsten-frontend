@@ -1,4 +1,5 @@
 import { useEffect, useReducer } from "react"
+import { navigate } from "@reach/router"
 import reducer, {
   initialState,
   createInitialize,
@@ -7,7 +8,7 @@ import reducer, {
   createClear } from "./authReducer"
 import authToken from "../utils/authToken"
 import { post, notOk } from "../utils/fetch"
-import { getAuthUrl } from "../config/domain"
+import { getAuthUrl, to } from "../config/domain"
 
 const useAuth = () : [AuthState, AuthActions] => {
 
@@ -17,6 +18,7 @@ const useAuth = () : [AuthState, AuthActions] => {
     (async () => {
       const token = authToken.get()
       dispatch(createInitialize(token))
+      if (token === undefined) navigate(to("/login"))
     })()
   }, [])
 
@@ -33,6 +35,7 @@ const useAuth = () : [AuthState, AuthActions] => {
       const { token } = result
       authToken.set(token)
       dispatch(createAuthenticate(token))
+      navigate(to("/"))
       return true
     })()
   }
@@ -47,7 +50,7 @@ const useAuth = () : [AuthState, AuthActions] => {
     dispatch(createClear())
   }
 
-  return [auth, { authenticate, unAuthenticate, clear  }]
+  return [auth, { authenticate, unAuthenticate, clear }]
 }
 
 export default useAuth

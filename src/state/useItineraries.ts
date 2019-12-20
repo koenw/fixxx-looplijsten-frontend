@@ -1,4 +1,5 @@
 import { useEffect, useReducer } from "react"
+import { navigate } from "@reach/router"
 import reducer, {
   initialState,
   createInitialize,
@@ -8,18 +9,21 @@ import reducer, {
   createRemove,
   createSetNote,
   createClear } from "./itinerariesReducer"
-import { get, post, put, patch, del, notOk } from "../utils/fetch"
-import { getUrl } from "../config/domain"
+import { get, post, put, patch, del, notOk, isForbidden } from "../utils/fetch"
+import { getUrl, to } from "../config/domain"
 import calculateNewPosition from "../utils/calculateNewPosition"
 
 const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
-  const [itineraries, dispatch] = useReducer(reducer, initialState as never)
+  const [itinerariesState, dispatch] = useReducer(reducer, initialState as never)
 
   const initialize = async () => {
     const url = getUrl("itineraries")
     const [response, result] = await get(url)
-    if (notOk(response)) return
+    if (notOk(response)) {
+      if (isForbidden(response)) navigate(to("/login"))
+      return
+    }
     const itineraries = result.items as Itineraries
     dispatch(createInitialize(itineraries))
   }
@@ -47,7 +51,7 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
     dispatch(createMove(index, newIndex))
 
-    const { itineraries: items } = itineraries
+    const { itineraries: items } = itinerariesState
     const position = calculateNewPosition(items, index, newIndex)
     const id = items[index].id
     patchPosition(id, position)
@@ -81,6 +85,6 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
     initialize()
   }, [])
 
-  return [itineraries, { initialize, add, move, remove, setNote, clear }]
+  return [itinerariesState, { initialize, add, move, remove, setNote, clear }]
 }
 export default useItineraries

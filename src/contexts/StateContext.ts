@@ -51,9 +51,9 @@ const value = {
 
     hasItinerary: () => false,
     itineraries: {
-      itineraries: [],
+      isFetching: false,
       isInitialized: false,
-      isUpdating: false
+      itineraries: []
     },
     itinerariesActions: {
       initialize: noop,

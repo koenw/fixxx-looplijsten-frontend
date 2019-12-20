@@ -13,6 +13,7 @@ type Action = {
   }
 }
 
+const START_FETCHING = "START_FETCHING"
 const INITIALIZE = "INITIALIZE"
 const ADD = "ADD"
 const UPDATE = "UPDATE"
@@ -21,6 +22,7 @@ const REMOVE = "REMOVE"
 const SET_NOTE = "SET_NOTE"
 const CLEAR = "CLEAR"
 
+export const createStartFetching = () => ({ type: START_FETCHING, payload: {} })
 export const createInitialize = (itineraries: Itineraries) => ({ type: INITIALIZE, payload: { itineraries } })
 export const createAdd = (itineraries: Itineraries) => ({ type: ADD, payload: { itineraries } })
 export const createUpdate = (id: Id, itinerary: Itinerary) => ({ type: UPDATE, payload: { id, itinerary } })
@@ -31,16 +33,20 @@ export const createClear = () => ({ type: CLEAR, payload: {} })
 
 export const initialState: ItinerariesState = {
   isInitialized: false,
-  isUpdating: false,
+  isFetching: false,
   itineraries: []
 }
 
 const reducer = (state: ItinerariesState, action: Action) : ItinerariesState => {
   switch (action.type) {
+    case START_FETCHING: {
+      return { ...state, isFetching: true }
+    }
     case INITIALIZE: {
       const isInitialized = true
+      const isFetching = false
       const { itineraries = [] } = action.payload
-      return { ...state, isInitialized, itineraries }
+      return { ...state, isInitialized, isFetching, itineraries }
     }
     case ADD: {
       const { itineraries: prevItineraries } = state
