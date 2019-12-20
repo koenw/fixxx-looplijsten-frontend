@@ -32,10 +32,13 @@ const Itineraries: FC = () => {
         isInitialized
       },
       itinerariesActions: {
+        initialize,
         remove
       }
     }
   } = useContext(stateContext)
+
+  if (!isInitialized) initialize()
 
   const showSpinner = !isInitialized
   const errorMessage = undefined

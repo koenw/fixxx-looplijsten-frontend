@@ -5,6 +5,7 @@ declare type ItinerariesState = {
 }
 
 declare type ItinerariesActions = {
+  initialize: () => void
   add: (a: CaseId) => void
   move: (a: Index, b: Index) => void
   remove: (a: Id) => void

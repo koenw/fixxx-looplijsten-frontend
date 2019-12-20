@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from "react"
 import reducer, {
   initialState,
-  initialize,
+  createInitialize,
   createAdd,
   createUpdate,
   createMove,
@@ -16,14 +16,12 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
   const [itineraries, dispatch] = useReducer(reducer, initialState as never)
 
-  useEffect(() => {
-    (async () => {
-      const [response, result] = await get(getUrl("itineraries"))
-      if (notOk(response)) return
-      const itineraries = result.items as Itineraries
-      dispatch(initialize(itineraries))
-    })()
-  }, [])
+  const initialize = async () => {
+    const [response, result] = await get(getUrl("itineraries"))
+    if (notOk(response)) return
+    const itineraries = result.items as Itineraries
+    dispatch(createInitialize(itineraries))
+  }
 
   const add = (caseId: CaseId) => {
     (async () => {
@@ -53,7 +51,6 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
   }
 
   const remove = (id: Id) => {
-
     (async () => {
       const [response] = await del(getUrl(`itineraries/items/${ id }`))
       if (notOk(response)) return
@@ -76,6 +73,10 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
   const clear = () => dispatch(createClear())
 
-  return [itineraries, { add, move, remove, setNote, clear }]
+  useEffect(() => {
+    initialize()
+  }, [])
+
+  return [itineraries, { initialize, add, move, remove, setNote, clear }]
 }
 export default useItineraries

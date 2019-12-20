@@ -56,6 +56,7 @@ const value = {
       isUpdating: false
     },
     itinerariesActions: {
+      initialize: noop,
       add: noop,
       move: noop,
       remove: noop,

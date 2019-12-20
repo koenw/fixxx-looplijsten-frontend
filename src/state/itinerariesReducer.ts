@@ -21,7 +21,7 @@ const REMOVE = "REMOVE"
 const SET_NOTE = "SET_NOTE"
 const CLEAR = "CLEAR"
 
-export const initialize = (itineraries: Itineraries) => ({ type: INITIALIZE, payload: { itineraries } })
+export const createInitialize = (itineraries: Itineraries) => ({ type: INITIALIZE, payload: { itineraries } })
 export const createAdd = (itineraries: Itineraries) => ({ type: ADD, payload: { itineraries } })
 export const createUpdate = (id: Id, itinerary: Itinerary) => ({ type: UPDATE, payload: { id, itinerary } })
 export const createMove = (index: Index, newIndex: Index) => ({ type: MOVE, payload: { index, newIndex } })
