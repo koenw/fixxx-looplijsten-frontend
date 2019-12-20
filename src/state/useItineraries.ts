@@ -17,7 +17,8 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
   const [itineraries, dispatch] = useReducer(reducer, initialState as never)
 
   const initialize = async () => {
-    const [response, result] = await get(getUrl("itineraries"))
+    const url = getUrl("itineraries")
+    const [response, result] = await get(url)
     if (notOk(response)) return
     const itineraries = result.items as Itineraries
     dispatch(createInitialize(itineraries))
@@ -25,7 +26,8 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
   const add = (caseId: CaseId) => {
     (async () => {
-      const [response, result] = await post(getUrl("itineraries/items"), { id: caseId })
+      const url = getUrl("itineraries/items")
+      const [response, result] = await post(url, { id: caseId })
       if (notOk(response)) return
       const itinerary = result as Itinerary
       const itineraries = [itinerary] as Itineraries
@@ -36,7 +38,8 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
   const move = (index: Index, newIndex: Index) => {
 
     const patchPosition = async (id: Id, position: number) => {
-      const [response, result] = await patch(getUrl(`itineraries/items/${ id }`), { position })
+      const url = getUrl(`itineraries/items/${ id }`)
+      const [response, result] = await patch(url, { position })
       if (notOk(response)) return
       const itinerary = result as Itinerary
       dispatch(createUpdate(id, itinerary))
@@ -52,7 +55,8 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
   const remove = (id: Id) => {
     (async () => {
-      const [response] = await del(getUrl(`itineraries/items/${ id }`))
+      const url = getUrl(`itineraries/items/${ id }`)
+      const [response] = await del(url)
       if (notOk(response)) return
       dispatch(createRemove(id))
     })()
@@ -60,10 +64,10 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
   const setNote = async (itineraryId: Id, text: string, id?: Id) => {
 
-    const path = `notes/${ id || "" }`
+    const url = getUrl(`notes/${ id || "" }`)
     const method = text === "" ? del : id !== undefined ? put : post
     const body = { itinerary_item: itineraryId, text }
-    const [response, result] = await method(path, body)
+    const [response, result] = await method(url, body)
     if (notOk(response)) return false
     const newText = result ? result.text : ""
     const noteId = result ? result.id : id
