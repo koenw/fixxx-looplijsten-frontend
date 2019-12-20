@@ -5,8 +5,9 @@ import reducer, {
   createAuthenticate,
   createUnAuthenticate,
   createClear } from "./authReducer"
-import { getAuthUrl } from "../config/domain"
 import authToken from "../utils/authToken"
+import { post, notOk } from "../utils/fetch"
+import { getAuthUrl } from "../config/domain"
 
 const useAuth = () : [AuthState, AuthActions] => {
 
@@ -23,25 +24,16 @@ const useAuth = () : [AuthState, AuthActions] => {
 
     (async () => {
       const url = getAuthUrl()
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ username: email, password })
-      })
+      const [response, result] = await post(url, { username: email, password })
 
       // Handle error responses
-      if (response.status === 400) return false
+      if (notOk(response)) return false
 
       // Handle successful login
-      if (response.status === 200) {
-        const { token } = await response.json()
-        authToken.set(token)
-        dispatch(createAuthenticate(token))
-        return true
-      }
+      const { token } = result
+      authToken.set(token)
+      dispatch(createAuthenticate(token))
+      return true
     })()
   }
 

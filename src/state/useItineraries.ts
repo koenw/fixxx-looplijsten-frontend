@@ -9,6 +9,7 @@ import reducer, {
   createSetNote,
   createClear } from "./itinerariesReducer"
 import { get, post, put, patch, del, notOk } from "../utils/fetch"
+import { getUrl } from "../config/domain"
 import calculateNewPosition from "../utils/calculateNewPosition"
 
 const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
@@ -17,7 +18,7 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
   useEffect(() => {
     (async () => {
-      const [response, result] = await get("itineraries")
+      const [response, result] = await get(getUrl("itineraries"))
       if (notOk(response)) return
       const itineraries = result.items as Itineraries
       dispatch(initialize(itineraries))
@@ -26,7 +27,7 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
   const add = (caseId: CaseId) => {
     (async () => {
-      const [response, result] = await post("itineraries/items", { id: caseId })
+      const [response, result] = await post(getUrl("itineraries/items"), { id: caseId })
       if (notOk(response)) return
       const itinerary = result as Itinerary
       const itineraries = [itinerary] as Itineraries
@@ -37,7 +38,7 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
   const move = (index: Index, newIndex: Index) => {
 
     const patchPosition = async (id: Id, position: number) => {
-      const [response, result] = await patch(`itineraries/items/${ id }`, { position })
+      const [response, result] = await patch(getUrl(`itineraries/items/${ id }`), { position })
       if (notOk(response)) return
       const itinerary = result as Itinerary
       dispatch(createUpdate(id, itinerary))
@@ -54,7 +55,7 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
   const remove = (id: Id) => {
 
     (async () => {
-      const [response] = await del(`itineraries/items/${ id }`)
+      const [response] = await del(getUrl(`itineraries/items/${ id }`))
       if (notOk(response)) return
       dispatch(createRemove(id))
     })()
