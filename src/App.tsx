@@ -13,6 +13,7 @@ import CasePage from "./pages/CasePage"
 import NotePage from "./pages/NotePage"
 import LoginPage from "./pages/LoginPage"
 import NotFoundPage from "./pages/NotFoundPage"
+import LoginCallbackPage from "./pages/LoginCallbackPage"
 
 const Main = styled.main`
   margin: 15px
@@ -42,6 +43,7 @@ const App: FC = () => {
               <NotePage path="/notes/:itineraryId" />
               <NotePage path="/notes/:itineraryId/:id" />
               <LoginPage path="/login" />
+              <LoginCallbackPage path="/authentication/callback" />
               <NotFoundPage default />
             </Router>
           </Main>

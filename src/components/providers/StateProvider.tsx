@@ -97,13 +97,15 @@ const StateProvider: FC<Props> = ({ children }) => {
     user: string
   }
   const [isFetched, setIsFetched] = useState(false)
-  const [result, isFetching, errorMessage] = useFetch("itineraries", true) as [Result, boolean, ErrorMessage]
-  if (result !== undefined && Array.isArray(result.items)) {
-    if (isFetched === false) {
-      setIsFetched(true)
-      setItineraries(result.items)
-    }
-  }
+  // NOTE: This always fetched itineraries,
+  const [result, isFetching, errorMessage] = [undefined, false, '']
+  // const [result, isFetching, errorMessage] = useFetch("itineraries", true) as [Result, boolean, ErrorMessage]
+  // if (result !== undefined && Array.isArray(result.items)) {
+  //   if (isFetched === false) {
+  //     setIsFetched(true)
+  //     setItineraries(result.items)
+  //   }
+  // }
 
   const clearState = () => {
     setItineraries([])

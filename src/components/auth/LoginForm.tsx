@@ -5,7 +5,7 @@ import { to } from "../../config/domain"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Login as LoginIcon } from "@datapunt/asc-assets"
-import { getAuthUrl } from "../../config/domain"
+import { getAuthUrl, getOIDCProviderUrl } from "../../config/domain"
 import authToken from "../../utils/authToken"
 import ErrorMessage from "../global/ErrorMessage"
 import Input from "../styled/Input"
@@ -68,6 +68,7 @@ const LoginForm: FC = () => {
   }
 
   const showErrorMessage = errorMessage !== ""
+  const gripUri = getOIDCProviderUrl()
 
   return (
     <Div className="Login">
@@ -80,6 +81,11 @@ const LoginForm: FC = () => {
         }
         <Button variant="application" iconLeft={ <LoginIcon /> }>Inloggen</Button>
       </Form>
+      <h2>
+          <a href={gripUri}>
+            Login met KPN Grip
+          </a>
+        </h2>      
     </Div>
   )
 }

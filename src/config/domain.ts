@@ -13,13 +13,15 @@ const domain =
   "http://localhost:8000/"
 const basePath = "api/v1/"
 const authPath = "api-token-auth/"
+const authOIDCPath = "oidc-authenticate/"
 const pathPrefix = "looplijsten/"
 
 const config = {
   domain,
   pathPrefix,
   basePath,
-  authPath
+  authPath,
+  authOIDCPath
 }
 export default config
 
@@ -32,7 +34,24 @@ export const getUrl = (path: string, params?: QueryParams) => {
 
 export const getAuthUrl = () => {
   const { domain, pathPrefix, authPath } = config
+  
   return `${ domain }${ pathPrefix }${ authPath }`
+}
+
+export const getAuthOIDCUrl = () => {
+  const { domain, pathPrefix, authOIDCPath } = config
+  
+  return `${ domain }${ pathPrefix }${ authOIDCPath }`
+}
+
+export const getOIDCProviderUrl = () => {
+  // TODO: generate this dynamically using environment
+  const authorizeUri = "https://auth.grip-on-it.com/v2/rjsfm52t/oidc/idp/authorize"
+  const responseType = "code"
+  const scope = "openid"
+  const clientId = "730eb73b-c09b-4c70-b6c8-ea4044d17e85"
+  const redirectUri = "http%3A%2F%2Flocalhost%3A3000%2Fauthentication%2Fcallback"
+  return `${authorizeUri}?response_type=${responseType}&scope=${scope}&client_id=${clientId}&redirect_uri=${redirectUri}`  
 }
 
 export const getBasepath = () => hostname === "acc.straatnotes.amsterdam.nl" || hostname === "straatnotes.amsterdam.nl" ? "/looplijsten" : ""
