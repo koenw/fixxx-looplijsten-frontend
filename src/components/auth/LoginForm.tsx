@@ -1,7 +1,5 @@
-import React, { FC, FormEvent, useState, useContext } from "react"
+import React, { FC, FormEvent, useContext } from "react"
 import useOnChangeState from "../../hooks/useOnChangeState"
-import { navigate } from "@reach/router"
-import { to } from "../../config/domain"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Login as LoginIcon } from "@datapunt/asc-assets"
@@ -41,14 +39,15 @@ const LoginForm: FC = () => {
 
   const [email, onChangeEmail] = useOnChangeState()
   const [password, onChangePassword] = useOnChangeState()
-  const [errorMessage, setErrorMessage] = useState("")
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
     authenticate(email, password)
   }
 
-  const showErrorMessage = errorMessage !== ""
+  // @TODO: Read from reducer
+  const showErrorMessage = false
+  const errorMessage = ""
 
   return (
     <Div className="Login">

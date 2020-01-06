@@ -1,8 +1,6 @@
 import React, { FC, useContext } from "react"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
-import { navigate } from "@reach/router"
-import { to } from "../../config/domain"
 import { Logout as LogoutIcon } from "@datapunt/asc-assets"
 import stateContext from "../../contexts/StateContext"
 

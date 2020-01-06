@@ -2,6 +2,7 @@ declare type ItinerariesState = {
   isFetching: boolean
   isInitialized: boolean
   itineraries: Itineraries
+  errorMessage: ErrorMessage
 }
 
 declare type ItinerariesActions = {

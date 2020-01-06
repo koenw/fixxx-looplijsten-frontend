@@ -43,8 +43,8 @@ const StateProvider: FC<Props> = ({ children }) => {
 
   // clear
   const clear = () => {
-    itinerariesActions.clear()
     authActions.clear()
+    itinerariesActions.clear()
   }
 
   const value = {

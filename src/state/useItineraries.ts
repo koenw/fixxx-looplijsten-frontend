@@ -2,7 +2,10 @@ import { useEffect, useReducer } from "react"
 import { navigate } from "@reach/router"
 import reducer, {
   initialState,
+  createStartFetching,
+  createStopFetching,
   createInitialize,
+  createSetErrorMessage,
   createAdd,
   createUpdate,
   createMove,
@@ -19,9 +22,15 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
   const initialize = async () => {
     const url = getUrl("itineraries")
+    dispatch(createStartFetching())
     const [response, result] = await get(url)
+    if (isForbidden(response)) {
+      dispatch(createStopFetching())
+      return navigate(to("/login"))
+    }
     if (notOk(response)) {
-      if (isForbidden(response)) navigate(to("/login"))
+      const errorMessage = response ? await response.body() : "Failed to GET"
+      dispatch(createSetErrorMessage(errorMessage))
       return
     }
     const itineraries = result.items as Itineraries

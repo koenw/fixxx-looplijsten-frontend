@@ -30,7 +30,8 @@ const Itineraries: FC = () => {
       itineraries: {
         isFetching,
         isInitialized,
-        itineraries
+        itineraries,
+        errorMessage
       },
       itinerariesActions: {
         initialize,
@@ -39,11 +40,11 @@ const Itineraries: FC = () => {
     }
   } = useContext(stateContext)
 
-  if (!isInitialized && !isFetching) initialize()
+  const hasError = errorMessage !== undefined
+  if (!isInitialized && !isFetching && !hasError) initialize()
 
-  const showSpinner = !isInitialized
-  const errorMessage = undefined
-  const showError = errorMessage !== undefined
+  const showSpinner = isFetching
+  const showError = hasError
   const show = !showSpinner && !showError
   const hasItineraries = itineraries.length > 0
 

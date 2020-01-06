@@ -53,7 +53,8 @@ const value = {
     itineraries: {
       isFetching: false,
       isInitialized: false,
-      itineraries: []
+      itineraries: [],
+      errorMessage: undefined
     },
     itinerariesActions: {
       initialize: noop,

@@ -10,10 +10,13 @@ type Action = {
     newIndex?: Index
     noteId?: Id
     note?: string
+    errorMessage?: ErrorMessage
   }
 }
 
 const START_FETCHING = "START_FETCHING"
+const STOP_FETCHING = "STOP_FETCHING"
+const SET_ERROR_MESSAGE = "SET_ERROR_MESSAGE"
 const INITIALIZE = "INITIALIZE"
 const ADD = "ADD"
 const UPDATE = "UPDATE"
@@ -23,6 +26,8 @@ const SET_NOTE = "SET_NOTE"
 const CLEAR = "CLEAR"
 
 export const createStartFetching = () => ({ type: START_FETCHING, payload: {} })
+export const createStopFetching = () => ({ type: STOP_FETCHING, payload: {} })
+export const createSetErrorMessage = (errorMessage: string) => ({ type: SET_ERROR_MESSAGE, payload: { errorMessage } })
 export const createInitialize = (itineraries: Itineraries) => ({ type: INITIALIZE, payload: { itineraries } })
 export const createAdd = (itineraries: Itineraries) => ({ type: ADD, payload: { itineraries } })
 export const createUpdate = (id: Id, itinerary: Itinerary) => ({ type: UPDATE, payload: { id, itinerary } })
@@ -34,13 +39,21 @@ export const createClear = () => ({ type: CLEAR, payload: {} })
 export const initialState: ItinerariesState = {
   isInitialized: false,
   isFetching: false,
-  itineraries: []
+  itineraries: [],
+  errorMessage: undefined
 }
 
 const reducer = (state: ItinerariesState, action: Action) : ItinerariesState => {
   switch (action.type) {
     case START_FETCHING: {
-      return { ...state, isFetching: true }
+      return { ...state, isFetching: true, errorMessage: undefined }
+    }
+    case STOP_FETCHING: {
+      return { ...state, isFetching: false }
+    }
+    case SET_ERROR_MESSAGE: {
+      const { errorMessage } = action.payload
+      return { ...state, isFetching: false, errorMessage }
     }
     case INITIALIZE: {
       const isInitialized = true
