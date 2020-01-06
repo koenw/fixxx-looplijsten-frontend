@@ -44,38 +44,8 @@ const LoginForm: FC = () => {
   const [errorMessage, setErrorMessage] = useState("")
 
   const onSubmit = async (event: FormEvent) => {
-
     event.preventDefault()
-    const result = authenticate(email, password)
-    navigate(to("/"))
-
-    /*
-    setErrorMessage("")
-
-    const url = getAuthUrl()
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ username: email, password })
-    })
-    const json = await response.json()
-
-    // Handle error responses
-    if (response.status === 400) {
-      const message = `Login failed${ json.non_field_errors ? `: ${ json.non_field_errors }` : "" }`
-      setErrorMessage(message)
-    }
-
-    // Handle successful login
-    else if (response.status === 200) {
-      authToken.set(json.token)
-      navigate(to("/"))
-      window.location.reload()
-    }
-    */
+    authenticate(email, password)
   }
 
   const showErrorMessage = errorMessage !== ""

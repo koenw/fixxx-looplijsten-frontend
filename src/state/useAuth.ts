@@ -48,6 +48,7 @@ const useAuth = () : [AuthState, AuthActions] => {
   const clear = () => {
     authToken.clear()
     dispatch(createClear())
+    navigate(to("/login"))
   }
 
   return [auth, { authenticate, unAuthenticate, clear }]

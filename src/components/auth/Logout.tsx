@@ -18,10 +18,7 @@ const Logout: FC = () => {
     }
   } = useContext(stateContext)
 
-  const onClick = () => {
-    clear()
-    navigate(to("/login"))
-  }
+  const onClick = () => clear()
 
   return (
     <Div className="Logout">
