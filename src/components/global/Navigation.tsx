@@ -33,7 +33,9 @@ const Navigation: FC = () => {
 
   const {
     state: {
-      itineraries
+      itineraries: {
+        itineraries
+      }
     }
   } = useContext(stateContext)
 

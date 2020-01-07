@@ -16,7 +16,7 @@ const SearchResult: FC<Props> = ({ cases }) => {
 
   const showPlural = cases.length > 1
   const caseItem = cases[0]
-
+  
   return (
     <Div className="SearchResult">
       { showPlural ?

@@ -19,14 +19,16 @@ const DroppableItineraries: FC<Props> = ({ itineraries }) => {
 
   const {
     state: {
-      moveItinerary
+      itinerariesActions: {
+        move
+      }
     }
   } = useContext(stateContext)
 
   const onDragEnd = async (result: any) => {
     if (result.destination === null) return
     const { source: { index }, destination: { index: newIndex } } = result
-    moveItinerary(index, newIndex)
+    move(index, newIndex)
   }
 
   return (

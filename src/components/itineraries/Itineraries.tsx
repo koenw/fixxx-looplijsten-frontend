@@ -27,34 +27,47 @@ const Itineraries: FC = () => {
 
   const {
     state: {
-      itineraries,
-      itinerariesIsFetching: isFetching,
-      itinerariesErrorMessage: errorMessage,
-      removeAllItineraries
+      itineraries: {
+        isFetching,
+        isInitialized,
+        itineraries,
+        errorMessage
+      },
+      itinerariesActions: {
+        initialize,
+        remove
+      }
     }
   } = useContext(stateContext)
 
+  const hasError = errorMessage !== undefined
+  if (!isInitialized && !isFetching && !hasError) initialize()
+
   const showSpinner = isFetching
-  const showError = errorMessage !== undefined
+  const showError = hasError
   const show = !showSpinner && !showError
   const hasItineraries = itineraries.length > 0
 
   const emptyText = "Je looplijst is leeg. Zoek adressen om aan je looplijst toe te voegen."
 
-  const onClick = () => removeAllItineraries()
+  const onClick = () => itineraries.map(itinerary => remove(itinerary.id))
+  const Buttons = () => (
+    <>
+      <MapsButton itineraries={ itineraries } />
+      <RemoveAllButton onClick={ onClick } />
+    </>
+  )
   const ButtonsTop = () => (
     <>
       <ButtonWrap>
-        <MapsButton itineraries={ itineraries } />
-        <RemoveAllButton onClick={ onClick } />
+        <Buttons />
       </ButtonWrap>
       <Hr />
     </>
   )
   const ButtonsBottom = () => (
     <ButtonWrapBottom>
-      <MapsButton itineraries={ itineraries } />
-      <RemoveAllButton onClick={ onClick } />
+      <Buttons />
     </ButtonWrapBottom>
   )
 

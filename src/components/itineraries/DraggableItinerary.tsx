@@ -1,12 +1,12 @@
 import React, { FC, useContext } from "react"
 import { Draggable } from "react-beautiful-dnd"
 import { navigate } from "@reach/router"
-import { getUrl, to } from "../../config/domain"
-import authToken from "../../utils/authToken"
+import { to } from "../../config/domain"
 import styled from "styled-components"
 import IconButton from "../global/IconButton"
 import Itinerary from "./Itinerary"
 import stateContext from "../../contexts/StateContext"
+import confirm from "../../utils/confirm"
 
 type Props = {
   itinerary: Itinerary
@@ -32,7 +32,9 @@ const DraggableItinerary: FC<Props> = ({ itinerary, index }) => {
 
   const {
     state: {
-      removeItinerary
+      itinerariesActions: {
+        remove
+      }
     }
   } = useContext(stateContext)
 
@@ -41,28 +43,10 @@ const DraggableItinerary: FC<Props> = ({ itinerary, index }) => {
   const noteText = notes[0] && notes[0].text
   const notePath = `/notes/${ id }/${ noteId || "" }`
 
-  const onClick = async () => {
-
-    try {
-      const url = getUrl(`itineraries/items/${ id }`)
-      const token = authToken.get()
-      const response = await fetch(url, {
-        method: "Delete",
-        headers: {
-          Accept: "application/json",
-          Authorization: `Token ${ token }`,
-          "Content-Type": "application/json"
-        }
-      })
-      if (response.ok) {
-        removeItinerary(itinerary)
-      } else {
-        alert("Verwijderen mislukt")
-      }
-    } catch (err) {
-      console.error(err)
-    }
-  }
+  const onClick = () => confirm(
+    "Weet je zeker dat je dit address van je looplijst wilt verwijderen?",
+    () => remove(id)
+  )
 
   return (
     <div className="DraggableItinerary">

@@ -1,9 +1,6 @@
 import React, { FC, useContext } from "react"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
-import { navigate } from "@reach/router"
-import { to } from "../../config/domain"
-import authToken from "../../utils/authToken"
 import { Logout as LogoutIcon } from "@datapunt/asc-assets"
 import stateContext from "../../contexts/StateContext"
 
@@ -15,15 +12,11 @@ const Logout: FC = () => {
 
   const {
     state: {
-      clearState
+      clear
     }
   } = useContext(stateContext)
 
-  const onClick = () => {
-    authToken.clear()
-    clearState()
-    navigate(to("/login"))
-  }
+  const onClick = () => clear()
 
   return (
     <Div className="Logout">
