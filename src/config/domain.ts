@@ -52,7 +52,9 @@ export const getOIDCProviderUrl = () => {
   const clientId = "d3d664c7-bb33-4bf0-b7c9-b8bdf1199b76"
   
   // TODO: add production url
-  const redirectUri = isAcc ? "https%3A%2F%2Facc.straatnotes.amsterdam.nl%2Flooplijsten%2Fauthentication%2Fcallback" : "http%3A%2F%2Flocalhost%3A3000%2Fauthentication%2Fcallback"
+  const redirectUri = hostname === "acc.straatnotes.amsterdam.nl" 
+  ? "https%3A%2F%2Facc.straatnotes.amsterdam.nl%2Flooplijsten%2Fauthentication%2Fcallback" 
+  : "http%3A%2F%2Flocalhost%3A3000%2Fauthentication%2Fcallback"
   return `${authorizeUri}?response_type=${responseType}&scope=${scope}&client_id=${clientId}&redirect_uri=${redirectUri}`  
 }
 
