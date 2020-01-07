@@ -49,7 +49,7 @@ export const getOIDCProviderUrl = () => {
   const authorizeUri = "https://auth.grip-on-it.com/v2/rjsfm52t/oidc/idp/authorize"
   const responseType = "code"
   const scope = "openid"
-  const clientId = "730eb73b-c09b-4c70-b6c8-ea4044d17e85"
+  const clientId = "d3d664c7-bb33-4bf0-b7c9-b8bdf1199b76"
   const redirectUri = "http%3A%2F%2Flocalhost%3A3000%2Fauthentication%2Fcallback"
   return `${authorizeUri}?response_type=${responseType}&scope=${scope}&client_id=${clientId}&redirect_uri=${redirectUri}`  
 }
