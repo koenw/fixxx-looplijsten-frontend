@@ -6,19 +6,15 @@ type Value = {
     auth: AuthState,
     authActions: AuthActions,
 
-    search: {
-      postalCode: string
-      streetNumber: string
-      suffix: string
-    }
-    setSearch: (a: string, b: string, c: string) => void
-
     parse: string
     setParse: (a: string) => void
 
     hasItinerary: (a: CaseId) => boolean
     itineraries: ItinerariesState
     itinerariesActions: ItinerariesActions
+
+    search: SearchState
+    searchActions: SearchActions
 
     isAnonymous: boolean
     toggleIsAnonymous: () => void
@@ -39,13 +35,6 @@ const value = {
       clear: noop
     },
 
-    search: {
-      postalCode: "",
-      streetNumber: "",
-      suffix: ""
-    },
-    setSearch: noop,
-
     parse: "",
     setParse: noop,
 
@@ -63,6 +52,14 @@ const value = {
       remove: noop,
       setNote: async () => false,
       clear: noop
+    },
+
+    search: {
+      query: undefined,
+      results: []
+    },
+    searchActions: {
+      search: (a: PostalCode, b: string, c: Suffix) => {}
     },
 
     isAnonymous: false,

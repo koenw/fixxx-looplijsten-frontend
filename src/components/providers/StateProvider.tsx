@@ -3,6 +3,7 @@ import StateContext from '../../contexts/StateContext'
 import parseLocationSearch from "../../utils/parseLocationSearch"
 import useAuth from "../../state/useAuth"
 import useItineraries from "../../state/useItineraries"
+import useSearch from "../../state/useSearch"
 
 type Props = {
   children: ReactNode
@@ -12,17 +13,6 @@ const StateProvider: FC<Props> = ({ children }) => {
 
   // auth
   const [auth, authActions] = useAuth() as [AuthState, AuthActions]
-
-  // search
-  const [postalCode, setPostalCode] = useState("")
-  const [streetNumber, setStreetNumber] = useState("")
-  const [suffix, setSuffix] = useState("")
-  const search = { postalCode, streetNumber, suffix }
-  const setSearch = (postalCode: string, streetNumber: string, suffix: string) => {
-    setPostalCode(postalCode)
-    setStreetNumber(streetNumber)
-    setSuffix(suffix)
-  }
 
   // parse
   const [parse, setParse] = useState("")
@@ -34,6 +24,9 @@ const StateProvider: FC<Props> = ({ children }) => {
   // anonymous
   const [isAnonymous, setIsAnonymous] = useState(false)
   const toggleIsAnonymous = () => setIsAnonymous(!isAnonymous)
+
+  // search
+  const [search, searchActions] = useSearch() as [SearchState, SearchActions]
 
   useEffect(() => {
     const anonymous = parseLocationSearch(window.location.search).anonymous
@@ -52,9 +45,6 @@ const StateProvider: FC<Props> = ({ children }) => {
       auth,
       authActions,
 
-      search,
-      setSearch,
-
       parse,
       setParse,
 
@@ -64,6 +54,9 @@ const StateProvider: FC<Props> = ({ children }) => {
 
       isAnonymous,
       toggleIsAnonymous,
+
+      search,
+      searchActions,
 
       clear
     }

@@ -8,10 +8,6 @@ import InputBase from "../styled/Input"
 import authToken from "../../utils/authToken"
 import stateContext from "../../contexts/StateContext"
 
-type Props = {
-  setResults: SetState
-}
-
 const Form = styled.form`
   max-width: 768px
 `
@@ -53,59 +49,26 @@ const SearchButton = styled(Button)`
   margin-top: 24px
 `
 
-const get = async (postalCode: string, streetNumber: string, suffix: string) => {
-
-  try {
-    const params = { postalCode, streetNumber, suffix }
-    const url = getUrl("search", params)
-    const token = authToken.get()
-    const response = await fetch(url, {
-      headers: {
-        Accept: "application/json",
-        Authorization: `Token ${ token }`,
-        "Content-Type": "application/json"
-      }
-    })
-    return await response.json()
-  } catch (err) {
-    console.error(err)
-  }
-}
-
-const SearchForm: FC<Props> = ({ setResults }) => {
+const SearchForm: FC = () => {
 
   const {
     state: {
       search: {
-        postalCode: postalCodeState,
-        streetNumber: streetNumberState,
-        suffix: suffixState
+        query
       },
-      setSearch
+      searchActions: {
+        search
+      }
     }
   } = useContext(stateContext)
 
-  const [postalCode, onChangePostalCode] = useOnChangeState(postalCodeState)
-  const [streetNumber, onChangeStreetNumber] = useOnChangeState(streetNumberState)
-  const [suffix, onChangeSuffix] = useOnChangeState(suffixState)
-
-  const search = async () => {
-    if (postalCode === "" || streetNumber === "") return
-    const json = await get(postalCode.replace(/\s/g, ""), streetNumber, suffix)
-    const hasCases = json.cases !== undefined && json.cases.length > 0
-    const results =  hasCases ? [{ success: true, data: json }] : []
-    setResults(results)
-  }
-
-  useEffect(() => {
-    search()
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
+  const [postalCode, onChangePostalCode] = useOnChangeState(query ? query[0] : "")
+  const [streetNumber, onChangeStreetNumber] = useOnChangeState(query ? query[1] : "")
+  const [suffix, onChangeSuffix] = useOnChangeState(query ? query[2] : "")
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
-    setSearch(postalCode, streetNumber, suffix)
-    search()
+    search(postalCode, streetNumber, suffix)
   }
 
   return (

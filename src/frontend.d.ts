@@ -28,3 +28,15 @@ declare type AuthActions = {
   unAuthenticate: () => void
   clear: () => void
 }
+
+declare type PostalCode = string
+declare type Suffix = string
+declare type Query = [PostalCode, string, Suffix]
+declare type SearchState = {
+  query?: Query
+  results: BWVData[]
+}
+
+declare type SearchActions = {
+  search: (a: PostalCode, b: string, c: Suffix) => void
+}
