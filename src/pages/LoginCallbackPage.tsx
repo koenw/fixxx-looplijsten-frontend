@@ -33,6 +33,7 @@ const LoginCallbackPage: FC<RouteComponentProps> = () => {
     if (response.status !== 200) {
       const message = `Could not confirm authentication with resource server`
       setErrorMessage(message)
+      setLoading(false)
     }
 
     // Handle successful login
@@ -54,7 +55,7 @@ const LoginCallbackPage: FC<RouteComponentProps> = () => {
     <>
       <h1>Confirming authentication with resource server</h1>
       { loading && <Spinner/> }
-      { showErrorMessage && <ErrorMessage text={ errorMessage } />
+      { showErrorMessage && !loading && <ErrorMessage text={ errorMessage } />
       }  
     </>
   )
