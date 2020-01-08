@@ -1,4 +1,4 @@
-import React, { FC, useContext } from "react"
+import React, { FC, useContext, useState } from "react"
 import { Draggable } from "react-beautiful-dnd"
 import { navigate } from "@reach/router"
 import { to } from "../../config/domain"
@@ -14,6 +14,12 @@ type Props = {
 }
 
 const Div = styled.div`
+  overflow: hidden
+  transition: height 0.6s ease-out
+  height: ${ (props: { collapsed: boolean }) => props.collapsed ? 0 : '200px' }
+`
+
+const Inner = styled.div`
   display: flex
   justify-content: space-between
   background: white
@@ -43,13 +49,19 @@ const DraggableItinerary: FC<Props> = ({ itinerary, index }) => {
   const noteText = notes[0] && notes[0].text
   const notePath = `/notes/${ id }/${ noteId || "" }`
 
+  const [isCollapsed, setCollapse] = useState(false)
+  const collapse = () => setCollapse(true)
+
   const onClick = () => confirm(
     "Weet je zeker dat je deze zaak (en eventuele notities) uit je looplijst wilt verwijderen?",
-    () => remove(id)
+    () => {
+      collapse()
+      window.setTimeout(() => remove(id), 500)
+    }
   )
 
   return (
-    <div className="DraggableItinerary">
+    <Div className="DraggableItinerary" collapsed={ isCollapsed }>
       <Draggable key={ String(id) } draggableId={ String(id) } index={ index }>
       { (provided, snapshot) => (
         <div
@@ -57,17 +69,17 @@ const DraggableItinerary: FC<Props> = ({ itinerary, index }) => {
           { ...provided.draggableProps }
           { ...provided.dragHandleProps }
         >
-          <Div>
+          <Inner>
             <Itinerary itinerary={ bwv_data } note={ noteText } />
             <ButtonWrap>
               <IconButton icon="DocumentText" onClick={ () => navigate(to(notePath)) } />
               <IconButton icon="TrashBin" onClick={ onClick } />
             </ButtonWrap>
-          </Div>
+          </Inner>
         </div>
       ) }
       </Draggable>
-    </div>
+    </Div>
   )
 }
 export default DraggableItinerary
