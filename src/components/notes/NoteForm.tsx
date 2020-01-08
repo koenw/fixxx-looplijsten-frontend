@@ -6,6 +6,7 @@ import useOnChangeState from "../../hooks/useOnChangeState"
 import { navigate } from "@reach/router"
 import { to } from "../../config/domain"
 import stateContext from "../../contexts/StateContext"
+import currentTime from "../../utils/currentTime"
 
 const ButtonWrap = styled.div`
   display: flex
@@ -53,7 +54,9 @@ const NoteForm: FC<Props> = ({ itineraryId, id, value }) => {
   const onClick = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     event.stopPropagation()
-    await saveNote(nawText)
+    const time = currentTime()
+    const text = `${ nawText } ${ time } uur`
+    await saveNote(text)
   }
 
   return (
