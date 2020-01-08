@@ -18,7 +18,7 @@ const useAuth = () : [AuthState, AuthActions] => {
     const token = authToken.get()
     const hasToken = token !== undefined
     if (!hasToken) {
-      navigate(to("/login"))
+      if (window.location.pathname !== to("/authentication/callback")) navigate(to("/login"))
       return false
     } else {
       dispatch(createInitialize(token))
