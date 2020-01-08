@@ -41,10 +41,6 @@ const Itineraries: FC = () => {
   } = useContext(stateContext)
 
   const hasError = errorMessage !== undefined
-  if (!isInitialized && !isFetching && !hasError) {
-    console.log("Itineraries initialize")
-    initialize()
-  }
 
   const showSpinner = isFetching
   const showError = hasError

@@ -33,9 +33,7 @@ const LoginForm: FC = () => {
 
   const {
     state: {
-      authActions: {
-        authenticate
-      }
+      authenticate
     }
   } = useContext(StateContext)
 
@@ -44,7 +42,7 @@ const LoginForm: FC = () => {
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
-    authenticate(email, password)
+    await authenticate(email, password)
   }
 
   const gripUri = getOIDCProviderUrl()
@@ -68,7 +66,7 @@ const LoginForm: FC = () => {
           <a href={gripUri}>
             Login met KPN Grip
           </a>
-        </h2>      
+        </h2>
     </Div>
   )
 }

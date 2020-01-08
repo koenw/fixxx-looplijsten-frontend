@@ -24,7 +24,9 @@ declare type AuthState = {
 }
 
 declare type AuthActions = {
-  authenticate: (a: string, b: string) => void
+  initialize: () => boolean
+  authenticate: (a: string, b: string) => Promise<boolean>
+  authenticateToken: (a: AuthToken) => void
   unAuthenticate: () => void
   clear: () => void
 }

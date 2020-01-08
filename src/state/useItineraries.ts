@@ -91,10 +91,6 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
   const clear = () => dispatch(createClear())
 
-  useEffect(() => {
-    initialize()
-  }, [])
-
   return [itinerariesState, { initialize, add, move, remove, setNote, clear }]
 }
 export default useItineraries

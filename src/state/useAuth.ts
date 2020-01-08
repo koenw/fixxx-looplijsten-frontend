@@ -14,30 +14,38 @@ const useAuth = () : [AuthState, AuthActions] => {
 
   const [auth, dispatch] = useReducer(reducer, initialState as never)
 
-  useEffect(() => {
-    (async () => {
-      const token = authToken.get()
+  const initialize = () : boolean => {
+    const token = authToken.get()
+    const hasToken = token !== undefined
+    if (!hasToken) {
+      navigate(to("/login"))
+      return false
+    } else {
       dispatch(createInitialize(token))
-      if (token === undefined) navigate(to("/login"))
-    })()
-  }, [])
-
-  const authenticate = (email: Email, password: Password) => {
-
-    (async () => {
-      const url = getAuthUrl()
-      const [response, result] = await post(url, { username: email, password })
-
-      // Handle error responses
-      if (notOk(response)) return false
-
-      // Handle successful login
-      const { token } = result
-      authToken.set(token)
-      dispatch(createAuthenticate(token))
-      navigate(to("/"))
       return true
-    })()
+    }
+  }
+
+  const authenticate = async (email: Email, password: Password) : Promise<boolean> => {
+
+    const url = getAuthUrl()
+    const [response, result] = await post(url, { username: email, password })
+
+    // Handle error responses
+    if (notOk(response)) return false
+
+    // Handle successful login
+    const { token } = result
+    authToken.set(token)
+    dispatch(createAuthenticate(token))
+    navigate(to("/"))
+    return true
+  }
+
+  const authenticateToken = (token: AuthToken) => {
+    authToken.set(token)
+    dispatch(createAuthenticate(token))
+    navigate(to("/"))
   }
 
   const unAuthenticate = () => {
@@ -51,7 +59,7 @@ const useAuth = () : [AuthState, AuthActions] => {
     navigate(to("/login"))
   }
 
-  return [auth, { authenticate, unAuthenticate, clear }]
+  return [auth, { initialize, authenticate, authenticateToken, unAuthenticate, clear }]
 }
 
 export default useAuth
