@@ -34,13 +34,11 @@ export const getUrl = (path: string, params?: QueryParams) => {
 
 export const getAuthUrl = () => {
   const { domain, pathPrefix, authPath } = config
-
   return `${ domain }${ pathPrefix }${ authPath }`
 }
 
 export const getAuthOIDCUrl = () => {
   const { domain, pathPrefix, authOIDCPath } = config
-
   return `${ domain }${ pathPrefix }${ authOIDCPath }`
 }
 
@@ -51,11 +49,13 @@ export const getOIDCProviderUrl = () => {
   const scope = "openid"
   const clientId = "d3d664c7-bb33-4bf0-b7c9-b8bdf1199b76"
 
-  // TODO: add production url
+  // @TODO: add production url
+  // @TODO: extract protocol, domain
+  // @TODO: use to() for paths
   const redirectUri = hostname === "acc.straatnotes.amsterdam.nl"
-  ? "https%3A%2F%2Facc.straatnotes.amsterdam.nl%2Flooplijsten%2Fauthentication%2Fcallback"
-  : "http%3A%2F%2Flocalhost%3A3000%2Fauthentication%2Fcallback"
-  return `${authorizeUri}?response_type=${responseType}&scope=${scope}&client_id=${clientId}&redirect_uri=${redirectUri}`
+  ? "https://acc.straatnotes.amsterdam.nl/looplijsten/authentication/callback"
+  : "http://localhost:3000/authentication/callback"
+  return `${ authorizeUri }?response_type=${ responseType }&scope=${ scope }&client_id=${ clientId }&redirect_uri=${ encodeURIComponent(redirectUri) }`
 }
 
 export const getBasepath = () => hostname === "acc.straatnotes.amsterdam.nl" || hostname === "straatnotes.amsterdam.nl" ? "/looplijsten" : ""
