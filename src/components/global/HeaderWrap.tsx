@@ -3,6 +3,13 @@ import { Header } from "@datapunt/asc-ui"
 import Logout from "../auth/Logout"
 import { Location } from "@reach/router"
 import { to } from "../../config/domain"
+import styled from "styled-components"
+
+const Wrap = styled.div`
+  position: fixed
+  width: 100%
+  top: 0
+`
 
 const HeaderWrap: React.FC = () => {
 
@@ -13,12 +20,14 @@ const HeaderWrap: React.FC = () => {
       const showLogout = !pathnames.includes(`${ location.pathname }`)
       const navigation = showLogout ? <Logout /> : null
       return (
-        <Header
-          tall={ false }
-          title="Toezicht op pad"
-          homeLink={ to("/") }
-          navigation={ navigation }
-        />
+        <Wrap>
+          <Header
+            tall={ false }
+            title="Toezicht op pad"
+            homeLink={ to("/") }
+            navigation={ navigation }
+          />
+        </Wrap>
       )
     } }
     </Location>

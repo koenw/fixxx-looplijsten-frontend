@@ -17,6 +17,7 @@ import LoginCallbackPage from "./pages/LoginCallbackPage"
 
 const Main = styled.main`
   margin: 15px
+  margin-top: 118px
 `
 
 /* Be careful!
