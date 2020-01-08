@@ -21,6 +21,7 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
   const [itinerariesState, dispatch] = useReducer(reducer, initialState as never)
 
   const initialize = async () => {
+    console.log("useItineraries initialize")
     const url = getUrl("itineraries")
     dispatch(createStartFetching())
     const [response, result] = await get(url)

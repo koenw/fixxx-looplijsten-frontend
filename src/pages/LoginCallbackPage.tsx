@@ -57,6 +57,8 @@ const LoginCallbackPage: FC<RouteComponentProps> = () => {
     }
   }, [loading])
 
+  console.log(loading, errorMessage)
+
   return (
     <>
       <h1>Confirming authentication with resource server</h1>
