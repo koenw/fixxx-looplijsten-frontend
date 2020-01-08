@@ -14,10 +14,14 @@ const LoginCallbackPage: FC<RouteComponentProps> = () => {
   const [errorMessage, setErrorMessage] = useState("")
   const showErrorMessage = errorMessage !== ""
 
+  console.log("LoginCallbackPage")
+
   const confirmLogin = async () => {
     setErrorMessage("")
     const queryParameters = parseLocationSearch(window.location.search)
     const { code }  = queryParameters
+
+    console.log(code)
 
     const url = getAuthOIDCUrl()
     const response = await fetch(url, {
@@ -27,8 +31,8 @@ const LoginCallbackPage: FC<RouteComponentProps> = () => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({code})
-    })  
-  
+    })
+
     // Handle error responses
     if (response.status !== 200) {
       const message = `Could not confirm authentication with resource server`
@@ -40,15 +44,15 @@ const LoginCallbackPage: FC<RouteComponentProps> = () => {
     else if (response.status === 200) {
       const json = await response.json()
       authToken.set(json.token)
-      navigate(to("/"))      
+      navigate(to("/"))
     }
   }
-  
-  useEffect(() => {    
+
+  useEffect(() => {
     if(!loading) {
       setLoading(true)
-      confirmLogin()      
-    }    
+      confirmLogin()
+    }
   }, [loading])
 
   return (
@@ -56,7 +60,7 @@ const LoginCallbackPage: FC<RouteComponentProps> = () => {
       <h1>Confirming authentication with resource server</h1>
       { loading && <Spinner/> }
       { showErrorMessage && !loading && <ErrorMessage text={ errorMessage } />
-      }  
+      }
     </>
   )
 }

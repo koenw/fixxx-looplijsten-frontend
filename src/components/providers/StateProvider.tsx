@@ -28,13 +28,23 @@ const StateProvider: FC<Props> = ({ children }) => {
   // search
   const [search, searchActions] = useSearch() as [SearchState, SearchActions]
 
+  // initialize
   useEffect(() => {
+
+    // anonymous
     const anonymous = parseLocationSearch(window.location.search).anonymous
     const isAnonymous = anonymous === "1"
     setIsAnonymous(isAnonymous)
+
+    // auth
+
+    // itineraries
+
+    console.log("StateProvider initialize")
+
   }, [])
 
-  // clear
+  // deinitialize
   const clear = () => {
     authActions.clear()
     itinerariesActions.clear()
