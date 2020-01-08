@@ -36,6 +36,11 @@ const StateProvider: FC<Props> = ({ children }) => {
     if (isSuccess) initialize()
   }
 
+  const authenticateToken = (token: AuthToken) => {
+    authActions.authenticateToken(token)
+    initialize()
+  }
+
   // initialize
   const initialize = () => {
 
@@ -86,6 +91,7 @@ const StateProvider: FC<Props> = ({ children }) => {
       searchActions,
 
       authenticate,
+      authenticateToken,
 
       clear
     }

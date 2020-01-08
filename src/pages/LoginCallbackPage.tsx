@@ -1,4 +1,5 @@
-import React, { FC, useState, useEffect } from "react"
+import React, { FC, useContext, useState, useEffect } from "react"
+import StateContext from "../contexts/StateContext"
 import { Spinner } from "@datapunt/asc-ui"
 import { RouteComponentProps } from "@reach/router"
 import ErrorMessage from "../components/global/ErrorMessage"
@@ -10,6 +11,12 @@ import { to } from "../config/domain"
 import { post, notOk } from "../utils/fetch"
 
 const LoginCallbackPage: FC<RouteComponentProps> = () => {
+
+  const {
+    state: {
+      authenticateToken
+    }
+  } = useContext(StateContext)
 
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | undefined>()
@@ -34,8 +41,8 @@ const LoginCallbackPage: FC<RouteComponentProps> = () => {
       const message = `Could not confirm authentication with resource server. HTTP Status: ${ httpStatus }`
       setErrorMessage(message)
     } else {
-      authToken.set(result.token)
-      navigate(to("/"))
+      const { token } = result
+      authenticateToken(token)
     }
 
     setLoading(false)

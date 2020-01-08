@@ -20,6 +20,7 @@ type Value = {
     toggleIsAnonymous: () => void
 
     authenticate: (a: Email, b: Password) => void
+    authenticateToken: (a: AuthToken) => void
 
     clear: () => void
   }
@@ -70,6 +71,7 @@ const value = {
     toggleIsAnonymous: noop,
 
     authenticate: async (a: Email, b: Password) => {},
+    authenticateToken: (a: AuthToken) => {},
 
     clear: noop
   }
