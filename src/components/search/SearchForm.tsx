@@ -1,11 +1,9 @@
-import React, { FC, FormEvent, useContext, useEffect } from "react"
+import React, { FC, FormEvent, useContext } from "react"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Search } from "@datapunt/asc-assets"
 import useOnChangeState from "../../hooks/useOnChangeState"
-import { getUrl } from "../../config/domain"
 import InputBase from "../styled/Input"
-import authToken from "../../utils/authToken"
 import stateContext from "../../contexts/StateContext"
 
 const Form = styled.form`

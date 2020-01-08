@@ -29,12 +29,10 @@ const Itineraries: FC = () => {
     state: {
       itineraries: {
         isFetching,
-        isInitialized,
         itineraries,
         errorMessage
       },
       itinerariesActions: {
-        initialize,
         remove
       }
     }

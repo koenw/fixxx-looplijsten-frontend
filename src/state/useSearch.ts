@@ -1,11 +1,10 @@
-import { useEffect, useReducer } from "react"
+import { useReducer } from "react"
 import reducer, {
   initialState,
   createSearch,
   createSetResults
 } from "./searchReducer"
 import { get, notOk } from "../utils/fetch"
-import queryParams from "../utils/queryParams"
 import { getUrl } from "../config/domain"
 
 const useSearch = () : [SearchState, SearchActions] => {

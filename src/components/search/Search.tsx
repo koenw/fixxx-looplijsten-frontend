@@ -1,4 +1,4 @@
-import React, { FC, useState, useContext } from "react"
+import React, { FC, useContext } from "react"
 import SearchForm from "./SearchForm"
 import SearchResults from "./SearchResults"
 import { Link } from "@reach/router"

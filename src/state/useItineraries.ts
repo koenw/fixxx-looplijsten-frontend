@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react"
+import { useReducer } from "react"
 import { navigate } from "@reach/router"
 import reducer, {
   initialState,

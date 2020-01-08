@@ -4,10 +4,7 @@ import { Spinner } from "@datapunt/asc-ui"
 import { RouteComponentProps } from "@reach/router"
 import ErrorMessage from "../components/global/ErrorMessage"
 import { getAuthOIDCUrl } from "../config/domain"
-import authToken from "../utils/authToken"
 import parseLocationSearch from '../utils/parseLocationSearch'
-import { navigate } from "@reach/router"
-import { to } from "../config/domain"
 import { post, notOk } from "../utils/fetch"
 
 const LoginCallbackPage: FC<RouteComponentProps> = () => {

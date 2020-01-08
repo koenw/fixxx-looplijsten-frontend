@@ -1,11 +1,9 @@
 import React, { FC, ReactNode, useState, useEffect } from "react"
-import { navigate } from "@reach/router"
 import StateContext from '../../contexts/StateContext'
 import useAuth from "../../state/useAuth"
 import useItineraries from "../../state/useItineraries"
 import useSearch from "../../state/useSearch"
 import parseLocationSearch from "../../utils/parseLocationSearch"
-import authToken from "../../utils/authToken"
 
 type Props = {
   children: ReactNode
