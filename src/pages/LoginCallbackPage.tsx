@@ -33,6 +33,8 @@ const LoginCallbackPage: FC<RouteComponentProps> = () => {
       body: JSON.stringify({code})
     })
 
+    console.log(response)
+
     // Handle error responses
     if (response.status !== 200) {
       const message = `Could not confirm authentication with resource server`
