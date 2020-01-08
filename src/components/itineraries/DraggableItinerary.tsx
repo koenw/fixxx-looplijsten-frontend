@@ -44,7 +44,7 @@ const DraggableItinerary: FC<Props> = ({ itinerary, index }) => {
   const notePath = `/notes/${ id }/${ noteId || "" }`
 
   const onClick = () => confirm(
-    "Weet je zeker dat je dit address van je looplijst wilt verwijderen?",
+    "Weet je zeker dat je deze zaak (en eventuele notities) uit je looplijst wilt verwijderen?",
     () => remove(id)
   )
 
