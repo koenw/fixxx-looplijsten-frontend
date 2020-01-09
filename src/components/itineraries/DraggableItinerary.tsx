@@ -59,11 +59,10 @@ const DraggableItinerary: FC<Props> = ({ itinerary, index }) => {
 
   const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
     userSelect: "none",
-    borderBottom: "1px solid #767676",
     background: "white",
-    borderRadius: "5px",
+    borderBottom: "1px solid #767676",
     boxShadow: isDragging ? "0 2px 20px black" : "none",
-    padding: isDragging ? "0 8px" : 0,
+    padding: isDragging ? "0 20px" : 0,
     ...draggableStyle
   })
 
