@@ -30,18 +30,15 @@ const Ul = styled.ul`
 const Li = styled.li`
   border-bottom: 5px solid transparent
   border-bottom-color: ${ (props: { isActive?: boolean }) => props.isActive ? 'red' : 'transparent' }
-  padding-bottom: 7px
+  padding: 0 10px 7px 10px;
   a {
     color: black
   }
 `
-const LiSearch = styled.li`
+const LiSearch = styled(Li)`
   width: 24px
   height: 24px
   margin-right: 16px
-  border-bottom: 5px solid transparent
-  border-bottom-color: ${ (props: { isActive?: boolean }) => props.isActive ? 'red' : 'transparent' }
-  padding-bottom: 7px
 `
 
 const Navigation: FC = () => {
