@@ -61,6 +61,7 @@ type BWVPersoon = {
   voorletters: string
   geslacht: "M" | "V"
   geboortedatum: string
+  overlijdensdatum: string
   vestigingsdatum_adres: string
 }
 type BWVPersonen = BWVPersoon[]

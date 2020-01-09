@@ -105,14 +105,16 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
       name: person.naam,
       initials: person.voorletters,
       sex: person.geslacht,
-      born: person.geboortedatum ? formatDate(person.geboortedatum.slice(0, -9))! : undefined,
-      livingSince: person.vestigingsdatum_adres ? formatDate(person.vestigingsdatum_adres.slice(0, -9))! : undefined
+      born: person.geboortedatum ? formatDate(person.geboortedatum)! : undefined,
+      livingSince: person.vestigingsdatum_adres ? formatDate(person.vestigingsdatum_adres)! : undefined,
+      died: person.overlijdensdatum ? formatDate(person.overlijdensdatum)! : undefined
     })
   }) : []
   const bewoners = people.reduce((acc: any, person, index) => {
     acc.push(<span className="anonymous">{ (index + 1) + ". " + person.initials + " " + person.name + " (" + person.sex + ")" }</span>)
     acc.push(["Geboren", <span className="anonymous">{ person.born }</span>])
     acc.push(["Woont hier sinds", person.livingSince])
+    if (person.died !== undefined) acc.push(["✝️ Overleden", <span className="anonymous">{ person.died }</span>])
     return acc
   }, [])
   const showBewoners = personCount > 0
