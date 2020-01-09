@@ -39,7 +39,7 @@ const LoginCallbackPage: FC<RouteComponentProps> = () => {
 
     if (notOk(response)) {      
       const httpStatus = response ? response.status : "Unknown"
-      const message = `Kon de authenticatie met de API server niet bevestigen. HTTP Status: ${ httpStatus }`
+      const message = `Er ging iets mis bij het inloggen. HTTP Status: ${ httpStatus }`
       setErrorMessage(message)
     } else {
       const { access } = result
