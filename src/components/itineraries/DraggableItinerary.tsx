@@ -14,16 +14,13 @@ type Props = {
 }
 
 const Div = styled.div`
-  overflow: hidden
-  transition: height 0.6s ease-out
-  height: ${ (props: { collapsed: boolean }) => props.collapsed ? 0 : '200px' }
+  transition: opacity 0.6s ease-out
+  opacity: ${ (props: { collapsed: boolean }) => props.collapsed ? 0 : 1 }
 `
 
 const Inner = styled.div`
   display: flex
   justify-content: space-between
-  background: white
-  border-bottom: 1px solid #767676
 `
 
 const ButtonWrap = styled.div`
@@ -60,6 +57,16 @@ const DraggableItinerary: FC<Props> = ({ itinerary, index }) => {
     }
   )
 
+  const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
+    userSelect: "none",
+    borderBottom: "1px solid #767676",
+    background: "white",
+    borderRadius: "5px",
+    boxShadow: isDragging ? "0 2px 20px black" : "none",
+    padding: isDragging ? "0 8px" : 0,
+    ...draggableStyle
+  })
+
   return (
     <Div className="DraggableItinerary" collapsed={ isCollapsed }>
       <Draggable key={ String(id) } draggableId={ String(id) } index={ index }>
@@ -68,6 +75,7 @@ const DraggableItinerary: FC<Props> = ({ itinerary, index }) => {
           ref={ provided.innerRef }
           { ...provided.draggableProps }
           { ...provided.dragHandleProps }
+          style={ getItemStyle(snapshot.isDragging, provided.draggableProps.style) }
         >
           <Inner>
             <Itinerary itinerary={ bwv_data } note={ noteText } />
