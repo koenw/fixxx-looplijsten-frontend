@@ -41,7 +41,7 @@ const useFetch = (path: string, plural = false, immediateReturn = false) : [any,
           const response = await fetch(url, {
             signal,
             headers: {
-              "Authorization": `Token ${ token }`
+              "Authorization": `Bearer ${ token }`
             }
           })
 

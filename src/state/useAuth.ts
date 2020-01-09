@@ -29,13 +29,14 @@ const useAuth = () : [AuthState, AuthActions] => {
   const authenticate = async (email: Email, password: Password) : Promise<boolean> => {
 
     const url = getAuthUrl()
-    const [response, result] = await post(url, { username: email, password })
+    const [response, result] = await post(url, { email, password })
 
     // Handle error responses
     if (notOk(response)) return false
 
     // Handle successful login
-    const { token } = result
+    const { access } = result
+    const token = access    
     authToken.set(token)
     dispatch(createAuthenticate(token))
     navigate(to("/"))

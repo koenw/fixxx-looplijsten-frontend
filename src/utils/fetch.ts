@@ -15,7 +15,7 @@ type Headers = Record<string, string>
 
 const getHeaders = (token?: AuthToken, body?: Body) => {
   const headers: Headers = {}
-  if (token !== undefined) headers.Authorization = `Token ${ token }`
+  if (token !== undefined) headers.Authorization = `Bearer ${ token }`
   if (body !== undefined) headers["Content-Type"] = "application/json"
   return headers
 }

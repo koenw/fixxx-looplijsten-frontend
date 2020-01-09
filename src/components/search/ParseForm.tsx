@@ -64,7 +64,7 @@ const fetchOne = (item: SearchQueryParams) : Promise<Response> => {
   return fetch(url, {
     headers: {
       Accept: "application/json",
-      Authorization: `Token ${ token }`,
+      Authorization: `Bearer ${ token }`,
       "Content-Type": "application/json"
     }
   })

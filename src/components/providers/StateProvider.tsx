@@ -41,16 +41,11 @@ const StateProvider: FC<Props> = ({ children }) => {
 
   // initialize
   const initialize = () => {
-
-    console.log("StateProvider initialize")
-
     if (itineraries.isInitialized) return
 
-    console.log("authActions initialize")
     const isAuthenticated = authActions.initialize()
     if (!isAuthenticated) return
 
-    console.log("itinerariesActions initialize")
     itinerariesActions.initialize()
   }
 
