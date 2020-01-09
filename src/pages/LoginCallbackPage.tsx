@@ -43,7 +43,6 @@ const LoginCallbackPage: FC<RouteComponentProps> = () => {
       setErrorMessage(message)
     } else {
       const { access } = result
-      console.log(result)
       authenticateToken(access)
     }
 
