@@ -12,7 +12,7 @@ const domain =
   isAcc ? "https://acc.api.straatnotes.amsterdam.nl/" :
   "http://localhost:8000/"
 const basePath = "api/v1/"
-const authPath = "api-token-auth/"
+const authPath = "token_obtain_pair/"
 const authOIDCPath = "oidc-authenticate/"
 const pathPrefix = "looplijsten/"
 

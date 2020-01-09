@@ -6,6 +6,13 @@ import ErrorMessage from "../components/global/ErrorMessage"
 import { getAuthOIDCUrl } from "../config/domain"
 import parseLocationSearch from '../utils/parseLocationSearch'
 import { post, notOk } from "../utils/fetch"
+import styled from "styled-components"
+
+const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
 const LoginCallbackPage: FC<RouteComponentProps> = () => {
 
@@ -26,20 +33,18 @@ const LoginCallbackPage: FC<RouteComponentProps> = () => {
 
     const queryParameters = parseLocationSearch(window.location.search)
     const { code } = queryParameters
-
-    console.log("Grip code", code)
-
+    
     const url = getAuthOIDCUrl()
     const [response, result] = await post(url, { code })
 
-    if (notOk(response)) {
-      // @TODO: Dutch error message
+    if (notOk(response)) {      
       const httpStatus = response ? response.status : "Unknown"
-      const message = `Could not confirm authentication with resource server. HTTP Status: ${ httpStatus }`
+      const message = `Kon de authenticatie met de API server niet bevestigen. HTTP Status: ${ httpStatus }`
       setErrorMessage(message)
     } else {
-      const { token } = result
-      authenticateToken(token)
+      const { access } = result
+      console.log(result)
+      authenticateToken(access)
     }
 
     setLoading(false)
@@ -52,12 +57,11 @@ const LoginCallbackPage: FC<RouteComponentProps> = () => {
 
   // @TODO: Dutch title
   return (
-    <>
-      <h1>Confirming authentication with resource server</h1>
+    <Div>
       { showSpinner && <Spinner/> }
       { showErrorMessage && <ErrorMessage text={ errorMessage! } />
       }
-    </>
+    </Div>
   )
 }
 

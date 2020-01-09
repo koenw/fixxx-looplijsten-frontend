@@ -1,5 +1,6 @@
 const key = "vakantieverhuur-looplijsten-token"
-const regExp = /^[0-9a-f]{40}$/
+// A regular expression that detects a valid JWT token
+const regExp = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/
 
 export default {
   get: () : OptionalAuthToken => {
