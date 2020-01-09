@@ -48,6 +48,7 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
   const bagData = caseItem.bag_data as BagData
   const gebruiksdoel = hasBagData ? bagData.gebruiksdoel : undefined
   const woningBestemming = gebruiksdoel && gebruiksdoel.length ? gebruiksdoel[0] : undefined
+  const woningGebruik = hasBagData && bagData.gebruik ? bagData.gebruik : undefined
   const woningBouwlagen = hasBagData && bagData.bouwlagen ? bagData.bouwlagen : undefined
   const woningEtage = hasBagData && bagData.verdieping_toegang != null ? bagData.verdieping_toegang : undefined
   const woningKamers = hasBagData && bagData.aantal_kamers ? bagData.aantal_kamers : 0
@@ -187,6 +188,7 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
         title="Woning"
         data={[
           ["Gebruiksdoel", woningBestemming],
+          ["Soort Object (feitelijk gebruik)", woningGebruik],
           ["Aantal bouwlagen", woningBouwlagen !== undefined ? woningBouwlagen : "-"],
           ["Verdieping toegang", woningEtage !== undefined ? woningEtage : "-"],
           ["Aantal kamers", woningKamers > 0 ? woningKamers : "-"],

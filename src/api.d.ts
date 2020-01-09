@@ -76,6 +76,7 @@ type VakantieVerhuur = {
 }
 declare type BagData = {
   gebruiksdoel: string[]
+  gebruik: string | null
   bouwlagen: number | null
   aantal_kamers: number | null
   oppervlakte: number | null
