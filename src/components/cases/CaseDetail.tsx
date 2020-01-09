@@ -188,7 +188,7 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
         data={[
           ["Gebruiksdoel", woningBestemming],
           ["Aantal bouwlagen", woningBouwlagen !== undefined ? woningBouwlagen : "-"],
-          ["Etage", woningEtage !== undefined ? woningEtage : "-"],
+          ["Verdieping toegang", woningEtage !== undefined ? woningEtage : "-"],
           ["Aantal kamers", woningKamers > 0 ? woningKamers : "-"],
           ["Woonoppervlak", woningOppervlak > 0 ? woningOppervlak + " m²" : "-"],
           mailtoAnchor
