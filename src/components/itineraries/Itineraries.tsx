@@ -17,7 +17,11 @@ type Result = {
 const ButtonWrap = styled.div`
   display: flex
   justify-content: space-between
-  margin-top: 24px
+  margin: 24px 0
+  button {
+    max-width: 48%
+    overflow: hidden
+  }
 `
 const ButtonWrapBottom = styled(ButtonWrap)`
   margin-top: -44px
@@ -67,6 +71,7 @@ const Itineraries: FC = () => {
       <Buttons />
     </ButtonWrapBottom>
   )
+  const showButtonsBottom = itineraries.length > 4
 
   return (
     <div className="Itineraries">
@@ -78,7 +83,9 @@ const Itineraries: FC = () => {
             <>
               <ButtonsTop />
               <DroppableItineraries itineraries={ itineraries } />
-              <ButtonsBottom />
+              { showButtonsBottom &&
+                <ButtonsBottom />
+              }
             </> :
             <p>{ emptyText }</p>
         )

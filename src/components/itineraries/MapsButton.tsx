@@ -34,6 +34,7 @@ const MapsButton: FC<Props> = ({ itineraries }) => {
     const href = `https://www.google.nl/maps/dir/${ path }`
     window.open(href, "_blank")
   }
-  return <StyledButton onClick={ onClick } variant="blank" iconLeft={ <Location /> }>Bekijk op Google Maps</StyledButton>
+  const text = window.innerWidth > 768 ? "Bekijk op Google Maps" : "Google Maps"
+  return <StyledButton onClick={ onClick } variant="blank" iconLeft={ <Location /> }>{ text }</StyledButton>
 }
 export default MapsButton

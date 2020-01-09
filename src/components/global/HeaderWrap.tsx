@@ -7,8 +7,9 @@ import styled from "styled-components"
 
 const Wrap = styled.div`
   position: fixed
-  width: 100%
   top: 0
+  width: 100%
+  z-index: 9999
 `
 
 const HeaderWrap: React.FC = () => {
