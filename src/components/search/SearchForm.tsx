@@ -42,6 +42,9 @@ const InputWrapStreetNumber = styled(InputWrap)`
 const ButtonWrap = styled.div`
   vertical-align: top
   display: inline-block
+  button {
+    width: 50px
+  }
 `
 const SearchButton = styled(Button)`
   margin-top: 24px
