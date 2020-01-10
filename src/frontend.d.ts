@@ -35,8 +35,10 @@ declare type PostalCode = string
 declare type Suffix = string
 declare type Query = [PostalCode, string, Suffix]
 declare type SearchState = {
+  isFetching: boolean
   query?: Query
-  results: BWVData[]
+  results?: BWVData[]
+  errorMessage: ErrorMessage
 }
 
 declare type SearchActions = {

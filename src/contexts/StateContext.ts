@@ -1,5 +1,8 @@
 import { createContext } from "react"
 import noop from "../utils/noop"
+import { initialState as authState } from "../state/authReducer"
+import { initialState as itinerariesState } from "../state/itinerariesReducer"
+import { initialState as searchState } from "../state/searchReducer"
 
 type Value = {
   state: {
@@ -28,10 +31,7 @@ type Value = {
 
 const value = {
   state: {
-    auth: {
-      isInitialized: false,
-      authToken: undefined
-    },
+    auth: authState,
     authActions: {
       initialize: () => false,
       authenticate: async (a: Email, b: Password) => false,
@@ -44,12 +44,7 @@ const value = {
     setParse: noop,
 
     hasItinerary: () => false,
-    itineraries: {
-      isFetching: false,
-      isInitialized: false,
-      itineraries: [],
-      errorMessage: undefined
-    },
+    itineraries: itinerariesState,
     itinerariesActions: {
       initialize: noop,
       add: noop,
@@ -59,10 +54,7 @@ const value = {
       clear: noop
     },
 
-    search: {
-      query: undefined,
-      results: []
-    },
+    search: searchState,
     searchActions: {
       search: (a: PostalCode, b: string, c: Suffix) => {}
     },
