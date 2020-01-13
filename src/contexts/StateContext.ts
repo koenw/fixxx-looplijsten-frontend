@@ -3,14 +3,12 @@ import noop from "../utils/noop"
 import { initialState as authState } from "../state/authReducer"
 import { initialState as itinerariesState } from "../state/itinerariesReducer"
 import { initialState as searchState } from "../state/searchReducer"
+import { initialState as parseState } from "../state/parseReducer"
 
 type Value = {
   state: {
     auth: AuthState,
     authActions: AuthActions,
-
-    parse: string
-    setParse: (a: string) => void
 
     hasItinerary: (a: CaseId) => boolean
     itineraries: ItinerariesState
@@ -18,6 +16,9 @@ type Value = {
 
     search: SearchState
     searchActions: SearchActions
+
+    parse: ParseState
+    parseActions: ParseActions
 
     isAnonymous: boolean
     toggleIsAnonymous: () => void
@@ -39,10 +40,7 @@ const value = {
       unAuthenticate: noop,
       clear: noop
     },
-
-    parse: "",
-    setParse: noop,
-
+    
     hasItinerary: () => false,
     itineraries: itinerariesState,
     itinerariesActions: {
@@ -57,6 +55,11 @@ const value = {
     search: searchState,
     searchActions: {
       search: (a: PostalCode, b: string, c: Suffix) => {}
+    },
+
+    parse: parseState,
+    parseActions: {
+      parse: (a: string) => {}
     },
 
     isAnonymous: false,

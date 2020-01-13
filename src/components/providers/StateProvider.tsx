@@ -3,6 +3,7 @@ import StateContext from '../../contexts/StateContext'
 import useAuth from "../../state/useAuth"
 import useItineraries from "../../state/useItineraries"
 import useSearch from "../../state/useSearch"
+import useParse from "../../state/useParse"
 import parseLocationSearch from "../../utils/parseLocationSearch"
 
 type Props = {
@@ -14,9 +15,6 @@ const StateProvider: FC<Props> = ({ children }) => {
   // auth
   const [auth, authActions] = useAuth() as [AuthState, AuthActions]
 
-  // parse
-  const [parse, setParse] = useState("")
-
   // itineraries
   const [itineraries, itinerariesActions] = useItineraries() as [ItinerariesState, ItinerariesActions]
   const hasItinerary = (caseId: CaseId) => itineraries.itineraries.filter(itinerary => itinerary.case.bwv_data.case_id === caseId).length > 0
@@ -27,6 +25,9 @@ const StateProvider: FC<Props> = ({ children }) => {
 
   // search
   const [search, searchActions] = useSearch() as [SearchState, SearchActions]
+
+  // parse
+  const [parse, parseActions] = useParse() as [ParseState, ParseActions]
 
   // authenticate
   const authenticate = async (email: Email, password: Password) => {
@@ -70,9 +71,6 @@ const StateProvider: FC<Props> = ({ children }) => {
       auth,
       authActions,
 
-      parse,
-      setParse,
-
       hasItinerary,
       itineraries,
       itinerariesActions,
@@ -82,6 +80,9 @@ const StateProvider: FC<Props> = ({ children }) => {
 
       search,
       searchActions,
+
+      parse,
+      parseActions,
 
       authenticate,
       authenticateToken,

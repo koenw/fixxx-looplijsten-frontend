@@ -46,3 +46,14 @@ declare type SearchState = {
 declare type SearchActions = {
   search: (a: PostalCode, b: string, c: Suffix) => void
 }
+
+declare type ParseState = {
+  isFetching: boolean
+  query?: string
+  results?: SearchResults
+  errorMessage: ErrorMessage
+}
+
+declare type ParseActions = {
+  parse: (a: string) => void
+}
