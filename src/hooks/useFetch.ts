@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { navigate } from "@reach/router"
 import { getUrl, to } from "../config/domain"
 import authToken from "../utils/authToken"
+import { get, isOk, isForbidden } from "../utils/fetch"
 
 const navigateToLogin = () => {
   navigate(to("/login"))
@@ -23,14 +24,9 @@ const useFetch = (path: string, plural = false, immediateReturn = false) : [any,
       return
     }
 
-    let abortController: AbortController
-
     (async () => {
 
       try {
-
-        abortController = new AbortController()
-        const signal = abortController.signal
 
         const url = getUrl(path)
         const token = authToken.get()
@@ -39,21 +35,11 @@ const useFetch = (path: string, plural = false, immediateReturn = false) : [any,
           navigateToLogin()
         }
         else {
-          const response = await fetch(url, {
-            signal,
-            headers: {
-              "Authorization": `Bearer ${ token }`
-            }
-          })
-
-          if (response.status === 403) {
-            navigateToLogin()
-          }
-          else if (response.ok) {
-            const json = await response.json()
-            setData(json)
-          }
-          else {
+          const [response, result] = await get(url)
+          if (isOk(response)) {
+            setData(result)
+          } else {
+            if (isForbidden(response)) return navigateToLogin()
             setError(`Error: HTTP ${ response.status }`)
           }
         }
@@ -66,11 +52,6 @@ const useFetch = (path: string, plural = false, immediateReturn = false) : [any,
         setIsFetching(false)
       }
     })()
-
-    return () => {
-      if (abortController === undefined) return
-      abortController.abort()
-    }
   }, [path, immediateReturn])
 
   return [data, isFetching, error]
