@@ -13,6 +13,7 @@ const Form = styled.form`
 const Label = styled.label`
   font-weight: 500
   display: block
+  min-height: 22px
   margin-bottom: 2px
 `
 
