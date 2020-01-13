@@ -1,7 +1,7 @@
 import { useReducer } from "react"
 import reducer, {
   initialState,
-  createSearch,
+  createStartFetching,
   createSetResults
 } from "./searchReducer"
 import { get, notOk } from "../utils/fetch"
@@ -15,7 +15,7 @@ const useSearch = () : [SearchState, SearchActions] => {
 
     (async () => {
 
-      dispatch(createSearch([postalCode, streetNumber, suffix]))
+      dispatch(createStartFetching([postalCode, streetNumber, suffix]))
 
       const params = { postalCode, streetNumber, suffix }
       const url = getUrl("search", params)

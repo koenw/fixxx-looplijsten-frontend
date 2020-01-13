@@ -8,11 +8,11 @@ type Action = {
   }
 }
 
-const SEARCH = "SEARCH"
+const START_FETCHING = "START_FETCHING"
 const SET_RESULTS = "SET_RESULTS"
 const SET_ERROR = "SET_ERROR"
 
-export const createSearch = (query?: Query) => ({ type: SEARCH, payload: { query } })
+export const createStartFetching = (query?: Query) => ({ type: START_FETCHING, payload: { query } })
 export const createSetResults = (results?: Results) => ({ type: SET_RESULTS, payload: { results } })
 export const createSetError = (errorMessage?: ErrorMessage) => ({ type: SET_ERROR, payload: { errorMessage } })
 
@@ -25,11 +25,12 @@ export const initialState: SearchState = {
 
 const reducer = (state: SearchState, action: Action) : SearchState => {
   switch (action.type) {
-    case SEARCH: {
+    case START_FETCHING: {
       const { query } = action.payload
       const isFetching = true
+      const errorMessage = undefined
       const results = undefined
-      return { ...state, isFetching, query, results }
+      return { ...state, isFetching, query, results, errorMessage }
     }
     case SET_RESULTS: {
       const isFetching = false
