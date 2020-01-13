@@ -14,3 +14,8 @@ a {
   color: #004699;
   font-weight: bold;
 }
+
+/* IE11 */
+main {
+  display: block;
+}
