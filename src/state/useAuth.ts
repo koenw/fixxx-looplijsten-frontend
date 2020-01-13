@@ -2,7 +2,9 @@ import { useReducer } from "react"
 import { navigate } from "@reach/router"
 import reducer, {
   initialState,
+  createStartFetching,
   createInitialize,
+  createSetErrorMessage,
   createAuthenticate,
   createUnAuthenticate,
   createClear } from "./authReducer"
@@ -28,15 +30,25 @@ const useAuth = () : [AuthState, AuthActions] => {
 
   const authenticate = async (email: Email, password: Password) : Promise<boolean> => {
 
+    dispatch(createStartFetching())
+
     const url = getAuthUrl()
-    const [response, result] = await post(url, { email, password })
+    const [response, result, errorMessage] = await post(url, { email, password })
+    console.log(errorMessage)
 
     // Handle error responses
-    if (notOk(response)) return false
+    if (notOk(response)) {
+      const message =
+        response.status === 401 ? "Ongeldige email, wachtwoord combinatie" :
+        errorMessage !== undefined ? errorMessage! :
+        String(response.status)
+      dispatch(createSetErrorMessage(message))
+      return false
+    }
 
     // Handle successful login
     const { access } = result
-    const token = access    
+    const token = access
     authToken.set(token)
     dispatch(createAuthenticate(token))
     navigate(to("/"))

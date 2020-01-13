@@ -33,7 +33,11 @@ const LoginForm: FC = () => {
 
   const {
     state: {
-      authenticate
+      authenticate,
+      auth: {
+        isFetching,
+        errorMessage
+      }
     }
   } = useContext(StateContext)
 
@@ -47,9 +51,8 @@ const LoginForm: FC = () => {
 
   const gripUri = getOIDCProviderUrl()
 
-  // @TODO: Read from reducer
-  const showErrorMessage = false
-  const errorMessage = ""
+  const isDisabled = isFetching
+  const showErrorMessage = errorMessage !== undefined
 
   return (
     <Div className="Login">
@@ -58,9 +61,9 @@ const LoginForm: FC = () => {
         <InputLoginForm type="email" placeholder="email" value={ email } onChange={ onChangeEmail } />
         <InputLoginForm type="password" placeholder="wachtwoord" value={ password } onChange={ onChangePassword } />
         { showErrorMessage &&
-          <ErrorMessage text={ errorMessage } />
+          <ErrorMessage text={ errorMessage! } />
         }
-        <Button variant="application" iconLeft={ <LoginIcon /> }>Inloggen</Button>
+        <Button variant="application" iconLeft={ <LoginIcon /> } disabled={ isDisabled }>Inloggen</Button>
       </Form>
       <h2>
           <a href={gripUri}>

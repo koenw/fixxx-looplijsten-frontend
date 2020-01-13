@@ -20,7 +20,9 @@ declare type AuthToken = string
 declare type OptionalAuthToken = AuthToken | undefined
 declare type AuthState = {
   isInitialized: boolean
+  isFetching: boolean
   authToken?: AuthToken
+  errorMessage: ErrorMessage
 }
 
 declare type AuthActions = {
