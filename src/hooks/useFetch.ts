@@ -1,3 +1,4 @@
+import "abortcontroller-polyfill/dist/polyfill-patch-fetch"
 import { useState, useEffect } from "react"
 import { navigate } from "@reach/router"
 import { getUrl, to } from "../config/domain"
