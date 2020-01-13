@@ -11,8 +11,9 @@ import currentTime from "../../utils/currentTime"
 const ButtonWrap = styled.div`
   display: flex
   justify-content: flex-end
+  margin-top: 12px
   button {
-    margin-left: 6px
+    margin-left: 12px
   }
 `
 

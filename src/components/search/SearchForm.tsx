@@ -47,6 +47,7 @@ const ButtonWrap = styled.div`
   }
 `
 const SearchButton = styled(Button)`
+  display: block
   margin-top: 24px
 `
 

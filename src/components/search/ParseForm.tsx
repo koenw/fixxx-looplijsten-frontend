@@ -16,6 +16,7 @@ import promiseSerial from "../../utils/promiseSerial"
 const ButtonWrap = styled.div`
   display: flex
   justify-content: flex-end
+  margin-top: 12px
 `
 const AddAllButtonWrap = styled(ButtonWrap)`
   margin-top: 24px
@@ -24,6 +25,7 @@ const Form = styled.form`
   max-width: 768px
 `
 const Textarea = styled(TextareaBase)`
+  display: block
   width: 100%
 `
 

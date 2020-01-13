@@ -8,6 +8,7 @@ type Props = {
 }
 
 const Textarea = styled(TextareaBase)`
+  display: block
   width: 100%
 `
 
