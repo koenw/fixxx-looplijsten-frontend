@@ -34,7 +34,6 @@ const useAuth = () : [AuthState, AuthActions] => {
 
     const url = getAuthUrl()
     const [response, result, errorMessage] = await post(url, { email, password })
-    console.log(errorMessage)
 
     // Handle error responses
     if (notOk(response)) {
