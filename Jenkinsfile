@@ -34,16 +34,17 @@ node {
         }
     }
 
-    stage("Test") {
-        tryStep "test start", {
-            sh "docker-compose -p ${PROJECT} up --exit-code-from test"
-        }
-        always {
-            tryStep "test stop", {
-                sh "docker-compose -p ${PROJECT} down -v || true"
-            }
-        }
-    }
+
+    // stage("Test") {
+    //     tryStep "test start", {
+    //         sh "docker-compose -p ${PROJECT} up --exit-code-from test"
+    //     }
+    //     always {
+    //         tryStep "test stop", {
+    //             sh "docker-compose -p ${PROJECT} down -v || true"
+    //         }
+    //     }
+    // }
 
     // stage('Test') {
     //     tryStep "Test", {

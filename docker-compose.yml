@@ -13,4 +13,4 @@ services:
   test:
     build:
       context: .
-    command: "CI=true npm test"
+    command: npm test
