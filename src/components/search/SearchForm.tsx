@@ -1,10 +1,10 @@
-import React, { FC, FormEvent, useContext } from "react"
+import React, { FC, FormEvent } from "react"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Search } from "@datapunt/asc-assets"
 import useOnChangeState from "../../hooks/useOnChangeState"
 import InputBase from "../styled/Input"
-import stateContext from "../../contexts/StateContext"
+import useGlobalState from "../../hooks/useGlobalState"
 
 const Form = styled.form`
   max-width: 768px
@@ -55,15 +55,13 @@ const SearchButton = styled(Button)`
 const SearchForm: FC = () => {
 
   const {
-    state: {
-      search: {
-        query
-      },
-      searchActions: {
-        search
-      }
+    search: {
+      query
+    },
+    searchActions: {
+      search
     }
-  } = useContext(stateContext)
+  } = useGlobalState()
 
   const [postalCode, onChangePostalCode] = useOnChangeState(query ? query[0] : "")
   const [streetNumber, onChangeStreetNumber] = useOnChangeState(query ? query[1] : "")

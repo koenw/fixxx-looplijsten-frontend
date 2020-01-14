@@ -1,5 +1,5 @@
-import React, { FC, useContext, FormEvent } from "react"
-import stateContext from "../../contexts/StateContext"
+import React, { FC, FormEvent } from "react"
+import useGlobalState from "../../hooks/useGlobalState"
 import IconButton from "../global/IconButton"
 import styled from "styled-components"
 
@@ -23,17 +23,15 @@ const Div = styled.div`
 const SearchResultButtonWrap: FC<Props> = ({ caseId }) => {
 
   const {
-    state: {
-      hasItinerary,
-      itineraries: {
-        itineraries
-      },
-      itinerariesActions: {
-        add,
-        remove
-      }
+    hasItinerary,
+    itineraries: {
+      itineraries
+    },
+    itinerariesActions: {
+      add,
+      remove
     }
-  } = useContext(stateContext)
+  } = useGlobalState()
 
   const onClickAdd = (event: FormEvent) => {
     event.preventDefault()

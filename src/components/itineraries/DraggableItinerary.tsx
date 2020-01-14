@@ -1,11 +1,11 @@
-import React, { FC, useContext, useState } from "react"
+import React, { FC, useState } from "react"
 import { Draggable } from "react-beautiful-dnd"
 import { navigate } from "@reach/router"
 import { to } from "../../config/domain"
 import styled from "styled-components"
 import IconButton from "../global/IconButton"
 import Itinerary from "./Itinerary"
-import stateContext from "../../contexts/StateContext"
+import useGlobalState from "../../hooks/useGlobalState"
 import confirm from "../../lib/utils/confirm"
 
 type Props = {
@@ -34,12 +34,10 @@ const ButtonWrap = styled.div`
 const DraggableItinerary: FC<Props> = ({ itinerary, index }) => {
 
   const {
-    state: {
-      itinerariesActions: {
-        remove
-      }
+    itinerariesActions: {
+      remove
     }
-  } = useContext(stateContext)
+  } = useGlobalState()
 
   const { id, case: { bwv_data }, notes } = itinerary
   const noteId = notes[0] && notes[0].id

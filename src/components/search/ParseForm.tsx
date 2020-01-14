@@ -1,4 +1,4 @@
-import React, { FC, useContext, FormEvent } from "react"
+import React, { FC, FormEvent } from "react"
 import { Button, Spinner } from "@datapunt/asc-ui"
 import { Search } from "@datapunt/asc-assets"
 import styled from "styled-components"
@@ -6,9 +6,9 @@ import TextareaBase from "../styled/Textarea"
 import Hr from "../styled/Hr"
 import useOnChangeState from "../../hooks/useOnChangeState"
 import SearchResults from "./SearchResults"
-import stateContext from "../../contexts/StateContext"
 import AddAllButton from "./AddAllButton"
 import promiseSerial from "../../lib/utils/promiseSerial"
+import useGlobalState from "../../hooks/useGlobalState"
 
 const ButtonWrap = styled.div`
   display: flex
@@ -29,21 +29,19 @@ const Textarea = styled(TextareaBase)`
 const ParseForm: FC = () => {
 
   const {
-    state: {
-      parse: {
-        isFetching,
-        query,
-        results
-      },
-      parseActions: {
-        parse
-      },
-      hasItinerary,
-      itinerariesActions: {
-        add
-      }
+    parse: {
+      isFetching,
+      query,
+      results
+    },
+    parseActions: {
+      parse
+    },
+    hasItinerary,
+    itinerariesActions: {
+      add
     }
-  } = useContext(stateContext)
+  } = useGlobalState()
 
   const [value, onChangeValue] = useOnChangeState(query)
   const showSpinner = isFetching

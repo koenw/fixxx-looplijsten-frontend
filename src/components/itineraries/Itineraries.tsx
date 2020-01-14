@@ -1,9 +1,9 @@
-import React, { FC, useContext } from "react"
+import React, { FC } from "react"
 import styled from "styled-components"
 import { Spinner } from "@datapunt/asc-ui"
 import ErrorMessage from "../global/ErrorMessage"
 import DroppableItineraries from "./DroppableItineraries"
-import stateContext from "../../contexts/StateContext"
+import useGlobalState from "../../hooks/useGlobalState"
 import MapsButton from "./MapsButton"
 import RemoveAllButton from "./RemoveAllButton"
 import Hr from "../styled/Hr"
@@ -30,17 +30,15 @@ const ButtonWrapBottom = styled(ButtonWrap)`
 const Itineraries: FC = () => {
 
   const {
-    state: {
-      itineraries: {
-        isFetching,
-        itineraries,
-        errorMessage
-      },
-      itinerariesActions: {
-        remove
-      }
+    itineraries: {
+      isFetching,
+      itineraries,
+      errorMessage
+    },
+    itinerariesActions: {
+      remove
     }
-  } = useContext(stateContext)
+  } = useGlobalState()
 
   const hasError = errorMessage !== undefined
 

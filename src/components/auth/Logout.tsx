@@ -1,8 +1,8 @@
-import React, { FC, useContext } from "react"
+import React, { FC } from "react"
+import useGlobalState from "../../hooks/useGlobalState"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Logout as LogoutIcon } from "@datapunt/asc-assets"
-import stateContext from "../../contexts/StateContext"
 
 const Div = styled.div`
   margin-right: 8px
@@ -11,10 +11,8 @@ const Div = styled.div`
 const Logout: FC = () => {
 
   const {
-    state: {
-      clear
-    }
-  } = useContext(stateContext)
+    clear
+  } = useGlobalState()
 
   const onClick = () => clear()
 

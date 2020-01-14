@@ -1,4 +1,5 @@
-import React, { FC, FormEvent, useContext } from "react"
+import React, { FC, FormEvent } from "react"
+import useGlobalState from "../../hooks/useGlobalState"
 import useOnChangeState from "../../hooks/useOnChangeState"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
@@ -7,7 +8,6 @@ import { getOIDCProviderUrl } from "../../config/domain"
 
 import ErrorMessage from "../global/ErrorMessage"
 import Input from "../styled/Input"
-import StateContext from "../../contexts/StateContext"
 
 const Form = styled.form`
   width: 100%
@@ -32,14 +32,12 @@ const InputLoginForm = styled(Input)`
 const LoginForm: FC = () => {
 
   const {
-    state: {
-      authenticate,
-      auth: {
-        isFetching,
-        errorMessage
-      }
+    authenticate,
+    auth: {
+      isFetching,
+      errorMessage
     }
-  } = useContext(StateContext)
+  } = useGlobalState()
 
   const [email, onChangeEmail] = useOnChangeState()
   const [password, onChangePassword] = useOnChangeState()

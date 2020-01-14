@@ -1,11 +1,11 @@
-import React, { FC, useContext } from "react"
+import React, { FC } from "react"
 import SearchForm from "./SearchForm"
 import SearchResults from "./SearchResults"
 import { Spinner } from "@datapunt/asc-ui"
 import { Link } from "@reach/router"
 import { to } from "../../config/domain"
 import styled from "styled-components"
-import stateContext from "../../contexts/StateContext"
+import useGlobalState from "../../hooks/useGlobalState"
 
 const Div = styled.div`
   max-width: 768px
@@ -20,13 +20,11 @@ const Div = styled.div`
 const Search: FC = () => {
 
   const {
-    state: {
-      search: {
-        isFetching,
-        results
-      }
+    search: {
+      isFetching,
+      results
     }
-  } = useContext(stateContext)
+  } = useGlobalState()
 
   const showSpinner = isFetching
   const searchResults = results ? results.map(result => ({

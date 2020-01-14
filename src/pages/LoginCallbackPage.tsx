@@ -1,5 +1,5 @@
-import React, { FC, useContext, useState, useEffect } from "react"
-import StateContext from "../contexts/StateContext"
+import React, { FC, useState, useEffect } from "react"
+import useGlobalState from "../hooks/useGlobalState"
 import { Spinner } from "@datapunt/asc-ui"
 import { RouteComponentProps } from "@reach/router"
 import ErrorMessage from "../components/global/ErrorMessage"
@@ -17,10 +17,8 @@ const Div = styled.div`
 const LoginCallbackPage: FC<RouteComponentProps> = () => {
 
   const {
-    state: {
-      authenticateToken
-    }
-  } = useContext(StateContext)
+    authenticateToken
+  } = useGlobalState()
 
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | undefined>()

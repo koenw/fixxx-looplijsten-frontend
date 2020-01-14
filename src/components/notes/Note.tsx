@@ -1,5 +1,5 @@
-import React, { FC, useContext } from "react"
-import stateContext from "../../contexts/StateContext"
+import React, { FC } from "react"
+import useGlobalState from "../../hooks/useGlobalState"
 import { Spinner } from "@datapunt/asc-ui"
 import NoteForm from "./NoteForm"
 
@@ -11,13 +11,11 @@ type Props = {
 const Note: FC<Props> = ({ itineraryId, id }) => {
 
   const {
-    state: {
-      itineraries: {
-        isFetching
-      },
-      getItineraryNote
-    }
-  } = useContext(stateContext)
+    itineraries: {
+      isFetching
+    },
+    getItineraryNote
+  } = useGlobalState()
 
   const note = id !== undefined ? getItineraryNote(itineraryId, id) : undefined
   const noteValue = note !== undefined ? note.text : ""

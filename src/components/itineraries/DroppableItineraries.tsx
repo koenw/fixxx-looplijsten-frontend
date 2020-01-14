@@ -1,8 +1,8 @@
-import React, { FC, useContext } from "react"
+import React, { FC } from "react"
 import { DragDropContext, Droppable } from "react-beautiful-dnd"
 import styled from "styled-components"
 import DraggableItinerary from "./DraggableItinerary"
-import stateContext from "../../contexts/StateContext"
+import useGlobalState from "../../hooks/useGlobalState"
 
 type Props = {
   itineraries: Itineraries
@@ -18,12 +18,10 @@ const DroppableInner = styled.div`
 const DroppableItineraries: FC<Props> = ({ itineraries }) => {
 
   const {
-    state: {
-      itinerariesActions: {
-        move
-      }
+    itinerariesActions: {
+      move
     }
-  } = useContext(stateContext)
+  } = useGlobalState()
 
   const onDragEnd = async (result: any) => {
     if (result.destination === null) return

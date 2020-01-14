@@ -1,11 +1,11 @@
-import React, { FC, useContext, FormEvent, MouseEvent } from "react"
+import React, { FC, FormEvent, MouseEvent } from "react"
 import NoteTextarea from "./NoteTextarea"
 import { Button } from "@datapunt/asc-ui"
 import styled from "styled-components"
 import useOnChangeState from "../../hooks/useOnChangeState"
 import { navigate } from "@reach/router"
 import { to } from "../../config/domain"
-import stateContext from "../../contexts/StateContext"
+import useGlobalState from "../../hooks/useGlobalState"
 import currentTime from "../../lib/utils/currentTime"
 
 const ButtonWrap = styled.div`
@@ -26,12 +26,10 @@ type Props = {
 const NoteForm: FC<Props> = ({ itineraryId, id, value }) => {
 
   const {
-    state: {
-      itinerariesActions: {
-        setNote
-      }
+    itinerariesActions: {
+      setNote
     }
-  } = useContext(stateContext)
+  } = useGlobalState()
 
   const [text, onChangeText] = useOnChangeState(value)
   const showButton = text === ""

@@ -1,9 +1,9 @@
-import React, { FC, useContext } from "react"
+import React, { FC } from "react"
 import { Link } from "@reach/router"
 import styled from "styled-components"
 import { Search as SearchIcon } from "@datapunt/asc-assets"
 import { to } from "../../config/domain"
-import stateContext from "../../contexts/StateContext"
+import useGlobalState from "../../hooks/useGlobalState"
 
 const NavWrap = styled.div`
   position: fixed
@@ -44,12 +44,10 @@ const LiSearch = styled(Li)`
 const Navigation: FC = () => {
 
   const {
-    state: {
-      itineraries: {
-        itineraries
-      }
+    itineraries: {
+      itineraries
     }
-  } = useContext(stateContext)
+  } = useGlobalState()
 
   const numItineraries = itineraries ? itineraries.length : 0
   const showCounter = numItineraries > 0

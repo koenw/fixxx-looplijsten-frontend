@@ -1,10 +1,10 @@
-import React, { FC, useContext } from "react"
+import React, { FC } from "react"
+import useGlobalState from "../../hooks/useGlobalState"
 import useFetch from "../../hooks/useFetch"
 import { Spinner } from "@datapunt/asc-ui"
 import CaseDetail from "./CaseDetail"
 import EyeButton from "./EyeButton"
 import ErrorMessage from "../global/ErrorMessage"
-import StateContext from "../../contexts/StateContext"
 
 type Props = {
   caseId: CaseId
@@ -13,11 +13,9 @@ type Props = {
 const Case: FC<Props> = ({ caseId }) => {
 
   const {
-    state: {
-      isAnonymous,
-      toggleIsAnonymous
-    }
-  } = useContext(StateContext)
+    isAnonymous,
+    toggleIsAnonymous
+  } = useGlobalState()
 
   const [caseItem, isFetching, errorMessage] = useFetch(`cases/${ caseId }`) as [Case, boolean, ErrorMessage]
 
