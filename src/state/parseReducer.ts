@@ -1,20 +1,11 @@
-type Results = BWVData[]
-type Action = {
-  type: string
-  payload: {
-    query?: string
-    results?: SearchResults
-    errorMessage?: ErrorMessage
-  }
-}
+type Action =
+  | { type: "START_FETCHING", payload: { query: string } }
+  | { type: "SET_RESULTS", payload: { results: SearchResults } }
+  | { type: "SET_ERROR", payload: { errorMessage: ErrorMessage } }
 
-const START_FETCHING = "START_FETCHING"
-const SET_RESULTS = "SET_RESULTS"
-const SET_ERROR = "SET_ERROR"
-
-export const createStartFetching = (query?: string) => ({ type: START_FETCHING, payload: { query } })
-export const createSetResults = (results?: SearchResults) => ({ type: SET_RESULTS, payload: { results } })
-export const createSetError = (errorMessage?: ErrorMessage) => ({ type: SET_ERROR, payload: { errorMessage } })
+export const createStartFetching = (query: string) : Action => ({ type: "START_FETCHING", payload: { query } })
+export const createSetResults = (results: SearchResults) : Action => ({ type: "SET_RESULTS", payload: { results } })
+export const createSetError = (errorMessage: ErrorMessage) : Action => ({ type: "SET_ERROR", payload: { errorMessage } })
 
 export const initialState: ParseState = {
   isFetching: false,
@@ -25,19 +16,19 @@ export const initialState: ParseState = {
 
 const reducer = (state: ParseState, action: Action) : ParseState => {
   switch (action.type) {
-    case START_FETCHING: {
+    case "START_FETCHING": {
       const { query } = action.payload
       const isFetching = true
       const errorMessage = undefined
       const results = undefined
       return { ...state, isFetching, query, results, errorMessage }
     }
-    case SET_RESULTS: {
+    case "SET_RESULTS": {
       const isFetching = false
       const { results = [] } = action.payload
       return { ...state, isFetching, results }
     }
-    case SET_ERROR: {
+    case "SET_ERROR": {
       const { errorMessage } = action.payload
       const isFetching = false
       return { ...state, isFetching, errorMessage }
