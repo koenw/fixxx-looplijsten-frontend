@@ -5,11 +5,11 @@ import CaseDetailSection from "./CaseDetailSection"
 import Signal from "../global/Signal"
 import Hr from "../styled/Hr"
 import MailtoAnchor from "./MailtoAnchor"
-import formatDate from "../../utils/formatDate"
-import replaceNewLines from "../../utils/replaceNewLines"
-import replaceUrls from "../../utils/replaceUrls"
-import isBetweenDates from "../../utils/isBetweenDates"
-import displayAddress from "../../utils/displayAddress"
+import formatDate from "../../lib/utils/formatDate"
+import replaceNewLines from "../../lib/utils/replaceNewLines"
+import replaceUrls from "../../lib/utils/replaceUrls"
+import isBetweenDates from "../../lib/utils/isBetweenDates"
+import displayAddress from "../../lib/displayAddress"
 
 type Props = {
   caseItem: Case

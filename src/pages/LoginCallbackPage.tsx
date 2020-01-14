@@ -4,8 +4,8 @@ import { Spinner } from "@datapunt/asc-ui"
 import { RouteComponentProps } from "@reach/router"
 import ErrorMessage from "../components/global/ErrorMessage"
 import { getAuthOIDCUrl } from "../config/domain"
-import parseLocationSearch from '../utils/parseLocationSearch'
-import { post, notOk } from "../utils/fetch"
+import parseLocationSearch from '../lib/utils/parseLocationSearch'
+import { post, notOk } from "../lib/utils/fetch"
 import styled from "styled-components"
 
 const Div = styled.div`
@@ -33,11 +33,11 @@ const LoginCallbackPage: FC<RouteComponentProps> = () => {
 
     const queryParameters = parseLocationSearch(window.location.search)
     const { code } = queryParameters
-    
+
     const url = getAuthOIDCUrl()
     const [response, result] = await post(url, { code })
 
-    if (notOk(response)) {      
+    if (notOk(response)) {
       const httpStatus = response ? response.status : "Unknown"
       const message = `Er ging iets mis bij het inloggen. HTTP Status: ${ httpStatus }`
       setErrorMessage(message)

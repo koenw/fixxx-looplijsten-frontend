@@ -1,4 +1,4 @@
-import moveInArray from "../utils/moveInArray"
+import moveInArray from "../lib/utils/moveInArray"
 
 type Action = {
   type: string

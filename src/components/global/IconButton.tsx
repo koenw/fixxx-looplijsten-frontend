@@ -2,7 +2,7 @@ import React, { FC, MouseEvent } from "react"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Enlarge, Minimise, TrashBin, DocumentText } from "@datapunt/asc-assets"
-import noop from "../../utils/noop"
+import noop from "../../lib/utils/noop"
 
 type Props = {
   icon: "Enlarge" | "Minimise" | "TrashBin" | "DocumentText"

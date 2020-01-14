@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import noop from "../utils/noop"
+import noop from "../lib/utils/noop"
 import { initialState as authState } from "../state/authReducer"
 import { initialState as itinerariesState } from "../state/itinerariesReducer"
 import { initialState as searchState } from "../state/searchReducer"

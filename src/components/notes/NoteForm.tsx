@@ -6,7 +6,7 @@ import useOnChangeState from "../../hooks/useOnChangeState"
 import { navigate } from "@reach/router"
 import { to } from "../../config/domain"
 import stateContext from "../../contexts/StateContext"
-import currentTime from "../../utils/currentTime"
+import currentTime from "../../lib/utils/currentTime"
 
 const ButtonWrap = styled.div`
   display: flex

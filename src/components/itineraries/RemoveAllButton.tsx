@@ -2,8 +2,8 @@ import React, { FC, MouseEvent } from "react"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { TrashBin } from "@datapunt/asc-assets"
-import noop from "../../utils/noop"
-import confirm from "../../utils/confirm"
+import noop from "../../lib/utils/noop"
+import confirm from "../../lib/utils/confirm"
 
 type Props = {
   onClick?: (a: MouseEvent<HTMLButtonElement>) => void

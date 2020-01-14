@@ -4,7 +4,7 @@ import reducer, {
   createStartFetching,
   createSetResults
 } from "./searchReducer"
-import { get, notOk } from "../utils/fetch"
+import { get, notOk } from "../lib/utils/fetch"
 import { getUrl } from "../config/domain"
 
 const useSearch = () : [SearchState, SearchActions] => {

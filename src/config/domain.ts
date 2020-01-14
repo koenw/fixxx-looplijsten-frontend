@@ -1,6 +1,6 @@
-import parseLocationSearch from "../utils/parseLocationSearch"
-import queryParams from "../utils/queryParams"
-import pick from "../utils/pick"
+import parseLocationSearch from "../lib/utils/parseLocationSearch"
+import queryParams from "../lib/utils/queryParams"
+import pick from "../lib/utils/pick"
 
 const hostname = window.location.hostname
 const api = parseLocationSearch(window.location.search).api

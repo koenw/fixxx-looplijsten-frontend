@@ -2,7 +2,7 @@ import React, { FC, useState, MouseEvent } from "react"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Enlarge } from "@datapunt/asc-assets"
-import noop from "../../utils/noop"
+import noop from "../../lib/utils/noop"
 
 type Props = {
   onClick?: (a: MouseEvent<HTMLButtonElement>) => void

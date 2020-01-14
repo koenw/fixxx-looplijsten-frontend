@@ -12,9 +12,9 @@ import reducer, {
   createRemove,
   createSetNote,
   createClear } from "./itinerariesReducer"
-import { get, post, put, patch, del, notOk, isForbidden } from "../utils/fetch"
+import { get, post, put, patch, del, notOk, isForbidden } from "../lib/utils/fetch"
 import { getUrl, to } from "../config/domain"
-import calculateNewPosition from "../utils/calculateNewPosition"
+import calculateNewPosition from "../lib/calculateNewPosition"
 
 const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 

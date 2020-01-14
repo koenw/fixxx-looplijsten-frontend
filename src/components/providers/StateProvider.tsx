@@ -4,7 +4,7 @@ import useAuth from "../../state/useAuth"
 import useItineraries from "../../state/useItineraries"
 import useSearch from "../../state/useSearch"
 import useParse from "../../state/useParse"
-import parseLocationSearch from "../../utils/parseLocationSearch"
+import parseLocationSearch from "../../lib/utils/parseLocationSearch"
 
 type Props = {
   children: ReactNode

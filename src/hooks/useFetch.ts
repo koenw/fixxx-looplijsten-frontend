@@ -2,8 +2,8 @@ import "abortcontroller-polyfill/dist/polyfill-patch-fetch"
 import { useState, useEffect } from "react"
 import { navigate } from "@reach/router"
 import { getUrl, to } from "../config/domain"
-import authToken from "../utils/authToken"
-import { get, isOk, isForbidden } from "../utils/fetch"
+import authToken from "../lib/authToken"
+import { get, isOk, isForbidden } from "../lib/utils/fetch"
 
 const navigateToLogin = () => {
   navigate(to("/login"))

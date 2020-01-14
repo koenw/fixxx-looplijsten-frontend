@@ -1,4 +1,4 @@
-import authToken from "./authToken"
+import authToken from "../../lib/authToken"
 
 type Method = "GET" | "POST" | "PUT" | "PATCH" | "DELETE"
 type URL = string

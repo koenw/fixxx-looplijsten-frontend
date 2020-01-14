@@ -8,7 +8,7 @@ import useOnChangeState from "../../hooks/useOnChangeState"
 import SearchResults from "./SearchResults"
 import stateContext from "../../contexts/StateContext"
 import AddAllButton from "./AddAllButton"
-import promiseSerial from "../../utils/promiseSerial"
+import promiseSerial from "../../lib/utils/promiseSerial"
 
 const ButtonWrap = styled.div`
   display: flex

@@ -6,7 +6,7 @@ import styled from "styled-components"
 import IconButton from "../global/IconButton"
 import Itinerary from "./Itinerary"
 import stateContext from "../../contexts/StateContext"
-import confirm from "../../utils/confirm"
+import confirm from "../../lib/utils/confirm"
 
 type Props = {
   itinerary: Itinerary

@@ -3,7 +3,7 @@ import { Link } from "@reach/router"
 import { to } from "../../config/domain"
 import styled from "styled-components"
 import Signal from "../global/Signal"
-import displayAddress from "../../utils/displayAddress"
+import displayAddress from "../../lib/displayAddress"
 
 type Props = {
   itinerary: BWVData

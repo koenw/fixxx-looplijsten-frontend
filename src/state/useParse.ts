@@ -4,9 +4,9 @@ import reducer, {
   createStartFetching,
   createSetResults
 } from "./parseReducer"
-import { get } from "../utils/fetch"
+import { get } from "../lib/utils/fetch"
 import { getUrl } from "../config/domain"
-import parseAddressLine from "../utils/parseAddressLine"
+import parseAddressLine from "../lib/parseAddressLine"
 
 type ParseResult = {
   success: boolean

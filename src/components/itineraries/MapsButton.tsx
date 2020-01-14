@@ -2,7 +2,7 @@ import React, { FC, MouseEvent } from "react"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Location } from "@datapunt/asc-assets"
-import displayAddress from "../../utils/displayAddress"
+import displayAddress from "../../lib/displayAddress"
 
 type Props = {
   itineraries: Itineraries

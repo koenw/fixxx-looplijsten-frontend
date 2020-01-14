@@ -5,7 +5,7 @@ import SearchResultAddress from "./SearchResultAddress"
 import SearchResultCase from "./SearchResultCase"
 import SearchResultButtonWrap from "./SearchResultButtonWrap"
 import { to } from "../../config/domain"
-import displayAddress from "../../utils/displayAddress"
+import displayAddress from "../../lib/displayAddress"
 
 type Props = {
   caseItem: BWVData

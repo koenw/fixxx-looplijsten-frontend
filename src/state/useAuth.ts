@@ -8,8 +8,8 @@ import reducer, {
   createAuthenticate,
   createUnAuthenticate,
   createClear } from "./authReducer"
-import authToken from "../utils/authToken"
-import { post, notOk } from "../utils/fetch"
+import authToken from "../lib/authToken"
+import { post, notOk } from "../lib/utils/fetch"
 import { getAuthUrl, to } from "../config/domain"
 
 const useAuth = () : [AuthState, AuthActions] => {
