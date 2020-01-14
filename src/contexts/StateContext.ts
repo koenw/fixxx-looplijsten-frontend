@@ -10,9 +10,10 @@ type Value = {
     auth: AuthState,
     authActions: AuthActions,
 
-    hasItinerary: (a: CaseId) => boolean
     itineraries: ItinerariesState
     itinerariesActions: ItinerariesActions
+    hasItinerary: (a: CaseId) => boolean
+    getItineraryNote: (a: Id, b: Id) => ONote
 
     search: SearchState
     searchActions: SearchActions
@@ -41,7 +42,6 @@ const value = {
       clear: noop
     },
 
-    hasItinerary: () => false,
     itineraries: itinerariesState,
     itinerariesActions: {
       initialize: noop,
@@ -51,6 +51,8 @@ const value = {
       setNote: async () => false,
       clear: noop
     },
+    hasItinerary: () => false,
+    getItineraryNote: (a: Id, b: Id) => undefined,
 
     search: searchState,
     searchActions: {

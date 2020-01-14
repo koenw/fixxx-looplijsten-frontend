@@ -32,6 +32,7 @@ declare type Note = {
   itinerary_item: Id
   text: string
 }
+declare type ONote = Note | undefined
 declare type Notes = Note[]
 declare type Itinerary = {
   id: Id
@@ -41,6 +42,7 @@ declare type Itinerary = {
   notes: Notes
   position: ItineraryPosition
 }
+declare type OItinerary = Itinerary | undefined
 declare type Itineraries = Itinerary[]
 
 declare type SearchResult = {

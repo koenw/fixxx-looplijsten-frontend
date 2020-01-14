@@ -17,7 +17,13 @@ const StateProvider: FC<Props> = ({ children }) => {
 
   // itineraries
   const [itineraries, itinerariesActions] = useItineraries() as [ItinerariesState, ItinerariesActions]
-  const hasItinerary = (caseId: CaseId) => itineraries.itineraries.filter(itinerary => itinerary.case.bwv_data.case_id === caseId).length > 0
+  const getItinerary = (caseId: CaseId) : OItinerary => itineraries.itineraries.find(itinerary => itinerary.case.bwv_data.case_id === caseId)
+  const hasItinerary = (caseId: CaseId) => getItinerary(caseId) !== undefined
+  const getItineraryNote = (itineraryId: Id, id: Id) : ONote => {
+    const itinerary = itineraries.itineraries.find(itinerary => itinerary.id === itineraryId)
+    if (itinerary === undefined) return
+    return itinerary.notes.find(note => note.id === id)
+  }
 
   // anonymous
   const [isAnonymous, setIsAnonymous] = useState(false)
@@ -71,9 +77,10 @@ const StateProvider: FC<Props> = ({ children }) => {
       auth,
       authActions,
 
-      hasItinerary,
       itineraries,
       itinerariesActions,
+      hasItinerary,
+      getItineraryNote,
 
       isAnonymous,
       toggleIsAnonymous,
