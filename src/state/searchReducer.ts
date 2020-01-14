@@ -1,11 +1,10 @@
 type Action =
   | { type: "START_FETCHING", payload: { query: Query } }
-  | { type: "SET_RESULTS", payload: { results?: Results } }
+  | { type: "SET_RESULTS", payload: { results: SearchResults } }
   | { type: "SET_ERROR", payload: { errorMessage: ErrorMessage } }
-type Results = BWVData[]
 
 export const createStartFetching = (query: Query) : Action => ({ type: "START_FETCHING", payload: { query } })
-export const createSetResults = (results?: Results) : Action => ({ type: "SET_RESULTS", payload: { results } })
+export const createSetResults = (results: SearchResults) : Action => ({ type: "SET_RESULTS", payload: { results } })
 export const createSetError = (errorMessage: ErrorMessage) : Action => ({ type: "SET_ERROR", payload: { errorMessage } })
 
 export const initialState: SearchState = {

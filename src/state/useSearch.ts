@@ -25,7 +25,11 @@ const useSearch = () : [SearchState, SearchActions] => {
       if (notOk(response)) return false
 
       // Set results
-      const results = result.cases
+      const { cases } = result
+      const results = [{
+        success: true,
+        data: { cases }
+      }]
       dispatch(createSetResults(results))
     })()
   }

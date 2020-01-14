@@ -27,12 +27,6 @@ const Search: FC = () => {
   } = useGlobalState()
 
   const showSpinner = isFetching
-  const searchResults = results ? results.map(result => ({
-    success: true,
-    data: {
-      cases: [result]
-    }
-  })) : undefined
 
   return (
     <div className="Search">
@@ -43,7 +37,7 @@ const Search: FC = () => {
       { showSpinner &&
         <Spinner size={ 40 } />
       }
-      <SearchResults results={ searchResults } />
+      <SearchResults results={ results } />
     </div>
   )
 }
