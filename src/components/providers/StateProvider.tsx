@@ -47,10 +47,10 @@ const StateProvider: FC<Props> = ({ children }) => {
   }
 
   // initialize
-  const initialize = () => {
+  const initialize = async () => {
     if (itineraries.isInitialized) return
 
-    const isAuthenticated = authActions.initialize()
+    const isAuthenticated = await authActions.initialize()
     if (!isAuthenticated) return
 
     itinerariesActions.initialize()

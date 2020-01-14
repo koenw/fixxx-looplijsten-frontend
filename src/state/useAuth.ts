@@ -9,22 +9,34 @@ import reducer, {
   createUnAuthenticate,
   createClear } from "./authReducer"
 import authToken from "../lib/authToken"
-import { post, notOk } from "../lib/utils/fetch"
-import { getAuthUrl, to } from "../config/domain"
+import { get, post, notOk } from "../lib/utils/fetch"
+import { getAuthUrl, getIsAuthenticatedUrl, to } from "../config/domain"
 
 const useAuth = () : [AuthState, AuthActions] => {
 
   const [auth, dispatch] = useReducer(reducer, initialState as never)
 
-  const initialize = () : boolean => {
+  const isAuthenticated = async () : Promise<boolean> => {
     const token = authToken.get()
     const hasToken = token !== undefined
-    if (!hasToken) {
+    if (!hasToken) return false
+    const url = getIsAuthenticatedUrl()
+    const [, result] = await get(url) as [undefined, IsAuthenticatedResponse]
+    if (result === undefined) return false
+    const { is_authenticated: isAuthenticated } = result
+    return isAuthenticated
+  }
+
+  const initialize = async () : Promise<boolean> => {
+    const isAuthorized = await isAuthenticated()
+    if (isAuthorized) {
+      const token = authToken.get()
+      dispatch(createInitialize(token))
+      if (window.location.pathname === to("/login", false)) navigate(to("/"))
+      return true
+    } else {
       if (window.location.pathname !== to("/authentication/callback")) navigate(to("/login"))
       return false
-    } else {
-      dispatch(createInitialize(token))
-      return true
     }
   }
 

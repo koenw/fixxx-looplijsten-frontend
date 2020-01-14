@@ -13,6 +13,7 @@ const domain =
   "http://localhost:8000/"
 const basePath = "api/v1/"
 const authPath = "credentials-authenticate/"
+const isAuthenticatedPath = "is-authenticated/"
 const authOIDCPath = "oidc-authenticate/"
 const pathPrefix = "looplijsten/"
 
@@ -21,6 +22,7 @@ const config = {
   pathPrefix,
   basePath,
   authPath,
+  isAuthenticatedPath,
   authOIDCPath
 }
 export default config
@@ -30,6 +32,11 @@ export const getUrl = (path: string, params?: QueryParams) => {
   const shouldAppendSlash = path.substr(-1) !== "/"
   const url = `${ domain }${ pathPrefix }${ basePath }${ path }${ shouldAppendSlash ? "/" : "" }`
   return `${ url }${ params ? queryParams(params) : "" }`
+}
+
+export const getIsAuthenticatedUrl = () => {
+  const { domain, pathPrefix, isAuthenticatedPath } = config
+  return `${ domain }${ pathPrefix }${ isAuthenticatedPath }`
 }
 
 export const getAuthUrl = () => {

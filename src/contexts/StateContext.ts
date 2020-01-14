@@ -35,7 +35,7 @@ const value = {
   state: {
     auth: authState,
     authActions: {
-      initialize: () => false,
+      initialize: async () => false,
       authenticate: async (a: Email, b: Password) => false,
       authenticateToken: (a: AuthToken) => {},
       unAuthenticate: noop,
