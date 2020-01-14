@@ -50,7 +50,7 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
   const move = (index: Index, newIndex: Index) => {
 
-    const patchPosition = async (id: Id, position: number) => {
+    const patchPosition = async (id: Id, position: ItineraryPosition) => {
       const url = getUrl(`itineraries/items/${ id }`)
       const [response, result] = await patch(url, { position })
       if (notOk(response)) return

@@ -40,7 +40,7 @@ const value = {
       unAuthenticate: noop,
       clear: noop
     },
-    
+
     hasItinerary: () => false,
     itineraries: itinerariesState,
     itinerariesActions: {
@@ -54,7 +54,7 @@ const value = {
 
     search: searchState,
     searchActions: {
-      search: (a: PostalCode, b: string, c: Suffix) => {}
+      search: (a: PostalCode, b: StreetNumberString, c: StreetSuffix) => {}
     },
 
     parse: parseState,

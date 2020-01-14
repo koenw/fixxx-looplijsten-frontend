@@ -11,7 +11,7 @@ const useSearch = () : [SearchState, SearchActions] => {
 
   const [state, dispatch] = useReducer(reducer, initialState as never)
 
-  const search = (postalCode: PostalCode, streetNumber: string, suffix: Suffix) => {
+  const search = (postalCode: PostalCode, streetNumber: StreetNumberString, suffix: StreetSuffix) => {
 
     (async () => {
 

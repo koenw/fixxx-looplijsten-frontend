@@ -3,7 +3,7 @@ const key = "vakantieverhuur-looplijsten-token"
 const regExp = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/
 
 export default {
-  get: () : OptionalAuthToken => {
+  get: () : OAuthToken => {
     try {
       return localStorage.getItem(key) || undefined
     } catch (err) {

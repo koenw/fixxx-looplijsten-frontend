@@ -1,8 +1,8 @@
-const calculateNewPosition = (items: { position: number }[], index: Index, newIndex: Index) : number => {
+const calculateNewPosition = (items: { position: ItineraryPosition }[], index: Index, newIndex: Index) : ItineraryPosition => {
 
   if (index === newIndex) return items[index].position
 
-  const precedingPosition = newIndex > 0 ? items[newIndex - 1].position : 0
+  const precedingPosition: number = newIndex > 0 ? items[newIndex - 1].position : 0
   const length = items.length
   const succeedingPosition = newIndex <= length - 1 ? items[newIndex].position : undefined
   const position = succeedingPosition ?

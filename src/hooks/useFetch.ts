@@ -9,7 +9,7 @@ const navigateToLogin = () => {
   navigate(to("/login"))
 }
 
-const useFetch = (path: string, plural = false, immediateReturn = false) : [any, boolean, ErrorMessage] => {
+const useFetch = (path: string, plural = false, immediateReturn = false) : [any, boolean, OErrorMessage] => {
 
   const [isFetching, setIsFetching] = useState(true)
   const [error, setError] = useState<ErrorMessage>()

@@ -1,8 +1,11 @@
+declare type ErrorMessage = string
+declare type OErrorMessage = ErrorMessage | undefined
+
 declare type ItinerariesState = {
   isFetching: boolean
   isInitialized: boolean
   itineraries: Itineraries
-  errorMessage: ErrorMessage
+  errorMessage?: ErrorMessage
 }
 
 declare type ItinerariesActions = {
@@ -14,44 +17,39 @@ declare type ItinerariesActions = {
   clear: () => void
 }
 
-declare type Email = string
-declare type Password = string
-declare type AuthToken = string
-declare type OptionalAuthToken = AuthToken | undefined
 declare type AuthState = {
   isInitialized: boolean
   isFetching: boolean
   authToken?: AuthToken
-  errorMessage: ErrorMessage
+  errorMessage?: ErrorMessage
 }
 
 declare type AuthActions = {
   initialize: () => boolean
-  authenticate: (a: string, b: string) => Promise<boolean>
+  authenticate: (a: Email, b: Password) => Promise<boolean>
   authenticateToken: (a: AuthToken) => void
   unAuthenticate: () => void
   clear: () => void
 }
 
-declare type PostalCode = string
-declare type Suffix = string
-declare type Query = [PostalCode, string, Suffix]
+declare type StreetSuffix = string
+declare type Query = [PostalCode, StreetNumberString, StreetSuffix]
 declare type SearchState = {
   isFetching: boolean
   query?: Query
   results?: BWVData[]
-  errorMessage: ErrorMessage
+  errorMessage?: ErrorMessage
 }
 
 declare type SearchActions = {
-  search: (a: PostalCode, b: string, c: Suffix) => void
+  search: (a: PostalCode, b: StreetNumberString, c: StreetSuffix) => void
 }
 
 declare type ParseState = {
   isFetching: boolean
   query?: string
   results?: SearchResults
-  errorMessage: ErrorMessage
+  errorMessage?: ErrorMessage
 }
 
 declare type ParseActions = {

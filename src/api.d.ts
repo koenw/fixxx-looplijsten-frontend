@@ -1,7 +1,8 @@
 declare type Index = number
+declare type ItineraryPosition = number
 
 declare type Id = number
-declare type OptionalId = Id | undefined
+declare type OId = Id | undefined
 declare type Ids = Id[]
 
 declare type CaseId = string
@@ -9,19 +10,21 @@ declare type CaseIds = CaseId[]
 
 declare type StreetName = string
 declare type StreetNumber = number
+declare type StreetNumberString = string
 declare type StreetSuffix = string
+declare type StreetSuffixLetter = string
 declare type Address = [StreetName, StreetNumber, StreetSuffix | undefined]
 declare type PostalCode = string
 declare type Stadium = string
 
 declare type BWVData = {
   case_id: CaseId
-  street_name: string
-  postal_code: string
-  stadium: string
-  street_number: number
-  suffix: string | null
-  suffix_letter: string | null
+  street_name: StreeName
+  postal_code: PostalCode
+  stadium: Stadium
+  street_number: StreetNumber
+  suffix: StreetSuffix | null
+  suffix_letter: StreetSuffixLetter | null
   case_reason: string
 }
 declare type Note = {
@@ -36,7 +39,7 @@ declare type Itinerary = {
     bwv_data: BWVData
   }
   notes: Notes
-  position: number
+  position: ItineraryPosition
 }
 declare type Itineraries = Itinerary[]
 
@@ -122,7 +125,3 @@ declare type Case = {
   import_stadia: ImportStadia[]
   vakantie_verhuur: VakantieVerhuur
 }
-declare type OptionalCase = Case | undefined
-
-declare type OptionalString = string | undefined
-declare type ErrorMessage = OptionalString
