@@ -48,6 +48,7 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
       if (index < arr.length - 1) acc.push(<Hr />)
       return acc
     }, [])
+  const showRelatedCases = relatedCases.length > 0
 
   // Vakantieverhuur
   const vakantieverNotifiedRentals = caseItem.vakantie_verhuur.notified_rentals
@@ -192,10 +193,12 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
         footer={ { link: `http://www.google.com/maps/place/${ address }, Amsterdam`, title: "Bekijk op Google Maps" } }
         signal={ lastStadia }
       />
-      <CaseDetailSection
-        title="Andere open zaken op dit adres"
-        data={ relatedCases }
-        />
+      { showRelatedCases &&
+        <CaseDetailSection
+          title="Andere open zaken op dit adres"
+          data={ relatedCases }
+          />
+      }
       <CaseDetailSection
         title="Vakantieverhuur"
         data={[
