@@ -117,6 +117,10 @@ type ImportStadia = {
   peildatum: string
   sta_nr: string
 }
+type RelatedCase = {
+  case_number: string
+  case_id: string
+}
 declare type Case = {
   bag_data: BagData | BagDataError
   import_adres: ImportAdres
@@ -126,4 +130,5 @@ declare type Case = {
   bwv_personen: BWVPersonen
   import_stadia: ImportStadia[]
   vakantie_verhuur: VakantieVerhuur
+  related_cases: RelatedCase[]
 }

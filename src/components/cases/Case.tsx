@@ -34,7 +34,7 @@ const Case: FC<Props> = ({ caseId }) => {
       }
       { show &&
         <>
-          <CaseDetail caseItem={ caseItem! } />
+          <CaseDetail caseId={ caseId } caseItem={ caseItem! } />
           <EyeButton onClick={ onClick } isOpen={ isAnonymous } />
         </>
       }

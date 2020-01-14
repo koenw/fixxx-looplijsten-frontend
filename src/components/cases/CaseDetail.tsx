@@ -1,4 +1,6 @@
 import React, { FC } from "react"
+import { Link } from "@reach/router"
+import { to } from "../../config/domain"
 import styled from "styled-components"
 import CaseDetailHeader from "./CaseDetailHeader"
 import CaseDetailSection from "./CaseDetailSection"
@@ -12,6 +14,7 @@ import isBetweenDates from "../../lib/utils/isBetweenDates"
 import displayAddress from "../../lib/displayAddress"
 
 type Props = {
+  caseId: CaseId
   caseItem: Case
 }
 
@@ -21,7 +24,7 @@ const HrSpaced = styled(Hr)`
 
 const parseMeldingText = (text: string) => replaceNewLines(replaceUrls(text.trim()), "<br />")
 
-const CaseDetail: FC<Props> = ({ caseItem }) => {
+const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
 
   console.log(caseItem)
 
@@ -33,6 +36,11 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
   const caseCount =  caseItem.bwv_tmp.num_cases !== null ? parseInt(caseItem.bwv_tmp.num_cases, 10) : undefined
   const openCaseCount = caseItem.bwv_tmp.num_open_cases !== null ? caseItem.bwv_tmp.num_open_cases : undefined
   const caseOpening = caseItem.bwv_tmp.openings_reden !== null ? caseItem.bwv_tmp.openings_reden : undefined
+
+  // Related cases
+  const relatedCases = caseItem.related_cases
+    .filter(relatedCase => relatedCase.case_id !== caseId)
+    .sort((a, b) => parseInt(a.case_number, 10) - parseInt(b.case_number, 10))
 
   // Vakantieverhuur
   const vakantieverNotifiedRentals = caseItem.vakantie_verhuur.notified_rentals
@@ -177,6 +185,14 @@ const CaseDetail: FC<Props> = ({ caseItem }) => {
         footer={ { link: `http://www.google.com/maps/place/${ address }, Amsterdam`, title: "Bekijk op Google Maps" } }
         signal={ lastStadia }
       />
+      <CaseDetailSection
+        title="Andere open zaken op dit adres"
+        data={
+          relatedCases.map(relatedCase => {
+            return ["Zaaknummer", <Link to={ to(`/cases/${ relatedCase.case_id }`) }>{ `${ relatedCase.case_number } van ${ caseCount }` }</Link>]
+          })
+        }
+        />
       <CaseDetailSection
         title="Vakantieverhuur"
         data={[
