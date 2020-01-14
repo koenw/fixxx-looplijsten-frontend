@@ -41,6 +41,13 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
   const relatedCases = caseItem.related_cases
     .filter(relatedCase => relatedCase.case_id !== caseId)
     .sort((a, b) => parseInt(a.case_number, 10) - parseInt(b.case_number, 10))
+    .reduce((acc: any, relatedCase: RelatedCase, index, arr) => {
+      const { case_id, case_number, case_reason } = relatedCase
+      acc.push(["Zaaknummer", <Link to={ to(`/cases/${ case_id }`) }>{ `${ case_number } van ${ caseCount }` }</Link>])
+      acc.push(["Openingsreden", case_reason])
+      if (index < arr.length - 1) acc.push(<Hr />)
+      return acc
+    }, [])
 
   // Vakantieverhuur
   const vakantieverNotifiedRentals = caseItem.vakantie_verhuur.notified_rentals
@@ -187,11 +194,7 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
       />
       <CaseDetailSection
         title="Andere open zaken op dit adres"
-        data={
-          relatedCases.map(relatedCase => {
-            return ["Zaaknummer", <Link to={ to(`/cases/${ relatedCase.case_id }`) }>{ `${ relatedCase.case_number } van ${ caseCount }` }</Link>]
-          })
-        }
+        data={ relatedCases }
         />
       <CaseDetailSection
         title="Vakantieverhuur"

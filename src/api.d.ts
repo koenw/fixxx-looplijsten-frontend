@@ -120,6 +120,7 @@ type ImportStadia = {
 type RelatedCase = {
   case_number: string
   case_id: string
+  case_reason: string
 }
 declare type Case = {
   bag_data: BagData | BagDataError
