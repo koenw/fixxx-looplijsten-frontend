@@ -10,3 +10,7 @@ services:
     build:
       context: .
     command: npm run lint
+  test:
+    build:
+      context: .
+    command: CI=true npm test
