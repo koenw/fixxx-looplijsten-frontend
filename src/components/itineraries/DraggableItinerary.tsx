@@ -25,9 +25,9 @@ const Inner = styled.div`
 
 const ButtonWrap = styled.div`
   width: 60px
-  margin: 24px 0
+  margin: 15px 0
   button:first-child {
-    margin-bottom: 24px
+    margin-bottom: 15px
   }
 `
 

@@ -9,10 +9,10 @@ type Props = {
 }
 
 const Div = styled.div`
-  margin: -169px -15px 0
+  margin: 0 -15px 0
 `
 const DroppableInner = styled.div`
-  padding: 169px 15px 68px
+  padding: 0 15px
 `
 
 const DroppableItineraries: FC<Props> = ({ itineraries }) => {

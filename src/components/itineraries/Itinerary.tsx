@@ -16,7 +16,7 @@ const Article = styled.article`
   a {
     display: block
     margin-bottom: 0
-    padding: 24px 0
+    padding: 15px 0
   }
 `
 const H1 = styled.h1`

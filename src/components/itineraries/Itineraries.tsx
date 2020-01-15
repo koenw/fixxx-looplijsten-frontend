@@ -17,14 +17,14 @@ type Result = {
 const ButtonWrap = styled.div`
   display: flex
   justify-content: space-between
-  margin: 24px 0
+  margin-bottom: 15px
   button {
     max-width: 48%
     overflow: hidden
   }
 `
 const ButtonWrapBottom = styled(ButtonWrap)`
-  margin-top: -44px
+  margin-top: 15px
 `
 
 const Itineraries: FC = () => {

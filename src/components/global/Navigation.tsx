@@ -15,10 +15,10 @@ const NavWrap = styled.div`
 
 const Nav = styled.nav`
   background-color: #E6E6E6
-  padding: 12px
+  padding: 15px
   padding-bottom: 0
-  margin-bottom: 12px
-  width: calc(100% - 24px);
+  margin-bottom: 15px
+  width: calc(100% - 30px);
 `
 const Ul = styled.ul`
   list-style: none
@@ -41,6 +41,11 @@ const LiSearch = styled(Li)`
   margin-right: 16px
 `
 
+// this empty element is used to correct scroll position under fixed header, navigation
+const FocusSpacer = styled.div`
+  height: 116px
+`
+
 const Navigation: FC = () => {
 
   const {
@@ -57,14 +62,17 @@ const Navigation: FC = () => {
   const searchActive = pathname === to("/zoeken", false) || pathname === to("/parse", false)
 
   return (
-    <NavWrap>
-      <Nav>
-        <Ul>
-          <Li isActive={ looplijstActive }><Link to={ to("/") }>Mijn looplijst { showCounter && `(${ numItineraries })` }</Link></Li>
-          <LiSearch isActive={ searchActive }><Link to={ to("/zoeken") }><SearchIcon /></Link></LiSearch>
-        </Ul>
-      </Nav>
-    </NavWrap>
+    <>
+      <NavWrap>
+        <Nav>
+          <Ul>
+            <Li isActive={ looplijstActive }><Link to={ to("/") }>Mijn looplijst { showCounter && `(${ numItineraries })` }</Link></Li>
+            <LiSearch isActive={ searchActive }><Link to={ to("/zoeken") }><SearchIcon /></Link></LiSearch>
+          </Ul>
+        </Nav>
+      </NavWrap>
+      <FocusSpacer />
+    </>
   )
 }
 export default Navigation
