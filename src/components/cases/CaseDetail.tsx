@@ -22,7 +22,7 @@ const HrSpaced = styled(Hr)`
   margin: 24px 0
 `
 
-const parseMeldingText = (text: string) => replaceNewLines(replaceUrls(text.trim()), "<br />")
+const parseMeldingText = (text: string) => replaceNewLines(replaceUrls(text.trim()))
 
 const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
 

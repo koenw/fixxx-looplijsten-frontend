@@ -5,43 +5,27 @@ import { getUrl, to } from "../config/domain"
 import authToken from "../lib/authToken"
 import { get, isOk, isForbidden } from "../lib/utils/fetch"
 
-const navigateToLogin = () => {
-  navigate(to("/login"))
-}
-
-const useFetch = (path: string, plural = false, immediateReturn = false) : [any, boolean, OErrorMessage] => {
+const useFetch = (path: string) : [any, boolean, OErrorMessage] => {
 
   const [isFetching, setIsFetching] = useState(true)
   const [error, setError] = useState<ErrorMessage>()
-
-  const defaultState = plural ? [] : undefined
-  const [data, setData] = useState(defaultState)
+  const [data, setData] = useState()
 
   useEffect(() => {
 
-    if (immediateReturn) {
-      setIsFetching(false)
-      return
-    }
-
     (async () => {
 
+      setIsFetching(true)
+      setData(undefined)
+      setError(undefined)
+
       try {
-
         const url = getUrl(path)
-        const token = authToken.get()
-
-        if (token === undefined) {
-          navigateToLogin()
-        }
-        else {
-          const [response, result] = await get(url)
-          if (isOk(response)) {
-            setData(result)
-          } else {
-            if (isForbidden(response)) return navigateToLogin()
-            setError(`Error: HTTP ${ response.status }`)
-          }
+        const [response, result] = await get(url)
+        if (isOk(response)) {
+          setData(result)
+        } else {
+          setError(`Error: HTTP ${ response.status }`)
         }
       }
       catch (err) {
@@ -52,7 +36,7 @@ const useFetch = (path: string, plural = false, immediateReturn = false) : [any,
         setIsFetching(false)
       }
     })()
-  }, [path, immediateReturn])
+  }, [path])
 
   return [data, isFetching, error]
 }
