@@ -8,7 +8,6 @@ import styled from "styled-components"
 import useGlobalState from "../../hooks/useGlobalState"
 
 const Div = styled.div`
-  max-width: 768px
   margin: 12px 0
   display: flex
   justify-content: flex-end

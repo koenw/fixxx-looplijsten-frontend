@@ -38,7 +38,6 @@ const Li = styled.li`
 const LiSearch = styled(Li)`
   width: 24px
   height: 24px
-  margin-right: 16px
 `
 
 // this empty element is used to correct scroll position under fixed header, navigation

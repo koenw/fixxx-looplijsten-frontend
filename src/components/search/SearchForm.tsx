@@ -6,10 +6,6 @@ import useOnChangeState from "../../hooks/useOnChangeState"
 import InputBase from "../styled/Input"
 import useGlobalState from "../../hooks/useGlobalState"
 
-const Form = styled.form`
-  max-width: 768px
-`
-
 const Label = styled.label`
   font-weight: 500
   display: block
@@ -73,7 +69,7 @@ const SearchForm: FC = () => {
   }
 
   return (
-    <Form onSubmit={ onSubmit }>
+    <form onSubmit={ onSubmit }>
       <InputWrapPostalCode>
         <Label>postcode</Label>
         <Input
@@ -110,7 +106,7 @@ const SearchForm: FC = () => {
       <ButtonWrap>
         <SearchButton variant="secondary" iconSize={ 24 } icon={ <Search /> } />
       </ButtonWrap>
-    </Form>
+    </form>
   )
 }
 

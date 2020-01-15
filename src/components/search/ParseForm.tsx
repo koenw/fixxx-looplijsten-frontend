@@ -18,9 +18,6 @@ const ButtonWrap = styled.div`
 const AddAllButtonWrap = styled(ButtonWrap)`
   margin-top: 24px
 `
-const Form = styled.form`
-  max-width: 768px
-`
 const Textarea = styled(TextareaBase)`
   display: block
   width: 100%
@@ -85,12 +82,12 @@ const ParseForm: FC = () => {
 
   return (
     <div className="ParseForm">
-      <Form onSubmit={ onSubmit }>
+      <form onSubmit={ onSubmit }>
         <Textarea rows={ 16 } value={ value } onChange={ onChangeValue } autoFocus />
         <ButtonWrap>
           <Button variant="secondary" size={ 60 } icon={ <Search /> } />
         </ButtonWrap>
-      </Form>
+      </form>
       { showSpinner &&
         <Spinner size={ 60 } />
       }
