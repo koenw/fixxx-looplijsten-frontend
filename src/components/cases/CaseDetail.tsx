@@ -203,7 +203,7 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
         title="Vakantieverhuur"
         data={[
           ["Vandaag verhuurd", vakantieverhuurToday],
-          [`Dagen verhuurd ${ new Date().getFullYear() }`, vakantieverhuurDays > 0 ? <a href="#vakantieverhuur">{ vakantieverhuurDays } dagen</a> : "-"],
+          [`Nachten verhuurd ${ new Date().getFullYear() }`, vakantieverhuurDays > 0 ? <a href="#vakantieverhuur">{ vakantieverhuurDays } nachten</a> : "-"],
           ["Shortstay", undefined],
           ["B&B aangemeld", undefined]
         ]}
