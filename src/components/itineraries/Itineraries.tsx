@@ -31,6 +31,7 @@ const Itineraries: FC = () => {
 
   const {
     itineraries: {
+      isInitialized,
       isFetching,
       itineraries,
       errorMessage
@@ -42,7 +43,7 @@ const Itineraries: FC = () => {
 
   const hasError = errorMessage !== undefined
 
-  const showSpinner = isFetching
+  const showSpinner = !isInitialized || isFetching
   const showError = hasError
   const show = !showSpinner && !showError
   const hasItineraries = itineraries.length > 0
