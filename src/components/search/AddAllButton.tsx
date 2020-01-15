@@ -6,19 +6,16 @@ import noop from "../../lib/utils/noop"
 
 type Props = {
   onClick?: (a: MouseEvent<HTMLButtonElement>) => void
+  disabled?: boolean
 }
 
 const StyledButton = styled(Button)`
   border: solid 1px black
 `
 
-const AddAllButton: FC<Props> = ({ onClick = noop }) => {
-
-  const [isDisabled, setIsDisabled] = useState(false)
-  const disable = () => setIsDisabled(true)
+const AddAllButton: FC<Props> = ({ onClick = noop, disabled = false }) => {
 
   const onClickHandler = (event: MouseEvent<HTMLButtonElement>) => {
-    disable()
     onClick(event)
   }
 
@@ -27,7 +24,7 @@ const AddAllButton: FC<Props> = ({ onClick = noop }) => {
       onClick={ onClickHandler }
       variant="blank"
       iconLeft={ <Enlarge /> }
-      disabled={ isDisabled }
+      disabled={ disabled }
     >
     Voeg alles toe aan Mijn looplijst
     </StyledButton>

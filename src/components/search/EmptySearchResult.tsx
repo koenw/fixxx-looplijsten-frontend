@@ -7,7 +7,7 @@ type Props = {
 
 const Div = styled.div`
   margin-top: 12px
-  border-bottom: 4px solid #767676
+  border-bottom: 1px solid #767676
 `
 const Span = styled.span`
   font-style: italic

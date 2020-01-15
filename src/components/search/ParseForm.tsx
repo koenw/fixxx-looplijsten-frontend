@@ -16,7 +16,7 @@ const ButtonWrap = styled.div`
   margin-top: 12px
 `
 const AddAllButtonWrap = styled(ButtonWrap)`
-  margin-top: 24px
+  margin: 24px 0
 `
 const Textarea = styled(TextareaBase)`
   display: block
@@ -43,7 +43,11 @@ const ParseForm: FC = () => {
   const [value, onChangeValue] = useOnChangeState(query)
   const showSpinner = isFetching
   const showResults = results !== undefined && results.length > 0 && !isFetching
-  const showAddAllButton = showResults && results!.length > 1
+  const nonItineraries = (results || [])
+    .map(result => result.data ? result.data.cases : [])
+    .flat(1)
+    .filter(caseItem => !hasItinerary(caseItem.case_id))
+  const showAddAllButton = showResults && nonItineraries.length > 0
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
@@ -76,7 +80,7 @@ const ParseForm: FC = () => {
 
   const AddAll = () => (
     <AddAllButtonWrap>
-      <AddAllButton onClick={ onClick } />
+      <AddAllButton onClick={ onClick } disabled={ isFetching }/>
     </AddAllButtonWrap>
   )
 
@@ -85,7 +89,7 @@ const ParseForm: FC = () => {
       <form onSubmit={ onSubmit }>
         <Textarea rows={ 16 } value={ value } onChange={ onChangeValue } autoFocus />
         <ButtonWrap>
-          <Button variant="secondary" size={ 60 } icon={ <Search /> } />
+          <Button variant="secondary" iconLeft={ <Search /> }>Zoek alles</Button>
         </ButtonWrap>
       </form>
       { showSpinner &&
