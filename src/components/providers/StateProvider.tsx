@@ -13,10 +13,10 @@ type Props = {
 const StateProvider: FC<Props> = ({ children }) => {
 
   // auth
-  const [auth, authActions] = useAuth() as [AuthState, AuthActions]
+  const [auth, authActions] = useAuth()
 
   // itineraries
-  const [itineraries, itinerariesActions] = useItineraries() as [ItinerariesState, ItinerariesActions]
+  const [itineraries, itinerariesActions] = useItineraries()
   const getItinerary = (caseId: CaseId) : OItinerary => itineraries.itineraries.find(itinerary => itinerary.case.bwv_data.case_id === caseId)
   const hasItinerary = (caseId: CaseId) => getItinerary(caseId) !== undefined
   const getItineraryNote = (itineraryId: Id, id: Id) : ONote => {
@@ -25,15 +25,15 @@ const StateProvider: FC<Props> = ({ children }) => {
     return itinerary.notes.find(note => note.id === id)
   }
 
+  // search
+  const [search, searchActions] = useSearch()
+
+  // parse
+  const [parse, parseActions] = useParse()
+
   // anonymous
   const [isAnonymous, setIsAnonymous] = useState(false)
   const toggleIsAnonymous = () => setIsAnonymous(!isAnonymous)
-
-  // search
-  const [search, searchActions] = useSearch() as [SearchState, SearchActions]
-
-  // parse
-  const [parse, parseActions] = useParse() as [ParseState, ParseActions]
 
   // authenticate
   const authenticate = async (email: Email, password: Password) => {
@@ -47,6 +47,7 @@ const StateProvider: FC<Props> = ({ children }) => {
   }
 
   // initialize
+  const isInitialized = auth.isInitialized && itineraries.isInitialized
   const initialize = async () => {
     if (itineraries.isInitialized) return
 
@@ -56,7 +57,7 @@ const StateProvider: FC<Props> = ({ children }) => {
     itinerariesActions.initialize()
   }
 
-  // deinitialize
+  // clear
   const clear = () => {
     authActions.clear()
     itinerariesActions.clear()
@@ -82,17 +83,19 @@ const StateProvider: FC<Props> = ({ children }) => {
       hasItinerary,
       getItineraryNote,
 
-      isAnonymous,
-      toggleIsAnonymous,
-
       search,
       searchActions,
 
       parse,
       parseActions,
 
+      isAnonymous,
+      toggleIsAnonymous,
+
       authenticate,
       authenticateToken,
+
+      isInitialized,
 
       clear
     }

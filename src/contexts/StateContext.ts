@@ -27,6 +27,8 @@ type Value = {
     authenticate: (a: Email, b: Password) => void
     authenticateToken: (a: AuthToken) => void
 
+    isInitialized: boolean
+
     clear: () => void
   }
 }
@@ -69,6 +71,8 @@ const value = {
 
     authenticate: async (a: Email, b: Password) => {},
     authenticateToken: (a: AuthToken) => {},
+
+    isInitialized: false,
 
     clear: noop
   }

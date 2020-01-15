@@ -30,8 +30,8 @@ const ButtonWrapBottom = styled(ButtonWrap)`
 const Itineraries: FC = () => {
 
   const {
+    isInitialized,
     itineraries: {
-      isInitialized,
       isFetching,
       itineraries,
       errorMessage
