@@ -1,9 +1,7 @@
 import "abortcontroller-polyfill/dist/polyfill-patch-fetch"
 import { useState, useEffect } from "react"
-import { navigate } from "@reach/router"
-import { getUrl, to } from "../config/domain"
-import authToken from "../lib/authToken"
-import { get, isOk, isForbidden } from "../lib/utils/fetch"
+import { getUrl } from "../config/domain"
+import { get, isOk } from "../lib/utils/fetch"
 
 const useFetch = (path: string) : [any, boolean, OErrorMessage] => {
 

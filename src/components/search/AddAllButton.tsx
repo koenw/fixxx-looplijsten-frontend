@@ -1,4 +1,4 @@
-import React, { FC, useState, MouseEvent } from "react"
+import React, { FC, MouseEvent } from "react"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Enlarge } from "@datapunt/asc-assets"
