@@ -65,7 +65,7 @@ const NoteForm: FC<Props> = ({ itineraryId, id, value }) => {
         { showButton &&
           <Button variant="secondary" onClick={ onClick }>{ nawText }</Button>
         }
-        <Button variant="secondary">Opslaan</Button>
+        <Button variant="secondary">Bewaren</Button>
       </ButtonWrap>
     </form>
   )

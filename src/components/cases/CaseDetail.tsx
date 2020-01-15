@@ -149,7 +149,7 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
 
   const logboek = bevindingen.reduce((acc: any, item, index) => {
     acc.push(["Toezichthouder", <strong className="anonymous">{ item.name }</strong>])
-    acc.push(["Tijd", item.time])
+    acc.push(["Tijd", `${ item.time } uur`])
     acc.push(["Datum", item.date])
     acc.push(["Hit", item.hit])
     acc.push(<p className="anonymous" dangerouslySetInnerHTML={ { __html: replaceNewLines(item.text, "<br /><br />") } }></p>)
