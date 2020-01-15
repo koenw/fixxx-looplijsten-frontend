@@ -19,6 +19,9 @@ const Article = styled.article`
     padding: 15px 0
   }
 `
+const Div = styled.div`
+  padding-left: 12px
+`
 const H1 = styled.h1`
   font-size: 20px
   line-height: 28px
@@ -37,6 +40,9 @@ const Note = styled.p`
   line-height: 1.3em
   color: gray
   font-weight: normal
+`
+const SignalWrap = styled.div`
+  margin-left: -12px
 `
 
 const Itinerary: FC<Props> = ({ itinerary, note, showAddress = true }) => {
@@ -66,7 +72,7 @@ const Itinerary: FC<Props> = ({ itinerary, note, showAddress = true }) => {
   return (
     <Article className="Itinerary">
       <Link to={ linkTo }>
-        <div>
+        <Div>
           { showAddress &&
             <>
               <H1>{ address }</H1>
@@ -75,12 +81,14 @@ const Itinerary: FC<Props> = ({ itinerary, note, showAddress = true }) => {
           }
           <div>
             <P>{ caseReason }</P>
-            <Signal text={ stadium } />
+            <SignalWrap>
+              <Signal text={ stadium } />
+            </SignalWrap>
             { showNote &&
               <Note>{ noteString }</Note>
             }
           </div>
-        </div>
+        </Div>
       </Link>
     </Article>
   )
