@@ -4,6 +4,7 @@ export const body = (
   address: string,
   postalCode: string,
   gebruiksdoel?: string,
+  gebruik?: string,
   aantalBouwlagen?: number,
   etage?: number,
   aantalKamers?: number,
@@ -19,10 +20,11 @@ ${ postalCode } Amsterdam
 Ons systeem toont bij dit adres op dit moment de volgende gegevens uit BAG:
 
 Gebruiksdoel: ${ gebruiksdoel || "-" }
+Soort Object (feitelijk gebruik): ${ gebruik || "" }
 Aantal bouwlagen: ${ aantalBouwlagen || "-"}
-Etage: ${ etage || "-" }
+Verdieping toegang: ${ etage || "-" }
 Aantal kamers: ${ aantalKamers || "-" }
-Oppervlak: ${ oppervlak ? `${ oppervlak } m² ` : "-" }
+Woonoppervlak: ${ oppervlak ? `${ oppervlak } m² ` : "-" }
 
 We hebben bij onze controle de volgende afwijkingen geconstateerd:
 

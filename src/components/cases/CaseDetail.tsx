@@ -76,6 +76,7 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
     address={ address }
     postalCode={ postalCode }
     gebruiksdoel={ woningBestemming }
+    gebruik={ woningGebruik }
     aantalBouwlagen={ woningBouwlagen }
     etage={ woningEtage }
     aantalKamers= { woningKamers }
