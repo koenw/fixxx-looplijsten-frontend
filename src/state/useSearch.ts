@@ -26,10 +26,13 @@ const useSearch = () : [SearchState, SearchActions] => {
 
       // Set results
       const { cases } = result
-      const results = [{
-        success: true,
-        data: { cases }
-      }]
+      const hasCases = cases.length > 0
+      const results = hasCases ?
+        [{
+          success: true,
+          data: { cases }
+        }] :
+        []
       dispatch(createSetResults(results))
     })()
   }
