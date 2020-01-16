@@ -6,6 +6,7 @@ import CaseDetailHeader from "./CaseDetailHeader"
 import CaseDetailSection from "./CaseDetailSection"
 import Signal from "../global/Signal"
 import Hr from "../styled/Hr"
+import Span from "../styled/Span"
 import MailtoAnchor from "./MailtoAnchor"
 import formatDate from "../../lib/utils/formatDate"
 import replaceNewLines from "../../lib/utils/replaceNewLines"
@@ -126,11 +127,12 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
       died: person.overlijdensdatum ? formatDate(person.overlijdensdatum)! : undefined
     })
   }) : []
-  const bewoners = people.reduce((acc: any, person, index) => {
-    acc.push(<span className="anonymous">{ (index + 1) + ". " + person.initials + " " + person.name + " (" + person.sex + ")" }</span>)
+  const bewoners = people.reduce((acc: any, person, index, arr) => {
+    acc.push(<Span className="anonymous"><strong>{ (index + 1) + ". " + person.initials + " " + person.name + " (" + person.sex + ")" }</strong></Span>)
     acc.push(["Geboren", <span className="anonymous">{ person.born }</span>])
     acc.push(["Woont hier sinds", person.livingSince])
     if (person.died !== undefined) acc.push(["✝️ Overleden", <span className="anonymous">{ person.died }</span>])
+    if (index < arr.length - 1) acc.push(<Hr />)
     return acc
   }, [])
   const showBewoners = personCount > 0

@@ -1,5 +1,7 @@
 import React, { FC, ReactNode } from "react"
 import styled from "styled-components"
+import H1 from "../styled/H1"
+import Hr from "../styled/Hr"
 import Label from "../styled/Label"
 import Footer from "./Footer"
 import InvalidDataSpan from "../global/InvalidDataSpan"
@@ -19,8 +21,8 @@ type Props = {
 const Section = styled.section`
   overflow: hidden
   border: 1px solid #B4B4B4
-  margin-bottom: 24px
-  padding: 8px
+  margin-bottom: 15px
+  padding: 12px
 `
 
 const P = styled.p`
@@ -39,7 +41,7 @@ const CaseDetailSection: FC<Props> = ({ id, title, data, footer }) => {
         <Anchor name={ id! } />
       }
       { hasTitle &&
-        <h1>{ title }</h1>
+        <H1>{ title }</H1>
       }
       { data.map((keyValue, index) => {
           const hasLabel = Array.isArray(keyValue)
