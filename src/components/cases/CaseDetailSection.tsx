@@ -1,7 +1,6 @@
 import React, { FC, ReactNode } from "react"
 import styled from "styled-components"
 import H1 from "../styled/H1"
-import Hr from "../styled/Hr"
 import Label from "../styled/Label"
 import Footer from "./Footer"
 import InvalidDataSpan from "../global/InvalidDataSpan"
