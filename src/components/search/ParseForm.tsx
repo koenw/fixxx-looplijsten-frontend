@@ -7,7 +7,6 @@ import Hr from "../styled/Hr"
 import useOnChangeState from "../../hooks/useOnChangeState"
 import SearchResults from "./SearchResults"
 import AddAllButton from "./AddAllButton"
-import promiseSerial from "../../lib/utils/promiseSerial"
 import useGlobalState from "../../hooks/useGlobalState"
 
 const ButtonWrap = styled.div`
@@ -36,7 +35,7 @@ const ParseForm: FC = () => {
     },
     hasItinerary,
     itinerariesActions: {
-      add
+      addMany
     }
   } = useGlobalState()
 
@@ -73,9 +72,7 @@ const ParseForm: FC = () => {
     }, [] as CaseIds)
     if (caseIds.length === 0) return
 
-    // sequentially add each case to itineraries, so order is maintained
-    const funcs = caseIds.map(caseId => async () => add(caseId))
-    await promiseSerial(funcs)
+    await addMany(caseIds)
   }
 
   const AddAll = () => (

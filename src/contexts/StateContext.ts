@@ -48,6 +48,7 @@ const value = {
     itinerariesActions: {
       initialize: noop,
       add: noop,
+      addMany: noop,
       move: noop,
       remove: noop,
       setNote: async () => false,

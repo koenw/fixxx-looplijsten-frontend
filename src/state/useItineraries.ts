@@ -14,6 +14,7 @@ import reducer, {
   createClear } from "./itinerariesReducer"
 import { get, post, put, patch, del, notOk, isForbidden } from "../lib/utils/fetch"
 import { getUrl, to } from "../config/domain"
+import promiseSerial from "../lib/utils/promiseSerial"
 import calculateNewPosition from "../lib/calculateNewPosition"
 
 const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
@@ -37,15 +38,19 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
     dispatch(createInitialize(itineraries))
   }
 
-  const add = (caseId: CaseId) => {
-    (async () => {
-      const url = getUrl("itineraries/items")
-      const [response, result] = await post(url, { id: caseId })
-      if (notOk(response)) return
-      const itinerary = result as Itinerary
-      const itineraries = [itinerary] as Itineraries
-      dispatch(createAdd(itineraries))
-    })()
+  const add = async (caseId: CaseId) => {
+    const url = getUrl("itineraries/items")
+    const [response, result] = await post(url, { id: caseId })
+    if (notOk(response)) return
+    const itinerary = result as Itinerary
+    const itineraries = [itinerary] as Itineraries
+    dispatch(createAdd(itineraries))
+  }
+
+  const addMany = async (caseIds: CaseIds) => {
+    // sequentially add each case to itineraries, so order is maintained
+    const funcs = caseIds.map(caseId => async () => add(caseId))
+    await promiseSerial(funcs)
   }
 
   const move = (index: Index, newIndex: Index) => {
@@ -66,13 +71,11 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
     patchPosition(id, position)
   }
 
-  const remove = (id: Id) => {
-    (async () => {
-      const url = getUrl(`itineraries/items/${ id }`)
-      const [response] = await del(url)
-      if (notOk(response)) return
-      dispatch(createRemove(id))
-    })()
+  const remove = async (id: Id) => {
+    const url = getUrl(`itineraries/items/${ id }`)
+    const [response] = await del(url)
+    if (notOk(response)) return
+    dispatch(createRemove(id))
   }
 
   const setNote = async (itineraryId: Id, text: string, id?: Id) => {
@@ -90,6 +93,6 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
 
   const clear = () => dispatch(createClear())
 
-  return [itinerariesState, { initialize, add, move, remove, setNote, clear }]
+  return [itinerariesState, { initialize, add, addMany, move, remove, setNote, clear }]
 }
 export default useItineraries

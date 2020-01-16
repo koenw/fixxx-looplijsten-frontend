@@ -44,27 +44,25 @@ const reducer = (state: ItinerariesState, action: Action) : ItinerariesState => 
       return { ...state, isFetching: false, errorMessage }
     }
     case "INITIALIZE": {
-      const isInitialized = true
-      const isFetching = false
-      const { itineraries = [] } = action.payload
-      return { ...state, isInitialized, isFetching, itineraries }
+      const { itineraries } = action.payload
+      return { ...state, isInitialized: true, isFetching: false, itineraries }
     }
     case "ADD": {
       const { itineraries: prevItineraries } = state
       const { itineraries } = action.payload
-      return { ...state, itineraries: prevItineraries.concat(itineraries!) }
+      return { ...state, itineraries: prevItineraries.concat(itineraries) }
     }
     case "UPDATE": {
       const { itineraries: prevItineraries } = state
-      const index = prevItineraries!.findIndex(itinerary => itinerary.id === action.payload.id)
+      const index = prevItineraries.findIndex(itinerary => itinerary.id === action.payload.id)
       const itineraries = [...prevItineraries]
-      itineraries[index] = action.payload.itinerary!
+      itineraries[index] = action.payload.itinerary
       return { ...state, itineraries }
     }
     case "MOVE": {
       const { itineraries: prevItineraries } = state
       const { index, newIndex } = action.payload
-      const itineraries = moveInArray(prevItineraries, index!, newIndex!)
+      const itineraries = moveInArray(prevItineraries, index, newIndex)
       return { ...state, itineraries }
     }
     case "REMOVE": {
@@ -76,10 +74,10 @@ const reducer = (state: ItinerariesState, action: Action) : ItinerariesState => 
     case "SET_NOTE": {
       const { itineraries: prevItineraries } = state
       const { id, noteId, note } = action.payload
-      const index = prevItineraries!.findIndex(itinerary => itinerary.id === id!)
+      const index = prevItineraries.findIndex(itinerary => itinerary.id === id)
       const itineraries = [...prevItineraries]
-      if (note! !== "") {
-        itineraries[index].notes[0] = { id: noteId!, itinerary_item: id!, text: note! }
+      if (note !== "") {
+        itineraries[index].notes[0] = { id: noteId, itinerary_item: id, text: note }
       } else {
         itineraries[index].notes = []
       }
