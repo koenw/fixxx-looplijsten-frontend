@@ -9,9 +9,10 @@ type Props = {
 }
 
 const Div = styled.div`
-  margin: 0 -15px 0
+  margin: -192px -15px 0
 `
 const DroppableInner = styled.div`
+  margin-top: 192px
   padding: 0 15px
 `
 
