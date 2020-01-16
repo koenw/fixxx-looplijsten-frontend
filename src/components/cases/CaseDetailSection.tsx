@@ -3,6 +3,7 @@ import styled from "styled-components"
 import Label from "../styled/Label"
 import Footer from "./Footer"
 import InvalidDataSpan from "../global/InvalidDataSpan"
+import Anchor from "../global/Anchor"
 
 type Value = string | ReactNode
 type KeyValueDetail = string | ReactNode | [string, Value]
@@ -26,13 +27,17 @@ const P = styled.p`
   margin-bottom: 8px
 `
 
-const CaseDetailSection: FC<Props> = ({ id = "", title, data, footer }) => {
+const CaseDetailSection: FC<Props> = ({ id, title, data, footer }) => {
 
   const hasTitle = title !== undefined
   const showFooter = footer !== undefined
+  const hasAnchor = id !== undefined
 
   return (
-    <Section id={ id }>
+    <Section>
+      { hasAnchor &&
+        <Anchor name={ id! } />
+      }
       { hasTitle &&
         <h1>{ title }</h1>
       }
