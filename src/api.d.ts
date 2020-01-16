@@ -88,6 +88,10 @@ declare type BagData = {
   oppervlakte: number | null
   verblijfsobjectidentificatie: string | null
   verdieping_toegang: number | null
+  status: string
+  ligplaatsidentificatie?: string
+  indicatie_geconstateerd?: boolean
+  aanduiding_in_onderzoek?: boolean
 }
 type BagDataError = {
   error: string

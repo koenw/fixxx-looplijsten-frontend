@@ -63,6 +63,10 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
   // Woning
   const hasBagData = (caseItem.bag_data as BagDataError).error === undefined
   const bagData = caseItem.bag_data as BagData
+  const isWoonboot = hasBagData && bagData.ligplaatsidentificatie !== undefined
+  const isWoning = !isWoonboot
+
+  // woning
   const gebruiksdoel = hasBagData ? bagData.gebruiksdoel : undefined
   const woningBestemming = gebruiksdoel && gebruiksdoel.length ? gebruiksdoel[0] : undefined
   const woningGebruik = hasBagData && bagData.gebruik ? bagData.gebruik : undefined
@@ -82,9 +86,36 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
     aantalKamers= { woningKamers }
     oppervlak={ woningOppervlak }
     />
+  // woonboot
+  const woonbootLigplaatsIndicatie = hasBagData && bagData.ligplaatsidentificatie
+  const woonbootStatus = hasBagData && bagData.status
+  const woonbootIndicatie = hasBagData && bagData.indicatie_geconstateerd ? "Ja" : "Nee"
+  const woonbootAanduiding = hasBagData && bagData.aanduiding_in_onderzoek ? "Ja" : "Nee"
+
+  const woningFields = [
+    ["Gebruiksdoel", woningBestemming],
+    ["Soort Object (feitelijk gebruik)", woningGebruik],
+    ["Aantal bouwlagen", woningBouwlagen !== undefined ? woningBouwlagen : "-"],
+    ["Verdieping toegang", woningEtage !== undefined ? woningEtage : "-"],
+    ["Aantal kamers", woningKamers > 0 ? woningKamers : "-"],
+    ["Woonoppervlak", woningOppervlak > 0 ? woningOppervlak + " m²" : "-"],
+    mailtoAnchor
+  ]
+  const woonbootFields = [
+    ["Status", woonbootStatus || "-"],
+    ["Indicatie geconstateerd", woonbootIndicatie],
+    ["Aanduiding in onderzoek", woonbootAanduiding],
+    mailtoAnchor
+  ]
+  const woningData = isWoning ? woningFields : woonbootFields
+
+  // woning footer
+  const woningUrlBagType = isWoning ? "verblijfsobject" : "ligplaats"
+  const woningUrlBagId = isWoning ? woningBagId : woonbootLigplaatsIndicatie
+  const woningUrl = `https://data.amsterdam.nl/data/bag/${ woningUrlBagType }/id${ woningUrlBagId }/`
   const woningFooter =
-    woningBagId ?
-      { link: `https://data.amsterdam.nl/data/bag/verblijfsobject/id${ woningBagId }/`, title: "Bekijk op Data & informatie" } :
+    woningUrlBagId ?
+      { link: woningUrl, title: "Bekijk op Data & informatie" } :
       undefined
 
   // Melding
@@ -213,15 +244,7 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
         />
       <CaseDetailSection
         title="Woning"
-        data={[
-          ["Gebruiksdoel", woningBestemming],
-          ["Soort Object (feitelijk gebruik)", woningGebruik],
-          ["Aantal bouwlagen", woningBouwlagen !== undefined ? woningBouwlagen : "-"],
-          ["Verdieping toegang", woningEtage !== undefined ? woningEtage : "-"],
-          ["Aantal kamers", woningKamers > 0 ? woningKamers : "-"],
-          ["Woonoppervlak", woningOppervlak > 0 ? woningOppervlak + " m²" : "-"],
-          mailtoAnchor
-        ]}
+        data={ woningData }
         footer={ woningFooter }
         />
       <CaseDetailSection

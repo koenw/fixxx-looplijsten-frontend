@@ -22,8 +22,8 @@ type Props = {
 
 const Header = styled.section`
   border: 1px solid #B4B4B4
-  margin-bottom: 24px
-  padding: 8px
+  margin-bottom: 15px
+  padding: 15px
 `
 
 const H1 = styled.h1`
