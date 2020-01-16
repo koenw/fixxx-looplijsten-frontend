@@ -21,16 +21,15 @@ declare type ItinerariesActions = {
 declare type AuthState = {
   isInitialized: boolean
   isFetching: boolean
-  authToken?: AuthToken
+  token?: AuthToken
   errorMessage?: ErrorMessage
 }
 
 declare type AuthActions = {
   initialize: () => Promise<boolean>
   authenticate: (a: Email, b: Password) => Promise<boolean>
-  authenticateToken: (a: AuthToken) => void
+  authenticateToken: (a: AuthToken) => boolean
   unAuthenticate: () => void
-  clear: () => void
 }
 
 declare type StreetSuffix = string

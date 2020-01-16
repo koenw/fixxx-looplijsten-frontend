@@ -42,14 +42,14 @@ const StateProvider: FC<Props> = ({ children }) => {
   }
 
   const authenticateToken = (token: AuthToken) => {
-    authActions.authenticateToken(token)
-    initialize()
+    const isSuccess = authActions.authenticateToken(token)
+    if (isSuccess) initialize()
   }
 
   // initialize
   const isInitialized = auth.isInitialized && itineraries.isInitialized
   const initialize = async () => {
-    if (itineraries.isInitialized) return
+    if (isInitialized) return
 
     const isAuthenticated = await authActions.initialize()
     if (!isAuthenticated) return
@@ -59,11 +59,11 @@ const StateProvider: FC<Props> = ({ children }) => {
 
   // clear
   const clear = () => {
-    authActions.clear()
+    authActions.unAuthenticate()
     itinerariesActions.clear()
   }
 
-  // initialize
+  // initialization
   useEffect(() => {
 
     const anonymous = parseLocationSearch(window.location.search).anonymous

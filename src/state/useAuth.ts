@@ -6,8 +6,8 @@ import reducer, {
   createInitialize,
   createSetErrorMessage,
   createAuthenticate,
-  createUnAuthenticate,
-  createClear } from "./authReducer"
+  createUnAuthenticate
+} from "./authReducer"
 import authToken from "../lib/authToken"
 import { get, post, notOk } from "../lib/utils/fetch"
 import { getAuthUrl, getIsAuthenticatedUrl, to } from "../config/domain"
@@ -58,32 +58,37 @@ const useAuth = () : [AuthState, AuthActions] => {
     }
 
     // Handle successful login
-    const { access } = result
-    const token = access
-    authToken.set(token)
+    const { access: token } = result
+    const validToken = authToken.set(token)
+    if (!validToken) {
+      const message = "Ongeldige auth token"
+      dispatch(createSetErrorMessage(message))
+      return false
+    }
     dispatch(createAuthenticate(token))
     navigate(to("/"))
     return true
   }
 
-  const authenticateToken = (token: AuthToken) => {
-    authToken.set(token)
+  const authenticateToken = (token: AuthToken) : boolean => {
+    const validToken = authToken.set(token)
+    if (!validToken) {
+      const message = "Ongeldige auth token"
+      dispatch(createSetErrorMessage(message))
+      return false
+    }
     dispatch(createAuthenticate(token))
     navigate(to("/"))
+    return true
   }
 
   const unAuthenticate = () => {
     authToken.clear()
     dispatch(createUnAuthenticate())
-  }
-
-  const clear = () => {
-    authToken.clear()
-    dispatch(createClear())
     navigate(to("/login"))
   }
 
-  return [auth, { initialize, authenticate, authenticateToken, unAuthenticate, clear }]
+  return [auth, { initialize, authenticate, authenticateToken, unAuthenticate }]
 }
 
 export default useAuth
