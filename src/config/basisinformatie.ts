@@ -1,6 +1,7 @@
 export const email = "Terugmelding.Basisinformatie@amsterdam.nl"
 export const subject = "Terugmelding Basisinformatie"
 export const body = (
+  isWoonboot: boolean,
   address: string,
   postalCode: string,
   gebruiksdoel?: string,
@@ -8,7 +9,10 @@ export const body = (
   aantalBouwlagen?: number,
   etage?: number,
   aantalKamers?: number,
-  oppervlak?: number
+  oppervlak?: number,
+  woonbootStatus?: string,
+  woonbootIndicatie?: boolean,
+  woonbootAanduiding?: boolean
 ) =>
 `Beste collega,
 
@@ -19,12 +23,19 @@ ${ postalCode } Amsterdam
 
 Ons systeem toont bij dit adres op dit moment de volgende gegevens uit BAG:
 
-Gebruiksdoel: ${ gebruiksdoel || "-" }
+${ !isWoonboot ?
+
+`Gebruiksdoel: ${ gebruiksdoel || "-" }
 Soort Object (feitelijk gebruik): ${ gebruik || "" }
 Aantal bouwlagen: ${ aantalBouwlagen || "-"}
 Verdieping toegang: ${ etage || "-" }
 Aantal kamers: ${ aantalKamers || "-" }
-Woonoppervlak: ${ oppervlak ? `${ oppervlak } m² ` : "-" }
+Woonoppervlak: ${ oppervlak ? `${ oppervlak } m² ` : "-" }`
+:
+`Status: ${ woonbootStatus || "-" }
+Indicatie geconstateerd: ${ woonbootIndicatie ? "Ja" : "Nee" }
+Aanduiding in onderzoek: ${ woonbootAanduiding ? "Ja" : "Nee" }`
+}
 
 We hebben bij onze controle de volgende afwijkingen geconstateerd:
 

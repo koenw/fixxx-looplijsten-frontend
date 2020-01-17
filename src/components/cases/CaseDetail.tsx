@@ -76,6 +76,14 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
   const woningOppervlak =
     hasBagData && bagData.oppervlakte && bagData.oppervlakte > 1 ? bagData.oppervlakte : 0
   const woningBagId = hasBagData ? bagData.verblijfsobjectidentificatie : undefined
+
+  // woonboot
+  const woonbootLigplaatsIndicatie = hasBagData && bagData.ligplaatsidentificatie
+  const woonbootStatus = hasBagData && bagData.status ? bagData.status : undefined
+  const woonbootIndicatie = hasBagData && bagData.indicatie_geconstateerd !== undefined ? bagData.indicatie_geconstateerd : false
+  const woonbootAanduiding = hasBagData && bagData.aanduiding_in_onderzoek !== undefined ? bagData.aanduiding_in_onderzoek : false
+
+  // woning terugmeld email
   const mailtoAnchor = <MailtoAnchor
     address={ address }
     postalCode={ postalCode }
@@ -85,13 +93,11 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
     etage={ woningEtage }
     aantalKamers= { woningKamers }
     oppervlak={ woningOppervlak }
+    isWoonboot={ isWoonboot }
+    woonbootStatus={ woonbootStatus }
+    woonbootIndicatie={ woonbootIndicatie }
+    woonbootAanduiding={ woonbootAanduiding }
     />
-  // woonboot
-  const woonbootLigplaatsIndicatie = hasBagData && bagData.ligplaatsidentificatie
-  const woonbootStatus = hasBagData && bagData.status
-  const woonbootIndicatie = hasBagData && bagData.indicatie_geconstateerd ? "Ja" : "Nee"
-  const woonbootAanduiding = hasBagData && bagData.aanduiding_in_onderzoek ? "Ja" : "Nee"
-
   const woningFields = [
     ["Gebruiksdoel", woningBestemming],
     ["Soort Object (feitelijk gebruik)", woningGebruik],
@@ -103,8 +109,8 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
   ]
   const woonbootFields = [
     ["Status", woonbootStatus || "-"],
-    ["Indicatie geconstateerd", woonbootIndicatie],
-    ["Aanduiding in onderzoek", woonbootAanduiding],
+    ["Indicatie geconstateerd", woonbootIndicatie ? "Ja" : "Nee"],
+    ["Aanduiding in onderzoek", woonbootAanduiding ? "Ja" : "Nee"],
     mailtoAnchor
   ]
   const woningData = isWoning ? woningFields : woonbootFields
