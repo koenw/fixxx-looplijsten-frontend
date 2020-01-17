@@ -52,7 +52,7 @@ const StateProvider: FC<Props> = ({ children }) => {
     if (isInitialized) return
 
     const isAuthenticated = await authActions.initialize()
-    if (!isAuthenticated) return
+    if (!isAuthenticated) return clear()
 
     itinerariesActions.initialize()
   }
