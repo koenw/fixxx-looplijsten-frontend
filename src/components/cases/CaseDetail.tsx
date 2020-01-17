@@ -13,6 +13,7 @@ import replaceNewLines from "../../lib/utils/replaceNewLines"
 import replaceUrls from "../../lib/utils/replaceUrls"
 import isBetweenDates from "../../lib/utils/isBetweenDates"
 import displayAddress from "../../lib/displayAddress"
+import displayBoolean from "../../lib/displayBoolean"
 
 type Props = {
   caseId: CaseId
@@ -58,6 +59,8 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
   const vakantieverhuurToday = vakantieverhuurNotified ? caseItem.vakantie_verhuur.notified_rentals.filter(
     rental => isBetweenDates(new Date(rental.check_in), new Date(rental.check_out), new Date())
   ).length > 0 : "-"
+  const vakantieverhuurShortstay = caseItem.vakantie_verhuur.shortstay === "J" ? true : false
+  const vakantieverhuurBnB = caseItem.vakantie_verhuur.is_bnb_declared === "J" ? true : false
   const showVakantieverhuur = vakantieverhuurNotified
 
   // Woning
@@ -109,8 +112,8 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
   ]
   const woonbootFields = [
     ["Status", woonbootStatus || "-"],
-    ["Indicatie geconstateerd", woonbootIndicatie ? "Ja" : "Nee"],
-    ["Aanduiding in onderzoek", woonbootAanduiding ? "Ja" : "Nee"],
+    ["Indicatie geconstateerd", displayBoolean(woonbootIndicatie)],
+    ["Aanduiding in onderzoek", displayBoolean(woonbootAanduiding)],
     mailtoAnchor
   ]
   const woningData = isWoning ? woningFields : woonbootFields
@@ -244,8 +247,8 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
         data={[
           ["Vandaag verhuurd", vakantieverhuurToday],
           [`Nachten verhuurd ${ new Date().getFullYear() }`, vakantieverhuurDays > 0 ? <a href="#vakantieverhuur">{ vakantieverhuurDays } nachten</a> : "-"],
-          ["Shortstay", undefined],
-          ["B&B aangemeld", undefined]
+          ["Shortstay", displayBoolean(vakantieverhuurShortstay)],
+          ["B&B aangemeld", displayBoolean(vakantieverhuurBnB)]
         ]}
         />
       <CaseDetailSection

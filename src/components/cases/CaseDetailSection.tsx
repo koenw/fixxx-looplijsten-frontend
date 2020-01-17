@@ -5,6 +5,7 @@ import Label from "../styled/Label"
 import Footer from "./Footer"
 import InvalidDataSpan from "../global/InvalidDataSpan"
 import Anchor from "../global/Anchor"
+import displayBoolean from "../../lib/displayBoolean"
 
 type Value = string | ReactNode
 type KeyValueDetail = string | ReactNode | [string, Value]
@@ -47,7 +48,7 @@ const CaseDetailSection: FC<Props> = ({ id, title, data, footer }) => {
           const key = Array.isArray(keyValue) ? keyValue[0] : keyValue
           let value = Array.isArray(keyValue) ? keyValue[1] : keyValue
           if (typeof value === "boolean") {
-            value = value === true ? "Ja" : "Nee"
+            value = displayBoolean(value)
           }
           const isString = typeof value === "string"
           const isUndefined = value == null

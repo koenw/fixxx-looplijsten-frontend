@@ -79,6 +79,8 @@ type BWVTmp = {
 type VakantieVerhuur = {
   notified_rentals: [{ check_in: string, check_out: string }]
   rented_days: number
+  shortstay: "J" | "N"
+  is_bnb_declared: "J" | "N"
 }
 declare type BagData = {
   gebruiksdoel: string[]
