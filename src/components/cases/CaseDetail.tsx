@@ -68,6 +68,7 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
   const bagData = caseItem.bag_data as BagData
   const isWoonboot = hasBagData && bagData.ligplaatsidentificatie !== undefined
   const isWoning = !isWoonboot
+  const woningTitle = isWoning ? "Woning" : "Ligplaats"
 
   // woning
   const gebruiksdoel = hasBagData ? bagData.gebruiksdoel : undefined
@@ -252,7 +253,7 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
         ]}
         />
       <CaseDetailSection
-        title="Woning"
+        title={ woningTitle }
         data={ woningData }
         footer={ woningFooter }
         />
