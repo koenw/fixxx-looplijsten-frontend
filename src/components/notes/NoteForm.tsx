@@ -33,9 +33,10 @@ const NoteForm: FC<Props> = ({ itineraryId, id, value }) => {
 
   const [text, onChangeText] = useOnChangeState(value)
   const showButton = text === ""
-  const nawText = "NAW"
+  const nawText = "Niet aanwezig"
 
   const saveNote = async (text: string) => {
+    if (text === "" && id === undefined) return
     const result = await setNote(itineraryId, text, id)
     if (result) {
       navigate(to("/"))
