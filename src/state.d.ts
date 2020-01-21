@@ -55,4 +55,5 @@ declare type ParseState = {
 
 declare type ParseActions = {
   parse: (a: string) => void
+  clear: () => void
 }

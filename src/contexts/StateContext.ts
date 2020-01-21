@@ -64,7 +64,8 @@ const value = {
 
     parse: parseState,
     parseActions: {
-      parse: (a: string) => {}
+      parse: (a: string) => {},
+      clear: noop
     },
 
     isAnonymous: false,

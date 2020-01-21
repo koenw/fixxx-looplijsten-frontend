@@ -2,10 +2,12 @@ type Action =
   | { type: "START_FETCHING", payload: { query: string } }
   | { type: "SET_RESULTS", payload: { results: SearchResults } }
   | { type: "SET_ERROR", payload: { errorMessage: ErrorMessage } }
+  | { type: "CLEAR" }
 
 export const createStartFetching = (query: string) : Action => ({ type: "START_FETCHING", payload: { query } })
 export const createSetResults = (results: SearchResults) : Action => ({ type: "SET_RESULTS", payload: { results } })
 export const createSetError = (errorMessage: ErrorMessage) : Action => ({ type: "SET_ERROR", payload: { errorMessage } })
+export const createClear = () : Action => ({ type: "CLEAR" })
 
 export const initialState: ParseState = {
   isFetching: false,
@@ -32,6 +34,11 @@ const reducer = (state: ParseState, action: Action) : ParseState => {
       const { errorMessage } = action.payload
       const isFetching = false
       return { ...state, isFetching, errorMessage }
+    }
+    case "CLEAR": {
+      const query = undefined
+      const results = undefined
+      return { ...state, query, results }
     }
     default:
       return state

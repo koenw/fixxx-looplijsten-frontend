@@ -2,7 +2,8 @@ import { useReducer } from "react"
 import reducer, {
   initialState,
   createStartFetching,
-  createSetResults
+  createSetResults,
+  createClear
 } from "./parseReducer"
 import { get } from "../lib/utils/fetch"
 import { getUrl } from "../config/domain"
@@ -84,7 +85,11 @@ const useParse = () : [ParseState, ParseActions] => {
     dispatch(createSetResults(results))
   }
 
-  return [state, { parse }]
+  const clear = () => {
+    dispatch(createClear())
+  }
+
+  return [state, { parse, clear }]
 }
 
 export default useParse

@@ -5,14 +5,19 @@ import styled from "styled-components"
 import TextareaBase from "../styled/Textarea"
 import Hr from "../styled/Hr"
 import useOnChangeState from "../../hooks/useOnChangeState"
+import useGlobalState from "../../hooks/useGlobalState"
 import SearchResults from "./SearchResults"
 import AddAllButton from "./AddAllButton"
-import useGlobalState from "../../hooks/useGlobalState"
+import ClearButton from "./ClearButton"
 
 const ButtonWrap = styled.div`
   display: flex
   justify-content: flex-end
   margin-top: 12px
+  button {
+    position: relative
+    top: -56px
+  }
 `
 const AddAllButtonWrap = styled(ButtonWrap)`
   margin: 24px 0
@@ -20,6 +25,11 @@ const AddAllButtonWrap = styled(ButtonWrap)`
 const Textarea = styled(TextareaBase)`
   display: block
   width: 100%
+`
+const ClearButtonWrap = styled.div`
+  margin-top: 12px
+  display: flex
+  justify-content: flex-start
 `
 
 const ParseForm: FC = () => {
@@ -31,7 +41,8 @@ const ParseForm: FC = () => {
       results
     },
     parseActions: {
-      parse
+      parse,
+      clear
     },
     hasItinerary,
     itinerariesActions: {
@@ -39,7 +50,7 @@ const ParseForm: FC = () => {
     }
   } = useGlobalState()
 
-  const [value, onChangeValue] = useOnChangeState(query)
+  const [value, onChangeValue, setValue] = useOnChangeState(query || "")
   const showSpinner = isFetching
   const showResults = results !== undefined && results.length > 0 && !isFetching
   const nonItineraries = (results || [])
@@ -75,16 +86,25 @@ const ParseForm: FC = () => {
     await addMany(caseIds)
   }
 
+  const onClickClear = () => {
+    setValue("")
+    clear()
+  }
+
   const AddAll = () => (
     <AddAllButtonWrap>
       <AddAllButton onClick={ onClick } disabled={ isFetching }/>
     </AddAllButtonWrap>
   )
 
+
   return (
     <div className="ParseForm">
       <form onSubmit={ onSubmit }>
         <Textarea rows={ 16 } value={ value } onChange={ onChangeValue } autoFocus />
+        <ClearButtonWrap>
+          <ClearButton onClick={ onClickClear } />
+        </ClearButtonWrap>
         <ButtonWrap>
           <Button variant="secondary" iconLeft={ <Search /> }>Zoek alles</Button>
         </ButtonWrap>

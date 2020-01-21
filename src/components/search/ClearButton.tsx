@@ -14,7 +14,7 @@ const StyledButton = styled(Button)`
 
 const ClearButton: FC<Props> = ({ onClick = noop }) =>
   <StyledButton variant="textButton" onClick={ onClick}>
-    Wis zoekvelden
+    Wis velden
   </StyledButton>
 
 export default ClearButton
