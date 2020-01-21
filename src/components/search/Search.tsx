@@ -8,10 +8,12 @@ import styled from "styled-components"
 import useGlobalState from "../../hooks/useGlobalState"
 
 const Div = styled.div`
-  margin: 12px 0
   display: flex
   justify-content: flex-end
   a {
+    position: relative
+    top: -46px
+    padding: 12px 15px
     margin-bottom: 0
   }
 `

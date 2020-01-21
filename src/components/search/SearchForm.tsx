@@ -5,6 +5,7 @@ import { Search } from "@datapunt/asc-assets"
 import useOnChangeState from "../../hooks/useOnChangeState"
 import InputBase from "../styled/Input"
 import useGlobalState from "../../hooks/useGlobalState"
+import ClearButton from "./ClearButton"
 
 const Label = styled.label`
   font-weight: 500
@@ -48,6 +49,12 @@ const SearchButton = styled(Button)`
   margin-top: 24px
 `
 
+const ClearButtonWrap = styled.div`
+  margin-top: 12px
+  display: flex
+  justify-content: flex-start
+`
+
 const SearchForm: FC = () => {
 
   const {
@@ -55,58 +62,72 @@ const SearchForm: FC = () => {
       query
     },
     searchActions: {
-      search
+      search,
+      clear
     }
   } = useGlobalState()
 
-  const [postalCode, onChangePostalCode] = useOnChangeState(query ? query[0] : "")
-  const [streetNumber, onChangeStreetNumber] = useOnChangeState(query ? query[1] : "")
-  const [suffix, onChangeSuffix] = useOnChangeState(query ? query[2] : "")
+  const [postalCode, onChangePostalCode, setPostalCode] = useOnChangeState(query ? query[0] : "")
+  const [streetNumber, onChangeStreetNumber, setStreetNumber] = useOnChangeState(query ? query[1] : "")
+  const [suffix, onChangeSuffix, setSuffix] = useOnChangeState(query ? query[2] : "")
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
     search(postalCode, streetNumber, suffix)
   }
 
+  const onClickClear = (event: FormEvent) => {
+    const emptyString = ""
+    setPostalCode(emptyString)
+    setStreetNumber(emptyString)
+    setSuffix(emptyString)
+    clear()
+  }
+
   return (
-    <form onSubmit={ onSubmit }>
-      <InputWrapPostalCode>
-        <Label>postcode</Label>
-        <Input
-          type="text"
-          pattern="\s*[1-9][0-9]{3}\s?[a-zA-Z]{2}\s*"
-          title="Geldige postcodes zijn in de 1234AA of 1234 aa"
-          required
-          autoFocus
-          value={ postalCode }
-          onChange={ onChangePostalCode }
-          />
-      </InputWrapPostalCode>
-      <InputWrapStreetNumber>
-        <Label>huisnr.</Label>
-        <Input
-          type="number"
-          min="1"
-          step="1"
-          pattern="\d+"
-          title="Alleen cijfers zijn geldig"
-          required
-          value={ streetNumber }
-          onChange={ onChangeStreetNumber }
-          />
-      </InputWrapStreetNumber>
-      <InputWrap>
-        <Label>hslt.&nbsp;/&nbsp;etage</Label>
-        <Input
-          type="text"
-          value={ suffix }
-          onChange={ onChangeSuffix }
-          />
-      </InputWrap>
-      <ButtonWrap>
-        <SearchButton variant="secondary" iconSize={ 24 } icon={ <Search /> } />
-      </ButtonWrap>
-    </form>
+    <div className="Search">
+      <form onSubmit={ onSubmit }>
+        <InputWrapPostalCode>
+          <Label>postcode</Label>
+          <Input
+            type="text"
+            pattern="\s*[1-9][0-9]{3}\s?[a-zA-Z]{2}\s*"
+            title="Geldige postcodes zijn in de 1234AA of 1234 aa"
+            required
+            autoFocus
+            value={ postalCode }
+            onChange={ onChangePostalCode }
+            />
+        </InputWrapPostalCode>
+        <InputWrapStreetNumber>
+          <Label>huisnr.</Label>
+          <Input
+            type="number"
+            min="1"
+            step="1"
+            pattern="\d+"
+            title="Alleen cijfers zijn geldig"
+            required
+            value={ streetNumber }
+            onChange={ onChangeStreetNumber }
+            />
+        </InputWrapStreetNumber>
+        <InputWrap>
+          <Label>hslt.&nbsp;/&nbsp;etage</Label>
+          <Input
+            type="text"
+            value={ suffix }
+            onChange={ onChangeSuffix }
+            />
+        </InputWrap>
+        <ButtonWrap>
+          <SearchButton variant="secondary" iconSize={ 24 } icon={ <Search /> } />
+        </ButtonWrap>
+      </form>
+      <ClearButtonWrap>
+        <ClearButton onClick={ onClickClear } />
+      </ClearButtonWrap>
+    </div>
   )
 }
 

@@ -2,7 +2,8 @@ import { useReducer } from "react"
 import reducer, {
   initialState,
   createStartFetching,
-  createSetResults
+  createSetResults,
+  createClear
 } from "./searchReducer"
 import { get, notOk } from "../lib/utils/fetch"
 import { getUrl } from "../config/domain"
@@ -39,7 +40,11 @@ const useSearch = () : [SearchState, SearchActions] => {
     })()
   }
 
-  return [state, { search }]
+  const clear = () => {
+    dispatch(createClear())
+  }
+
+  return [state, { search, clear }]
 }
 
 export default useSearch

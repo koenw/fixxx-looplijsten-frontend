@@ -43,6 +43,7 @@ declare type SearchState = {
 
 declare type SearchActions = {
   search: (a: PostalCode, b: StreetNumberString, c: StreetSuffix) => void
+  clear: () => void
 }
 
 declare type ParseState = {

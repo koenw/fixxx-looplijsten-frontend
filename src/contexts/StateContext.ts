@@ -58,7 +58,8 @@ const value = {
 
     search: searchState,
     searchActions: {
-      search: (a: PostalCode, b: StreetNumberString, c: StreetSuffix) => {}
+      search: (a: PostalCode, b: StreetNumberString, c: StreetSuffix) => {},
+      clear: noop
     },
 
     parse: parseState,
