@@ -17,6 +17,9 @@ const Div = styled.div`
     margin-bottom: 0
   }
 `
+const StyledLink = styled(Link)`
+  color: #4caf50
+`
 
 const Search: FC = () => {
 
@@ -33,7 +36,7 @@ const Search: FC = () => {
     <div className="Search">
       <SearchForm />
       <Div>
-        <Link to={ to("/parse") }>Copy + paste TamTam looplijst</Link>
+        <StyledLink to={ to("/parse") }>Copy + paste TamTam looplijst</StyledLink>
       </Div>
       { showSpinner &&
         <Spinner size={ 40 } />
