@@ -19,7 +19,6 @@ const Span = styled.span`
     box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.6)
   }
 `
-
 const Button = styled.button`
   cursor: pointer
   background: none
@@ -28,16 +27,28 @@ const Button = styled.button`
   width: 100%
   height: 100%
   padding: 0
-  background-repeat: no-repeat
-  background-position: center
-  background-size: 36px
+`
+const Img = styled.img`
+  padding: 24px 18px
+  width: 36px
+  height: 24px
+`
+const ImgDisabled = styled.img`
+  padding: 18px
+  width: 36px
+  height: 36px
 `
 
 const EyeButton: FC<Props> = ({ onClick, isOpen }) => {
-  const name = isOpen ? "eye" : "eye-disabled"
-  const filename = `${ name }@2x.png`
-  const src = `${ getBasepath() }/icons/${ filename }`
-  const style = { backgroundImage: `url(${ src })` }
-  return <Span><Button onClick={ onClick } style={ style }>️</Button></Span>
+  const getImgUrl = (name: string) => `${ getBasepath() }/icons/${ name }@2x.png`
+  const getStyle = (isHidden: boolean) => isHidden ? { display: "none" } : undefined
+  return (
+    <Span>
+      <Button onClick={ onClick }>️
+        <Img src={ getImgUrl("eye") } style={ getStyle(!isOpen) } />
+        <ImgDisabled src={ getImgUrl("eye-disabled") } style={ getStyle(isOpen) } />
+      </Button>
+    </Span>
+  )
 }
 export default EyeButton
