@@ -7,6 +7,7 @@ import IconButton from "../global/IconButton"
 import Itinerary from "./Itinerary"
 import useGlobalState from "../../hooks/useGlobalState"
 import confirm from "../../lib/utils/confirm"
+import NoteIcon from "./NoteIcon"
 
 type Props = {
   itinerary: Itinerary
@@ -77,7 +78,7 @@ const DraggableItinerary: FC<Props> = ({ itinerary, index }) => {
           <Inner>
             <Itinerary itinerary={ bwv_data } note={ noteText } />
             <ButtonWrap>
-              <IconButton icon="DocumentText" onClick={ () => navigate(to(notePath)) } />
+              <IconButton iconNode={ <NoteIcon /> } onClick={ () => navigate(to(notePath)) } />
               <IconButton icon="TrashBin" onClick={ onClick } />
             </ButtonWrap>
           </Inner>
