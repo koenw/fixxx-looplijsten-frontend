@@ -7,6 +7,7 @@ type Props = {
 
 const P = styled.p`
   color: red
+  margin-bottom: 18px
 `
 
 const ErrorMessage: FC<Props> = ({ text }) => {
