@@ -50,7 +50,7 @@ const useAuth = () : [AuthState, AuthActions] => {
     // Handle error responses
     if (notOk(response)) {
       const message =
-        response.status === 401 ? "Ongeldige email, wachtwoord combinatie" :
+        response !== undefined && response.status === 401 ? "Ongeldige email, wachtwoord combinatie" :
         errorMessage !== undefined ? errorMessage! :
         String(response.status)
       dispatch(createSetErrorMessage(message))

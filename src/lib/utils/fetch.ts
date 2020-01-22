@@ -31,7 +31,7 @@ const fetch = async (url: URL, method: Method = "GET", body?: Body, parseRespons
     return [response, data]
   } catch (err) {
     console.error(err)
-    return [undefined, undefined, err]
+    return [undefined, undefined, err.toString()]
   }
 }
 export default fetch
