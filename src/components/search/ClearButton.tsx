@@ -1,5 +1,5 @@
 import React, { MouseEvent, FC } from "react"
-import { Spinner, Button } from "@datapunt/asc-ui"
+import { Button } from "@datapunt/asc-ui"
 import styled from "styled-components"
 import noop from "../../lib/utils/noop"
 
