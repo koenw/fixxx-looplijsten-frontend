@@ -20,6 +20,7 @@ const Span = styled.span`
   }
 `
 const Button = styled.button`
+  display: inline-block
   cursor: pointer
   background: none
   border: none

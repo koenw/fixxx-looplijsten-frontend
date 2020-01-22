@@ -21,7 +21,7 @@ const Span = styled.span`
   height: 23px
   margin-top: 20px
   margin-right: 16px
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8);
   color: white
   font-weight: 600
   padding: 6px 14px
