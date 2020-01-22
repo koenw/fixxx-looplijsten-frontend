@@ -8,10 +8,7 @@ type Props = {
 }
 
 const Span = styled.span`
-  position: fixed
-  z-index: 9
-  bottom: 12px
-  right: 12px
+  display: inline-block
   background: white
   box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.3);
   transition: box-shadow 0.2s ease-in-out

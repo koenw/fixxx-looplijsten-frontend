@@ -1,9 +1,8 @@
 import React, { FC } from "react"
-import useGlobalState from "../../hooks/useGlobalState"
 import useFetch from "../../hooks/useFetch"
 import { Spinner } from "@datapunt/asc-ui"
 import CaseDetail from "./CaseDetail"
-import EyeButton from "./EyeButton"
+import AnonymousToggle from "./AnonymousToggle"
 import ErrorMessage from "../global/ErrorMessage"
 
 type Props = {
@@ -12,18 +11,11 @@ type Props = {
 
 const Case: FC<Props> = ({ caseId }) => {
 
-  const {
-    isAnonymous,
-    toggleIsAnonymous
-  } = useGlobalState()
-
   const [caseItem, isFetching, errorMessage] = useFetch(`cases/${ caseId }`) as [Case, boolean, ErrorMessage]
 
   const showSpinner = isFetching
   const show = caseItem !== undefined
   const showErrorMessage = errorMessage !== undefined
-
-  const onClick = () => toggleIsAnonymous()
 
   return (
     <div className="CaseDetail">
@@ -33,7 +25,7 @@ const Case: FC<Props> = ({ caseId }) => {
       { show &&
         <>
           <CaseDetail caseId={ caseId } caseItem={ caseItem! } />
-          <EyeButton onClick={ onClick } isOpen={ isAnonymous } />
+          <AnonymousToggle />
         </>
       }
       { showErrorMessage &&
