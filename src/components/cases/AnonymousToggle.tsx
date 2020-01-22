@@ -38,13 +38,13 @@ const AnonymousToggle: FC = () => {
     toggleIsAnonymous
   } = useGlobalState()
 
-  const showMessage = isAnonymous
+  const showLabel = !isAnonymous
 
   const onClick = () => toggleIsAnonymous()
 
   return (
     <Div className="AnonymousToggle">
-      <Span isHidden={ showMessage }>Privé modus staat aan</Span>
+      <Span isHidden={ showLabel }>Privé modus staat aan</Span>
       <EyeButton onClick={ onClick } isOpen={ isAnonymous } />
     </Div>
   )
