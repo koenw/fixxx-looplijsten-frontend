@@ -20,11 +20,15 @@ const Span = styled.span`
   display: inline-block
   height: 23px
   margin-top: 20px
-  margin-right: 12px
+  margin-right: 16px
   background: rgba(0, 0, 0, 0.6);
   color: white
-  padding: 4px 8px
-  border-radius: 4px
+  font-weight: 600
+  padding: 6px 14px
+  border-radius: 6px
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.2s ease-out
+  opacity: ${ (props: { isHidden: boolean }) => props.isHidden ? 0 : 1 }
 `
 
 const AnonymousToggle: FC = () => {
@@ -40,9 +44,7 @@ const AnonymousToggle: FC = () => {
 
   return (
     <Div className="AnonymousToggle">
-      { showMessage &&
-        <Span>Privé modus staat aan</Span>
-      }
+      <Span isHidden={ showMessage }>Privé modus staat aan</Span>
       <EyeButton onClick={ onClick } isOpen={ isAnonymous } />
     </Div>
   )
