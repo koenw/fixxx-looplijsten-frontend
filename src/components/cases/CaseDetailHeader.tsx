@@ -2,7 +2,9 @@ import React, { FC } from "react"
 import styled from "styled-components"
 import Signal from "../global/Signal"
 import InvalidDataSpan from "../global/InvalidDataSpan"
+import ScrollToAnchor from "../global/ScrollToAnchor"
 import Label from "../styled/Label"
+
 import Footer from "./Footer"
 
 type Props = {
@@ -53,7 +55,7 @@ const CaseDetailHeader: FC<Props> = ({ address, postalCode, personCount, caseNum
         <Signal type={ signalType } text={ signal } />
       }
       <div>
-        <Label>Ingeschreven</Label><span>{ personCount > 0 ? <a href="#personen">{ personText }</a> : personText }</span>
+        <Label>Ingeschreven</Label><span>{ personCount > 0 ? <ScrollToAnchor anchor="personen" text={ personText } /> : personText }</span>
       </div>
       <div>
         <Label>Zaaknummer</Label>

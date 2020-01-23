@@ -4,7 +4,6 @@ import H1 from "../styled/H1"
 import Label from "../styled/Label"
 import Footer from "./Footer"
 import InvalidDataSpan from "../global/InvalidDataSpan"
-import Anchor from "../global/Anchor"
 import displayBoolean from "../../lib/displayBoolean"
 
 type Value = string | ReactNode
@@ -33,13 +32,9 @@ const CaseDetailSection: FC<Props> = ({ id, title, data, footer }) => {
 
   const hasTitle = title !== undefined
   const showFooter = footer !== undefined
-  const hasAnchor = id !== undefined
 
   return (
-    <Section>
-      { hasAnchor &&
-        <Anchor name={ id! } />
-      }
+    <Section id={ id !== undefined ? id : "" }>
       { hasTitle &&
         <H1>{ title }</H1>
       }

@@ -14,6 +14,7 @@ import replaceUrls from "../../lib/utils/replaceUrls"
 import isBetweenDates from "../../lib/utils/isBetweenDates"
 import displayAddress from "../../lib/displayAddress"
 import displayBoolean from "../../lib/displayBoolean"
+import ScrollToAnchor from "../global/ScrollToAnchor"
 
 type Props = {
   caseId: CaseId
@@ -247,7 +248,7 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
         title="Vakantieverhuur"
         data={[
           ["Vandaag verhuurd", vakantieverhuurToday],
-          [`Nachten verhuurd ${ new Date().getFullYear() }`, vakantieverhuurDays > 0 ? <a href="#vakantieverhuur">{ vakantieverhuurDays } nachten</a> : "-"],
+          [`Nachten verhuurd ${ new Date().getFullYear() }`, vakantieverhuurDays > 0 ? <ScrollToAnchor anchor="vakantieverhuur" text={ `${ vakantieverhuurDays } nachten` } /> : "-"],
           ["Shortstay", displayBoolean(vakantieverhuurShortstay)],
           ["B&B aangemeld", displayBoolean(vakantieverhuurBnB)]
         ]}
