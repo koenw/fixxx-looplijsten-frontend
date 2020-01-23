@@ -7,8 +7,8 @@ type Props = {
   isOpen: boolean
 }
 
-const Span = styled.span`
-  display: inline-block
+const Div = styled.div`
+  display: block
   background: white
   box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.3);
   transition: box-shadow 0.2s ease-in-out
@@ -20,7 +20,7 @@ const Span = styled.span`
   }
 `
 const Button = styled.button`
-  display: inline-block
+  display: block
   cursor: pointer
   background: none
   border: none
@@ -29,27 +29,32 @@ const Button = styled.button`
   height: 100%
   padding: 0
 `
-const Img = styled.img`
-  padding: 24px 18px
+
+const Img = styled.span`
+  display: inline-block
+  margin: 24px 18px
   width: 36px
   height: 24px
+  background-repeat: no-repeat
+  background-size: contain
+  background-image: url('${ getBasepath() }/icons/eye@2x.png');
 `
-const ImgDisabled = styled.img`
-  padding: 18px
-  width: 36px
+
+const ImgDisabled = styled(Img)`
+  margin: 18px
   height: 36px
+  background-image: url('${ getBasepath() }/icons/eye-disabled@2x.png')
 `
 
 const EyeButton: FC<Props> = ({ onClick, isOpen }) => {
-  const getImgUrl = (name: string) => `${ getBasepath() }/icons/${ name }@2x.png`
   const getStyle = (isHidden: boolean) => isHidden ? { display: "none" } : undefined
   return (
-    <Span>
-      <Button onClick={ onClick }>️
-        <Img src={ getImgUrl("eye") } style={ getStyle(!isOpen) } />
-        <ImgDisabled src={ getImgUrl("eye-disabled") } style={ getStyle(isOpen) } />
+    <Div>
+      <Button onClick={ onClick }>
+        <Img style={ getStyle(!isOpen) } />
+        <ImgDisabled style={ getStyle(isOpen) } />
       </Button>
-    </Span>
+    </Div>
   )
 }
 export default EyeButton

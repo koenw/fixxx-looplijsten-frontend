@@ -32,6 +32,7 @@ const MapsButton: FC<Props> = ({ itineraries }) => {
       .filter((address, index, arr) => arr.indexOf(address) === index) // filter unique
       .join("/")
     const href = `https://www.google.nl/maps/dir/${ path }`
+    console.log(href)
     window.open(href, "_blank")
   }
   const text = window.innerWidth > 768 ? "Bekijk op Google Maps" : "Google Maps"
