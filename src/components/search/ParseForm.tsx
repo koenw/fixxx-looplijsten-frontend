@@ -14,10 +14,6 @@ const ButtonWrap = styled.div`
   display: flex
   justify-content: flex-end
   margin-top: 12px
-  button {
-    position: relative
-    top: -56px
-  }
 `
 const AddAllButtonWrap = styled(ButtonWrap)`
   margin: 24px 0
