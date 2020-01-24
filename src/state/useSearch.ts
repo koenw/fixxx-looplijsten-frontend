@@ -8,6 +8,7 @@ import reducer, {
 import { get, notOk } from "../lib/utils/fetch"
 import { getUrl } from "../config/domain"
 import isEmptyObject from "../lib/utils/isEmptyObject"
+import groupCasesByAddress from "../lib/groupCasesByAddress"
 
 const useSearch = () : [SearchState, SearchActions] => {
 
@@ -28,14 +29,9 @@ const useSearch = () : [SearchState, SearchActions] => {
 
       // Set results
       const { cases } = result
-      const nonEmptyCases = cases.filter((obj: Object) => !isEmptyObject(obj))
-      const hasCases = nonEmptyCases.length > 0
-      const results = hasCases ?
-        [{
-          success: true,
-          data: { cases: nonEmptyCases }
-        }] :
-        []
+      const nonEmptyCases = cases.filter((obj: BWVData) => !isEmptyObject(obj))
+      const groupedCases = groupCasesByAddress(nonEmptyCases)
+      const results = groupedCases.map(cases => ({ success: true, data: { cases } }))
       dispatch(createSetResults(results))
     })()
   }

@@ -19,7 +19,7 @@ declare type Stadium = string
 
 declare type BWVData = {
   case_id: CaseId
-  street_name: StreeName
+  street_name: StreetName
   postal_code: PostalCode
   stadium: Stadium
   street_number: StreetNumber
@@ -139,3 +139,4 @@ declare type Case = {
   vakantie_verhuur: VakantieVerhuur
   related_cases: RelatedCase[]
 }
+declare type Cases = Case[]
