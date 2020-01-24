@@ -36,7 +36,7 @@ const Search: FC = () => {
     <div className="Search">
       <SearchForm />
       <Div>
-        <StyledLink to={ to("/parse") }>Copy + paste TamTam looplijst</StyledLink>
+        <StyledLink to={ to("/parse") }>Copy + paste TamTam lijst</StyledLink>
       </Div>
       { showSpinner &&
         <Spinner size={ 40 } />
