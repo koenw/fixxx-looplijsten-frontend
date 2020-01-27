@@ -1,5 +1,13 @@
 {
   "rewrites": [
+    
+    { "source": "login", "destination": "/index.html" },
+    { "source": "authentication/callback", "destination": "/index.html" },
+    { "source": "zoeken", "destination": "/index.html" },
+    { "source": "parse", "destination": "/index.html" },
+    { "source": "cases/*", "destination": "/index.html" },
+    { "source": "notes/*", "destination": "/index.html" },
+
     { "source": "looplijsten/login", "destination": "/looplijsten/index.html" },
     { "source": "looplijsten/authentication/callback", "destination": "/looplijsten/index.html" },
     { "source": "looplijsten/zoeken", "destination": "/looplijsten/index.html" },
