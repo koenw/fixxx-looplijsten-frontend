@@ -1,5 +1,4 @@
 import { useReducer } from "react"
-import { navigate } from "@reach/router"
 import reducer, {
   initialState,
   createStartFetching,
@@ -13,7 +12,7 @@ import reducer, {
   createSetNote,
   createClear } from "./itinerariesReducer"
 import { get, post, put, patch, del, notOk, isForbidden } from "../lib/utils/fetch"
-import { getUrl, to } from "../config/domain"
+import { getUrl } from "../config/domain"
 import { navigateToLogin } from "../lib/navigateTo"
 import promiseSerial from "../lib/utils/promiseSerial"
 import calculateNewPosition from "../lib/calculateNewPosition"

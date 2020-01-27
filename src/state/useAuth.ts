@@ -1,5 +1,4 @@
 import { useReducer } from "react"
-import { navigate } from "@reach/router"
 import reducer, {
   initialState,
   createStartFetching,
@@ -67,7 +66,7 @@ const useAuth = () : [AuthState, AuthActions] => {
       return false
     }
     dispatch(createAuthenticate(token))
-    navigate(to("/"))
+    navigateToHome()
     return true
   }
 
@@ -79,7 +78,7 @@ const useAuth = () : [AuthState, AuthActions] => {
       return false
     }
     dispatch(createAuthenticate(token))
-    navigate(to("/"))
+    navigateToHome()
     return true
   }
 
