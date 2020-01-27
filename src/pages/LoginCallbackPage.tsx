@@ -52,11 +52,13 @@ const LoginCallbackPage: FC<RouteComponentProps> = () => {
     confirmLogin()
   }, [])
 
-  // @TODO: Dutch title
   return (
     <Div>
-      { showSpinner && <Spinner/> }
-      { showErrorMessage && <ErrorMessage text={ errorMessage! } />
+      { showSpinner &&
+        <Spinner/>
+      }
+      { showErrorMessage &&
+        <ErrorMessage text={ errorMessage! } />
       }
     </Div>
   )

@@ -36,7 +36,10 @@ const useAuth = () : [AuthState, AuthActions] => {
       return true
     } else {
       console.log(window.location.pathname, to("/authentication/callback"))
-      if (window.location.pathname !== to("/authentication/callback")) navigateToLogin()
+      if (window.location.pathname !== to("/authentication/callback")) {
+        console.log("navigateToLogin")
+        navigateToLogin()
+      }
       return false
     }
   }
