@@ -1,13 +1,15 @@
 import { useReducer } from "react"
+import { navigate } from "@reach/router"
 import reducer, {
   initialState,
   createStartFetching,
   createSetResults,
   createClear
 } from "./parseReducer"
-import { get } from "../lib/utils/fetch"
-import { getUrl } from "../config/domain"
+import { get, isForbidden } from "../lib/utils/fetch"
+import { getUrl, to } from "../config/domain"
 import parseAddressLine from "../lib/parseAddressLine"
+import navigateToLogin from "../lib/navigateToLogin"
 
 type ParseResult = {
   success: boolean
@@ -42,7 +44,8 @@ const parseText = (text: string) : ParseResults => {
 const fetchOne = async (item: SearchQueryParams) : Promise<any> => {
   const params = { postalCode: item[0].toUpperCase(), streetNumber: item[1], suffix: item[2] || "" }
   const url = getUrl("search", params)
-  const [, result] = await get(url) as [undefined, any]
+  const [response, result] = await get(url) as [Response, any]
+  if (isForbidden(response)) return navigateToLogin() 
   return result
 }
 

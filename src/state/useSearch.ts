@@ -1,14 +1,16 @@
 import { useReducer } from "react"
+import { navigate } from "@reach/router"
 import reducer, {
   initialState,
   createStartFetching,
   createSetResults,
   createClear
 } from "./searchReducer"
-import { get, notOk } from "../lib/utils/fetch"
-import { getUrl } from "../config/domain"
+import { get, notOk, isForbidden } from "../lib/utils/fetch"
+import { getUrl, to } from "../config/domain"
 import isEmptyObject from "../lib/utils/isEmptyObject"
 import groupCasesByAddress from "../lib/groupCasesByAddress"
+import navigateToLogin from "../lib/navigateToLogin"
 
 const useSearch = () : [SearchState, SearchActions] => {
 
@@ -25,6 +27,7 @@ const useSearch = () : [SearchState, SearchActions] => {
       const [response, result] = await get(url)
 
       // Handle error responses
+      if (isForbidden(response)) return navigateToLogin()
       if (notOk(response)) return false
 
       // Set results

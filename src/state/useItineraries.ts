@@ -14,6 +14,7 @@ import reducer, {
   createClear } from "./itinerariesReducer"
 import { get, post, put, patch, del, notOk, isForbidden } from "../lib/utils/fetch"
 import { getUrl, to } from "../config/domain"
+import navigateToLogin from "../lib/navigateToLogin"
 import promiseSerial from "../lib/utils/promiseSerial"
 import calculateNewPosition from "../lib/calculateNewPosition"
 
@@ -27,7 +28,7 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
     const [response, result] = await get(url)
     if (isForbidden(response)) {
       dispatch(createStopFetching())
-      return navigate(to("/login"))
+      return navigateToLogin()
     }
     if (notOk(response)) {
       const errorMessage = response ? await response.body() : "Failed to GET"
@@ -41,7 +42,8 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
   const add = async (caseId: CaseId) => {
     const url = getUrl("itineraries/items")
     const [response, result] = await post(url, { id: caseId })
-    if (notOk(response)) return
+    if (isForbidden(response)) return navigateToLogin()
+    if (notOk(response)) return alert(`Toevoegen mislukt (case: ${ caseId })`)
     const itinerary = result as Itinerary
     const itineraries = [itinerary] as Itineraries
     dispatch(createAdd(itineraries))
@@ -58,7 +60,8 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
     const patchPosition = async (id: Id, position: ItineraryPosition) => {
       const url = getUrl(`itineraries/items/${ id }`)
       const [response, result] = await patch(url, { position })
-      if (notOk(response)) return
+      if (isForbidden(response)) return navigateToLogin()
+      if (notOk(response)) return alert("Verplaatsen mislukt")
       const itinerary = result as Itinerary
       dispatch(createUpdate(id, itinerary))
     }
@@ -74,7 +77,8 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
   const remove = async (id: Id) => {
     const url = getUrl(`itineraries/items/${ id }`)
     const [response] = await del(url)
-    if (notOk(response)) return
+    if (isForbidden(response)) return navigateToLogin()
+    if (notOk(response)) return alert("Verwijderen mislukt")
     dispatch(createRemove(id))
   }
 
@@ -84,7 +88,14 @@ const useItineraries = () : [ItinerariesState, ItinerariesActions] => {
     const method = text === "" ? del : id !== undefined ? put : post
     const body = { itinerary_item: itineraryId, text }
     const [response, result] = await method(url, body)
-    if (notOk(response)) return false
+    if (isForbidden(response)) {
+      navigateToLogin()
+      return false
+    }
+    if (notOk(response)) {
+      alert("Bewaren mislukt")
+      return false
+    }
     const newText = result ? result.text : ""
     const noteId = result ? result.id : id
     dispatch(createSetNote(itineraryId, noteId!, newText))

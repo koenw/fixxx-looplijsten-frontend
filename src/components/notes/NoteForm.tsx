@@ -38,11 +38,7 @@ const NoteForm: FC<Props> = ({ itineraryId, id, value }) => {
   const saveNote = async (text: string) => {
     if (text === "" && id === undefined) return
     const result = await setNote(itineraryId, text, id)
-    if (result) {
-      navigate(to("/"))
-    } else {
-      alert("Opslaan mislukt")
-    }
+    if (result) navigate(to("/"))
   }
 
   const onSubmit = async (event: FormEvent) => {

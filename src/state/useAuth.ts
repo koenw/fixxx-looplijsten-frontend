@@ -11,6 +11,7 @@ import reducer, {
 import authToken from "../lib/authToken"
 import { get, post, notOk } from "../lib/utils/fetch"
 import { getAuthUrl, getIsAuthenticatedUrl, to } from "../config/domain"
+import navigateToLogin from "../lib/navigateToLogin"
 
 const useAuth = () : [AuthState, AuthActions] => {
 
@@ -35,7 +36,7 @@ const useAuth = () : [AuthState, AuthActions] => {
       if (window.location.pathname === to("/login", false)) navigate(to("/"))
       return true
     } else {
-      if (window.location.pathname !== to("/authentication/callback")) navigate(to("/login"))
+      if (window.location.pathname !== to("/authentication/callback")) navigateToLogin()
       return false
     }
   }
@@ -85,7 +86,7 @@ const useAuth = () : [AuthState, AuthActions] => {
   const unAuthenticate = () => {
     authToken.clear()
     dispatch(createUnAuthenticate())
-    navigate(to("/login"))
+    navigateToLogin()
   }
 
   return [auth, { initialize, authenticate, authenticateToken, unAuthenticate }]
