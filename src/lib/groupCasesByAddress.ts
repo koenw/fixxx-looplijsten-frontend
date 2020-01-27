@@ -1,7 +1,11 @@
 import displayAddress from "./displayAddress"
 
-const groupCasesByAddress = (cases: BWVData[]) : BWVData[][] => {
-  if (cases.length <= 1) return [cases]
+type Cases = BWVData[]
+
+const groupCasesByAddress = (cases: Cases) : Cases[] => {
+  const l = cases.length
+  if (l === 0) return []
+  if (l === 1) return [cases]
   const obj = cases.reduce((acc, caseItem) => {
     const {
       street_name: streetName,
@@ -13,7 +17,7 @@ const groupCasesByAddress = (cases: BWVData[]) : BWVData[][] => {
     if (!acc.hasOwnProperty(address)) acc[address] = []
     acc[address].push(caseItem)
     return acc
-  }, {} as Record<string, BWVData[]>)
+  }, {} as Record<string, Cases>)
   const addresses = Object.keys(obj).sort()
   return addresses.map(address => obj[address])
 }
