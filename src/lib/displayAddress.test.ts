@@ -7,7 +7,7 @@ describe("displayAddress", () => {
   })
 
   it("streetName, streetNumber, suffix", () => {
-    expect(displayAddress("Alfa betastraat", 12, "A")).toBe("Alfa betastraat 12 A")
+    expect(displayAddress("Alfa betastraat", 12, "A")).toBe("Alfa betastraat 12A")
   })
 
   xit("streetName, streetNumber, etage", () => {
@@ -15,6 +15,6 @@ describe("displayAddress", () => {
   })
 
   it("streetName, streetNumber, suffix, etage", () => {
-    expect(displayAddress("Alfa betastraat", 12, "C", 3)).toBe("Alfa betastraat 12 C3")
+    expect(displayAddress("Alfa betastraat", 12, "C", 3)).toBe("Alfa betastraat 12C-3")
   })
 })
