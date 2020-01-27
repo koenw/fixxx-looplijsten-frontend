@@ -8,14 +8,17 @@ const isAcc = api === "acc"
 
 const domain =
   hostname === "acc.straatnotes.amsterdam.nl" ? "https://acc.api.straatnotes.amsterdam.nl/" :
-  hostname === "top.amsterdam.nl" ? "https://top.amsterdam.nl/api" :
+  hostname === "top.amsterdam.nl" ? "https://top.amsterdam.nl/" :
   isAcc ? "https://acc.api.straatnotes.amsterdam.nl/" :
   "http://localhost:8000/"
 const basePath = "api/v1/"
 const authPath = "credentials-authenticate/"
 const isAuthenticatedPath = "is-authenticated/"
 const authOIDCPath = "oidc-authenticate/"
-const pathPrefix = "looplijsten/"
+const pathPrefix =
+  hostname === "top.amsterdam.nl" ? "api/" :
+  hostname === "acc.straatnotes.amsterdam.nl" || isAcc ? "looplijsten/" :
+  ""
 
 const config = {
   domain,
