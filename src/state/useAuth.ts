@@ -35,6 +35,7 @@ const useAuth = () : [AuthState, AuthActions] => {
       if (window.location.pathname === to("/login", false)) navigateToHome()
       return true
     } else {
+      console.log(window.location.pathname, to("/authentication/callback"))
       if (window.location.pathname !== to("/authentication/callback")) navigateToLogin()
       return false
     }
