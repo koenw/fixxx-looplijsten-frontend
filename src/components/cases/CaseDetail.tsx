@@ -211,7 +211,7 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
       datePeil: stadium.peildatum ? formatDate(stadium.peildatum, true)! : "-",
       num: parseInt(stadium.sta_nr, 10)
     })
-  }).sort((a, b) => a.num - b.num).reverse()
+  })
 
   const stadia = stadiums.reduce((acc: any, stadium, index) => {
     const type = stadium.description === "Issuemelding" ? "ISSUE" : "REGULAR"
