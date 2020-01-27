@@ -3,8 +3,7 @@ import NoteTextarea from "./NoteTextarea"
 import { Button } from "@datapunt/asc-ui"
 import styled from "styled-components"
 import useOnChangeState from "../../hooks/useOnChangeState"
-import { navigate } from "@reach/router"
-import { to } from "../../config/domain"
+import { navigateToHome } from "../../lib/navigateTo"
 import useGlobalState from "../../hooks/useGlobalState"
 import currentTime from "../../lib/utils/currentTime"
 
@@ -38,7 +37,7 @@ const NoteForm: FC<Props> = ({ itineraryId, id, value }) => {
   const saveNote = async (text: string) => {
     if (text === "" && id === undefined) return
     const result = await setNote(itineraryId, text, id)
-    if (result) navigate(to("/"))
+    if (result) navigateToHome()
   }
 
   const onSubmit = async (event: FormEvent) => {

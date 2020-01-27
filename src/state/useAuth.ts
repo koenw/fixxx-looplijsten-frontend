@@ -11,7 +11,7 @@ import reducer, {
 import authToken from "../lib/authToken"
 import { get, post, notOk } from "../lib/utils/fetch"
 import { getAuthUrl, getIsAuthenticatedUrl, to } from "../config/domain"
-import navigateToLogin from "../lib/navigateToLogin"
+import { navigateToHome, navigateToLogin } from "../lib/navigateTo"
 
 const useAuth = () : [AuthState, AuthActions] => {
 
@@ -33,7 +33,7 @@ const useAuth = () : [AuthState, AuthActions] => {
     if (isAuthorized) {
       const token = authToken.get()
       dispatch(createInitialize(token))
-      if (window.location.pathname === to("/login", false)) navigate(to("/"))
+      if (window.location.pathname === to("/login", false)) navigateToHome()
       return true
     } else {
       if (window.location.pathname !== to("/authentication/callback")) navigateToLogin()

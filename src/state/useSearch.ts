@@ -10,7 +10,7 @@ import { get, notOk, isForbidden } from "../lib/utils/fetch"
 import { getUrl, to } from "../config/domain"
 import isEmptyObject from "../lib/utils/isEmptyObject"
 import groupCasesByAddress from "../lib/groupCasesByAddress"
-import navigateToLogin from "../lib/navigateToLogin"
+import { navigateToLogin } from "../lib/navigateTo"
 
 const useSearch = () : [SearchState, SearchActions] => {
 

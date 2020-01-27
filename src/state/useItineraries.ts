@@ -14,7 +14,7 @@ import reducer, {
   createClear } from "./itinerariesReducer"
 import { get, post, put, patch, del, notOk, isForbidden } from "../lib/utils/fetch"
 import { getUrl, to } from "../config/domain"
-import navigateToLogin from "../lib/navigateToLogin"
+import { navigateToLogin } from "../lib/navigateTo"
 import promiseSerial from "../lib/utils/promiseSerial"
 import calculateNewPosition from "../lib/calculateNewPosition"
 

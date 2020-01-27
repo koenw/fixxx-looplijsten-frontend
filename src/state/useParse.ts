@@ -9,7 +9,7 @@ import reducer, {
 import { get, isForbidden } from "../lib/utils/fetch"
 import { getUrl, to } from "../config/domain"
 import parseAddressLine from "../lib/parseAddressLine"
-import navigateToLogin from "../lib/navigateToLogin"
+import { navigateToLogin } from "../lib/navigateTo"
 
 type ParseResult = {
   success: boolean
