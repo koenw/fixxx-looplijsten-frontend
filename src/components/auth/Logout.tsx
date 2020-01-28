@@ -17,7 +17,7 @@ const Logout: FC = () => {
 
   const onClick = () => {
     clear()
-    window.location.replace(getLogoutUrl())
+    window.open(getLogoutUrl(), "_blank")
   }
 
   return (
