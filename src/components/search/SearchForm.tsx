@@ -6,6 +6,7 @@ import useOnChangeState from "../../hooks/useOnChangeState"
 import InputBase from "../styled/Input"
 import useGlobalState from "../../hooks/useGlobalState"
 import ClearButton from "./ClearButton"
+import { mobile, desktop } from "../../responsiveness/mediaQueries"
 
 const Label = styled.label`
   font-weight: 500
@@ -16,7 +17,10 @@ const Label = styled.label`
 
 const InputWrap = styled.div`
   display: inline-block
-  width: 90px
+  width: 60px
+  @media ${ desktop } {
+    width: 90px
+  }
 `
 const Input = styled(InputBase)`
   height: 44px
@@ -24,7 +28,10 @@ const Input = styled(InputBase)`
 `
 
 const InputWrapPostalCode = styled(InputWrap)`
-  width: calc(100% - 234px)
+  width: calc(100% - 174px);
+  @media ${ desktop } {
+    width: calc(100% - 234px)
+  }
 `
 
 const InputWrapStreetNumber = styled(InputWrap)`
