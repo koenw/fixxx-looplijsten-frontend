@@ -52,6 +52,8 @@ const LoginCallbackPage: FC<RouteComponentProps> = () => {
     confirmLogin()
   }, [])
 
+  console.log("showSpinner", showSpinner, loading)
+
   return (
     <Div>
       { showSpinner &&
