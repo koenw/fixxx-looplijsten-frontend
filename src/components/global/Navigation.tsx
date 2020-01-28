@@ -3,6 +3,7 @@ import { Link } from "@reach/router"
 import styled from "styled-components"
 import { Search as SearchIcon } from "@datapunt/asc-assets"
 import { to } from "../../config/domain"
+import { isPage, isHomePage } from "../../config/page"
 import useGlobalState from "../../hooks/useGlobalState"
 
 const NavWrap = styled.div`
@@ -56,9 +57,8 @@ const Navigation: FC = () => {
   const numItineraries = itineraries ? itineraries.length : 0
   const showCounter = numItineraries > 0
 
-  const pathname = window.location.pathname
-  const looplijstActive = pathname === to("/", false)
-  const searchActive = pathname === to("/zoeken", false) || pathname === to("/parse", false)
+  const looplijstActive = isHomePage()
+  const searchActive = isPage("zoeken") || isPage("parse")
 
   return (
     <>
