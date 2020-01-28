@@ -6,7 +6,7 @@ const domain =
   isAcc || forceAcc ? "https://acc.api.straatnotes.amsterdam.nl/" :
   "http://localhost:8000/"
 const pathPrefix =
-  isProduction ? "api/" :
+  isProduction ? "api/looplijsten/" :
   isAcc || forceAcc ? "looplijsten/" :
   ""
 const basepath = "api/v1/"
@@ -51,7 +51,7 @@ export const getOIDCProviderUrl = () => {
   const authorizeUri = "https://auth.grip-on-it.com/v2/rjsfm52t/oidc/idp/authorize"
   const responseType = "code"
   const scope = "openid"
-  const clientId = isProduction ? "d3d664c7-bb33-4bf0-b7c9-b8bdf1199b76" : "d3d664c7-bb33-4bf0-b7c9-b8bdf1199b76"
+  const clientId = isProduction ? "65ba2077-9c90-4fcd-be2a-f7549e783bdc" : "d3d664c7-bb33-4bf0-b7c9-b8bdf1199b76"
 
   const redirectDomain =
     isProduction ? "https://top.amsterdam.nl/" :
