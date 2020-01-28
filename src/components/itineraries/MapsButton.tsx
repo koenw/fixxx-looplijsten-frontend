@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Location } from "@datapunt/asc-assets"
 import displayAddress from "../../lib/displayAddress"
+import { mobile, desktop } from "../../responsiveness/mediaQueries"
 
 type Props = {
   itineraries: Itineraries
@@ -10,6 +11,16 @@ type Props = {
 
 const StyledButton = styled(Button)`
   border: solid 1px black
+`
+const SpanMobile = styled.span`
+  @media ${ desktop } {
+    display: none
+  }
+`
+const SpanDesktop = styled.span`
+  @media ${ mobile } {
+    display: none
+  }
 `
 
 const MapsButton: FC<Props> = ({ itineraries }) => {
@@ -35,7 +46,11 @@ const MapsButton: FC<Props> = ({ itineraries }) => {
     console.log(href)
     window.open(href, "_blank")
   }
-  const text = window.innerWidth > 768 ? "Bekijk op Google Maps" : "Google Maps"
-  return <StyledButton onClick={ onClick } variant="blank" iconLeft={ <Location /> }>{ text }</StyledButton>
+  return (
+    <StyledButton onClick={ onClick } variant="blank" iconLeft={ <Location /> }>
+      <SpanMobile>Maps</SpanMobile>
+      <SpanDesktop>Bekijk op Google Maps</SpanDesktop>
+    </StyledButton>
+  )
 }
 export default MapsButton
