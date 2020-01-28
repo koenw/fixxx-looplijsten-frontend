@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import { email, subject, body } from "../../config/basisinformatie"
+import { email, subject, body } from "../../text/email/basisinformatie"
 
 type Props = {
   isWoonboot: boolean

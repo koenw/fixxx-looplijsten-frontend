@@ -1,4 +1,4 @@
-import displayBoolean from "../lib/displayBoolean"
+import displayBoolean from "../../lib/displayBoolean"
 
 export const email = "Terugmelding.Basisinformatie@amsterdam.nl"
 export const subject = "Terugmelding Basisinformatie"
