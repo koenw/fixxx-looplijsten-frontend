@@ -3,7 +3,7 @@ import { Router } from "@reach/router"
 import { ThemeProvider } from "@datapunt/asc-ui"
 import StateProvider from "./components/providers/StateProvider"
 import styled from "styled-components"
-import { getBasepath } from "./config/domain"
+import { basepath } from "./config/page"
 import Anonymous from "./components/global/Anonymous"
 import HeaderWrap from "./components/global/HeaderWrap"
 import ItinerariesPage from "./pages/ItinerariesPage"
@@ -26,8 +26,6 @@ const Main = styled.main`
  */
 
 const App: FC = () => {
-
-  const basepath = getBasepath()
 
   return (
     <StateProvider>

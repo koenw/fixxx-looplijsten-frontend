@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import { Link } from "@reach/router"
 import styled from "styled-components"
 import { Search as SearchIcon } from "@datapunt/asc-assets"
-import { to } from "../../config/domain"
+import { to } from "../../config/page"
 import { isPage, isHomePage } from "../../config/page"
 import useGlobalState from "../../hooks/useGlobalState"
 

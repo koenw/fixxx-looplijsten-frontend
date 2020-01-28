@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react"
 import { Draggable } from "react-beautiful-dnd"
 import { navigate } from "@reach/router"
-import { to } from "../../config/domain"
+import { to } from "../../config/page"
 import styled from "styled-components"
 import IconButton from "../global/IconButton"
 import Itinerary from "./Itinerary"

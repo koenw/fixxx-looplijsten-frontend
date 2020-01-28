@@ -1,6 +1,6 @@
 import React, { FC, FormEvent } from "react"
 import styled from "styled-components"
-import { getBasepath } from "../../config/domain"
+import { basepath } from "../../config/page"
 
 type Props = {
   onClick: (a: FormEvent) => void
@@ -37,13 +37,13 @@ const Img = styled.span`
   height: 24px
   background-repeat: no-repeat
   background-size: contain
-  background-image: url('${ getBasepath() }/icons/eye@2x.png');
+  background-image: url('${ basepath }/icons/eye@2x.png');
 `
 
 const ImgDisabled = styled(Img)`
   margin: 18px
   height: 36px
-  background-image: url('${ getBasepath() }/icons/eye-disabled@2x.png')
+  background-image: url('${ basepath }/icons/eye-disabled@2x.png')
 `
 
 const EyeButton: FC<Props> = ({ onClick, isOpen }) => {

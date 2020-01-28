@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { Link } from "@reach/router"
-import { to } from "../../config/domain"
+import { to } from "../../config/page"
 import styled from "styled-components"
 import Signal from "../global/Signal"
 import displayAddress from "../../lib/displayAddress"

@@ -3,7 +3,7 @@ import SearchForm from "./SearchForm"
 import SearchResults from "./SearchResults"
 import { Spinner } from "@datapunt/asc-ui"
 import { Link } from "@reach/router"
-import { to } from "../../config/domain"
+import { to } from "../../config/page"
 import styled from "styled-components"
 import useGlobalState from "../../hooks/useGlobalState"
 

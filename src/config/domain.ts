@@ -1,12 +1,5 @@
-import parseLocationSearch from "../lib/utils/parseLocationSearch"
+import { isProduction, isAcc, forceAcc } from "./environment"
 import queryParams from "../lib/utils/queryParams"
-import pick from "../lib/utils/pick"
-
-const hostname = window.location.hostname
-const isProduction = hostname === "top.amsterdam.nl"
-const isAcc = hostname === "acc.straatnotes.amsterdam.nl"
-const { api } = parseLocationSearch(window.location.search)
-const forceAcc = api === "acc"
 
 const domain =
   isProduction ? "https://top.amsterdam.nl/" :
@@ -16,7 +9,7 @@ const pathPrefix =
   isProduction ? "api/" :
   isAcc || forceAcc ? "looplijsten/" :
   ""
-const basePath = "api/v1/"
+const basepath = "api/v1/"
 const authPath = "credentials-authenticate/"
 const authOIDCPath = "oidc-authenticate/"
 const isAuthenticatedPath = "is-authenticated/"
@@ -24,7 +17,7 @@ const isAuthenticatedPath = "is-authenticated/"
 const config = {
   domain,
   pathPrefix,
-  basePath,
+  basepath,
   authPath,
   isAuthenticatedPath,
   authOIDCPath
@@ -32,9 +25,9 @@ const config = {
 export default config
 
 export const getUrl = (path: string, params?: QueryParams) => {
-  const { domain, pathPrefix, basePath } = config
+  const { domain, pathPrefix, basepath } = config
   const shouldAppendSlash = path.substr(-1) !== "/"
-  const url = `${ domain }${ pathPrefix }${ basePath }${ path }${ shouldAppendSlash ? "/" : "" }`
+  const url = `${ domain }${ pathPrefix }${ basepath }${ path }${ shouldAppendSlash ? "/" : "" }`
   return `${ url }${ params ? queryParams(params) : "" }`
 }
 
@@ -72,12 +65,4 @@ export const getOIDCProviderUrl = () => {
     redirect_uri: redirectUri,
   })
   return `${ authorizeUri }${ queryParamsString }`
-}
-
-export const getBasepath = () => hostname === "acc.straatnotes.amsterdam.nl" || hostname === "straatnotes.amsterdam.nl" ? "/looplijsten" : ""
-export const to = (path: string, appendParams = true) => {
-  const forwardParams = ["api", "anonymous"]
-  const params = parseLocationSearch(window.location.search)
-  const queryParamsString = queryParams(pick(params, forwardParams))
-  return `${ getBasepath() }${ path[0] !== "/" ? "/" : "" }${ path }${ appendParams ? queryParamsString : "" }`
 }

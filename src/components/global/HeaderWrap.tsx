@@ -2,7 +2,7 @@ import React from "react"
 import { Header } from "@datapunt/asc-ui"
 import Logout from "../auth/Logout"
 import { Location } from "@reach/router"
-import { to } from "../../config/domain"
+import { to } from "../../config/page"
 import styled from "styled-components"
 
 const Wrap = styled.div`

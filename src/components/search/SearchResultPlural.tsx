@@ -4,7 +4,7 @@ import styled from "styled-components"
 import SearchResultAddress from "./SearchResultAddress"
 import SearchResultCase from "./SearchResultCase"
 import SearchResultButtonWrap from "./SearchResultButtonWrap"
-import { to } from "../../config/domain"
+import { to } from "../../config/page"
 import displayAddress from "../../lib/displayAddress"
 
 type Props = {
