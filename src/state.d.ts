@@ -29,7 +29,7 @@ declare type AuthActions = {
   initialize: () => Promise<boolean>
   authenticate: (a: Email, b: Password) => Promise<boolean>
   authenticateToken: (a: AuthToken) => boolean
-  unAuthenticate: () => void
+  unAuthenticate: (a: boolean) => void
 }
 
 declare type StreetSuffix = string

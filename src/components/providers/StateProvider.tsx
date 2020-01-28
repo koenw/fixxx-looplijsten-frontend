@@ -1,10 +1,11 @@
-import React, { FC, ReactNode, useState, useEffect } from "react"
+  import React, { FC, ReactNode, useState, useEffect } from "react"
 import StateContext from '../../contexts/StateContext'
 import useAuth from "../../state/useAuth"
 import useItineraries from "../../state/useItineraries"
 import useSearch from "../../state/useSearch"
 import useParse from "../../state/useParse"
 import parseLocationSearch from "../../lib/utils/parseLocationSearch"
+import { isLoginCallbackPage } from "../../config/page"
 
 type Props = {
   children: ReactNode
@@ -49,20 +50,18 @@ const StateProvider: FC<Props> = ({ children }) => {
   // initialize
   const isInitialized = auth.isInitialized && itineraries.isInitialized
   const initialize = async () => {
-    console.log("isInitialized", isInitialized)
     if (isInitialized) return
 
     const isAuthenticated = await authActions.initialize()
-    console.log("isAuthenticated", isAuthenticated)
     if (!isAuthenticated) return clear()
 
-    console.log("itineraries initialize")
     itinerariesActions.initialize()
   }
 
   // clear
   const clear = () => {
-    authActions.unAuthenticate()
+    const shouldNavigateToLogin = !isLoginCallbackPage()
+    authActions.unAuthenticate(shouldNavigateToLogin)
     itinerariesActions.clear()
   }
 

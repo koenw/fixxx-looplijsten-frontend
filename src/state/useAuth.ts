@@ -9,7 +9,8 @@ import reducer, {
 } from "./authReducer"
 import authToken from "../lib/authToken"
 import { get, post, notOk } from "../lib/utils/fetch"
-import { getAuthUrl, getIsAuthenticatedUrl, to } from "../config/domain"
+import { getAuthUrl, getIsAuthenticatedUrl } from "../config/domain"
+import { isLoginPage, isLoginCallbackPage } from "../config/page"
 import { navigateToHome, navigateToLogin } from "../lib/navigateTo"
 
 const useAuth = () : [AuthState, AuthActions] => {
@@ -32,12 +33,10 @@ const useAuth = () : [AuthState, AuthActions] => {
     if (isAuthorized) {
       const token = authToken.get()
       dispatch(createInitialize(token))
-      if (window.location.pathname === to("/login", false)) navigateToHome()
+      if (isLoginPage()) navigateToHome()
       return true
     } else {
-      console.log(window.location.pathname, to("/authentication/callback"))
-      if (window.location.pathname !== to("/authentication/callback")) {
-        console.log("navigateToLogin")
+      if (!isLoginCallbackPage()) {
         navigateToLogin()
       }
       return false
@@ -86,10 +85,10 @@ const useAuth = () : [AuthState, AuthActions] => {
     return true
   }
 
-  const unAuthenticate = () => {
+  const unAuthenticate = (navigate = true) => {
     authToken.clear()
     dispatch(createUnAuthenticate())
-    navigateToLogin()
+    if (navigate) navigateToLogin()
   }
 
   return [auth, { initialize, authenticate, authenticateToken, unAuthenticate }]
