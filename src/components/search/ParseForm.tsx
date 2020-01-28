@@ -10,22 +10,31 @@ import SearchResults from "./SearchResults"
 import AddAllButton from "./AddAllButton"
 import ClearButton from "./ClearButton"
 
-const ButtonWrap = styled.div`
-  display: flex
-  justify-content: flex-end
-  margin-top: 12px
-`
-const AddAllButtonWrap = styled(ButtonWrap)`
-  margin: 24px 0
-`
 const Textarea = styled(TextareaBase)`
   display: block
   width: 100%
 `
-const ClearButtonWrap = styled.div`
+const ButtonWrap = styled.div`
+  display: inline-block
+  width: 50%
   margin-top: 12px
+`
+const ButtonOuter = styled.div`
   display: flex
-  justify-content: flex-start
+  justify-content: flex-end
+`
+const ClearButtonWrap = styled.div`
+  display: inline-block
+  width: 50%
+  margin-top: 12px
+`
+const AddAllButtonWrap = styled.div`
+  display: flex
+  justify-content: flex-end
+  margin: 24px 0
+`
+const SpinnerWrap = styled.div`
+  margin: 24px 0
 `
 
 const ParseForm: FC = () => {
@@ -102,11 +111,15 @@ const ParseForm: FC = () => {
           <ClearButton onClick={ onClickClear } />
         </ClearButtonWrap>
         <ButtonWrap>
-          <Button variant="secondary" iconLeft={ <Search /> }>Zoek alles</Button>
+          <ButtonOuter>
+            <Button variant="secondary" iconLeft={ <Search /> }>Zoek alles</Button>
+          </ButtonOuter>
         </ButtonWrap>
       </form>
       { showSpinner &&
-        <Spinner size={ 60 } />
+        <SpinnerWrap>
+          <Spinner size={ 60 } />
+        </SpinnerWrap>
       }
       { showAddAllButton &&
         <>
