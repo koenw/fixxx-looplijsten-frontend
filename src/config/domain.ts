@@ -57,7 +57,8 @@ export const getOIDCProviderUrl = () => {
     isProduction ? "https://top.amsterdam.nl/" :
     isAcc ? "https://acc.straatnotes.amsterdam.nl/" :
     "http://localhost:3000/"
-  const redirectUri = `${ redirectDomain }authentication/callback`
+  const redirectPath = isAcc ? "looplijsten/" : ""
+  const redirectUri = `${ redirectDomain }${ redirectPath }authentication/callback`
   const queryParamsString = queryParams({
     response_type: responseType,
     scope,
