@@ -9,9 +9,10 @@ import { post, notOk } from "../lib/utils/fetch"
 import styled from "styled-components"
 
 const Div = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: flex
+  flex-direction: column
+  align-items: center
+  margin-top: 100px
 `
 
 const LoginCallbackPage: FC<RouteComponentProps> = () => {
@@ -57,7 +58,7 @@ const LoginCallbackPage: FC<RouteComponentProps> = () => {
   return (
     <Div>
       { showSpinner &&
-        <Spinner/>
+        <Spinner size={ 60 } />
       }
       { showErrorMessage &&
         <ErrorMessage text={ errorMessage! } />
