@@ -3,22 +3,23 @@ import queryParams from "../lib/utils/queryParams"
 import pick from "../lib/utils/pick"
 
 const hostname = window.location.hostname
-const api = parseLocationSearch(window.location.search).api
-const isAcc = api === "acc"
+const isProduction = hostname === "top.amsterdam.nl"
+const isAcc = hostname === "acc.straatnotes.amsterdam.nl"
+const { api } = parseLocationSearch(window.location.search)
+const forceAcc = api === "acc"
 
 const domain =
-  hostname === "acc.straatnotes.amsterdam.nl" ? "https://acc.api.straatnotes.amsterdam.nl/" :
-  hostname === "top.amsterdam.nl" ? "https://top.amsterdam.nl/" :
-  isAcc ? "https://acc.api.straatnotes.amsterdam.nl/" :
+  isProduction ? "https://top.amsterdam.nl/" :
+  isAcc || forceAcc ? "https://acc.api.straatnotes.amsterdam.nl/" :
   "http://localhost:8000/"
+const pathPrefix =
+  isProduction ? "api/" :
+  isAcc || forceAcc ? "looplijsten/" :
+  ""
 const basePath = "api/v1/"
 const authPath = "credentials-authenticate/"
-const isAuthenticatedPath = "is-authenticated/"
 const authOIDCPath = "oidc-authenticate/"
-const pathPrefix =
-  hostname === "top.amsterdam.nl" ? "api/" :
-  hostname === "acc.straatnotes.amsterdam.nl" || isAcc ? "looplijsten/" :
-  ""
+const isAuthenticatedPath = "is-authenticated/"
 
 const config = {
   domain,
@@ -57,15 +58,20 @@ export const getOIDCProviderUrl = () => {
   const authorizeUri = "https://auth.grip-on-it.com/v2/rjsfm52t/oidc/idp/authorize"
   const responseType = "code"
   const scope = "openid"
-  const clientId = "d3d664c7-bb33-4bf0-b7c9-b8bdf1199b76"
+  const clientId = isProduction ? "d3d664c7-bb33-4bf0-b7c9-b8bdf1199b76" : "d3d664c7-bb33-4bf0-b7c9-b8bdf1199b76"
 
-  // @TODO: add production url
-  // @TODO: extract protocol, domain
-  // @TODO: use to() for paths
-  const redirectUri = hostname === "acc.straatnotes.amsterdam.nl"
-  ? "https://acc.straatnotes.amsterdam.nl/looplijsten/authentication/callback"
-  : "http://localhost:3000/authentication/callback"
-  return `${ authorizeUri }?response_type=${ responseType }&scope=${ scope }&client_id=${ clientId }&redirect_uri=${ encodeURIComponent(redirectUri) }`
+  const redirectDomain =
+    isProduction ? "https://top.amsterdam.nl/" :
+    isAcc ? "https://acc.straatnotes.amsterdam.nl/" :
+    "http://localhost:3000/"
+  const redirectUri = `${ redirectDomain }authentication/callback`
+  const queryParamsString = queryParams({
+    response_type: responseType,
+    scope,
+    client_id: clientId,
+    redirect_uri: redirectUri,
+  })
+  return `${ authorizeUri }${ queryParamsString }`
 }
 
 export const getBasepath = () => hostname === "acc.straatnotes.amsterdam.nl" || hostname === "straatnotes.amsterdam.nl" ? "/looplijsten" : ""
