@@ -68,3 +68,5 @@ export const getOIDCProviderUrl = () => {
   })
   return `${ authorizeUri }${ queryParamsString }`
 }
+
+export const getLogoutUrl = () => "https://auth.grip-on-it.com/v2/logout?tenantId=rjsfm52t"
