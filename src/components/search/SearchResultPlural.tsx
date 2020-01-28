@@ -39,7 +39,7 @@ const SearchResultPlural: FC<Props> = ({ cases }) => {
           case_reason: reason,
           stadium
         } = caseItem
-        const linkTo = to(`/cases/${ caseId }`)
+        const linkTo = to(`cases/${ caseId }`)
         return (
           <Link key={ JSON.stringify(caseItem) } to={ linkTo }>
             <Wrap key={ caseId }>

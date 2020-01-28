@@ -2,7 +2,7 @@ import React from "react"
 import { Header } from "@datapunt/asc-ui"
 import Logout from "../auth/Logout"
 import { Location } from "@reach/router"
-import { to } from "../../config/page"
+import { to, isLoginPage, isLoginCallbackPage } from "../../config/page"
 import styled from "styled-components"
 
 const Wrap = styled.div`
@@ -17,15 +17,14 @@ const HeaderWrap: React.FC = () => {
   return (
     <Location>
     { ({ location }) => {
-      const pathnames = [to("/login", false), to("/authentication/callback", false)]
-      const showLogout = !pathnames.includes(`${ location.pathname }`)
+      const showLogout = !isLoginPage() && !isLoginCallbackPage()
       const navigation = showLogout ? <Logout /> : null
       return (
         <Wrap>
           <Header
             tall={ false }
             title="Toezicht op pad"
-            homeLink={ to("/") }
+            homeLink={ to() }
             navigation={ navigation }
           />
         </Wrap>

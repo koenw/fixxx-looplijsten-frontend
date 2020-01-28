@@ -67,7 +67,7 @@ const Itinerary: FC<Props> = ({ itinerary, note, showAddress = true }) => {
     note! :
     undefined
 
-  const linkTo = to(`/cases/${ id }`)
+  const linkTo = to(`cases/${ id }`)
 
   return (
     <Article className="Itinerary">

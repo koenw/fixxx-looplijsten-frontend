@@ -65,8 +65,8 @@ const Navigation: FC = () => {
       <NavWrap>
         <Nav>
           <Ul>
-            <Li isActive={ looplijstActive }><Link to={ to("/") }>Mijn looplijst { showCounter && `(${ numItineraries })` }</Link></Li>
-            <LiSearch isActive={ searchActive }><Link to={ to("/zoeken") }><SearchIcon /></Link></LiSearch>
+            <Li isActive={ looplijstActive }><Link to={ to() }>Mijn looplijst { showCounter && `(${ numItineraries })` }</Link></Li>
+            <LiSearch isActive={ searchActive }><Link to={ to("zoeken") }><SearchIcon /></Link></LiSearch>
           </Ul>
         </Nav>
       </NavWrap>

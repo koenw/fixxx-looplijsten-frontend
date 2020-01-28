@@ -46,7 +46,7 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
     .sort((a, b) => parseInt(a.case_number, 10) - parseInt(b.case_number, 10))
     .reduce((acc: any, relatedCase: RelatedCase, index, arr) => {
       const { case_id, case_number, case_reason } = relatedCase
-      acc.push(["Zaaknummer", <Link to={ to(`/cases/${ case_id }`) }>{ `${ case_number } van ${ caseCount }` }</Link>])
+      acc.push(["Zaaknummer", <Link to={ to(`cases/${ case_id }`) }>{ `${ case_number } van ${ caseCount }` }</Link>])
       acc.push(["Openingsreden", case_reason])
       if (index < arr.length - 1) acc.push(<Hr />)
       return acc

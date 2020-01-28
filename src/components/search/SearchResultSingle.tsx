@@ -30,7 +30,7 @@ const SearchResultSingle: FC<Props> = ({ caseItem }) => {
     stadium
   } = caseItem
   const address = displayAddress(streetName, streetNumber, suffix_letter || undefined, suffix || undefined)
-  const linkTo = to(`/cases/${ caseId }`)
+  const linkTo = to(`cases/${ caseId }`)
 
   return (
     <div className="SearchResultSingle">

@@ -43,7 +43,7 @@ const DraggableItinerary: FC<Props> = ({ itinerary, index }) => {
   const { id, case: { bwv_data }, notes } = itinerary
   const noteId = notes[0] && notes[0].id
   const noteText = notes[0] && notes[0].text
-  const notePath = `/notes/${ id }/${ noteId || "" }`
+  const notePath = `notes/${ id }/${ noteId || "" }`
 
   const [isCollapsed, setCollapse] = useState(false)
   const collapse = () => setCollapse(true)

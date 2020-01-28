@@ -1,5 +1,6 @@
 import { isProduction, isAcc, forceAcc } from "./environment"
 import queryParams from "../lib/utils/queryParams"
+import { basepath } from "./page"
 
 const domain =
   isProduction ? "https://top.amsterdam.nl/" :
@@ -9,7 +10,7 @@ const pathPrefix =
   isProduction ? "api/looplijsten/" :
   isAcc || forceAcc ? "looplijsten/" :
   ""
-const basepath = "api/v1/"
+const apiPath = "api/v1/"
 const authPath = "credentials-authenticate/"
 const authOIDCPath = "oidc-authenticate/"
 const isAuthenticatedPath = "is-authenticated/"
@@ -17,7 +18,7 @@ const isAuthenticatedPath = "is-authenticated/"
 const config = {
   domain,
   pathPrefix,
-  basepath,
+  apiPath,
   authPath,
   isAuthenticatedPath,
   authOIDCPath
@@ -25,9 +26,9 @@ const config = {
 export default config
 
 export const getUrl = (path: string, params?: QueryParams) => {
-  const { domain, pathPrefix, basepath } = config
+  const { domain, pathPrefix, apiPath } = config
   const shouldAppendSlash = path.substr(-1) !== "/"
-  const url = `${ domain }${ pathPrefix }${ basepath }${ path }${ shouldAppendSlash ? "/" : "" }`
+  const url = `${ domain }${ pathPrefix }${ apiPath }${ path }${ shouldAppendSlash ? "/" : "" }`
   return `${ url }${ params ? queryParams(params) : "" }`
 }
 
@@ -53,12 +54,12 @@ export const getOIDCProviderUrl = () => {
   const scope = "openid"
   const clientId = isProduction ? "65ba2077-9c90-4fcd-be2a-f7549e783bdc" : "d3d664c7-bb33-4bf0-b7c9-b8bdf1199b76"
 
+  const redirectProtocol = isProduction || isAcc ? "https://" : "http://"
   const redirectDomain =
-    isProduction ? "https://top.amsterdam.nl/" :
-    isAcc ? "https://acc.straatnotes.amsterdam.nl/" :
-    "http://localhost:3000/"
-  const redirectPath = isAcc ? "looplijsten/" : ""
-  const redirectUri = `${ redirectDomain }${ redirectPath }authentication/callback`
+    isProduction ? "top.amsterdam.nl" :
+    isAcc ? "acc.straatnotes.amsterdam.nl" :
+    "localhost:3000"
+  const redirectUri = `${ redirectProtocol }${ redirectDomain }${ basepath }authentication/callback`
   const queryParamsString = queryParams({
     response_type: responseType,
     scope,
