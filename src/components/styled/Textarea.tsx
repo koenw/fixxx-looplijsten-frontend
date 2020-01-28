@@ -7,6 +7,10 @@ export default styled.textarea`
   line-height: 18px
   padding: 10px
   -webkit-appearance: none
+  -webkit-border-radius: 0
+  border-radius: 0
+  -webkit-box-shadow: none
+  box-shadow: none
   &:focus {
     outline: rgb(254, 200, 19) solid 2px
     outline-offset: 0.5px
