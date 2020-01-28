@@ -6,7 +6,7 @@ import reducer, {
   createClear
 } from "./parseReducer"
 import { get, isForbidden } from "../lib/utils/fetch"
-import { getUrl } from "../config/domain"
+import { getUrl } from "../config/api"
 import parseAddressLine from "../lib/parseAddressLine"
 import { navigateToLogin } from "../lib/navigateTo"
 

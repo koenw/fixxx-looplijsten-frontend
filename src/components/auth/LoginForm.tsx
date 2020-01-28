@@ -4,7 +4,7 @@ import useOnChangeState from "../../hooks/useOnChangeState"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Login as LoginIcon } from "@datapunt/asc-assets"
-import { getOIDCProviderUrl } from "../../config/domain"
+import { getOIDCProviderUrl } from "../../config/api"
 
 import ErrorMessage from "../global/ErrorMessage"
 import Input from "../styled/Input"

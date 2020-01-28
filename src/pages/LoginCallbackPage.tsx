@@ -3,7 +3,7 @@ import useGlobalState from "../hooks/useGlobalState"
 import { Spinner } from "@datapunt/asc-ui"
 import { RouteComponentProps } from "@reach/router"
 import ErrorMessage from "../components/global/ErrorMessage"
-import { getAuthOIDCUrl } from "../config/domain"
+import { getAuthOIDCUrl } from "../config/api"
 import parseLocationSearch from '../lib/utils/parseLocationSearch'
 import { post, notOk } from "../lib/utils/fetch"
 import styled from "styled-components"

@@ -9,7 +9,7 @@ import reducer, {
 } from "./authReducer"
 import authToken from "../lib/authToken"
 import { get, post, notOk } from "../lib/utils/fetch"
-import { getAuthUrl, getIsAuthenticatedUrl } from "../config/domain"
+import { getAuthUrl, getIsAuthenticatedUrl } from "../config/api"
 import { isLoginPage, isLoginCallbackPage } from "../config/page"
 import { navigateToHome, navigateToLogin } from "../lib/navigateTo"
 

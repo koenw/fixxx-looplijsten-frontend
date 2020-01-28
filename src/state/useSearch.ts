@@ -6,7 +6,7 @@ import reducer, {
   createClear
 } from "./searchReducer"
 import { get, notOk, isForbidden } from "../lib/utils/fetch"
-import { getUrl } from "../config/domain"
+import { getUrl } from "../config/api"
 import isEmptyObject from "../lib/utils/isEmptyObject"
 import groupCasesByAddress from "../lib/groupCasesByAddress"
 import { navigateToLogin } from "../lib/navigateTo"

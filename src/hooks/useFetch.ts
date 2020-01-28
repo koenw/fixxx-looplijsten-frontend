@@ -1,6 +1,6 @@
 import "abortcontroller-polyfill/dist/polyfill-patch-fetch"
 import { useState, useEffect } from "react"
-import { getUrl } from "../config/domain"
+import { getUrl } from "../config/api"
 import { get, isOk } from "../lib/utils/fetch"
 
 const useFetch = (path: string) : [any, boolean, OErrorMessage] => {
