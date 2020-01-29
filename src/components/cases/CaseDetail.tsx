@@ -261,11 +261,11 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
         title="Meldingen / aanleiding"
         data={ meldingenData.length ? meldingenData : ["-"] }
         />
-      { showBewoners &&
+      {
         <CaseDetailSection
           id="personen"
-          title={ `Huidige bewoners (${ people.length })` }
-          data= { bewoners } />
+          title={ `Huidige bewoners ${ showBewoners ? `(${ people.length })` : "" }` }
+          data= { showBewoners ? bewoners : ["Geen inschrijvingen"] } />
       }
       { showVakantieverhuur &&
       <CaseDetailSection

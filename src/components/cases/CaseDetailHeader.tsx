@@ -40,7 +40,7 @@ const P = styled.p`
 const CaseDetailHeader: FC<Props> = ({ address, postalCode, personCount, caseNumber, caseCount, openCaseCount, caseOpening, footer, signal }) => {
   const showFooter = footer !== undefined
   const personText =
-    personCount === 0 ? "-" :
+    personCount === 0 ? "Geen inschrijvingen" :
     personCount === 1 ? "1 persoon" :
     `${ personCount } personen`
 
