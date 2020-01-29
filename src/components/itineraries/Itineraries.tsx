@@ -54,11 +54,6 @@ const Itineraries: FC = () => {
   const show = !showSpinner && !showError
   const hasItineraries = itineraries.length > 0
 
-  const EmptyText = <>
-    <p>Je looplijst is leeg. Zoek adressen om aan je looplijst toe te voegen.</p>
-    <p>Je looplijst is leeg. Zoek adressen om aan je looplijst toe te voegen.</p>
-    </>
-
   const onClick = () => itineraries.map(itinerary => remove(itinerary.id))
   const Buttons = () => (
     <>
