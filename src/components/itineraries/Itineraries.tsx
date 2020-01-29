@@ -1,4 +1,6 @@
 import React, { FC } from "react"
+import { Link } from "@reach/router"
+import { to } from "../../config/page"
 import styled from "styled-components"
 import { Spinner } from "@datapunt/asc-ui"
 import ErrorMessage from "../global/ErrorMessage"
@@ -7,6 +9,7 @@ import useGlobalState from "../../hooks/useGlobalState"
 import MapsButton from "./MapsButton"
 import RemoveAllButton from "./RemoveAllButton"
 import Hr from "../styled/Hr"
+import TamTamLink from "../styled/TamTamLink"
 
 type Result = {
   id: Id,
@@ -25,6 +28,9 @@ const ButtonWrap = styled.div`
 `
 const ButtonWrapBottom = styled(ButtonWrap)`
   margin-top: 15px
+`
+const P = styled.p`
+  margin-bottom: 16px
 `
 
 const Itineraries: FC = () => {
@@ -48,7 +54,10 @@ const Itineraries: FC = () => {
   const show = !showSpinner && !showError
   const hasItineraries = itineraries.length > 0
 
-  const emptyText = "Je looplijst is leeg. Zoek adressen om aan je looplijst toe te voegen."
+  const EmptyText = <>
+    <p>Je looplijst is leeg. Zoek adressen om aan je looplijst toe te voegen.</p>
+    <p>Je looplijst is leeg. Zoek adressen om aan je looplijst toe te voegen.</p>
+    </>
 
   const onClick = () => itineraries.map(itinerary => remove(itinerary.id))
   const Buttons = () => (
@@ -86,7 +95,11 @@ const Itineraries: FC = () => {
                 <ButtonsBottom />
               }
             </> :
-            <p>{ emptyText }</p>
+            <>
+              <P>Je looplijst is leeg.</P>
+              <P><Link to={ to("zoeken") }>Zoek</Link> adressen om aan je looplijst toe te voegen.</P>
+              <P>Of <TamTamLink to={ to("parse") }>copy+paste</TamTamLink> je TamTam looplijst</P>
+            </>
         )
       }
       { showError &&

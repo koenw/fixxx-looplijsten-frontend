@@ -6,6 +6,7 @@ import { Link } from "@reach/router"
 import { to } from "../../config/page"
 import styled from "styled-components"
 import useGlobalState from "../../hooks/useGlobalState"
+import TamTamLink from "../styled/TamTamLink"
 
 const Div = styled.div`
   display: flex
@@ -16,9 +17,6 @@ const Div = styled.div`
     padding: 12px 15px
     margin-bottom: 0
   }
-`
-const StyledLink = styled(Link)`
-  color: #4caf50
 `
 
 const Search: FC = () => {
@@ -36,7 +34,7 @@ const Search: FC = () => {
     <div className="Search">
       <SearchForm />
       <Div>
-        <StyledLink to={ to("parse") }>Copy+paste TamTam lijst</StyledLink>
+        <TamTamLink to={ to("parse") }>Copy+paste TamTam lijst</TamTamLink>
       </Div>
       { showSpinner &&
         <Spinner size={ 40 } />
