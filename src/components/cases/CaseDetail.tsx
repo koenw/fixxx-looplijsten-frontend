@@ -90,7 +90,7 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
   // eigenaar
   const hasBrkData = (caseItem.brk_data as BrkDataError).error === undefined
   const brkData = caseItem.brk_data as BrkData
-  const eigenaar = hasBrkData && brkData.owners.length > 0 ? brkData.owners.join(", ") : undefined
+  const eigenaar = hasBrkData && brkData.owners.length > 0 ? brkData.owners.map(owner => owner._display).join(", ") : undefined
 
   // woning terugmeld email
   const mailtoAnchor = <MailtoAnchor
