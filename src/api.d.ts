@@ -95,7 +95,13 @@ declare type BagData = {
   indicatie_geconstateerd?: boolean
   aanduiding_in_onderzoek?: boolean
 }
-type BagDataError = {
+declare type BagDataError = {
+  error: string
+}
+declare type BrkData = {
+  owners: { _display: string }[]
+}
+declare type BrkDataError = {
   error: string
 }
 type BWVHotlineMelding = {
@@ -130,6 +136,7 @@ type RelatedCase = {
 }
 declare type Case = {
   bag_data: BagData | BagDataError
+  brk_data: BrkData | BrkDataError
   import_adres: ImportAdres
   bwv_hotline_bevinding: BWVHotlineBevinding[]
   bwv_tmp: BWVTmp

@@ -87,6 +87,11 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
   const woonbootIndicatie = hasBagData && bagData.indicatie_geconstateerd !== undefined ? bagData.indicatie_geconstateerd : false
   const woonbootAanduiding = hasBagData && bagData.aanduiding_in_onderzoek !== undefined ? bagData.aanduiding_in_onderzoek : false
 
+  // eigenaar
+  const hasBrkData = (caseItem.brk_data as BrkDataError).error === undefined
+  const brkData = caseItem.brk_data as BrkData
+  const eigenaar = hasBrkData && brkData.owners.length > 0 ? brkData.owners.join(", ") : undefined
+
   // woning terugmeld email
   const mailtoAnchor = <MailtoAnchor
     address={ address }
@@ -109,12 +114,14 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
     ["Verdieping toegang", woningEtage !== undefined ? woningEtage : "-"],
     ["Aantal kamers", woningKamers > 0 ? woningKamers : "-"],
     ["Woonoppervlak", woningOppervlak > 0 ? woningOppervlak + " m²" : "-"],
+    ["Eigenaar", eigenaar],
     mailtoAnchor
   ]
   const woonbootFields = [
     ["Status", woonbootStatus || "-"],
     ["Indicatie geconstateerd", woonbootIndicatie],
     ["Aanduiding in onderzoek", woonbootAanduiding],
+    ["Eigenaar", eigenaar],
     mailtoAnchor
   ]
   const woningData = isWoning ? woningFields : woonbootFields
