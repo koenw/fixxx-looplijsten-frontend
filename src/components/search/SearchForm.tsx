@@ -6,7 +6,7 @@ import useOnChangeState from "../../hooks/useOnChangeState"
 import InputBase from "../styled/Input"
 import useGlobalState from "../../hooks/useGlobalState"
 import ClearButton from "./ClearButton"
-import { mobile, desktop } from "../../responsiveness/mediaQueries"
+import { desktop } from "../../responsiveness/mediaQueries"
 
 const Label = styled.label`
   font-weight: 500

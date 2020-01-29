@@ -27,7 +27,6 @@ const SpanDesktop = styled.span`
 const RemoveAllButton: FC<Props> = ({ onClick = noop }) => {
   const message = "Weet je zeker dat je je hele looplijst wilt wissen?"
   const onClickConfirm = (event: MouseEvent<HTMLButtonElement>) => confirm(message, () => onClick(event))
-  const text = window.innerWidth > 768 ? "Wis gehele looplijst" : "Wis looplijst"
   return (
     <StyledButton onClick={ onClickConfirm } variant="blank" iconLeft={ <TrashBin /> }>
       <SpanMobile>Wis lijst</SpanMobile>
