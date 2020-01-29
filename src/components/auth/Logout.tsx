@@ -15,9 +15,9 @@ const Logout: FC = () => {
     clear
   } = useGlobalState()
 
-  const onClick = () => {
+  const onClick = async () => {
     clear()
-    window.open(getLogoutUrl(), "_blank")
+    await fetch(getLogoutUrl(), { mode: "no-cors", credentials: "include" })
   }
 
   return (
