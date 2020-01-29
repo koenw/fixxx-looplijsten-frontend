@@ -2,7 +2,7 @@
   "name": "react-fixxx-looplijsten-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://top.amsterdam.nl/",
+  "homepage": "/looplijsten/",
   "dependencies": {
     "@datapunt/asc-assets": "^0.17.7",
     "@datapunt/asc-core": "^0.17.7",
