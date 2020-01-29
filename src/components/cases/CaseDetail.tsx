@@ -13,7 +13,6 @@ import replaceNewLines from "../../lib/utils/replaceNewLines"
 import replaceUrls from "../../lib/utils/replaceUrls"
 import isBetweenDates from "../../lib/utils/isBetweenDates"
 import displayAddress from "../../lib/displayAddress"
-import displayBoolean from "../../lib/displayBoolean"
 import ScrollToAnchor from "../global/ScrollToAnchor"
 
 type Props = {
@@ -114,8 +113,8 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
   ]
   const woonbootFields = [
     ["Status", woonbootStatus || "-"],
-    ["Indicatie geconstateerd", displayBoolean(woonbootIndicatie)],
-    ["Aanduiding in onderzoek", displayBoolean(woonbootAanduiding)],
+    ["Indicatie geconstateerd", woonbootIndicatie],
+    ["Aanduiding in onderzoek", woonbootAanduiding],
     mailtoAnchor
   ]
   const woningData = isWoning ? woningFields : woonbootFields
@@ -249,8 +248,8 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
         data={[
           ["Vandaag verhuurd", vakantieverhuurToday],
           [`Nachten verhuurd ${ new Date().getFullYear() }`, vakantieverhuurDays > 0 ? <ScrollToAnchor anchor="vakantieverhuur" text={ `${ vakantieverhuurDays } nachten` } /> : "-"],
-          ["Shortstay", displayBoolean(vakantieverhuurShortstay)],
-          ["B&B aangemeld", displayBoolean(vakantieverhuurBnB)]
+          ["Shortstay", vakantieverhuurShortstay],
+          ["B&B aangemeld", vakantieverhuurBnB]
         ]}
         />
       <CaseDetailSection
