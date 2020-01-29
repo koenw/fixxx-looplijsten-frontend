@@ -60,6 +60,7 @@ export const getOIDCProviderUrl = () => {
     isAcc ? "acc.straatnotes.amsterdam.nl" :
     "localhost:3000"
   const redirectUri = `${ redirectProtocol }${ redirectDomain }${ basepath }authentication/callback`
+  console.log(redirectUri)
   const queryParamsString = queryParams({
     response_type: responseType,
     scope,
