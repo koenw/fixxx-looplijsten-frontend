@@ -261,13 +261,13 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
         title="Meldingen / aanleiding"
         data={ meldingenData.length ? meldingenData : ["-"] }
         />
+      <CaseDetailSection
+        id="personen"
+        title={ `Huidige bewoners${ showBewoners ? ` (${ people.length })` : "" }` }
+        data={ showBewoners ? bewoners : ["Geen inschrijvingen"] }
+        />
       {
-        <CaseDetailSection
-          id="personen"
-          title={ `Huidige bewoners ${ showBewoners ? `(${ people.length })` : "" }` }
-          data= { showBewoners ? bewoners : ["Geen inschrijvingen"] } />
-      }
-      { showVakantieverhuur &&
+      showVakantieverhuur &&
       <CaseDetailSection
         id="vakantieverhuur"
         title={ `Vakantieverhuur dit jaar (${ vakantieverhuurDays })` }
