@@ -9,7 +9,7 @@ const domain =
 const pathPrefix =
   isProduction ? "api/looplijsten/" :
   isAcc || forceAcc ? "looplijsten/" :
-  ""
+  "looplijsten/"
 const apiPath = "api/v1/"
 const authPath = "credentials-authenticate/"
 const authOIDCPath = "oidc-authenticate/"
