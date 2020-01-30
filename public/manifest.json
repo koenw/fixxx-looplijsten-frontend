@@ -24,7 +24,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "https://top.amsterdam.nl/",
+  "start_url": "https://top.amsterdam.nl",
   "display": "standalone",
   "theme_color": "#ffffff",
   "background_color": "#ffffff"
