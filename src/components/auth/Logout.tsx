@@ -3,7 +3,6 @@ import useGlobalState from "../../hooks/useGlobalState"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import { Logout as LogoutIcon } from "@datapunt/asc-assets"
-import { getLogoutUrl } from "../../config/api"
 
 const Div = styled.div`
   margin-right: 8px
@@ -15,10 +14,7 @@ const Logout: FC = () => {
     clear
   } = useGlobalState()
 
-  const onClick = async () => {
-    clear()
-    await fetch(getLogoutUrl(), { mode: "no-cors", credentials: "include" })
-  }
+  const onClick = () => clear()
 
   return (
     <Div className="Logout">

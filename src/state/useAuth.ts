@@ -12,6 +12,7 @@ import { get, post, notOk } from "../lib/utils/fetch"
 import { getAuthUrl, getIsAuthenticatedUrl } from "../config/api"
 import { isLoginPage, isLoginCallbackPage } from "../config/page"
 import { navigateToHome, navigateToLogin } from "../lib/navigateTo"
+import logoutGrip from "../lib/logoutGrip"
 
 const useAuth = () : [AuthState, AuthActions] => {
 
@@ -87,6 +88,7 @@ const useAuth = () : [AuthState, AuthActions] => {
 
   const unAuthenticate = (navigate = true) => {
     authToken.clear()
+    logoutGrip()
     dispatch(createUnAuthenticate())
     if (navigate) navigateToLogin()
   }
