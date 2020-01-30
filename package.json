@@ -2,7 +2,7 @@
   "name": "react-fixxx-looplijsten-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/looplijsten/",
+  "homepage": ".",
   "dependencies": {
     "@datapunt/asc-assets": "^0.17.7",
     "@datapunt/asc-core": "^0.17.7",
@@ -29,6 +29,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:acc": "./node_modules/.bin/env-cmd -f .env.acc npm run build",
     "test": "react-scripts test",
     "lint": "./node_modules/.bin/eslint src/**/*.{ts,tsx}",
     "eject": "react-scripts eject",
