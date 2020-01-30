@@ -6,6 +6,7 @@ describe("parseAddressLine", () => {
     const arr = parseAddressLine("straat 5 1234AA")
     expect(arr[0]).toBe("1234AA")
     expect(arr[1]).toBe(5)
+    expect(arr[2]).toBeUndefined()
   })
 
   it("straat 12 1234AA additional text", () => {
@@ -48,7 +49,6 @@ describe("parseAddressLine", () => {
     expect(arr[1]).toBe(92)
     expect(arr[2]).toBe("1")
   })
-
 
   it("2e Brededwarsstraat 23 A 2 1011AB", () => {
     const arr = parseAddressLine("2e Brededwarsstraat 23 A 2 1011AB")
