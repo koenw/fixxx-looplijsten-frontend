@@ -1,4 +1,4 @@
-  import React, { FC, ReactNode, useState, useEffect } from "react"
+import React, { FC, ReactNode, useState, useEffect } from "react"
 import StateContext from '../../contexts/StateContext'
 import useAuth from "../../state/useAuth"
 import useItineraries from "../../state/useItineraries"
