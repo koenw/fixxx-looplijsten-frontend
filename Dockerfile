@@ -1,5 +1,7 @@
 FROM node:12
 
+RUN echo $ENVIRONMENT
+
 ENV DIR /var/www
 
 WORKDIR $DIR
