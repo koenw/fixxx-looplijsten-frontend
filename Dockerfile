@@ -1,6 +1,6 @@
 FROM node:12
 
-RUN echo $ENVIRONMENT
+RUN echo "${ENVIRONMENT}"
 
 ENV DIR /var/www
 
