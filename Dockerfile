@@ -1,13 +1,12 @@
 FROM node:12
 
-RUN echo ${BUILD_ENV}
-
 ENV DIR /var/www
 
 WORKDIR $DIR
 COPY . $DIR
 RUN npm ci --unsafe-perm .
-RUN npm run build
+RUN if [ "$BUILD_ENV" != "production" ]; then npm run build:acc ; fi
+RUN if [ "$BUILD_ENV" = "production" ]; then npm run build ; fi
 RUN cp serve.json build/
 
 # tmp hack to make path work
