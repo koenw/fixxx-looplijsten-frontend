@@ -37,9 +37,7 @@ const useAuth = () : [AuthState, AuthActions] => {
       if (isLoginPage()) navigateToHome()
       return true
     } else {
-      if (!isLoginCallbackPage()) {
-        navigateToLogin()
-      }
+      if (!isLoginCallbackPage()) navigateToLogin()
       return false
     }
   }

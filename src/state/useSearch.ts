@@ -9,7 +9,7 @@ import { get, notOk, isForbidden } from "../lib/utils/fetch"
 import { getUrl } from "../config/api"
 import isEmptyObject from "../lib/utils/isEmptyObject"
 import groupCasesByAddress from "../lib/groupCasesByAddress"
-import { navigateToLogin } from "../lib/navigateTo"
+import handleForbiddenResponse from "../lib/handleForbiddenResponse"
 
 const useSearch = () : [SearchState, SearchActions] => {
 
@@ -26,7 +26,7 @@ const useSearch = () : [SearchState, SearchActions] => {
       const [response, result] = await get(url)
 
       // Handle error responses
-      if (isForbidden(response)) return navigateToLogin()
+      if (isForbidden(response)) return handleForbiddenResponse()
       if (notOk(response)) return false
 
       // Set results

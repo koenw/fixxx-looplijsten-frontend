@@ -8,7 +8,7 @@ import reducer, {
 import { get, isForbidden } from "../lib/utils/fetch"
 import { getUrl } from "../config/api"
 import parseAddressLine from "../lib/parseAddressLine"
-import { navigateToLogin } from "../lib/navigateTo"
+import handleForbiddenResponse from "../lib/handleForbiddenResponse"
 
 type ParseResult = {
   success: boolean
@@ -44,7 +44,7 @@ const fetchOne = async (item: SearchQueryParams) : Promise<any> => {
   const params = { postalCode: item[0].toUpperCase(), streetNumber: item[1], suffix: item[2] || "" }
   const url = getUrl("search", params)
   const [response, result] = await get(url) as [Response, any]
-  if (isForbidden(response)) return navigateToLogin()
+  if (isForbidden(response)) return handleForbiddenResponse()
   return result
 }
 
