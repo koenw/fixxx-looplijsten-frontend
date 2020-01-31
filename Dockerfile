@@ -5,8 +5,7 @@ ENV DIR /var/www
 WORKDIR $DIR
 COPY . $DIR
 RUN npm ci --unsafe-perm .
-RUN if [ "$BUILD_ENV" != "production" ]; then npm run build:acc ; fi
-RUN if [ "$BUILD_ENV" = "production" ]; then npm run build ; fi
+RUN npm run build
 RUN cp serve.json build/
 
 # tmp hack to make path work
