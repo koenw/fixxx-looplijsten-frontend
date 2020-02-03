@@ -1,9 +1,10 @@
 import logoutGrip from "./logoutGrip"
 import { navigateToLogin } from "./navigateTo"
 
-const handleForbiddenResponse = () => {
-  logoutGrip()
+const handleForbiddenResponse = async () => {
+  await logoutGrip()
   navigateToLogin()
+  window.location.reload()
 }
 
 export default handleForbiddenResponse
