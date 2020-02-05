@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import Case from "../components/cases/Case"
 import Navigation from "../components/global/Navigation"
 import { RouteComponentProps } from "@reach/router"
@@ -8,7 +8,7 @@ type Props = RouteComponentProps & {
   caseId?: string
 }
 
-const CasePage: React.FC<Props> = ({ teamId, caseId }) => {
+const CasePage: FC<Props> = ({ teamId, caseId }) => {
   return (
     <>
       <Navigation />
