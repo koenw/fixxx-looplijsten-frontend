@@ -28,6 +28,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:acc": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "lint": "./node_modules/.bin/eslint src/**/*.{ts,tsx}",

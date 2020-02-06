@@ -58,6 +58,7 @@ export const getOIDCProviderUrl = () => {
   const redirectDomain =
     isProduction ? "top.amsterdam.nl" :
     isAcc ? "acc.straatnotes.amsterdam.nl" :
+    forceAcc ? "localhost:3001" :
     "localhost:3000"
   const redirectUri = `${ redirectProtocol }${ redirectDomain }${ basepath }authentication/callback`
   console.log(redirectUri)
