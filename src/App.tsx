@@ -11,6 +11,8 @@ import SearchPage from "./pages/SearchPage"
 import ParsePage from "./pages/ParsePage"
 import CasePage from "./pages/CasePage"
 import NotePage from "./pages/NotePage"
+import PlanningPage from "./pages/PlanningPage"
+import PlanningResultPage from "./pages/PlanningResultPage"
 import LoginPage from "./pages/LoginPage"
 import NotFoundPage from "./pages/NotFoundPage"
 import LoginCallbackPage from "./pages/LoginCallbackPage"
@@ -41,6 +43,8 @@ const App: FC = () => {
               <CasePage path="/cases/:caseId" />
               <NotePage path="/notes/:itineraryId" />
               <NotePage path="/notes/:itineraryId/:id" />
+              <PlanningPage path="/planning" />
+              <PlanningResultPage path="/planning/result" />
               <LoginPage path="/login" />
               <LoginCallbackPage path="/authentication/callback" />
               <NotFoundPage default />

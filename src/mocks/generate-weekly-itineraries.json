@@ -1,0 +1,702 @@
+{
+  "opening_date": "2018-01-01",
+  "opening_reasons": [
+    "Sahara"
+  ],
+  "days": {
+    "monday": [
+      {
+        "name": "Ochtend",
+        "number_of_lists": 2,
+        "list_of_length": 8,
+        "stages": [
+          "onderzoek buitendienst"
+        ],
+        "itineraries": [
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          }
+        ]
+      },
+      {
+        "name": "Middag",
+        "number_of_lists": 2,
+        "list_of_length": 8,
+        "stages": [
+          "onderzoek buitendienst"
+        ],
+        "itineraries": [
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          }
+        ]
+      },
+      {
+        "name": "Avond",
+        "number_of_lists": 0,
+        "list_of_length": 8,
+        "stages": [
+          "onderzoek buitendienst"
+        ],
+        "itineraries": [
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          }
+        ]
+      }
+    ],
+    "tuesday": [
+      {
+        "name": "Ochtend",
+        "number_of_lists": 2,
+        "list_of_length": 8,
+        "stages": [
+          "onderzoek buitendienst"
+        ],
+        "itineraries": [
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          }
+        ]
+      },
+      {
+        "name": "Middag",
+        "number_of_lists": 2,
+        "list_of_length": 8,
+        "stages": [
+          "onderzoek buitendienst"
+        ],
+        "itineraries": [
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          }
+        ]
+      },
+      {
+        "name": "Avond",
+        "number_of_lists": 0,
+        "list_of_length": 8,
+        "stages": [
+          "onderzoek buitendienst"
+        ],
+        "itineraries": [
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          }
+        ]
+      }
+    ],
+    "wednesday": [
+      {
+        "name": "Ochtend",
+        "number_of_lists": 2,
+        "list_of_length": 8,
+        "stages": [
+          "onderzoek buitendienst"
+        ],
+        "itineraries": [
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          }
+        ]
+      },
+      {
+        "name": "Middag",
+        "number_of_lists": 2,
+        "list_of_length": 8,
+        "stages": [
+          "onderzoek buitendienst"
+        ],
+        "itineraries": [
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          }
+        ]
+      },
+      {
+        "name": "Avond",
+        "number_of_lists": 0,
+        "list_of_length": 8,
+        "stages": [
+          "onderzoek buitendienst"
+        ],
+        "itineraries": [
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          }
+        ]
+      }
+    ],
+    "thursday": [
+      {
+        "name": "Ochtend",
+        "number_of_lists": 2,
+        "list_of_length": 8,
+        "stages": [
+          "onderzoek buitendienst"
+        ],
+        "itineraries": [
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          }
+        ]
+      },
+      {
+        "name": "Middag",
+        "number_of_lists": 2,
+        "list_of_length": 8,
+        "stages": [
+          "onderzoek buitendienst"
+        ],
+        "itineraries": [
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          }
+        ]
+      },
+      {
+        "name": "Avond",
+        "number_of_lists": 0,
+        "list_of_length": 8,
+        "stages": [
+          "onderzoek buitendienst"
+        ],
+        "itineraries": [
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          }
+        ]
+      }
+    ],
+    "friday": [
+      {
+        "name": "Ochtend",
+        "number_of_lists": 2,
+        "list_of_length": 8,
+        "stages": [
+          "onderzoek buitendienst"
+        ],
+        "itineraries": [
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          }
+        ]
+      },
+      {
+        "name": "Middag",
+        "number_of_lists": 2,
+        "list_of_length": 8,
+        "stages": [
+          "onderzoek buitendienst"
+        ],
+        "itineraries": [
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          }
+        ]
+      },
+      {
+        "name": "Avond",
+        "number_of_lists": 0,
+        "list_of_length": 8,
+        "stages": [
+          "onderzoek buitendienst"
+        ],
+        "itineraries": [
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          }
+        ]
+      }
+    ],
+    "saturday": [
+      {
+        "name": "Weekend",
+        "number_of_lists": 1,
+        "list_of_length": 40,
+        "stages": [
+          "onderzoek buitendienst"
+        ],
+        "itineraries": [
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          }
+        ]
+      }
+    ],
+    "sunday": [
+      {
+        "name": "Weekend",
+        "number_of_lists": 1,
+        "list_of_length": 40,
+        "stages": [
+          "onderzoek buitendienst"
+        ],
+        "itineraries": [
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          },
+          {
+            "case_id": "12345_1",
+            "postal_code": "1234AB",
+            "street_name": "Amstel",
+            "street_number": 1,
+            "suffix": "2",
+            "suffix_letter": "A",
+            "stadium": "Issue melding",
+            "case_reason": "Sahara"
+          }
+        ]
+      }
+    ]
+  }
+}

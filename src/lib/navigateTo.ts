@@ -1,5 +1,7 @@
 import { navigate } from "@reach/router"
 import { to } from "../config/page"
 
-export const navigateToHome = () => navigate(to())
-export const navigateToLogin = () => navigate(to("login"))
+const navigateTo = (path?: string) => navigate(to(path))
+export default navigateTo
+export const navigateToHome = () => navigateTo()
+export const navigateToLogin = () => navigateTo("login")

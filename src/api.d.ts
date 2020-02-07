@@ -147,3 +147,10 @@ declare type Case = {
   related_cases: RelatedCase[]
 }
 declare type Cases = Case[]
+
+declare type PlanningResult = {
+  success: boolean
+  error?: string
+  data?: any
+}
+declare type PlanningResults = PlanningResult

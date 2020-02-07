@@ -1,9 +1,10 @@
 import React, { FC, ReactNode, useState, useEffect } from "react"
-import StateContext from '../../contexts/StateContext'
+import StateContext from "../../contexts/StateContext"
 import useAuth from "../../state/useAuth"
 import useItineraries from "../../state/useItineraries"
 import useSearch from "../../state/useSearch"
 import useParse from "../../state/useParse"
+import usePlanning from "../../state/usePlanning"
 import parseLocationSearch from "../../lib/utils/parseLocationSearch"
 import { isLoginCallbackPage } from "../../config/page"
 
@@ -31,6 +32,9 @@ const StateProvider: FC<Props> = ({ children }) => {
 
   // parse
   const [parse, parseActions] = useParse()
+
+  // planning
+  const [planning, planningActions] = usePlanning()
 
   // anonymous
   const [isAnonymous, setIsAnonymous] = useState(false)
@@ -90,6 +94,9 @@ const StateProvider: FC<Props> = ({ children }) => {
 
       parse,
       parseActions,
+
+      planning,
+      planningActions,
 
       isAnonymous,
       toggleIsAnonymous,

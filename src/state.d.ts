@@ -57,3 +57,13 @@ declare type ParseActions = {
   parse: (a: string) => void
   clear: () => void
 }
+
+declare type PlanningState = {
+  isFetching: boolean
+  results?: any
+  errorMessage?: ErrorMessage
+}
+
+declare type PlanningActions = {
+  generate: (a: any) => void
+}
