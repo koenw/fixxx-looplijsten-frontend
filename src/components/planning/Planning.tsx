@@ -2,7 +2,7 @@ import React, { FC, FormEvent } from "react"
 import styled from "styled-components"
 import useGlobalState from "../../hooks/useGlobalState"
 import useOnChangeState from "../../hooks/useOnChangeState"
-import days from "../../text/days"
+import days, { getTitle } from "../../lib/days"
 import DayInputs from "./DayInputs"
 import { Button } from "@datapunt/asc-ui"
 import createPlanningRequestBody from "../../lib/createPlanningRequestBody"
@@ -52,13 +52,13 @@ const Planning: FC = () => {
   const sunday = useOnChangeState("0") as unknown as Input
 
   const inputs = [
-    { title: days[0], inputs: [mondayMorning, mondayAfternoon, mondayEvening] },
-    { title: days[1], inputs: [tuesdayMorning, tuesdayAfternoon, tuesdayEvening] },
-    { title: days[2], inputs: [wednesdayMorning, wednesdayAfternoon, wednesdayEvening] },
-    { title: days[3], inputs: [thursdayMorning, thursdayAfternoon, thursdayEvening] },
-    { title: days[4], inputs: [fridayMorning, fridayAfternoon, fridayEvening] },
-    { title: days[5], inputs: [saturday] },
-    { title: days[6], inputs: [sunday] }
+    { title: getTitle(0), inputs: [mondayMorning, mondayAfternoon, mondayEvening] },
+    { title: getTitle(1), inputs: [tuesdayMorning, tuesdayAfternoon, tuesdayEvening] },
+    { title: getTitle(2), inputs: [wednesdayMorning, wednesdayAfternoon, wednesdayEvening] },
+    { title: getTitle(3), inputs: [thursdayMorning, thursdayAfternoon, thursdayEvening] },
+    { title: getTitle(4), inputs: [fridayMorning, fridayAfternoon, fridayEvening] },
+    { title: getTitle(5), inputs: [saturday] },
+    { title: getTitle(6), inputs: [sunday] }
   ]
 
   const onSubmit = (event: FormEvent) => {
