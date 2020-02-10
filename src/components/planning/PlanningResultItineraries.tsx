@@ -26,6 +26,13 @@ const ButtonWrap = styled.div`
   max-width: 600px
   margin-top: 24px
 `
+const Th = styled.th`
+  text-align: left
+  padding-right: 36px
+`
+const Td = styled.td`
+  padding-right: 36px
+`
 
 const PlanningResultItineraries: FC<Props> = ({ title, itineraries }) => {
   const fullTitle = `${ title } (${ itineraries.length })`
@@ -45,7 +52,7 @@ const PlanningResultItineraries: FC<Props> = ({ title, itineraries }) => {
     <Div className="PlanningResultItineraries" style={ style }>
       <h1>{ fullTitle }</h1>
       <table>
-        <tr><th>Straat</th><th>Postcode</th><th>Openingsreden</th><th>Stadium</th></tr>
+        <tr><Th>Straat</Th><Th>Postcode</Th><Th>Openingsreden</Th><Th>Stadium</Th></tr>
         { itineraries.map((itinerary: any) => {
             const {
               street_name: streetName,
@@ -62,11 +69,11 @@ const PlanningResultItineraries: FC<Props> = ({ title, itineraries }) => {
             fullText += `${ text }\n`
             return (
               <tr key={ address }>
-                <td>{ address }</td>
-                <td>{ postalCode }</td>
-                <td>{ caseReason }</td>
-                <td>{ stadium }</td>
-                <td><a href={ `/cases/${ caseId }` }>detail</a></td>
+                <Td>{ address }</Td>
+                <Td>{ postalCode }</Td>
+                <Td>{ caseReason }</Td>
+                <Td>{ stadium }</Td>
+                <Td><a href={ `/cases/${ caseId }` }>detail</a></Td>
               </tr>
             )
           })
