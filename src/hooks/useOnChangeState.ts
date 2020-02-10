@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react"
+import { useState } from "react"
 
 type Element = HTMLInputElement | HTMLTextAreaElement
 type ChangeEventInput = ChangeEvent<Element>
