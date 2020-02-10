@@ -74,7 +74,9 @@ const value = {
 
     planning: planningState,
     planningActions: {
-      generate: (a: any) => {}
+      initialize: noop,
+      generate: (a: any) => {},
+      clear: noop
     },
 
     isAnonymous: false,

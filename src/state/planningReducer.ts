@@ -2,10 +2,12 @@ type Action =
   | { type: "START_FETCHING" }
   | { type: "SET_RESULTS", payload: { results: any } }
   | { type: "SET_ERROR", payload: { errorMessage: ErrorMessage } }
+  | { type: "CLEAR" }
 
 export const createStartFetching = () : Action => ({ type: "START_FETCHING" })
 export const createSetResults = (results: any) : Action => ({ type: "SET_RESULTS", payload: { results } })
 export const createSetError = (errorMessage: ErrorMessage) : Action => ({ type: "SET_ERROR", payload: { errorMessage } })
+export const createClear = () : Action => ({ type: "CLEAR" })
 
 export const initialState: PlanningState = {
   isFetching: false,
@@ -31,6 +33,8 @@ const reducer = (state: PlanningState, action: Action) : PlanningState => {
       const isFetching = false
       return { ...state, isFetching, errorMessage }
     }
+    case "CLEAR":
+      return initialState
     default:
       return state
   }

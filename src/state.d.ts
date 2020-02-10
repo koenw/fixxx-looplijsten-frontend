@@ -65,5 +65,7 @@ declare type PlanningState = {
 }
 
 declare type PlanningActions = {
+  initialize: () => void
   generate: (a: any) => void
+  clear: () => void
 }

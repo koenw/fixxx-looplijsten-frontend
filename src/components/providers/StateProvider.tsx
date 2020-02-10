@@ -60,6 +60,7 @@ const StateProvider: FC<Props> = ({ children }) => {
     if (!isAuthenticated) return clear()
 
     itinerariesActions.initialize()
+    planningActions.initialize()
   }
 
   // clear
@@ -67,6 +68,7 @@ const StateProvider: FC<Props> = ({ children }) => {
     const shouldNavigateToLogin = !isLoginCallbackPage()
     authActions.unAuthenticate(shouldNavigateToLogin)
     itinerariesActions.clear()
+    planningActions.clear()
   }
 
   // initialization

@@ -11,9 +11,7 @@ const PlanningResult: FC = () => {
     }
   } = useGlobalState()
 
-  console.log(results)
   const hasResult = results !== undefined
-  if (!hasResult) navigateTo("planning")
   const showEmpty = !hasResult
   const days = hasResult ? results.days : undefined
 

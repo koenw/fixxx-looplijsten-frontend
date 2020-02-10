@@ -2,7 +2,8 @@ import { useReducer } from "react"
 import reducer, {
   initialState,
   createStartFetching,
-  createSetResults
+  createSetResults,
+  createClear
 } from "./planningReducer"
 import { post, notOk, isForbidden } from "../lib/utils/fetch"
 import { getUrl } from "../config/api"
@@ -12,7 +13,19 @@ import navigateTo from "../lib/navigateTo"
 
 const usePlanning = () : [PlanningState, PlanningActions] => {
 
+  const localStorageKey = "planningResult"
+
   const [state, dispatch] = useReducer(reducer, initialState as never)
+
+  const initialize = () => {
+    try {
+      const item = window.localStorage.getItem(localStorageKey)
+      if (item == null) return
+      const result = JSON.parse(item)
+      console.log(result)
+      dispatch(createSetResults(result))
+    } catch {}
+  }
 
   const generate = (params: any) => {
 
@@ -30,6 +43,7 @@ const usePlanning = () : [PlanningState, PlanningActions] => {
       }
       window.setTimeout(() => {
         dispatch(createSetResults(results.data))
+        window.localStorage.setItem(localStorageKey, JSON.stringify(results.data))
         navigateTo("planning/result")
       }, 500)
 
@@ -45,7 +59,12 @@ const usePlanning = () : [PlanningState, PlanningActions] => {
     })()
   }
 
-  return [state, { generate }]
+  const clear = () => {
+    window.localStorage.removeItem(localStorageKey)
+    dispatch(createClear())
+  }
+
+  return [state, { initialize, generate, clear }]
 }
 
 export default usePlanning
