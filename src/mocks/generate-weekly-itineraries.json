@@ -8,7 +8,7 @@
       {
         "name": "Ochtend",
         "number_of_lists": 2,
-        "list_of_length": 8,
+        "length_of_list": 8,
         "stages": [
           "onderzoek buitendienst"
         ],
@@ -48,7 +48,7 @@
       {
         "name": "Middag",
         "number_of_lists": 2,
-        "list_of_length": 8,
+        "length_of_list": 8,
         "stages": [
           "onderzoek buitendienst"
         ],
@@ -88,7 +88,7 @@
       {
         "name": "Avond",
         "number_of_lists": 0,
-        "list_of_length": 8,
+        "length_of_list": 8,
         "stages": [
           "onderzoek buitendienst"
         ],
@@ -130,7 +130,7 @@
       {
         "name": "Ochtend",
         "number_of_lists": 2,
-        "list_of_length": 8,
+        "length_of_list": 8,
         "stages": [
           "onderzoek buitendienst"
         ],
@@ -170,7 +170,7 @@
       {
         "name": "Middag",
         "number_of_lists": 2,
-        "list_of_length": 8,
+        "length_of_list": 8,
         "stages": [
           "onderzoek buitendienst"
         ],
@@ -210,7 +210,7 @@
       {
         "name": "Avond",
         "number_of_lists": 0,
-        "list_of_length": 8,
+        "length_of_list": 8,
         "stages": [
           "onderzoek buitendienst"
         ],
@@ -252,7 +252,7 @@
       {
         "name": "Ochtend",
         "number_of_lists": 2,
-        "list_of_length": 8,
+        "length_of_list": 8,
         "stages": [
           "onderzoek buitendienst"
         ],
@@ -292,7 +292,7 @@
       {
         "name": "Middag",
         "number_of_lists": 2,
-        "list_of_length": 8,
+        "length_of_list": 8,
         "stages": [
           "onderzoek buitendienst"
         ],
@@ -332,7 +332,7 @@
       {
         "name": "Avond",
         "number_of_lists": 0,
-        "list_of_length": 8,
+        "length_of_list": 8,
         "stages": [
           "onderzoek buitendienst"
         ],
@@ -374,7 +374,7 @@
       {
         "name": "Ochtend",
         "number_of_lists": 2,
-        "list_of_length": 8,
+        "length_of_list": 8,
         "stages": [
           "onderzoek buitendienst"
         ],
@@ -414,7 +414,7 @@
       {
         "name": "Middag",
         "number_of_lists": 2,
-        "list_of_length": 8,
+        "length_of_list": 8,
         "stages": [
           "onderzoek buitendienst"
         ],
@@ -454,7 +454,7 @@
       {
         "name": "Avond",
         "number_of_lists": 0,
-        "list_of_length": 8,
+        "length_of_list": 8,
         "stages": [
           "onderzoek buitendienst"
         ],
@@ -496,7 +496,7 @@
       {
         "name": "Ochtend",
         "number_of_lists": 2,
-        "list_of_length": 8,
+        "length_of_list": 8,
         "stages": [
           "onderzoek buitendienst"
         ],
@@ -536,7 +536,7 @@
       {
         "name": "Middag",
         "number_of_lists": 2,
-        "list_of_length": 8,
+        "length_of_list": 8,
         "stages": [
           "onderzoek buitendienst"
         ],
@@ -576,7 +576,7 @@
       {
         "name": "Avond",
         "number_of_lists": 0,
-        "list_of_length": 8,
+        "length_of_list": 8,
         "stages": [
           "onderzoek buitendienst"
         ],
@@ -618,7 +618,7 @@
       {
         "name": "Weekend",
         "number_of_lists": 1,
-        "list_of_length": 40,
+        "length_of_list": 40,
         "stages": [
           "onderzoek buitendienst"
         ],
@@ -660,7 +660,7 @@
       {
         "name": "Weekend",
         "number_of_lists": 1,
-        "list_of_length": 40,
+        "length_of_list": 40,
         "stages": [
           "onderzoek buitendienst"
         ],

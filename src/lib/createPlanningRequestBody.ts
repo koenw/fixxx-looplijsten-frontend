@@ -9,19 +9,19 @@ const createPlanningRequestBody = (inputs: any) => {
       {
         name: "Ochtend",
         number_of_lists: inputs[0].inputs[0],
-        list_of_length: listLength,
+        length_of_list: listLength,
         stages
       },
       {
         name: "Middag",
         number_of_lists: inputs[0].inputs[1],
-        list_of_length: listLength,
+        length_of_list: listLength,
         stages
       },
       {
         name: "Avond",
         number_of_lists: inputs[0].inputs[2],
-        list_of_length: listLength,
+        length_of_list: listLength,
         stages
       }
     ],
@@ -29,19 +29,19 @@ const createPlanningRequestBody = (inputs: any) => {
       {
         name: "Ochtend",
         number_of_lists: inputs[1].inputs[0],
-        list_of_length: listLength,
+        length_of_list: listLength,
         stages
       },
       {
         name: "Middag",
         number_of_lists: inputs[1].inputs[1],
-        list_of_length: listLength,
+        length_of_list: listLength,
         stages
       },
       {
         name: "Avond",
         number_of_lists: inputs[1].inputs[2],
-        list_of_length: listLength,
+        length_of_list: listLength,
         stages
       }
     ],
@@ -49,19 +49,19 @@ const createPlanningRequestBody = (inputs: any) => {
       {
         name: "Ochtend",
         number_of_lists: inputs[2].inputs[0],
-        list_of_length: listLength,
+        length_of_list: listLength,
         stages
       },
       {
         name: "Middag",
         number_of_lists: inputs[2].inputs[1],
-        list_of_length: listLength,
+        length_of_list: listLength,
         stages
       },
       {
         name: "Avond",
         number_of_lists: inputs[2].inputs[2],
-        list_of_length: listLength,
+        length_of_list: listLength,
         stages
       }
     ],
@@ -69,19 +69,19 @@ const createPlanningRequestBody = (inputs: any) => {
       {
         name: "Ochtend",
         number_of_lists: inputs[3].inputs[0],
-        list_of_length: listLength,
+        length_of_list: listLength,
         stages
       },
       {
         name: "Middag",
         number_of_lists: inputs[3].inputs[1],
-        list_of_length: listLength,
+        length_of_list: listLength,
         stages
       },
       {
         name: "Avond",
         number_of_lists: inputs[3].inputs[2],
-        list_of_length: listLength,
+        length_of_list: listLength,
         stages
       }
     ],
@@ -89,19 +89,19 @@ const createPlanningRequestBody = (inputs: any) => {
       {
         name: "Ochtend",
         number_of_lists: inputs[4].inputs[0],
-        list_of_length: listLength,
+        length_of_list: listLength,
         stages
       },
       {
         name: "Middag",
         number_of_lists: inputs[4].inputs[1],
-        list_of_length: listLength,
+        length_of_list: listLength,
         stages
       },
       {
         name: "Avond",
         number_of_lists: inputs[4].inputs[2],
-        list_of_length: listLength,
+        length_of_list: listLength,
         stages
       }
     ],
@@ -109,7 +109,7 @@ const createPlanningRequestBody = (inputs: any) => {
       {
         name: "Weekend",
         number_of_lists: inputs[5].inputs[0],
-        list_of_length: listLengthLong,
+        length_of_list: listLengthLong,
         stages
       }
     ],
@@ -117,7 +117,7 @@ const createPlanningRequestBody = (inputs: any) => {
       {
         name: "Weekend",
         number_of_lists: inputs[6].inputs[0],
-        list_of_length: listLengthLong,
+        length_of_list: listLengthLong,
         stages
       }
     ]
