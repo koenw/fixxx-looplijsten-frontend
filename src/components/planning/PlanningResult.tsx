@@ -1,6 +1,7 @@
 import React, { FC } from "react"
 import PlanningResultItineraries from "./PlanningResultItineraries"
 import useGlobalState from "../../hooks/useGlobalState"
+import days, { getTitle } from "../../lib/days"
 
 const PlanningResult: FC = () => {
 
@@ -12,7 +13,7 @@ const PlanningResult: FC = () => {
 
   const hasResult = results !== undefined
   const showEmpty = !hasResult
-  const days = hasResult ? results.days : undefined
+  const dayKeys = days.map(day => day.key)
 
   return (
     <div className="PlanningResult">
@@ -22,7 +23,10 @@ const PlanningResult: FC = () => {
       { hasResult &&
         <>
           <h1>Looplijsten</h1>
-          { days.monday.map((list: any) => <PlanningResultItineraries title={ `maandag ${ list.name }` } itineraries={ list.itineraries } />) }
+          { dayKeys.map(key =>
+              results.days[key].map((list: { name: string, itineraries: Itineraries }) =>
+                <PlanningResultItineraries title={ `${ getTitle(key) } ${ list.name }` } itineraries={ list.itineraries } />
+          )) }
         </>
       }
     </div>
