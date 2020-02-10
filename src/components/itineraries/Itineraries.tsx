@@ -57,7 +57,7 @@ const Itineraries: FC = () => {
   const onClick = () => itineraries.map(itinerary => remove(itinerary.id))
   const Buttons = () => (
     <>
-      <MapsButton itineraries={ itineraries } />
+      <MapsButton itineraries={ itineraries.map(itinerary => itinerary.case.bwv_data) } />
       <RemoveAllButton onClick={ onClick } />
     </>
   )

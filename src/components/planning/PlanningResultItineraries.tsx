@@ -7,7 +7,7 @@ import CopyToClipboardButton from "../global/CopyToClipboardButton"
 
 type Props = {
   title: string
-  itineraries: any
+  itineraries: BWVData[]
 }
 
 const Div = styled.div`
@@ -35,9 +35,9 @@ const Td = styled.td`
   padding-right: 36px
 `
 
-const createClipboardText = (itineraries: any) => {
+const createClipboardText = (itineraries: BWVData[]) => {
   const newline = "\n"
-  return itineraries.map((itinerary: any) => {
+  return itineraries.map((itinerary: BWVData) => {
     const {
       street_name: streetName,
       street_number: streetNumber,
@@ -47,7 +47,7 @@ const createClipboardText = (itineraries: any) => {
       stadium,
       case_reason: caseReason
     } = itinerary
-    const address = displayAddress(streetName, streetNumber, suffix, suffixLetter)
+    const address = displayAddress(streetName, streetNumber, suffix || undefined, suffixLetter || undefined)
     const text = `${ address } ${ postalCode } ${ stadium } ${ caseReason }`
     return text
   }).join(newline) + newline
@@ -64,7 +64,7 @@ const PlanningResultItineraries: FC<Props> = ({ title, itineraries }) => {
       <h1>{ fullTitle }</h1>
       <table>
         <tr><Th>Straat</Th><Th>Postcode</Th><Th>Openingsreden</Th><Th>Stadium</Th></tr>
-        { itineraries.map((itinerary: any) => {
+        { itineraries.map((itinerary: BWVData) => {
             const {
               street_name: streetName,
               street_number: streetNumber,
@@ -75,7 +75,7 @@ const PlanningResultItineraries: FC<Props> = ({ title, itineraries }) => {
               stadium,
               case_reason: caseReason
             } = itinerary
-            const address = displayAddress(streetName, streetNumber, suffix, suffixLetter)
+            const address = displayAddress(streetName, streetNumber, suffix || undefined, suffixLetter || undefined)
             return (
               <tr key={ address }>
                 <Td>{ address }</Td>
@@ -89,7 +89,7 @@ const PlanningResultItineraries: FC<Props> = ({ title, itineraries }) => {
         }
       </table>
       <ButtonWrap>
-        <MapsButton itineraries={ itineraries.map((itinerary: any) => ({ case: { bwv_data: itinerary } })) } />
+        <MapsButton itineraries={ itineraries } />
         <CopyToClipboardButton text={ text } onClick={ onClick } />
       </ButtonWrap>
     </Div>

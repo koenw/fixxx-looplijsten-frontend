@@ -6,7 +6,7 @@ import displayAddress from "../../lib/displayAddress"
 import { mobile, desktop } from "../../responsiveness/mediaQueries"
 
 type Props = {
-  itineraries: Itineraries
+  itineraries: BWVData[]
 }
 
 const StyledButton = styled(Button)`
@@ -28,13 +28,9 @@ const MapsButton: FC<Props> = ({ itineraries }) => {
     const path = itineraries
       .map(itinerary => {
         const {
-          case: {
-            bwv_data: {
-              street_name: streetName,
-              street_number: streetNumber,
-              postal_code: postalCode
-            }
-          }
+          street_name: streetName,
+          street_number: streetNumber,
+          postal_code: postalCode
         } = itinerary
         const address = displayAddress(streetName, streetNumber)
         const city = "Amsterdam"
@@ -43,7 +39,6 @@ const MapsButton: FC<Props> = ({ itineraries }) => {
       .filter((address, index, arr) => arr.indexOf(address) === index) // filter unique
       .join("/")
     const href = `https://www.google.nl/maps/dir/${ path }`
-    console.log(href)
     window.open(href, "_blank")
   }
   return (
