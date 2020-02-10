@@ -1,10 +1,8 @@
 import React, { FC } from "react"
 import { Link } from "@reach/router"
 import styled from "styled-components"
-import { Search as SearchIcon } from "@datapunt/asc-assets"
 import { to } from "../../config/page"
-import { isPage, isHomePage } from "../../config/page"
-import useGlobalState from "../../hooks/useGlobalState"
+import { isPage } from "../../config/page"
 
 const NavWrap = styled.div`
   position: fixed
@@ -43,12 +41,6 @@ const FocusSpacer = styled.div`
 `
 
 const NavigationPlanning: FC = () => {
-
-  const {
-    itineraries: {
-      itineraries
-    }
-  } = useGlobalState()
 
   const generateActive = isPage("planning")
   const resultActive = isPage("planning/result")

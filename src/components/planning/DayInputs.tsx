@@ -1,6 +1,5 @@
 import React, { FC } from "react"
 import styled from "styled-components"
-import useOnChangeState from "../../hooks/useOnChangeState"
 import Input from "../styled/Input"
 
 type Input = [string, OnChangeHandler]

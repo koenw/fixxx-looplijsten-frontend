@@ -1,7 +1,6 @@
 import React, { FC } from "react"
 import PlanningResultItineraries from "./PlanningResultItineraries"
 import useGlobalState from "../../hooks/useGlobalState"
-import navigateTo from "../../lib/navigateTo"
 
 const PlanningResult: FC = () => {
 
