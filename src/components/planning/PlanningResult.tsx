@@ -2,6 +2,8 @@ import React, { FC } from "react"
 import PlanningResultItineraries from "./PlanningResultItineraries"
 import useGlobalState from "../../hooks/useGlobalState"
 import days, { getTitle } from "../../lib/days"
+import { Spinner } from "@datapunt/asc-ui"
+
 
 const PlanningResult: FC = () => {
 
@@ -18,7 +20,7 @@ const PlanningResult: FC = () => {
   return (
     <div className="PlanningResult">
       { showEmpty &&
-        <p>Geen resultaten</p>
+        <Spinner size={ 60 } />
       }
       { hasResult &&
         <>
