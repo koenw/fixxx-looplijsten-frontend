@@ -4,7 +4,6 @@ import useGlobalState from "../../hooks/useGlobalState"
 import days, { getTitle } from "../../lib/days"
 import { Spinner } from "@datapunt/asc-ui"
 
-
 const PlanningResult: FC = () => {
 
   const {
@@ -26,7 +25,7 @@ const PlanningResult: FC = () => {
         <>
           <h1>Looplijsten</h1>
           { dayKeys.map(key =>
-              results.days[key].map((list: { name: string, itineraries: Itineraries }) =>
+              results.days[key].map((list: { name: string, itineraries: BWVData[] }) =>
                 <PlanningResultItineraries title={ `${ getTitle(key) } ${ list.name }` } itineraries={ list.itineraries } />
           )) }
         </>
