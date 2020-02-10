@@ -19,7 +19,12 @@ const PlanningResult: FC = () => {
       { showEmpty &&
         <p>Geen resultaten</p>
       }
-      { hasResult && days.monday.map((list: any) => <PlanningResultItineraries title={ `maandag ${ list.name }` } itineraries={ list.itineraries } />) }
+      { hasResult &&
+        <>
+          <h1>Looplijsten</h1>
+          { days.monday.map((list: any) => <PlanningResultItineraries title={ `maandag ${ list.name }` } itineraries={ list.itineraries } />) }
+        </>
+      }
     </div>
   )
 }
