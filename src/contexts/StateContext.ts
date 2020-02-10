@@ -68,6 +68,16 @@ const value = {
       clear: noop
     },
 
+<<<<<<< HEAD
+=======
+    planning: planningState,
+    planningActions: {
+      initialize: noop,
+      generate: (a: any) => {},
+      clear: noop
+    },
+
+>>>>>>> Local storage
     isAnonymous: false,
     toggleIsAnonymous: noop,
 
