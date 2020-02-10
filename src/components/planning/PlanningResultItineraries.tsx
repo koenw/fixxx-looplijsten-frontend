@@ -3,6 +3,7 @@ import displayAddress from "../../lib/displayAddress"
 import styled from "styled-components"
 import { Button } from "@datapunt/asc-ui"
 import MapsButton from "../itineraries/MapsButton"
+import CopyToClipboardButton from "../global/CopyToClipboardButton"
 
 type Props = {
   title: string
@@ -34,20 +35,30 @@ const Td = styled.td`
   padding-right: 36px
 `
 
+const createClipboardText = (itineraries: any) => {
+  const newline = "\n"
+  return itineraries.map((itinerary: any) => {
+    const {
+      street_name: streetName,
+      street_number: streetNumber,
+      suffix,
+      suffix_letter: suffixLetter,
+      postal_code: postalCode,
+      stadium,
+      case_reason: caseReason
+    } = itinerary
+    const address = displayAddress(streetName, streetNumber, suffix, suffixLetter)
+    const text = `${ address } ${ postalCode } ${ stadium } ${ caseReason }`
+    return text
+  }).join(newline) + newline
+}
+
 const PlanningResultItineraries: FC<Props> = ({ title, itineraries }) => {
   const fullTitle = `${ title } (${ itineraries.length })`
-  let fullText = ""
-  const ref = useRef<HTMLTextAreaElement>(null)
   const [isCopied, setIsCopied] = useState(false)
-  const onClick = () => {
-    const elem = ref.current
-    if (elem === null) return
-    elem.value = fullText
-    elem.select()
-    document.execCommand("copy")
-    setIsCopied(true)
-  }
   const style = isCopied ? { opacity: 0.1 } : undefined
+  const text = createClipboardText(itineraries)
+  const onClick = () => setIsCopied(true)
   return (
     <Div className="PlanningResultItineraries" style={ style }>
       <h1>{ fullTitle }</h1>
@@ -65,8 +76,6 @@ const PlanningResultItineraries: FC<Props> = ({ title, itineraries }) => {
               case_reason: caseReason
             } = itinerary
             const address = displayAddress(streetName, streetNumber, suffix, suffixLetter)
-            const text = `${ address } ${ postalCode } ${ stadium } ${ caseReason }`
-            fullText += `${ text }\n`
             return (
               <tr key={ address }>
                 <Td>{ address }</Td>
@@ -79,10 +88,9 @@ const PlanningResultItineraries: FC<Props> = ({ title, itineraries }) => {
           })
         }
       </table>
-      <TextArea ref={ ref }/>
       <ButtonWrap>
         <MapsButton itineraries={ itineraries.map((itinerary: any) => ({ case: { bwv_data: itinerary } })) } />
-        <Button onClick={ onClick }>Kopieër naar clipboard</Button>
+        <CopyToClipboardButton text={ text } onClick={ onClick } />
       </ButtonWrap>
     </Div>
   )
