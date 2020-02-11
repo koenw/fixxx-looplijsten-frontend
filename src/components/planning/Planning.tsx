@@ -9,13 +9,15 @@ import createPlanningRequestBody from "../../lib/createPlanningRequestBody"
 
 const DayPartWrap = styled.div`
   padding-left: 150px
-  label {
-    display: inline-block
-    width: 70px
-    padding-left: 4px
-    padding-bottom: 8px
-  }
 `
+const Label = styled.label`
+  display: inline-block
+  width: 70px
+  padding-left: 4px
+  padding-bottom: 8px
+  font-weight: bold
+`
+
 const ButtonWrap = styled.div`
   display: flex
   justify-content: flex-end
@@ -71,9 +73,9 @@ const Planning: FC = () => {
     <div className="Planning">
       <form onSubmit={ onSubmit }>
         <DayPartWrap>
-          <label>ochtend</label>
-          <label>middag</label>
-          <label>avond</label>
+          <Label>ochtend</Label>
+          <Label>middag</Label>
+          <Label>avond</Label>
         </DayPartWrap>
         { inputs.map(({ title, inputs }) => <DayInputs key={ title } title={ title } inputs={ inputs } />) }
         <ButtonWrap>
