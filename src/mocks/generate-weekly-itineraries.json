@@ -19,6 +19,7 @@
     "Bed en breakfast 2019"
   ],
 <<<<<<< HEAD
+<<<<<<< HEAD
   "days": [
     {
       "day": "monday",
@@ -5361,6 +5362,9 @@
     }
   ]
 =======
+=======
+  "generated_at": "2020-02-11 12:34:56",
+>>>>>>> Left over itineraries
   "days": {
     "monday": [
       {
@@ -6056,6 +6060,72 @@
         ]
       }
     ]
+<<<<<<< HEAD
   }
 >>>>>>> Fix naming
+=======
+  },
+  "left_over": [
+    {
+      "case_id": "12345_1",
+      "postal_code": "1234AB",
+      "street_name": "Amstel",
+      "street_number": 1,
+      "suffix": "2",
+      "suffix_letter": "A",
+      "stadium": "Issue melding",
+      "case_reason": "Sahara"
+    },
+    {
+      "case_id": "12345_1",
+      "postal_code": "1234AB",
+      "street_name": "Amstel",
+      "street_number": 1,
+      "suffix": "2",
+      "suffix_letter": "A",
+      "stadium": "Issue melding",
+      "case_reason": "Sahara"
+    },
+    {
+      "case_id": "12345_1",
+      "postal_code": "1234AB",
+      "street_name": "Amstel",
+      "street_number": 1,
+      "suffix": "2",
+      "suffix_letter": "A",
+      "stadium": "Issue melding",
+      "case_reason": "Sahara"
+    },
+    {
+      "case_id": "12345_1",
+      "postal_code": "1234AB",
+      "street_name": "Amstel",
+      "street_number": 1,
+      "suffix": "2",
+      "suffix_letter": "A",
+      "stadium": "Issue melding",
+      "case_reason": "Sahara"
+    },
+    {
+      "case_id": "12345_1",
+      "postal_code": "1234AB",
+      "street_name": "Amstel",
+      "street_number": 1,
+      "suffix": "2",
+      "suffix_letter": "A",
+      "stadium": "Issue melding",
+      "case_reason": "Sahara"
+    },
+    {
+      "case_id": "12345_1",
+      "postal_code": "1234AB",
+      "street_name": "Amstel",
+      "street_number": 1,
+      "suffix": "2",
+      "suffix_letter": "A",
+      "stadium": "Issue melding",
+      "case_reason": "Sahara"
+    }
+  ]
+>>>>>>> Left over itineraries
 }
