@@ -5364,7 +5364,12 @@
 =======
 =======
   "generated_at": "2020-02-11 12:34:56",
+<<<<<<< HEAD
 >>>>>>> Left over itineraries
+=======
+  "total_selected": 200,
+  "total_left_over": 95,
+>>>>>>> Teams
   "days": {
     "monday": [
       {

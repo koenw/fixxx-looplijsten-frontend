@@ -5,11 +5,13 @@ import MapsButton from "../itineraries/MapsButton"
 import CopyToClipboardButton from "../global/CopyToClipboardButton"
 
 type Props = {
-  title: string
+  title?: string
   itineraries: BWVData[][]
 }
 
 const Div = styled.div`
+  padding: 12px
+  border: solid 1px #B4B4B4
   margin-bottom: 36px
 `
 const ButtonWrap = styled.div`
@@ -48,14 +50,17 @@ const PlanningResultItineraries: FC<Props> = ({ title, itineraries }) => {
 
   const itinerariesFlattened = itineraries.flat()
 
-  const fullTitle = `${ title } (${ itinerariesFlattened.length })`
+  const hasTitle = title !== undefined
+  const fullTitle = hasTitle ? `${ title } (${ itinerariesFlattened.length })` : ""
   const [isCopied, setIsCopied] = useState(false)
   const style = isCopied ? { opacity: 0.1 } : undefined
   const text = createClipboardText(itinerariesFlattened)
   const onClick = () => setIsCopied(true)
   return (
     <Div className="PlanningResultItineraries" style={ style }>
-      <h1>{ fullTitle }</h1>
+      { hasTitle &&
+        <h1>{ fullTitle }</h1>
+      }
       { itineraries.map(list => {
         return (
           <>
