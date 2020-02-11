@@ -15,6 +15,7 @@ const PlanningResult: FC = () => {
   const hasResult = results !== undefined
   const showEmpty = !hasResult
   const dayKeys = days.map(day => day.key)
+  const { left_over: leftOverItineraries } = results || {}
 
   return (
     <div className="PlanningResult">
@@ -50,6 +51,7 @@ const PlanningResult: FC = () => {
               }
             </>
           }) }
+          <PlanningResultItineraries title="Niet ingedeeld" itineraries={ [leftOverItineraries] } />
         </>
       }
     </div>
