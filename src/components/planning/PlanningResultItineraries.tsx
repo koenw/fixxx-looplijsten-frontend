@@ -16,7 +16,7 @@ const ButtonWrap = styled.div`
   display: flex
   justify-content: flex-end
   max-width: 600px
-  margin: 12px 0
+  margin: 12px 0 36px
 `
 const Th = styled.th`
   text-align: left
