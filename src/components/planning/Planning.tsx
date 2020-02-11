@@ -2,7 +2,7 @@ import React, { FC, FormEvent } from "react"
 import styled from "styled-components"
 import useGlobalState from "../../hooks/useGlobalState"
 import useOnChangeState from "../../hooks/useOnChangeState"
-import days, { getTitle } from "../../lib/days"
+import { getTitle } from "../../lib/days"
 import DayInputs from "./DayInputs"
 import { Button } from "@datapunt/asc-ui"
 import createPlanningRequestBody from "../../lib/createPlanningRequestBody"
@@ -22,7 +22,6 @@ const ButtonWrap = styled.div`
   width: 368px
   margin-top: 36px
 `
-
 
 const Planning: FC = () => {
 

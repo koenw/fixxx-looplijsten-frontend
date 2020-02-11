@@ -24,10 +24,32 @@ const PlanningResult: FC = () => {
       { hasResult &&
         <>
           <h1>Looplijsten</h1>
-          { dayKeys.map(key =>
-              results.days[key].map((list: { name: string, itineraries: BWVData[] }) =>
-                <PlanningResultItineraries title={ `${ getTitle(key) } ${ list.name }` } itineraries={ list.itineraries } />
-          )) }
+          { dayKeys.map(key => {
+            const dayResult = results.days[key] as { name: string, itineraries: BWVData[] }[]
+            const dayItineraries = dayResult
+              .filter(item => item.name === "Ochtend" || item.name === "Middag")
+              .map(item => item.itineraries)
+            const showDayItineraries = dayItineraries.length > 0
+            const eveningItineraries = dayResult
+              .filter(item => item.name === "Avond")
+              .map(item => item.itineraries)
+            const showEveningItineraries = eveningItineraries.length > 0
+            const weekendItineraries = dayResult
+              .filter(item => item.name === "Weekend")
+              .map(item => item.itineraries)
+            const showWeekendItineraries = weekendItineraries.length > 0
+            return <>
+              { showDayItineraries &&
+                <PlanningResultItineraries title={ `${ getTitle(key) } team dag` } itineraries={ dayItineraries } />
+              }
+              { showEveningItineraries &&
+                <PlanningResultItineraries title={ `${ getTitle(key) } team avond` } itineraries={ eveningItineraries } />
+              }
+              { showWeekendItineraries &&
+                <PlanningResultItineraries title={ `${ getTitle(key) } team weekend` } itineraries={ weekendItineraries } />
+              }
+            </>
+          }) }
         </>
       }
     </div>
