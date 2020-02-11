@@ -29,11 +29,9 @@ const PlanningResult: FC = () => {
   const {
     left_over: leftOverItineraries,
     generated_at: generatedAt,
-    total,
     total_left_over: totalLeftOver,
     total_selected: totalSelected
   } = results || {}
-  console.log(results)
 
   return (
     <div className="PlanningResult">
