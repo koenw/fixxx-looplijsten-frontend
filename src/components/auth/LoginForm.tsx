@@ -1,4 +1,4 @@
-import React, { FC, FormEvent } from "react"
+import React, { FC, FormEvent, useMemo } from "react"
 import useGlobalState from "../../hooks/useGlobalState"
 import useOnChangeState from "../../hooks/useOnChangeState"
 import styled from "styled-components"
@@ -47,7 +47,7 @@ const LoginForm: FC = () => {
     await authenticate(email, password)
   }
 
-  const gripUri = getOIDCProviderUrl()
+  const gripUri = useMemo(getOIDCProviderUrl, [])
 
   const isDisabled = isFetching
   const showErrorMessage = errorMessage !== undefined

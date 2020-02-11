@@ -48,7 +48,6 @@ export const getAuthOIDCUrl = () => {
 }
 
 export const getOIDCProviderUrl = () => {
-  // TODO: generate this dynamically using environment
   const authorizeUri = "https://auth.grip-on-it.com/v2/rjsfm52t/oidc/idp/authorize"
   const responseType = "code"
   const scope = "openid"
@@ -61,7 +60,6 @@ export const getOIDCProviderUrl = () => {
     forceAcc ? "localhost:3001" :
     "localhost:3000"
   const redirectUri = `${ redirectProtocol }${ redirectDomain }${ basepath }authentication/callback`
-  console.log(redirectUri)
   const queryParamsString = queryParams({
     response_type: responseType,
     scope,
