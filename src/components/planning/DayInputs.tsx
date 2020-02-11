@@ -14,6 +14,7 @@ const Div = styled.div`
 `
 
 const Label = styled.label`
+  font-weight: bold
   display: inline-block
   width: 150px
 `
