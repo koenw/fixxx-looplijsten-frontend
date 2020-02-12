@@ -9,7 +9,7 @@ services:
   lint:
     build:
       context: .
-    command: npm run lint
+    command: npm run lint:quiet
   test:
     build:
       context: .

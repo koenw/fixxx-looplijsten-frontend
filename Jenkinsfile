@@ -46,13 +46,6 @@ node {
         }
     }
 
-    // stage('Test') {
-    //     tryStep "Test", {
-    //         sh "app/deploy/test/jenkins-script.sh"
-    //     }
-    // }
-
-
     stage("Build develop image") {
         tryStep "build", {
             def image = docker.build("repo.secure.amsterdam.nl/fixxx/looplijsten-frontend:${env.BUILD_NUMBER}", ".")
