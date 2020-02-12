@@ -31,7 +31,9 @@
     "start:acc": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:ci": "CI=true npm run test",
     "lint": "./node_modules/.bin/eslint src/**/*.{ts,tsx}",
+    "lint:quiet": "./node_modules/.bin/eslint --quiet src/**/*.{ts,tsx}",
     "eject": "react-scripts eject",
     "serve": "./node_modules/.bin/serve -p 7000 build"
   },
