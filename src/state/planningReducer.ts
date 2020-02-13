@@ -1,11 +1,11 @@
 type Action =
   | { type: "START_FETCHING" }
-  | { type: "SET_RESULTS", payload: { results: any } }
+  | { type: "SET_RESULTS", payload: { results: PlanningData } }
   | { type: "SET_ERROR", payload: { errorMessage: ErrorMessage } }
   | { type: "CLEAR" }
 
 export const createStartFetching = () : Action => ({ type: "START_FETCHING" })
-export const createSetResults = (results: any) : Action => ({ type: "SET_RESULTS", payload: { results } })
+export const createSetResults = (results: PlanningData) : Action => ({ type: "SET_RESULTS", payload: { results } })
 export const createSetError = (errorMessage: ErrorMessage) : Action => ({ type: "SET_ERROR", payload: { errorMessage } })
 export const createClear = () : Action => ({ type: "CLEAR" })
 

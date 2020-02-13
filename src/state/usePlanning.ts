@@ -42,7 +42,7 @@ const usePlanning = () : [PlanningState, PlanningActions] => {
         data: generateWeeklyItinerariesResponse
       }
       window.setTimeout(() => {
-        dispatch(createSetResults(results.data))
+        dispatch(createSetResults(results.data as unknown as PlanningData))
         window.localStorage.setItem(localStorageKey, JSON.stringify(results.data))
         navigateTo("planning/result")
       }, 500)

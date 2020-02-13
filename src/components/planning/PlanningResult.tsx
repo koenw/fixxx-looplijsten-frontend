@@ -25,13 +25,13 @@ const PlanningResult: FC = () => {
 
   const hasResult = results !== undefined
   const showEmpty = !hasResult
-  const dayKeys = days.map(day => day.key)
   const {
-    left_over: leftOverItineraries,
-    generated_at: generatedAt,
-    total_left_over: totalLeftOver,
-    total_selected: totalSelected
+    unplanned_cases: unplannedCases,
+    generated_at: generatedAt
   } = results || {}
+
+  const numPlannedCases = 0
+  const numUnplannedCases = unplannedCases ? unplannedCases.length : 0
 
   return (
     <div className="PlanningResult">
@@ -43,38 +43,45 @@ const PlanningResult: FC = () => {
           <H1>Looplijsten</H1>
           <P>gegenereerd: { generatedAt }</P>
           <Div>
-            <p><label>ingedeeld: </label>{ totalSelected }</p>
-            <p><label>niet ingedeeld: </label>{ totalLeftOver }</p>
+            <p><label>ingedeeld: </label>{ numPlannedCases }</p>
+            <p><label>niet ingedeeld: </label>{ numUnplannedCases }</p>
           </Div>
-          { dayKeys.map(key => {
-            const dayResult = results.days[key] as { name: string, itineraries: BWVData[] }[]
-            const dayItineraries = dayResult
-              .filter(item => item.name === "Ochtend" || item.name === "Middag")
-              .map(item => item.itineraries)
-            const showDayItineraries = dayItineraries.length > 0
-            const eveningItineraries = dayResult
-              .filter(item => item.name === "Avond")
-              .map(item => item.itineraries)
-            const showEveningItineraries = eveningItineraries.length > 0
-            const weekendItineraries = dayResult
-              .filter(item => item.name === "Weekend")
-              .map(item => item.itineraries)
-            const showWeekendItineraries = weekendItineraries.length > 0
-            return <>
-              <H1>{ getTitle(key) }</H1>
-              { showDayItineraries &&
-                <PlanningResultItineraries title={ `team dag` } itineraries={ dayItineraries } />
-              }
-              { showEveningItineraries &&
-                <PlanningResultItineraries title={ `team avond` } itineraries={ eveningItineraries } />
-              }
-              { showWeekendItineraries &&
-                <PlanningResultItineraries title={ `team weekend` } itineraries={ weekendItineraries } />
-              }
-            </>
+          { results.days.map((result: PlanningDay) => {
+            const { day, lists } = result
+            const dayMorningLists = lists
+              .filter(list => list.name === "Ochtend")
+              .map(list => list.itineraries)
+              .flat()
+            const dayAfternoonLists = lists
+              .filter(list => list.name === "Middag")
+              .map(list => list.itineraries)
+              .flat()
+            const zip = (arr: Lists, arr1: Lists) : Lists[] => arr.map((t: List, i: number) => arr1[i] !== undefined ? [t, arr1[i]] : [t])
+            const dayLists = zip(dayMorningLists, dayAfternoonLists)
+            const eveningLists = lists
+              .filter(list => list.name === "Avond")
+              .map(list => list.itineraries)
+              .flat()
+            const showEveningItineraries = eveningLists.length > 0
+            const weekendLists = lists
+              .filter(list => list.name === "Weekend")
+              .map(list => list.itineraries)
+              .flat()
+            return <div key={ day }>
+              <H1>{ getTitle(day) }</H1>
+              { dayLists.map((itineraries, index) =>
+                <PlanningResultItineraries key={ index } title={ `dag team ${ index + 1 }` } lists={ itineraries } />
+              ) }
+              { eveningLists.map((itineraries, index) =>
+                <PlanningResultItineraries key={ index } title={ `avond team ${ index + 1 }` } lists={ [itineraries] } />
+              ) }
+              { weekendLists.map((itineraries, index) =>
+                <PlanningResultItineraries key={ index } title={ `weekend team ${ index + 1 }` } lists={ [itineraries] } />
+              ) }
+            </div>
           }) }
           <H1>Niet ingedeeld</H1>
-          <PlanningResultItineraries itineraries={ [leftOverItineraries] } />
+          <PlanningResultItineraries lists={ [unplannedCases] } />
         </>
       }
     </div>

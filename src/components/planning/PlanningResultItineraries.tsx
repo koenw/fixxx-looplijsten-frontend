@@ -6,7 +6,7 @@ import CopyToClipboardButton from "../global/CopyToClipboardButton"
 
 type Props = {
   title?: string
-  itineraries: BWVData[][]
+  lists: Lists
 }
 
 const Div = styled.div`
@@ -28,9 +28,9 @@ const Td = styled.td`
   padding-right: 36px
 `
 
-const createClipboardText = (itineraries: BWVData[]) => {
+const createClipboardText = (list: List) => {
   const newline = "\n"
-  return itineraries.map((itinerary: BWVData) => {
+  return list.map(itinerary => {
     const {
       street_name: streetName,
       street_number: streetNumber,
@@ -46,27 +46,30 @@ const createClipboardText = (itineraries: BWVData[]) => {
   }).join(newline) + newline
 }
 
-const PlanningResultItineraries: FC<Props> = ({ title, itineraries }) => {
+const PlanningResultItineraries: FC<Props> = ({ title, lists }) => {
 
-  const itinerariesFlattened = itineraries.flat()
+  const itineraries = lists.flat()
 
   const hasTitle = title !== undefined
-  const fullTitle = hasTitle ? `${ title } (${ itinerariesFlattened.length })` : ""
+  const fullTitle = hasTitle ? `${ title } (${ itineraries.length })` : ""
   const [isCopied, setIsCopied] = useState(false)
   const style = isCopied ? { opacity: 0.1 } : undefined
-  const text = createClipboardText(itinerariesFlattened)
+  const text = createClipboardText(itineraries)
   const onClick = () => setIsCopied(true)
   return (
     <Div className="PlanningResultItineraries" style={ style }>
       { hasTitle &&
         <h1>{ fullTitle }</h1>
       }
-      { itineraries.map(list => {
+      { lists.map((itineraries, index) => {
         return (
-          <>
+          <div key={ index }>
             <table>
-              <tr><Th>Straat</Th><Th>Postcode</Th><Th>Openingsreden</Th><Th>Stadium</Th></tr>
-              { list.map((itinerary: BWVData) => {
+              <thead>
+                <tr><Th>Straat</Th><Th>Postcode</Th><Th>Openingsreden</Th><Th>Stadium</Th></tr>
+              </thead>
+              <tbody>
+              { itineraries.map(itinerary => {
                   const {
                     street_name: streetName,
                     street_number: streetNumber,
@@ -79,7 +82,7 @@ const PlanningResultItineraries: FC<Props> = ({ title, itineraries }) => {
                   } = itinerary
                   const address = displayAddress(streetName, streetNumber, suffix || undefined, suffixLetter || undefined)
                   return (
-                    <tr key={ address }>
+                    <tr key={ caseId }>
                       <Td>{ address }</Td>
                       <Td>{ postalCode }</Td>
                       <Td>{ caseReason }</Td>
@@ -89,11 +92,12 @@ const PlanningResultItineraries: FC<Props> = ({ title, itineraries }) => {
                   )
                 })
               }
+              </tbody>
             </table>
             <ButtonWrap>
-              <MapsButton itineraries={ itineraries[0] } />
+              <MapsButton itineraries={ itineraries } />
             </ButtonWrap>
-          </>
+          </div>
         )
       })}
       <ButtonWrap>
