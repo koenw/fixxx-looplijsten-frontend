@@ -24,7 +24,7 @@ const Wrap = styled.div`
 const ButtonWrap = styled.div`
   display: flex
   justify-content: flex-end
-  max-width: 600px
+  max-width: 900px
   margin: 12px 0 36px
 `
 const Th = styled.th`
@@ -81,7 +81,13 @@ const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [] }) 
             }
             <table>
               <thead>
-                <tr><Th>Straat</Th><Th>Postcode</Th><Th>Openingsreden</Th><Th>Stadium</Th></tr>
+                <tr>
+                  <Th>Straat</Th>
+                  <Th>Postcode</Th>
+                  <Th>Openingsreden</Th>
+                  <Th>Stadium</Th>
+                  <Th><MapsButton $as="a" itineraries={ itineraries } /></Th>
+                </tr>
               </thead>
               <tbody>
               { itineraries.map(itinerary => {
@@ -110,7 +116,7 @@ const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [] }) 
               </tbody>
             </table>
             <ButtonWrap>
-              <MapsButton itineraries={ itineraries } />
+
             </ButtonWrap>
           </Wrap>
         )

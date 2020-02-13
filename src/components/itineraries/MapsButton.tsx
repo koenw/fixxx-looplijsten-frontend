@@ -6,11 +6,15 @@ import displayAddress from "../../lib/displayAddress"
 import { mobile, desktop } from "../../responsiveness/mediaQueries"
 
 type Props = {
+  $as?: "a" | "button"
   itineraries: BWVData[]
 }
 
 const StyledButton = styled(Button)`
-  border: solid 1px black
+  border: ${ ({ $as }) => $as !== "a" ? "solid 1px black" : "none" };
+  ${ ({ $as }) => $as === "a" ? "margin-bottom: 0;" : "" }
+  ${ ({ $as }) => $as === "a" ? "padding: 0;" : "" }
+  ${ ({ $as }) => $as === "a" ? "&:hover { background-color: transparent; };" : "" }
 `
 const SpanMobile = styled.span`
   @media ${ desktop } {
@@ -23,8 +27,9 @@ const SpanDesktop = styled.span`
   }
 `
 
-const MapsButton: FC<Props> = ({ itineraries }) => {
+const MapsButton: FC<Props> = ({ $as = "button", itineraries }) => {
   const onClick = (event: MouseEvent) => {
+    event.preventDefault()
     const path = itineraries
       .map(itinerary => {
         const {
@@ -42,7 +47,7 @@ const MapsButton: FC<Props> = ({ itineraries }) => {
     window.open(href, "_blank")
   }
   return (
-    <StyledButton onClick={ onClick } variant="blank" iconLeft={ <Location /> }>
+    <StyledButton $as="a" onClick={ onClick } variant="blank" iconLeft={ $as !== "a" ? <Location /> : null }>
       <SpanMobile>Maps</SpanMobile>
       <SpanDesktop>Bekijk op Google Maps</SpanDesktop>
     </StyledButton>
