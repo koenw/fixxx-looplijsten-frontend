@@ -8,7 +8,6 @@ import reducer, {
 import { post, notOk, isForbidden } from "../lib/utils/fetch"
 import { getUrl } from "../config/api"
 import handleForbiddenResponse from "../lib/handleForbiddenResponse"
-import generateWeeklyItinerariesResponse from "../mocks/generate-weekly-itineraries.json"
 import navigateTo from "../lib/navigateTo"
 
 const usePlanning = () : [PlanningState, PlanningActions] => {
@@ -22,7 +21,6 @@ const usePlanning = () : [PlanningState, PlanningActions] => {
       const item = window.localStorage.getItem(localStorageKey)
       if (item == null) return
       const result = JSON.parse(item)
-      console.log(result)
       dispatch(createSetResults(result))
     } catch {}
   }
@@ -36,26 +34,14 @@ const usePlanning = () : [PlanningState, PlanningActions] => {
       const url = getUrl("generate-weekly-itineraries")
       const [response, result] = await post(url, params)
 
-      // tmp
-      const results = {
-        success: true,
-        data: generateWeeklyItinerariesResponse
-      }
-      window.setTimeout(() => {
-        dispatch(createSetResults(results.data as unknown as PlanningData))
-        window.localStorage.setItem(localStorageKey, JSON.stringify(results.data))
-        navigateTo("planning/result")
-      }, 500)
-
-      /*
       // Handle error responses
       if (isForbidden(response)) return handleForbiddenResponse()
       if (notOk(response)) return false
 
       // Set results
-      console.log(result)
       dispatch(createSetResults(result))
-      */
+      window.localStorage.setItem(localStorageKey, JSON.stringify(result))
+      navigateTo("planning/result")
     })()
   }
 

@@ -24,10 +24,13 @@ const Wrap = styled.div`
 const ButtonWrap = styled.div`
   display: flex
   justify-content: flex-end
-  max-width: 900px
-  margin: 12px 0 36px
+  margin: 12px
+`
+const Table = styled.table`
+  width: 100%
 `
 const Th = styled.th`
+  width: 20%
   text-align: left
   padding-right: 36px
 `
@@ -55,7 +58,7 @@ const createClipboardText = (lists: Lists, subtitles?: string[]) => {
       return text
     }).join(newline) + newline
     return `${ hasSubtitle ? subtitle + newline : "" }${ addressesText }${ newline }`
-  }).join("")
+  }).join(newline)
 }
 
 const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [] }) => {
@@ -79,7 +82,7 @@ const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [] }) 
             { hasSubtitle &&
               <h1>{ subtitle }</h1>
             }
-            <table>
+            <Table>
               <thead>
                 <tr>
                   <Th>Straat</Th>
@@ -114,7 +117,7 @@ const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [] }) 
                 })
               }
               </tbody>
-            </table>
+            </Table>
             <ButtonWrap>
 
             </ButtonWrap>

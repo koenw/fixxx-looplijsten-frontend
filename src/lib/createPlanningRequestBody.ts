@@ -19,7 +19,7 @@ const createPlanningRequestBody = (inputs: any) => {
     "Bed en breakfast 2019"
   ]
   const listLength = 6
-  const listLengthLong = 40
+  const listLengthLong = 5
   const days = [
     {
       day: "monday",
