@@ -1,9 +1,4 @@
-import { useState } from "react"
-
-type Element = HTMLInputElement | HTMLTextAreaElement
-type ChangeEventInput = ChangeEvent<Element>
-type OnChangeHandler = (a: ChangeEventInput) => void
-type SetState = (a: string) => void
+import { useState, ChangeEvent } from "react"
 
 const useOnChangeState = (defaultState = "") : [string, OnChangeHandler, SetState] => {
   const [state, setState] = useState(defaultState)

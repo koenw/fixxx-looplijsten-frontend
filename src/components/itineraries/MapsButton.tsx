@@ -11,7 +11,7 @@ type Props = {
 }
 
 const StyledButton = styled(Button)`
-  border: ${ ({ $as }) => $as !== "a" ? "solid 1px black" : "none" };
+  ${ ({ $as }) => $as !== "a" ? "border: solid 1px black;" : "" }
   ${ ({ $as }) => $as === "a" ? "margin-bottom: 0;" : "" }
   ${ ({ $as }) => $as === "a" ? "padding: 0;" : "" }
   ${ ({ $as }) => $as === "a" ? "&:hover { background-color: transparent; };" : "" }
@@ -47,7 +47,7 @@ const MapsButton: FC<Props> = ({ $as = "button", itineraries }) => {
     window.open(href, "_blank")
   }
   return (
-    <StyledButton $as="a" onClick={ onClick } variant="blank" iconLeft={ $as !== "a" ? <Location /> : null }>
+    <StyledButton $as={ $as } onClick={ onClick } variant="blank" iconLeft={ $as !== "a" ? <Location /> : null }>
       <SpanMobile>Maps</SpanMobile>
       <SpanDesktop>Bekijk op Google Maps</SpanDesktop>
     </StyledButton>

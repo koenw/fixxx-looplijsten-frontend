@@ -147,8 +147,6 @@ declare type Case = {
   related_cases: RelatedCase[]
 }
 declare type Cases = Case[]
-<<<<<<< HEAD
-=======
 
 declare type List = BWVData[]
 declare type Lists = List[]
@@ -174,4 +172,3 @@ declare type PlanningResult = {
   error?: string
   data?: PlanningData
 }
->>>>>>> Improve mock data

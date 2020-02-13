@@ -57,8 +57,6 @@ declare type ParseActions = {
   parse: (a: string) => void
   clear: () => void
 }
-<<<<<<< HEAD
-=======
 
 declare type PlanningState = {
   isFetching: boolean
@@ -71,4 +69,3 @@ declare type PlanningActions = {
   generate: (a: any) => void
   clear: () => void
 }
->>>>>>> Local storage
