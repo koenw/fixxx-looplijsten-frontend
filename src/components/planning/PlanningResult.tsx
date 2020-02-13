@@ -1,13 +1,10 @@
 import React, { FC } from "react"
 import PlanningResultItineraries from "./PlanningResultItineraries"
 import useGlobalState from "../../hooks/useGlobalState"
-import days, { getTitle } from "../../lib/days"
+import { getTitle } from "../../lib/days"
 import { Spinner } from "@datapunt/asc-ui"
 import styled from "styled-components"
 
-const P = styled.p`
-  margin-bottom: 24px
-`
 const Div = styled.div`
   margin-bottom: 24px
 `
@@ -26,8 +23,7 @@ const PlanningResult: FC = () => {
   const hasResult = results !== undefined
   const showEmpty = !hasResult
   const {
-    unplanned_cases: unplannedCases,
-    generated_at: generatedAt
+    unplanned_cases: unplannedCases
   } = results || {}
 
   const numPlannedCases = hasResult ?
@@ -63,7 +59,6 @@ const PlanningResult: FC = () => {
               .filter(list => list.name === "Avond")
               .map(list => list.itineraries)
               .flat()
-            const showEveningItineraries = eveningLists.length > 0
             const weekendLists = lists
               .filter(list => list.name === "Weekend")
               .map(list => list.itineraries)

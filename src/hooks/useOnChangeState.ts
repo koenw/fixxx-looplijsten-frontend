@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react"
+import { useState } from "react"
 
 const useOnChangeState = (defaultState = "") : [string, OnChangeHandler, SetState] => {
   const [state, setState] = useState(defaultState)
