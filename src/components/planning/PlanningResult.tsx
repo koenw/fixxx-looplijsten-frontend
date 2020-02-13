@@ -30,7 +30,9 @@ const PlanningResult: FC = () => {
     generated_at: generatedAt
   } = results || {}
 
-  const numPlannedCases = 0
+  const numPlannedCases = hasResult ?
+    results.days.map((result: PlanningDay) => result.lists.map(list => list.itineraries)).flat(3).length :
+    0
   const numUnplannedCases = unplannedCases ? unplannedCases.length : 0
 
   return (
@@ -41,7 +43,6 @@ const PlanningResult: FC = () => {
       { hasResult &&
         <>
           <H1>Looplijsten</H1>
-          <P>gegenereerd: { generatedAt }</P>
           <Div>
             <p><label>ingedeeld: </label>{ numPlannedCases }</p>
             <p><label>niet ingedeeld: </label>{ numUnplannedCases }</p>

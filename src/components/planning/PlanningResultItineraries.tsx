@@ -18,6 +18,10 @@ const Div = styled.div`
 const H1 = styled.h1`
   font-size: 24px
 `
+const H2 = styled.h2`
+  font-size: 16px
+  margin-top: 24px
+`
 const Wrap = styled.div`
   margin-left: 12px
 `
@@ -39,7 +43,7 @@ const Td = styled.td`
 `
 
 const createClipboardText = (lists: Lists, subtitles?: string[]) => {
-  const newline = "\n"
+  const nl = "\n"
   return lists.map((list, index) => {
     const subtitle = subtitles && subtitles[index]
     const hasSubtitle = subtitle !== undefined
@@ -53,12 +57,12 @@ const createClipboardText = (lists: Lists, subtitles?: string[]) => {
         stadium,
         case_reason: caseReason
       } = itinerary
-      const address = displayAddress(streetName, streetNumber, suffix || undefined, suffixLetter || undefined)
+      const address = displayAddress(streetName, streetNumber, suffixLetter || undefined, suffix || undefined)
       const text = `${ address } ${ postalCode } ${ stadium } ${ caseReason }`
       return text
-    }).join(newline) + newline
-    return `${ hasSubtitle ? subtitle + newline : "" }${ addressesText }${ newline }`
-  }).join(newline)
+    }).join(nl) + nl
+    return `${ hasSubtitle ? subtitle + nl : "" }${ addressesText }${ nl }`
+  }).join(nl)
 }
 
 const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [] }) => {
@@ -69,6 +73,7 @@ const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [] }) 
   const style = isCopied ? { opacity: 0.1 } : undefined
   const text = createClipboardText(lists, subtitles)
   const onClick = () => setIsCopied(true)
+
   return (
     <Div className="PlanningResultItineraries" style={ style }>
       { hasTitle &&
@@ -80,7 +85,7 @@ const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [] }) 
         return (
           <Wrap key={ index }>
             { hasSubtitle &&
-              <h1>{ subtitle }</h1>
+              <H2>{ subtitle }</H2>
             }
             <Table>
               <thead>
@@ -99,12 +104,12 @@ const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [] }) 
                     street_number: streetNumber,
                     suffix,
                     suffix_letter: suffixLetter,
-                    case_id: caseId,
+                    zaak_id: caseId,
                     postal_code: postalCode,
                     stadium,
                     case_reason: caseReason
                   } = itinerary
-                  const address = displayAddress(streetName, streetNumber, suffix || undefined, suffixLetter || undefined)
+                  const address = displayAddress(streetName, streetNumber, suffixLetter || undefined, suffix || undefined)
                   return (
                     <tr key={ caseId }>
                       <Td>{ address }</Td>
@@ -118,9 +123,6 @@ const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [] }) 
               }
               </tbody>
             </Table>
-            <ButtonWrap>
-
-            </ButtonWrap>
           </Wrap>
         )
       })}
