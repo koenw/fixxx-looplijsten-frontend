@@ -119,7 +119,7 @@ type BWVHotlineBevinding = {
   bevinding_datum: string
   bevinding_tijd: string
   hit: "J" | "N"
-  opmerking: string
+  opmerking: string | null
   volgnr_bevinding: string
 }
 type ImportStadia = {

@@ -193,7 +193,7 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
       date: formatDate(item.bevinding_datum, true)!,
       time: item.bevinding_tijd,
       hit: item.hit === "J",
-      text: item.opmerking,
+      text: item.opmerking || "", 
       num: parseInt(item.volgnr_bevinding, 10)
     })
   }).sort((a, b) => a.num - b.num).reverse()
