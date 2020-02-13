@@ -4,6 +4,7 @@ import useGlobalState from "../../hooks/useGlobalState"
 import { getTitle } from "../../lib/days"
 import { Spinner } from "@datapunt/asc-ui"
 import styled from "styled-components"
+import zip from "../../lib/zip"
 
 const Div = styled.div`
   margin-bottom: 24px
@@ -53,7 +54,6 @@ const PlanningResult: FC = () => {
               .filter(list => list.name === "Middag")
               .map(list => list.itineraries)
               .flat()
-            const zip = (arr: Lists, arr1: Lists) : Lists[] => arr.map((t: List, i: number) => arr1[i] !== undefined ? [t, arr1[i]] : [t])
             const dayLists = zip(dayMorningLists, dayAfternoonLists)
             const eveningLists = lists
               .filter(list => list.name === "Avond")
