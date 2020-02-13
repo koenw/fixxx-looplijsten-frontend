@@ -69,9 +69,10 @@ const PlanningResult: FC = () => {
               .flat()
             return <div key={ day }>
               <H1>{ getTitle(day) }</H1>
-              { dayLists.map((itineraries, index) =>
-                <PlanningResultItineraries key={ index } title={ `dag team ${ index + 1 }` } lists={ itineraries } />
-              ) }
+              { dayLists.map((itineraries, index) => {
+                  const subtitles = itineraries.length > 1 ? ["ochtend", "middag"] : undefined
+                  return <PlanningResultItineraries key={ index } title={ `team ${ index + 1 }` } lists={ itineraries } subtitles={ subtitles } />
+              } ) }
               { eveningLists.map((itineraries, index) =>
                 <PlanningResultItineraries key={ index } title={ `avond team ${ index + 1 }` } lists={ [itineraries] } />
               ) }

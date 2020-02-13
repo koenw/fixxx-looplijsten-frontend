@@ -7,12 +7,19 @@ import CopyToClipboardButton from "../global/CopyToClipboardButton"
 type Props = {
   title?: string
   lists: Lists
+  subtitles?: string[]
 }
 
 const Div = styled.div`
   padding: 12px
   border: solid 1px #B4B4B4
   margin-bottom: 36px
+`
+const H1 = styled.h1`
+  font-size: 24px
+`
+const Wrap = styled.div`
+  margin-left: 12px
 `
 const ButtonWrap = styled.div`
   display: flex
@@ -28,42 +35,50 @@ const Td = styled.td`
   padding-right: 36px
 `
 
-const createClipboardText = (list: List) => {
+const createClipboardText = (lists: Lists, subtitles?: string[]) => {
   const newline = "\n"
-  return list.map(itinerary => {
-    const {
-      street_name: streetName,
-      street_number: streetNumber,
-      suffix,
-      suffix_letter: suffixLetter,
-      postal_code: postalCode,
-      stadium,
-      case_reason: caseReason
-    } = itinerary
-    const address = displayAddress(streetName, streetNumber, suffix || undefined, suffixLetter || undefined)
-    const text = `${ address } ${ postalCode } ${ stadium } ${ caseReason }`
-    return text
-  }).join(newline) + newline
+  return lists.map((list, index) => {
+    const subtitle = subtitles && subtitles[index]
+    const hasSubtitle = subtitle !== undefined
+    const addressesText = list.map(itinerary => {
+      const {
+        street_name: streetName,
+        street_number: streetNumber,
+        suffix,
+        suffix_letter: suffixLetter,
+        postal_code: postalCode,
+        stadium,
+        case_reason: caseReason
+      } = itinerary
+      const address = displayAddress(streetName, streetNumber, suffix || undefined, suffixLetter || undefined)
+      const text = `${ address } ${ postalCode } ${ stadium } ${ caseReason }`
+      return text
+    }).join(newline) + newline
+    return `${ hasSubtitle ? subtitle + newline : "" }${ addressesText }${ newline }`
+  }).join("")
 }
 
-const PlanningResultItineraries: FC<Props> = ({ title, lists }) => {
-
-  const itineraries = lists.flat()
+const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [] }) => {
 
   const hasTitle = title !== undefined
-  const fullTitle = hasTitle ? `${ title } (${ itineraries.length })` : ""
+  const fullTitle = hasTitle ? `${ title } (${ lists.flat().length })` : ""
   const [isCopied, setIsCopied] = useState(false)
   const style = isCopied ? { opacity: 0.1 } : undefined
-  const text = createClipboardText(itineraries)
+  const text = createClipboardText(lists, subtitles)
   const onClick = () => setIsCopied(true)
   return (
     <Div className="PlanningResultItineraries" style={ style }>
       { hasTitle &&
-        <h1>{ fullTitle }</h1>
+        <H1>{ fullTitle }</H1>
       }
       { lists.map((itineraries, index) => {
+        const subtitle = subtitles[index]
+        const hasSubtitle = subtitle !== undefined
         return (
-          <div key={ index }>
+          <Wrap key={ index }>
+            { hasSubtitle &&
+              <h1>{ subtitle }</h1>
+            }
             <table>
               <thead>
                 <tr><Th>Straat</Th><Th>Postcode</Th><Th>Openingsreden</Th><Th>Stadium</Th></tr>
@@ -97,7 +112,7 @@ const PlanningResultItineraries: FC<Props> = ({ title, lists }) => {
             <ButtonWrap>
               <MapsButton itineraries={ itineraries } />
             </ButtonWrap>
-          </div>
+          </Wrap>
         )
       })}
       <ButtonWrap>
