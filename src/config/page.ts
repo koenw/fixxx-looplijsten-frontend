@@ -5,14 +5,11 @@ import pick from "../lib/utils/pick"
 
 export const basepath = isAcc ? "/looplijsten/" : "/"
 
-export const to = (path: string = "", appendParams = true) => {
-  const forwardParams = ["api", "anonymous"]
-  const params = parseLocationSearch(window.location.search)
-  const queryParamsString = queryParams(pick(params, forwardParams))
-  return `${ basepath }${ path }${ appendParams ? queryParamsString : "" }`
+export const to = (path: string = "") => {
+  return `${ basepath }${ path }`
 }
 
-export const isPage = (page: string) => window.location.pathname === to(page, false)
+export const isPage = (page: string) => window.location.pathname === to(page)
 export const isLoginPage = () => isPage("login")
 export const isLoginCallbackPage = () => isPage("authentication/callback")
 export const isHomePage = () => isPage("")

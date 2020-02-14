@@ -1,9 +1,9 @@
 import parseLocationSearch from "./parseLocationSearch"
 
 it("one", () => {
-  expect(parseLocationSearch("?api=acc")).toEqual({ api: "acc" })
+  expect(parseLocationSearch("?key=value")).toEqual({ key: "value" })
 })
 
 it("multiple", () => {
-  expect(parseLocationSearch("?api=acc&two=2")).toEqual({ api: "acc", two: "2" })
+  expect(parseLocationSearch("?key=value&two=2")).toEqual({ key: "value", two: "2" })
 })

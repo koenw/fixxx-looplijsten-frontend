@@ -68,7 +68,7 @@ const StateProvider: FC<Props> = ({ children }) => {
   // initialization
   useEffect(() => {
 
-    const anonymous = parseLocationSearch(window.location.search).anonymous
+    const { anonymous } = parseLocationSearch(window.location.search)
     const isAnonymous = anonymous === "1"
     setIsAnonymous(isAnonymous)
 

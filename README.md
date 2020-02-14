@@ -4,13 +4,14 @@
 
 - `npm run lint`
 - `npm run test`
+- `npm run test:ci`
 - `npm run build`
 - `npm run start`
 
 ## development
 
-Add `?api=acc` to url. Eg. http://localhost:3000/?api=acc to connect to acceptation API.
-
+Connect to acceptatie backend
+- `npm run start:acc`
 
 ## Original README
 
