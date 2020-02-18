@@ -1,3 +1,5 @@
+import capitalizeString from "./utils/capitalize"
+
 const days = [
   { key: "monday", title: "maandag" },
   { key: "tuesday", title: "dinsdag" },
@@ -8,8 +10,10 @@ const days = [
   { key: "sunday", title: "zondag" }
 ]
 export default days
-export const getTitle = (key: string | number) : string => {
+export const getTitle = (key: string | number, capitalize = false) : string => {
   const isKey = typeof key === "string"
   const day = isKey ? days.find(day => day.key === key) : days[key as Index]
-  return day ? day.title : ""
+  const str = day ? day.title : ""
+  const title = capitalize ? capitalizeString(str) : str
+  return title
 }

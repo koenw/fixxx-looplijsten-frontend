@@ -12,6 +12,7 @@ export const createClear = () : Action => ({ type: "CLEAR" })
 export const initialState: PlanningState = {
   isFetching: false,
   results: undefined,
+  timestamp: undefined,
   errorMessage: undefined
 }
 
@@ -26,7 +27,8 @@ const reducer = (state: PlanningState, action: Action) : PlanningState => {
     case "SET_RESULTS": {
       const isFetching = false
       const { results } = action.payload
-      return { ...state, isFetching, results }
+      const timestamp = new Date()
+      return { ...state, isFetching, results, timestamp }
     }
     case "SET_ERROR": {
       const { errorMessage } = action.payload

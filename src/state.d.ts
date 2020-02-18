@@ -61,6 +61,7 @@ declare type ParseActions = {
 declare type PlanningState = {
   isFetching: boolean
   results?: any
+  timestamp?: Date
   errorMessage?: ErrorMessage
 }
 

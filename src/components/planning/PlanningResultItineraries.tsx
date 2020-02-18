@@ -3,11 +3,13 @@ import displayAddress from "../../lib/displayAddress"
 import styled from "styled-components"
 import MapsButton from "../itineraries/MapsButton"
 import CopyToClipboardButton from "../global/CopyToClipboardButton"
+import ErrorMessage from "../global/ErrorMessage"
 
 type Props = {
   title?: string
   lists: Lists
   subtitles?: string[]
+  hasCopyButton?: boolean
 }
 
 const Div = styled.div`
@@ -20,10 +22,11 @@ const H1 = styled.h1`
 `
 const H2 = styled.h2`
   font-size: 16px
-  margin-top: 24px
+  margin: 16px 24px 16px 0
+  display: inline-block
 `
 const Wrap = styled.div`
-  margin-left: 12px
+  margin: 0 12px
 `
 const ButtonWrap = styled.div`
   display: flex
@@ -32,14 +35,27 @@ const ButtonWrap = styled.div`
 `
 const Table = styled.table`
   width: 100%
+  border-collapse: collapse
+  margin-bottom: 36px
+`
+const Tr = styled.tr`
+  border-bottom: solid 1px #B4B4B4
 `
 const Th = styled.th`
-  width: 20%
+  width: 25%
   text-align: left
-  padding-right: 36px
+  padding: 8px 0
+`
+const ThSmall = styled(Th)`
+  width: 12.5%
 `
 const Td = styled.td`
-  padding-right: 36px
+  padding: 8px 0
+  transition: opacity 0.2s ease-out
+  opacity: ${ (props: { faded?: boolean }) => props.faded ? 0.2 : 1 }
+`
+const ErrorMessageWrap = styled.div`
+  margin: 12px 0
 `
 
 const createClipboardText = (lists: Lists, subtitles?: string[]) => {
@@ -65,37 +81,45 @@ const createClipboardText = (lists: Lists, subtitles?: string[]) => {
   }).join(nl)
 }
 
-const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [] }) => {
+const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [], hasCopyButton = true }) => {
 
   const hasTitle = title !== undefined
-  const fullTitle = hasTitle ? `${ title } (${ lists.flat().length })` : ""
+  const totalLength = lists.flat().length
+  const fullTitle = hasTitle ? `${ title } ${ totalLength > 0 ? `(${ totalLength })` : "" } ` : ""
   const [isCopied, setIsCopied] = useState(false)
-  const style = isCopied ? { opacity: 0.1 } : undefined
   const text = createClipboardText(lists, subtitles)
   const onClick = () => setIsCopied(true)
 
+  const showCopyButton = hasCopyButton && totalLength > 0
+
   return (
-    <Div className="PlanningResultItineraries" style={ style }>
+    <Div className="PlanningResultItineraries">
       { hasTitle &&
         <H1>{ fullTitle }</H1>
       }
       { lists.map((itineraries, index) => {
         const subtitle = subtitles[index]
         const hasSubtitle = subtitle !== undefined
+        const length = itineraries.length
+        const subtitleDisplay = hasSubtitle ? `${ subtitle } (${ length })` : ""
+        const showErrorMessage = length === 0
         return (
           <Wrap key={ index }>
             { hasSubtitle &&
-              <H2>{ subtitle }</H2>
+              <>
+                <H2>{ subtitleDisplay }</H2>
+                <MapsButton $as="a" itineraries={ itineraries } />
+              </>
             }
             <Table>
               <thead>
-                <tr>
+                <Tr>
                   <Th>Straat</Th>
-                  <Th>Postcode</Th>
+                  <ThSmall>Postcode</ThSmall>
                   <Th>Openingsreden</Th>
                   <Th>Stadium</Th>
-                  <Th><MapsButton $as="a" itineraries={ itineraries } /></Th>
-                </tr>
+                  <ThSmall></ThSmall>
+                </Tr>
               </thead>
               <tbody>
               { itineraries.map(itinerary => {
@@ -111,24 +135,31 @@ const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [] }) 
                   } = itinerary
                   const address = displayAddress(streetName, streetNumber, suffixLetter || undefined, suffix || undefined)
                   return (
-                    <tr key={ caseId }>
-                      <Td>{ address }</Td>
-                      <Td>{ postalCode }</Td>
-                      <Td>{ caseReason }</Td>
-                      <Td>{ stadium }</Td>
-                      <Td><a href={ `/cases/${ caseId }` }>detail</a></Td>
-                    </tr>
+                    <Tr key={ caseId }>
+                      <Td faded={ isCopied }>{ address }</Td>
+                      <Td faded={ isCopied }>{ postalCode }</Td>
+                      <Td faded={ isCopied }>{ caseReason }</Td>
+                      <Td faded={ isCopied }>{ stadium }</Td>
+                      <Td><a href={ `/cases/${ caseId }` }>bekijk</a></Td>
+                    </Tr>
                   )
                 })
               }
               </tbody>
             </Table>
+            { showErrorMessage &&
+              <ErrorMessageWrap>
+                <ErrorMessage text="Onvoldoende zaken beschikbaar om deze lijst te genereren" />
+              </ErrorMessageWrap>
+            }
           </Wrap>
         )
       })}
-      <ButtonWrap>
-        <CopyToClipboardButton text={ text } onClick={ onClick } />
-      </ButtonWrap>
+      { showCopyButton &&
+        <ButtonWrap>
+          <CopyToClipboardButton text={ text } onClick={ onClick } />
+        </ButtonWrap>
+      }
     </Div>
   )
 }

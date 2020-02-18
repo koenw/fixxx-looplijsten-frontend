@@ -4,7 +4,7 @@ import useGlobalState from "../../hooks/useGlobalState"
 import useOnChangeState from "../../hooks/useOnChangeState"
 import { getTitle } from "../../lib/days"
 import DayInputs from "./DayInputs"
-import { Button } from "@datapunt/asc-ui"
+import { Button, Spinner } from "@datapunt/asc-ui"
 import createPlanningRequestBody from "../../lib/createPlanningRequestBody"
 
 const DayPartWrap = styled.div`
@@ -25,9 +25,17 @@ const ButtonWrap = styled.div`
   margin-top: 36px
 `
 
+const SpinnerWrap = styled.div`
+  margin-right: 24px
+  display: inline-block
+`
+
 const Planning: FC = () => {
 
   const {
+    planning: {
+      isFetching
+    },
     planningActions: {
       generate
     }
@@ -69,8 +77,11 @@ const Planning: FC = () => {
     generate(params)
   }
 
+  const showSpinner = isFetching
+
   return (
     <div className="Planning">
+      <h2>Hoeveel lijsten per dagdeel wil je genereren?</h2>
       <form onSubmit={ onSubmit }>
         <DayPartWrap>
           <Label>ochtend</Label>
@@ -79,7 +90,12 @@ const Planning: FC = () => {
         </DayPartWrap>
         { inputs.map(({ title, inputs }) => <DayInputs key={ title } title={ title } inputs={ inputs } />) }
         <ButtonWrap>
-          <Button>Generate</Button>
+          { showSpinner &&
+            <SpinnerWrap>
+              <Spinner size={ 40 } />
+            </SpinnerWrap>
+          }
+          <Button variant="primary" disabled={ isFetching }>Genereer looplijsten</Button>
         </ButtonWrap>
       </form>
     </div>
