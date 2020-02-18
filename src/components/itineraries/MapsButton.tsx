@@ -11,10 +11,17 @@ type Props = {
 }
 
 const StyledButton = styled(Button)`
-  ${ ({ $as }) => $as !== "a" ? "border: solid 1px black;" : "" }
-  ${ ({ $as }) => $as === "a" ? "margin-bottom: 0;" : "" }
-  ${ ({ $as }) => $as === "a" ? "padding: 0;" : "" }
-  ${ ({ $as }) => $as === "a" ? "&:hover { background-color: transparent; };" : "" }
+  ${ ({ $as }) => $as !== "a" ?
+    "border: solid 1px black;" :
+    `
+    margin-bottom: 0;
+    padding: 0;
+    height: auto;
+    &:hover {
+      background-color: transparent;
+    }
+    `
+  }
 `
 const SpanMobile = styled.span`
   @media ${ desktop } {
