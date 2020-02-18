@@ -104,7 +104,7 @@ const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [] }) 
                     street_number: streetNumber,
                     suffix,
                     suffix_letter: suffixLetter,
-                    zaak_id: caseId,
+                    case_id: caseId,
                     postal_code: postalCode,
                     stadium,
                     case_reason: caseReason

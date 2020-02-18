@@ -19,7 +19,6 @@ declare type Stadium = string
 
 declare type BWVData = {
   case_id: CaseId
-  zaak_id: CaseId
   street_name: StreetName
   postal_code: PostalCode
   stadium: Stadium
