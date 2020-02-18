@@ -5,17 +5,25 @@ import useOnChangeState from "../../hooks/useOnChangeState"
 import { getTitle } from "../../lib/days"
 import DayInputs from "./DayInputs"
 import { Button, Spinner } from "@datapunt/asc-ui"
-import createPlanningRequestBody from "../../lib/createPlanningRequestBody"
+import createPlanningRequestBody, { openingDate, openingReasons } from "../../lib/createPlanningRequestBody"
 
 const DayPartWrap = styled.div`
   padding-left: 150px
 `
+const Div = styled.div`
+  display: flex
+`
+const SettingsDiv = styled.div`
+  margin-left: 24px
+`
 const Label = styled.label`
+  font-weight: bold
+`
+const FormLabel = styled(Label)`
   display: inline-block
   width: 70px
   padding-left: 4px
   padding-bottom: 8px
-  font-weight: bold
 `
 
 const ButtonWrap = styled.div`
@@ -80,25 +88,36 @@ const Planning: FC = () => {
   const showSpinner = isFetching
 
   return (
-    <div className="Planning">
-      <h2>Hoeveel lijsten per dagdeel wil je genereren?</h2>
-      <form onSubmit={ onSubmit }>
-        <DayPartWrap>
-          <Label>ochtend</Label>
-          <Label>middag</Label>
-          <Label>avond</Label>
-        </DayPartWrap>
-        { inputs.map(({ title, inputs }) => <DayInputs key={ title } title={ title } inputs={ inputs } />) }
-        <ButtonWrap>
-          { showSpinner &&
-            <SpinnerWrap>
-              <Spinner size={ 40 } />
-            </SpinnerWrap>
-          }
-          <Button variant="primary" disabled={ isFetching }>Genereer looplijsten</Button>
-        </ButtonWrap>
-      </form>
-    </div>
+    <Div className="Planning">
+      <div>
+        <h2>Hoeveel lijsten per dagdeel wil je genereren?</h2>
+        <form onSubmit={ onSubmit }>
+          <DayPartWrap>
+            <FormLabel>ochtend</FormLabel>
+            <FormLabel>middag</FormLabel>
+            <FormLabel>avond</FormLabel>
+          </DayPartWrap>
+          { inputs.map(({ title, inputs }) => <DayInputs key={ title } title={ title } inputs={ inputs } />) }
+          <ButtonWrap>
+            { showSpinner &&
+              <SpinnerWrap>
+                <Spinner size={ 40 } />
+              </SpinnerWrap>
+            }
+            <Button variant="primary" disabled={ isFetching }>Genereer looplijsten</Button>
+          </ButtonWrap>
+        </form>
+      </div>
+      <SettingsDiv>
+        <h2>Settings</h2>
+        <Label>openings datum: </Label>
+        <p>{ openingDate }</p>
+        <Label>openings redenen: </Label>
+        <ul>
+          { openingReasons.map(reason => <li key={ reason }>{ reason }</li>) }
+        </ul>
+      </SettingsDiv>
+    </Div>
   )
 }
 export default Planning

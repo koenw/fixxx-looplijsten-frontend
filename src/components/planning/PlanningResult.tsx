@@ -46,7 +46,7 @@ const PlanningResult: FC = () => {
         <>
           <H1>Looplijsten</H1>
           <Div>
-            <p><label>gegenereerd op: </label>{ timestamp ? `${ formatDate(timestamp, true) } ${ timestamp.getHours() }:${ timestamp.getMinutes() }` : "-" }</p>
+            <p><label>gegenereerd op: </label>{ timestamp ? `${ formatDate(timestamp, true) } ${ timestamp.getHours() }:${ timestamp.getMinutes() } uur` : "-" }</p>
             <p><label>ingedeeld: </label>{ numPlannedCases }</p>
             <p><label>niet ingedeeld: </label>{ numUnplannedCases }</p>
             <p><label>totaal: </label>{ numTotalCases }</p>

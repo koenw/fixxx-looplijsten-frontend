@@ -1,23 +1,23 @@
+export const openingDate = "2018-01-01"
+export const openingReasons = [
+  "Zebra",
+  "Woonschip (woonboot)",
+  "Social Media 2019",
+  "Safari 2015",
+  "Safari",
+  "Project Lobith",
+  "Project Jordaan",
+  "Project Andes",
+  "Mystery Guest",
+  "Hotline",
+  "Haarlemmerbuurt",
+  "Digital toezicht Zebra",
+  "Digital toezicht Safari",
+  "Corpo-rico",
+  "Burgwallenproject Oudezijde",
+  "Bed en breakfast 2019"
+]
 const createPlanningRequestBody = (inputs: any) => {
-  const openingDate = "2018-01-01"
-  const openingReasons = [
-    "Zebra",
-    "Woonschip (woonboot)",
-    "Social Media 2019",
-    "Safari 2015",
-    "Safari",
-    "Project Lobith",
-    "Project Jordaan",
-    "Project Andes",
-    "Mystery Guest",
-    "Hotline",
-    "Haarlemmerbuurt",
-    "Digital toezicht Zebra",
-    "Digital toezicht Safari",
-    "Corpo-rico",
-    "Burgwallenproject Oudezijde",
-    "Bed en breakfast 2019"
-  ]
   const listLength = 6
   const listLengthLong = 5
   const days = [
