@@ -22,8 +22,11 @@ const H1 = styled.h1`
 `
 const H2 = styled.h2`
   font-size: 16px
-  margin: 16px 24px 16px 0
+  margin-right: 24px
   display: inline-block
+`
+const H2Wrap = styled.div`
+  margin: 16px 0
 `
 const Wrap = styled.div`
   margin: 0 12px
@@ -105,12 +108,12 @@ const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [], ha
         const showErrorMessage = length === 0
         return (
           <Wrap key={ index }>
-            { hasSubtitle &&
-              <>
+            <H2Wrap>
+              { hasSubtitle &&
                 <H2>{ subtitleDisplay }</H2>
-                <MapsButton $as="a" itineraries={ itineraries } />
-              </>
-            }
+              }
+              <MapsButton $as="a" itineraries={ itineraries } />
+            </H2Wrap>
             <Table>
               <thead>
                 <Tr>
