@@ -31,10 +31,10 @@ const H2Wrap = styled.div`
 const Wrap = styled.div`
   margin: 0 12px
 `
-const ButtonWrap = styled.div`
+const H1Wrap = styled.div`
   display: flex
-  justify-content: flex-end
-  margin: 12px
+  justify-content: space-between
+  margin: 12px 0
 `
 const Table = styled.table`
   width: 100%
@@ -97,9 +97,14 @@ const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [], ha
 
   return (
     <Div className="PlanningResultItineraries">
-      { hasTitle &&
-        <H1>{ fullTitle }</H1>
-      }
+      <H1Wrap>
+        { hasTitle &&
+          <H1>{ fullTitle }</H1>
+        }
+        { showCopyButton &&
+          <CopyToClipboardButton text={ text } onClick={ onClick } />
+        }
+      </H1Wrap>
       { lists.map((itineraries, index) => {
         const subtitle = subtitles[index]
         const hasSubtitle = subtitle !== undefined
@@ -158,11 +163,6 @@ const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [], ha
           </Wrap>
         )
       })}
-      { showCopyButton &&
-        <ButtonWrap>
-          <CopyToClipboardButton text={ text } onClick={ onClick } />
-        </ButtonWrap>
-      }
     </Div>
   )
 }
