@@ -14,6 +14,7 @@ import replaceUrls from "../../lib/utils/replaceUrls"
 import isBetweenDates from "../../lib/utils/isBetweenDates"
 import displayAddress from "../../lib/displayAddress"
 import ScrollToAnchor from "../global/ScrollToAnchor"
+import Purified from "../global/Purified"
 
 type Props = {
   caseId: CaseId
@@ -23,8 +24,6 @@ type Props = {
 const HrSpaced = styled(Hr)`
   margin: 24px 0
 `
-
-const parseMeldingText = (text: string) => replaceNewLines(replaceUrls(text.trim(), "_blank"))
 
 const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
 
@@ -150,20 +149,20 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
       anoniem: anoniem === "J",
       naam,
       telnr,
-      text: parseMeldingText(text || "")
+      text: replaceNewLines(replaceUrls((text || "").trim(), "_blank"))
     }
   }).reverse()
 
-  const meldingenData = meldingen.reduce((acc: any, item, index) => {
+  const meldingenData = meldingen.reduce((acc, item, index) => {
     const { datum, anoniem, naam, telnr, text } = item
     acc.push(["Datum melding", datum || "-"])
     acc.push(["Anonieme melding", anoniem])
     acc.push(["Melder", <p className="anonymous"> { naam }</p> || "-"])
     acc.push(["Melder telefoonnummer", telnr ? <a className="anonymous" href={ "tel://" + telnr }>{ telnr }</a> : "-"])
-    acc.push(<p className="anonymous" dangerouslySetInnerHTML={ { __html: text } }></p>)
+    acc.push(<Purified className="anonymous" text={ text } />)
     if (index < meldingen.length - 1) acc.push(<HrSpaced />)
     return acc
-  }, [])
+  }, [] as KeyValueDetails)
 
   // Bewoners
   const people = Array.isArray(caseItem.bwv_personen) ? caseItem.bwv_personen.map(person => {
@@ -188,13 +187,22 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
 
   // Logboek
   const bevindingen = caseItem.bwv_hotline_bevinding.map(item => {
+    const {
+      toez_hdr1_naam,
+      toez_hdr2_naam,
+      bevinding_datum,
+      bevinding_tijd,
+      hit,
+      opmerking,
+      volgnr_bevinding
+    } = item
     return ({
-      name: [item.toez_hdr1_naam, item.toez_hdr2_naam].filter(i => i != null).join(", "),
-      date: formatDate(item.bevinding_datum, true)!,
-      time: item.bevinding_tijd,
-      hit: item.hit === "J",
-      text: item.opmerking || "", 
-      num: parseInt(item.volgnr_bevinding, 10)
+      name: [toez_hdr1_naam, toez_hdr2_naam].filter(i => i != null).join(", "),
+      date: formatDate(bevinding_datum, true)!,
+      time: bevinding_tijd,
+      hit: hit === "J",
+      text: replaceNewLines((opmerking || "").trim(), "<br /><br />"),
+      num: parseInt(volgnr_bevinding, 10)
     })
   }).sort((a, b) => a.num - b.num).reverse()
 
@@ -203,7 +211,7 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
     acc.push(["Tijd", `${ item.time } uur`])
     acc.push(["Datum", item.date])
     acc.push(["Hit", item.hit])
-    acc.push(<p className="anonymous" dangerouslySetInnerHTML={ { __html: replaceNewLines(item.text, "<br /><br />") } }></p>)
+    acc.push(<Purified className="anonymous" text={ item.text } />)
     if (index < bevindingen.length - 1) acc.push(<Hr />)
     return acc
   }, [])

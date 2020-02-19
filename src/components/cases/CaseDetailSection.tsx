@@ -6,10 +6,6 @@ import Footer from "./Footer"
 import InvalidDataSpan from "../global/InvalidDataSpan"
 import displayBoolean from "../../lib/displayBoolean"
 
-type Value = string | ReactNode
-type KeyValueDetail = string | ReactNode | [string, Value]
-type KeyValueDetails = KeyValueDetail[]
-
 type Props = {
   id?: string
   title?: string
