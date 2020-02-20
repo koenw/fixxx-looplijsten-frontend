@@ -83,7 +83,7 @@ const PlanningResult: FC = () => {
               return list.itineraries.map((itineraries, index2) => {
                 const title = `Maandag Dag Team ${ index2 + 1 }`
                 const subtitles = ["Ochtend", "Middag"]
-                const itinerariesAfternoon = listsMondayAfternoon[index].itineraries[index2]
+                const itinerariesAfternoon = listsMondayAfternoon[index] ? listsMondayAfternoon[index].itineraries[index2] : undefined
                 const lists = itinerariesAfternoon !== undefined ? [itineraries, itinerariesAfternoon] : [itineraries]
                 return <PlanningResultItineraries key={ title } title={ title } subtitles={ subtitles } lists={ lists } />
               })
@@ -99,7 +99,7 @@ const PlanningResult: FC = () => {
               return list.itineraries.map((itineraries, index2) => {
                 const title = `Dinsdag Dag Team ${ index2 + 1 }`
                 const subtitles = ["Ochtend", "Middag"]
-                const itinerariesAfternoon = listsTuesdayAfternoon[index].itineraries[index2] || []
+                const itinerariesAfternoon = listsTuesdayAfternoon[index] ? listsTuesdayAfternoon[index].itineraries[index2] : undefined
                 const lists = itinerariesAfternoon !== undefined ? [itineraries, itinerariesAfternoon] : [itineraries]
                 return <PlanningResultItineraries key={ title } title={ title } subtitles={ subtitles } lists={ lists } />
               })
@@ -115,7 +115,7 @@ const PlanningResult: FC = () => {
               return list.itineraries.map((itineraries, index2) => {
                 const title = `Woensdag Dag Team ${ index2 + 1 }`
                 const subtitles = ["Ochtend", "Middag"]
-                const itinerariesAfternoon = listsWednesdayAfternoon[index].itineraries[index2] || []
+                const itinerariesAfternoon = listsWednesdayAfternoon[index] ? listsWednesdayAfternoon[index].itineraries[index2] : undefined
                 const lists = itinerariesAfternoon !== undefined ? [itineraries, itinerariesAfternoon] : [itineraries]
                 return <PlanningResultItineraries key={ title } title={ title } subtitles={ subtitles } lists={ lists } />
               })
@@ -132,7 +132,7 @@ const PlanningResult: FC = () => {
               return list.itineraries.map((itineraries, index2) => {
                 const title = `Donderdag Dag Team ${ index2 + 1 }`
                 const subtitles = ["Ochtend", "Middag"]
-                const itinerariesAfternoon = listsThursdayAfternoon[index].itineraries[index2] || []
+                const itinerariesAfternoon = listsThursdayAfternoon[index] ? listsThursdayAfternoon[index].itineraries[index2] : undefined
                 const lists = itinerariesAfternoon !== undefined ? [itineraries, itinerariesAfternoon] : [itineraries]
                 return <PlanningResultItineraries key={ title } title={ title } subtitles={ subtitles } lists={ lists } />
               })
@@ -148,7 +148,7 @@ const PlanningResult: FC = () => {
               return list.itineraries.map((itineraries, index2) => {
                 const title = `Vrijdag Dag Team ${ index2 + 1 }`
                 const subtitles = ["Ochtend", "Middag"]
-                const itinerariesAfternoon = listsFridayAfternoon[index].itineraries[index2] || []
+                const itinerariesAfternoon = listsFridayAfternoon[index] ? listsFridayAfternoon[index].itineraries[index2] : undefined
                 const lists = itinerariesAfternoon !== undefined ? [itineraries, itinerariesAfternoon] : [itineraries]
                 return <PlanningResultItineraries key={ title } title={ title } subtitles={ subtitles } lists={ lists } />
               })
