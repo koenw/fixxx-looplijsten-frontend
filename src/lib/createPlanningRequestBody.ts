@@ -30,87 +30,179 @@ const createPlanningRequestBody = (inputs: any) => {
     {
       name: "Maandag Ochtend",
       number_of_lists: inputs[0].inputs[0],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      primary_stadium: "Onderzoek buitendienst",
+      secondary_stadia: [
+        "2de Controle",
+        "3de Controle"
+      ]
     },
     {
       name: "Maandag Middag",
       number_of_lists: inputs[0].inputs[1],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      primary_stadium: "Onderzoek buitendienst",
+      secondary_stadia: [
+        "2de Controle",
+        "3de Controle"
+      ]
     },
     {
       name: "Maandag Avond",
       number_of_lists: inputs[0].inputs[2],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      primary_stadium: "Avondronde",
+      secondary_stadia: [
+        "Hercontrole",
+        "2de hercontrole",
+        "3de hercontrole"
+      ]
     },
     {
       name: "Dinsdag Ochtend",
       number_of_lists: inputs[1].inputs[0],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      primary_stadium: "Onderzoek buitendienst",
+      secondary_stadia: [
+        "2de Controle",
+        "3de Controle"
+      ]
     },
     {
       name: "Dinsdag Middag",
       number_of_lists: inputs[1].inputs[1],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      primary_stadium: "Onderzoek buitendienst",
+      secondary_stadia: [
+        "2de Controle",
+        "3de Controle"
+      ]
     },
     {
       name: "Dinsdag Avond",
       number_of_lists: inputs[1].inputs[2],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      primary_stadium: "Avondronde",
+      secondary_stadia: [
+        "Hercontrole",
+        "2de hercontrole",
+        "3de hercontrole"
+      ]
     },
     {
       name: "Woensdag Ochtend",
       number_of_lists: inputs[2].inputs[0],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      primary_stadium: "Onderzoek buitendienst",
+      secondary_stadia: [
+        "2de Controle",
+        "3de Controle"
+      ]
     },
     {
       name: "Woensdag Middag",
       number_of_lists: inputs[2].inputs[1],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      primary_stadium: "Onderzoek buitendienst",
+      secondary_stadia: [
+        "2de Controle",
+        "3de Controle"
+      ]
     },
     {
       name: "Woensdag Avond",
       number_of_lists: inputs[2].inputs[2],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      primary_stadium: "Avondronde",
+      secondary_stadia: [
+        "Hercontrole",
+        "2de hercontrole",
+        "3de hercontrole"
+      ]
     },
     {
       name: "Donderdag Ochtend",
       number_of_lists: inputs[3].inputs[0],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      primary_stadium: "Onderzoek buitendienst",
+      secondary_stadia: [
+        "2de Controle",
+        "3de Controle"
+      ]
     },
     {
       name: "Donderdag Middag",
       number_of_lists: inputs[3].inputs[1],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      primary_stadium: "Onderzoek buitendienst",
+      secondary_stadia: [
+        "2de Controle",
+        "3de Controle"
+      ]
     },
     {
       name: "Donderdag Avond",
       number_of_lists: inputs[3].inputs[2],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      primary_stadium: "Avondronde",
+      secondary_stadia: [
+        "Hercontrole",
+        "2de hercontrole",
+        "3de hercontrole"
+      ]
     },
     {
       name: "Vrijdag Ochtend",
       number_of_lists: inputs[4].inputs[0],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      primary_stadium: "Onderzoek buitendienst",
+      secondary_stadia: [
+        "2de Controle",
+        "3de Controle"
+      ]
     },
     {
       name: "Vrijdag Middag",
       number_of_lists: inputs[4].inputs[1],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      primary_stadium: "Onderzoek buitendienst",
+      secondary_stadia: [
+        "2de Controle",
+        "3de Controle"
+      ]
     },
     {
       name: "Vrijdag Avond",
       number_of_lists: inputs[4].inputs[2],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      primary_stadium: "Avondronde",
+      secondary_stadia: [
+        "Hercontrole",
+        "2de hercontrole",
+        "3de hercontrole"
+      ]
     },
     {
       name: "Zaterdag Weekend",
       number_of_lists: inputs[5].inputs[0],
-      length_of_lists: listLengthLong
+      length_of_lists: listLengthLong,
+      primary_stadium: "Weekend buitendienstonderzoek",
+      secondary_stadia: [
+        "Hercontrole",
+        "2de hercontrole",
+        "3de hercontrole"
+      ]
     },
     {
       name: "Zondag Weekend",
       number_of_lists: inputs[6].inputs[0],
-      length_of_lists: listLengthLong
+      length_of_lists: listLengthLong,
+      primary_stadium: "Weekend buitendienstonderzoek",
+      secondary_stadia: [
+        "Hercontrole",
+        "2de hercontrole",
+        "3de hercontrole"
+      ]
     }
   ]
   const body = {

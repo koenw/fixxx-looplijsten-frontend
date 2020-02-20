@@ -50,21 +50,21 @@ const Planning: FC = () => {
   } = useGlobalState()
 
   type Input = [string, OnChangeHandler]
-  const mondayMorning = useOnChangeState("2") as unknown as Input
-  const mondayAfternoon = useOnChangeState("2") as unknown as Input
+  const mondayMorning = useOnChangeState("1") as unknown as Input
+  const mondayAfternoon = useOnChangeState("1") as unknown as Input
   const mondayEvening = useOnChangeState("0") as unknown as Input
-  const tuesdayMorning = useOnChangeState("2") as unknown as Input
-  const tuesdayAfternoon = useOnChangeState("2") as unknown as Input
+  const tuesdayMorning = useOnChangeState("1") as unknown as Input
+  const tuesdayAfternoon = useOnChangeState("1") as unknown as Input
   const tuesdayEvening = useOnChangeState("0") as unknown as Input
-  const wednesdayMorning = useOnChangeState("2") as unknown as Input
-  const wednesdayAfternoon = useOnChangeState("2") as unknown as Input
-  const wednesdayEvening = useOnChangeState("2") as unknown as Input
-  const thursdayMorning = useOnChangeState("4") as unknown as Input
-  const thursdayAfternoon = useOnChangeState("4") as unknown as Input
-  const thursdayEvening = useOnChangeState("2") as unknown as Input
-  const fridayMorning = useOnChangeState("3") as unknown as Input
-  const fridayAfternoon = useOnChangeState("3") as unknown as Input
-  const fridayEvening = useOnChangeState("1") as unknown as Input
+  const wednesdayMorning = useOnChangeState("1") as unknown as Input
+  const wednesdayAfternoon = useOnChangeState("1") as unknown as Input
+  const wednesdayEvening = useOnChangeState("0") as unknown as Input
+  const thursdayMorning = useOnChangeState("2") as unknown as Input
+  const thursdayAfternoon = useOnChangeState("2") as unknown as Input
+  const thursdayEvening = useOnChangeState("1") as unknown as Input
+  const fridayMorning = useOnChangeState("2") as unknown as Input
+  const fridayAfternoon = useOnChangeState("2") as unknown as Input
+  const fridayEvening = useOnChangeState("0") as unknown as Input
   const saturday = useOnChangeState("1") as unknown as Input
   const sunday = useOnChangeState("1") as unknown as Input
 
