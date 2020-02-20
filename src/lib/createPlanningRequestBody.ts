@@ -11,19 +11,19 @@ export const openingReasons = [
   "Project Andes",
   "Project Jordaan",
   "Project Lobith",
-  "Project Sahara",
+  //"Project Sahara",
   "Safari",
   "Safari 2015",
-  "Sahara Adams Suites",
-  "Sahara hele woning",
-  "Sahara meer dan 4",
-  "Sahara Recensies",
-  "Sahara veel adv",
+  //"Sahara Adams Suites",
+  //"Sahara hele woning",
+  //"Sahara meer dan 4",
+  //"Sahara Recensies",
+  //"Sahara veel adv",
   "Social Media 2019",
   "Woonschip (woonboot)",
   "Zebra"
 ]
-const createPlanningRequestBody = (inputs: any) => {
+const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
   const listLength = 6
   const listLengthLong = 4
   const lists = [
