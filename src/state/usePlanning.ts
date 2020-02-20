@@ -3,6 +3,7 @@ import reducer, {
   initialState,
   createStartFetching,
   createSetResults,
+  createSetError,
   createClear
 } from "./planningReducer"
 import { post, notOk, isForbidden } from "../lib/utils/fetch"
@@ -35,8 +36,10 @@ const usePlanning = () : [PlanningState, PlanningActions] => {
       const [response, result] = await post(url, params)
 
       // Handle error responses
-      if (isForbidden(response)) return handleForbiddenResponse()
-      if (notOk(response)) return false
+      if (notOk(response)) {
+        dispatch(createSetError(response.statusText))
+        return isForbidden(response) ? handleForbiddenResponse() : false
+      }
 
       // Set results
       dispatch(createSetResults(result))

@@ -6,6 +6,7 @@ import { getTitle } from "../../lib/days"
 import DayInputs from "./DayInputs"
 import { Button, Spinner } from "@datapunt/asc-ui"
 import createPlanningRequestBody, { openingDate, openingReasons } from "../../lib/createPlanningRequestBody"
+import ErrorMessage from "../global/ErrorMessage"
 
 const DayPartWrap = styled.div`
   padding-left: 150px
@@ -42,7 +43,8 @@ const Planning: FC = () => {
 
   const {
     planning: {
-      isFetching
+      isFetching,
+      errorMessage
     },
     planningActions: {
       generate
@@ -86,6 +88,7 @@ const Planning: FC = () => {
   }
 
   const showSpinner = isFetching
+  const showError = errorMessage !== undefined
 
   return (
     <Div className="Planning">
@@ -98,6 +101,9 @@ const Planning: FC = () => {
             <FormLabel>avond</FormLabel>
           </DayPartWrap>
           { inputs.map(({ title, inputs }) => <DayInputs key={ title } title={ title } inputs={ inputs } />) }
+          { showError &&
+            <ErrorMessage text={ errorMessage! } />
+          }
           <ButtonWrap>
             { showSpinner &&
               <SpinnerWrap>
