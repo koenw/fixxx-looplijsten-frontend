@@ -10,7 +10,7 @@ type Props = {
 
 const TextArea = styled.textarea`
   position: absolute
-  top: -9999px
+  left: -9999px
 `
 
 const CopyToClipboardButton: FC<Props> = ({ text, onClick = noop }) => {
