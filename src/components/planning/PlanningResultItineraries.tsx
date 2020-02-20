@@ -7,7 +7,7 @@ import ErrorMessage from "../global/ErrorMessage"
 
 type Props = {
   title?: string
-  lists: Lists
+  lists: BWVData[][]
   subtitles?: string[]
   hasCopyButton?: boolean
 }
@@ -61,7 +61,7 @@ const ErrorMessageWrap = styled.div`
   margin: 12px 0
 `
 
-const createClipboardText = (lists: Lists, subtitles?: string[]) => {
+const createClipboardText = (lists: BWVData[][], subtitles?: string[]) => {
   const nl = "\n"
   return lists.map((list, index) => {
     const subtitle = subtitles && subtitles[index]

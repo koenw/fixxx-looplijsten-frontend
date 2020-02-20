@@ -148,23 +148,19 @@ declare type Case = {
 }
 declare type Cases = Case[]
 
-declare type List = BWVData[]
-declare type Lists = List[]
-declare type PlanningDay = {
-  day: string
-  lists: {
-    name: string
-    number_of_lists: number
-    length_of_lists: number
-    itineraries: Lists
-  }[]
+declare type List = {
+  name: string
+  number_of_lists: number
+  length_of_lists: number
+  id: number
+  itineraries: BWVData[][]
 }
-declare type PlanningDays = PlanningDay[]
+declare type Lists = List[]
 declare type PlanningData = {
   opening_date: string
   opening_reasons: string[]
-  days: PlanningDays
-  unplanned_cases: List
+  lists: Lists
+  unplanned_cases: BWVData[]
 }
 
 declare type PlanningResult = {
