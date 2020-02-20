@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react"
+import React, { FC } from "react"
 import styled from "styled-components"
 import H1 from "../styled/H1"
 import Label from "../styled/Label"
