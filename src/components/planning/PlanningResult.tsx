@@ -31,7 +31,7 @@ const PlanningResult: FC = () => {
 
   console.log(results)
 
-  const numPlannedCases = hasResult ? results!.lists.flat(1).length : 0
+  const numPlannedCases = hasResult ? results!.lists.map(list => list.itineraries).flat(2).length : 0
   const numUnplannedCases = unplannedCases ? unplannedCases.length : 0
   const numTotalCases = numPlannedCases + numUnplannedCases
   const showUnplannedCases = numUnplannedCases > 0
