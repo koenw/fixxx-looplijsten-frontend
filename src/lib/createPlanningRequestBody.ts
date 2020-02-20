@@ -30,12 +30,14 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
     {
       name: "Maandag Ochtend",
       number_of_lists: inputs[0].inputs[0],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
     },
     {
       name: "Maandag Middag",
       number_of_lists: inputs[0].inputs[1],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
     },
     {
       name: "Maandag Avond",
@@ -46,17 +48,20 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
         "Hercontrole",
         "2de hercontrole",
         "3de hercontrole"
-      ]
+      ],
+      exclude_stadia: ["Weekend buitendienstonderzoek"]
     },
     {
       name: "Dinsdag Ochtend",
       number_of_lists: inputs[1].inputs[0],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
     },
     {
       name: "Dinsdag Middag",
       number_of_lists: inputs[1].inputs[1],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
     },
     {
       name: "Dinsdag Avond",
@@ -67,17 +72,20 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
         "Hercontrole",
         "2de hercontrole",
         "3de hercontrole"
-      ]
+      ],
+      exclude_stadia: ["Weekend buitendienstonderzoek"]
     },
     {
       name: "Woensdag Ochtend",
       number_of_lists: inputs[2].inputs[0],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
     },
     {
       name: "Woensdag Middag",
       number_of_lists: inputs[2].inputs[1],
-      length_of_lists: listLength
+      length_of_lists: listLength,
+      exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
     },
     {
       name: "Woensdag Avond",
@@ -88,7 +96,8 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
         "Hercontrole",
         "2de hercontrole",
         "3de hercontrole"
-      ]
+      ],
+      exclude_stadia: ["Weekend buitendienstonderzoek"]
     },
     {
       name: "Donderdag Ochtend",
@@ -98,7 +107,8 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
       secondary_stadia: [
         "2de Controle",
         "3de Controle"
-      ]
+      ],
+      exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
     },
     {
       name: "Donderdag Middag",
@@ -108,7 +118,8 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
       secondary_stadia: [
         "2de Controle",
         "3de Controle"
-      ]
+      ],
+      exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
     },
     {
       name: "Donderdag Avond",
@@ -119,7 +130,8 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
         "Hercontrole",
         "2de hercontrole",
         "3de hercontrole"
-      ]
+      ],
+      exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
     },
     {
       name: "Vrijdag Ochtend",
@@ -129,7 +141,8 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
       secondary_stadia: [
         "2de Controle",
         "3de Controle"
-      ]
+      ],
+      exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
     },
     {
       name: "Vrijdag Middag",
@@ -139,7 +152,8 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
       secondary_stadia: [
         "2de Controle",
         "3de Controle"
-      ]
+      ],
+      exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
     },
     {
       name: "Vrijdag Avond",
@@ -150,7 +164,8 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
         "Hercontrole",
         "2de hercontrole",
         "3de hercontrole"
-      ]
+      ],
+      exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
     },
     {
       name: "Zaterdag Weekend",
@@ -161,7 +176,8 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
         "Hercontrole",
         "2de hercontrole",
         "3de hercontrole"
-      ]
+      ],
+      exclude_stadia: ["Avondronde"]
     },
     {
       name: "Zondag Weekend",
@@ -172,7 +188,8 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
         "Hercontrole",
         "2de hercontrole",
         "3de hercontrole"
-      ]
+      ],
+      exclude_stadia: ["Avondronde"]
     }
   ]
   const body = {
