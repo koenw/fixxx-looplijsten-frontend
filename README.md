@@ -10,8 +10,9 @@
 
 ## development
 
-Connect to acceptatie backend
+Connect to acceptance backend
 - `npm run start:acc`
+- open `http://localhost:3001/` in browser
 
 ## Original README
 
