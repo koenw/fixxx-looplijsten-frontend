@@ -131,7 +131,7 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
         "2de hercontrole",
         "3de hercontrole"
       ],
-      exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
+      exclude_stadia: ["Weekend buitendienstonderzoek"]
     },
     {
       name: "Vrijdag Ochtend",
@@ -165,7 +165,7 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
         "2de hercontrole",
         "3de hercontrole"
       ],
-      exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
+      exclude_stadia: ["Weekend buitendienstonderzoek"]
     },
     {
       name: "Zaterdag Weekend",
