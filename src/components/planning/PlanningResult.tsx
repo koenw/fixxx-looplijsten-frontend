@@ -65,6 +65,12 @@ const PlanningResult: FC = () => {
 
   const listsSunday = results ? results.lists.filter(list => list.name.match(/^Zondag/)) : []
 
+  // Day planning
+  const listsDay = results ? results.lists.filter(list => list.name.match(/^Dag/)) : []
+  const listsDayMorning = listsDay.filter(list => list.name.match(/Ochtend$/) && list.number_of_lists > 0)
+  const listsDayAfternoon = listsDay.filter(list => list.name.match(/Middag$/) && list.number_of_lists > 0)
+  const listsDayEvening = listsDay.filter(list => list.name.match(/Avond$/) && list.number_of_lists > 0)
+
   return (
     <div className="PlanningResult">
       { showEmpty &&
@@ -170,6 +176,22 @@ const PlanningResult: FC = () => {
           { listsSunday.map((list, index) => {
               return list.itineraries.map((itineraries, index2) => {
                 const title = `Zondag Team ${ index2 + 1 }`
+                return <PlanningResultItineraries key={ title } title={ title } lists={ [itineraries] } />
+              })
+          } ) }
+
+          { listsDayMorning.map((list, index) => {
+              return list.itineraries.map((itineraries, index2) => {
+                const title = `Dag Team ${ index2 + 1 }`
+                const subtitles = ["Ochtend", "Middag"]
+                const itinerariesAfternoon = listsDayAfternoon[index] ? listsDayAfternoon[index].itineraries[index2] : undefined
+                const lists = itinerariesAfternoon !== undefined ? [itineraries, itinerariesAfternoon] : [itineraries]
+                return <PlanningResultItineraries key={ title } title={ title } subtitles={ subtitles } lists={ lists } />
+              })
+          } ) }
+          { listsDayEvening.map((list, index) => {
+              return list.itineraries.map((itineraries, index2) => {
+                const title = `Avond Team ${ index2 + 1 }`
                 return <PlanningResultItineraries key={ title } title={ title } lists={ [itineraries] } />
               })
           } ) }

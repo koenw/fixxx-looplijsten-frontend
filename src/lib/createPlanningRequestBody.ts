@@ -26,7 +26,8 @@ export const openingReasons = [
 const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
   const listLength = 6
   const listLengthLong = 4
-  const lists = [
+  const lists = inputs.length === 7 ?
+  [
     {
       name: "Maandag Ochtend",
       number_of_lists: inputs[0].inputs[0],
@@ -191,6 +192,42 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
       ],
       exclude_stadia: ["Avondronde"]
     }
+  ] : [
+    {
+      name: "Dag Ochtend",
+      number_of_lists: inputs[0].inputs[0],
+      length_of_lists: listLength,
+      primary_stadium: "Onderzoek buitendienst",
+      secondary_stadia: [
+        "2de Controle",
+        "3de Controle"
+      ],
+      exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
+    },
+    {
+      name: "Dag Middag",
+      number_of_lists: inputs[0].inputs[1],
+      length_of_lists: listLength,
+      primary_stadium: "Onderzoek buitendienst",
+      secondary_stadia: [
+        "2de Controle",
+        "3de Controle"
+      ],
+      exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
+    },
+    {
+      name: "Dag Avond",
+      number_of_lists: inputs[0].inputs[2],
+      length_of_lists: listLength,
+      primary_stadium: "Avondronde",
+      secondary_stadia: [
+        "Hercontrole",
+        "2de hercontrole",
+        "3de hercontrole"
+      ],
+      exclude_stadia: ["Weekend buitendienstonderzoek"]
+    }
+
   ]
   const body = {
     opening_date: openingDate,
