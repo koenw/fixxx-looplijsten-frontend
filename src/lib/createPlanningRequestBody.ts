@@ -23,26 +23,32 @@ export const openingReasons = [
   "Woonschip (woonboot)",
   "Zebra"
 ]
-const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
+const repeat = <T>(v: T, n: number) : T[] => {
+  const arr = []
+  for (let i = 0; i < n; i++) arr.push(v)
+  return arr
+}
+const createPlanningRequestBody = (inputs: { inputs: number[] }[], dayOfWeek?: number) => {
   const listLength = 6
   const listLengthLong = 4
-  const lists = inputs.length === 7 ?
+  const inputs7 = inputs.length === 7 ? inputs : repeat(inputs[0], 7)
+  const listsWeek =
   [
     {
       name: "Maandag Ochtend",
-      number_of_lists: inputs[0].inputs[0],
+      number_of_lists: inputs7[0].inputs[0],
       length_of_lists: listLength,
       exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
     },
     {
       name: "Maandag Middag",
-      number_of_lists: inputs[0].inputs[1],
+      number_of_lists: inputs7[0].inputs[1],
       length_of_lists: listLength,
       exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
     },
     {
       name: "Maandag Avond",
-      number_of_lists: inputs[0].inputs[2],
+      number_of_lists: inputs7[0].inputs[2],
       length_of_lists: listLength,
       primary_stadium: "Avondronde",
       secondary_stadia: [
@@ -54,19 +60,19 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
     },
     {
       name: "Dinsdag Ochtend",
-      number_of_lists: inputs[1].inputs[0],
+      number_of_lists: inputs7[1].inputs[0],
       length_of_lists: listLength,
       exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
     },
     {
       name: "Dinsdag Middag",
-      number_of_lists: inputs[1].inputs[1],
+      number_of_lists: inputs7[1].inputs[1],
       length_of_lists: listLength,
       exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
     },
     {
       name: "Dinsdag Avond",
-      number_of_lists: inputs[1].inputs[2],
+      number_of_lists: inputs7[1].inputs[2],
       length_of_lists: listLength,
       primary_stadium: "Avondronde",
       secondary_stadia: [
@@ -78,19 +84,19 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
     },
     {
       name: "Woensdag Ochtend",
-      number_of_lists: inputs[2].inputs[0],
+      number_of_lists: inputs7[2].inputs[0],
       length_of_lists: listLength,
       exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
     },
     {
       name: "Woensdag Middag",
-      number_of_lists: inputs[2].inputs[1],
+      number_of_lists: inputs7[2].inputs[1],
       length_of_lists: listLength,
       exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
     },
     {
       name: "Woensdag Avond",
-      number_of_lists: inputs[2].inputs[2],
+      number_of_lists: inputs7[2].inputs[2],
       length_of_lists: listLength,
       primary_stadium: "Avondronde",
       secondary_stadia: [
@@ -102,7 +108,7 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
     },
     {
       name: "Donderdag Ochtend",
-      number_of_lists: inputs[3].inputs[0],
+      number_of_lists: inputs7[3].inputs[0],
       length_of_lists: listLength,
       primary_stadium: "Onderzoek buitendienst",
       secondary_stadia: [
@@ -113,7 +119,7 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
     },
     {
       name: "Donderdag Middag",
-      number_of_lists: inputs[3].inputs[1],
+      number_of_lists: inputs7[3].inputs[1],
       length_of_lists: listLength,
       primary_stadium: "Onderzoek buitendienst",
       secondary_stadia: [
@@ -124,7 +130,7 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
     },
     {
       name: "Donderdag Avond",
-      number_of_lists: inputs[3].inputs[2],
+      number_of_lists: inputs7[3].inputs[2],
       length_of_lists: listLength,
       primary_stadium: "Avondronde",
       secondary_stadia: [
@@ -136,7 +142,7 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
     },
     {
       name: "Vrijdag Ochtend",
-      number_of_lists: inputs[4].inputs[0],
+      number_of_lists: inputs7[4].inputs[0],
       length_of_lists: listLength,
       primary_stadium: "Onderzoek buitendienst",
       secondary_stadia: [
@@ -147,7 +153,7 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
     },
     {
       name: "Vrijdag Middag",
-      number_of_lists: inputs[4].inputs[1],
+      number_of_lists: inputs7[4].inputs[1],
       length_of_lists: listLength,
       primary_stadium: "Onderzoek buitendienst",
       secondary_stadia: [
@@ -158,7 +164,7 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
     },
     {
       name: "Vrijdag Avond",
-      number_of_lists: inputs[4].inputs[2],
+      number_of_lists: inputs7[4].inputs[2],
       length_of_lists: listLength,
       primary_stadium: "Avondronde",
       secondary_stadia: [
@@ -170,7 +176,7 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
     },
     {
       name: "Zaterdag Weekend",
-      number_of_lists: inputs[5].inputs[0],
+      number_of_lists: inputs7[5].inputs[0],
       length_of_lists: listLengthLong,
       primary_stadium: "Weekend buitendienstonderzoek",
       secondary_stadia: [
@@ -182,7 +188,7 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
     },
     {
       name: "Zondag Weekend",
-      number_of_lists: inputs[6].inputs[0],
+      number_of_lists: inputs7[6].inputs[0],
       length_of_lists: listLengthLong,
       primary_stadium: "Weekend buitendienstonderzoek",
       secondary_stadia: [
@@ -192,43 +198,8 @@ const createPlanningRequestBody = (inputs: { inputs: number[] }[]) => {
       ],
       exclude_stadia: ["Avondronde"]
     }
-  ] : [
-    {
-      name: "Dag Ochtend",
-      number_of_lists: inputs[0].inputs[0],
-      length_of_lists: listLength,
-      primary_stadium: "Onderzoek buitendienst",
-      secondary_stadia: [
-        "2de Controle",
-        "3de Controle"
-      ],
-      exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
-    },
-    {
-      name: "Dag Middag",
-      number_of_lists: inputs[0].inputs[1],
-      length_of_lists: listLength,
-      primary_stadium: "Onderzoek buitendienst",
-      secondary_stadia: [
-        "2de Controle",
-        "3de Controle"
-      ],
-      exclude_stadia: ["Avondronde", "Weekend buitendienstonderzoek"]
-    },
-    {
-      name: "Dag Avond",
-      number_of_lists: inputs[0].inputs[2],
-      length_of_lists: listLength,
-      primary_stadium: "Avondronde",
-      secondary_stadia: [
-        "Hercontrole",
-        "2de hercontrole",
-        "3de hercontrole"
-      ],
-      exclude_stadia: ["Weekend buitendienstonderzoek"]
-    }
-
   ]
+  const lists = dayOfWeek !== undefined ? listsWeek.splice(dayOfWeek * 3, 3) : listsWeek
   const body = {
     opening_date: openingDate,
     opening_reasons: openingReasons,

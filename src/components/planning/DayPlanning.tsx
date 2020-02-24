@@ -56,14 +56,20 @@ const DayPlanning: FC = () => {
   const afternoon = useOnChangeState("2") as unknown as Input
   const evening = useOnChangeState("0") as unknown as Input
 
+  const day = (new Date()).getDay()
+  const tomorrow = day + 1 > 6 ? 0 : day + 1
+  const dayOfWeek = tomorrow - 1 < 0 ? 6 : tomorrow - 1 // correct sunday => 6
+  const title = getTitle(dayOfWeek, true)
   const inputs = [
-    { title: "Dag", inputs: [morning, afternoon, evening] }
+    { title, inputs: [morning, afternoon, evening] }
   ]
 
   const onSubmit = (event: FormEvent) => {
     event.preventDefault()
-    const inputsNums = inputs.map(({ title, inputs }) => ({ title, inputs: inputs.map(input => parseInt(input[0], 10)) }))
-    const params = createPlanningRequestBody(inputsNums)
+
+    const inputsNums = inputs.map(({ inputs }) => ({ inputs: inputs.map(input => parseInt(input[0], 10)) }))
+    const params = createPlanningRequestBody(inputsNums, dayOfWeek)
+    console.log(params)
     generate(params)
   }
 
