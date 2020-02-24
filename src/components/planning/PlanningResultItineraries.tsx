@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC, useState, MouseEvent } from "react"
 import displayAddress from "../../lib/displayAddress"
 import styled from "styled-components"
 import MapsButton from "../itineraries/MapsButton"
@@ -53,6 +53,14 @@ const PlanningResultItineraries: FC<Props> = ({ title, itineraries, isCopied = f
   const titleDisplay = hasTitle ? `${ title } (${ length })` : ""
   const showErrorMessage = length === 0
 
+  const [itinerariesState, setItineraries] = useState(itineraries)
+  const onClick = (index: number) => (event: MouseEvent<HTMLElement>) => {
+    event.preventDefault()
+    const clone = [...itinerariesState]
+    clone.splice(index, 1)
+    setItineraries(clone)
+  }
+
   return (
     <Div className="PlanningResultItineraries">
       <H2Wrap>
@@ -69,10 +77,11 @@ const PlanningResultItineraries: FC<Props> = ({ title, itineraries, isCopied = f
             <Th>Openingsreden</Th>
             <Th>Stadium</Th>
             <ThSmall></ThSmall>
+            <ThSmall></ThSmall>
           </Tr>
         </thead>
         <tbody>
-        { itineraries.map(itinerary => {
+        { itinerariesState.map((itinerary, index) => {
             const {
               street_name: streetName,
               street_number: streetNumber,
@@ -91,6 +100,7 @@ const PlanningResultItineraries: FC<Props> = ({ title, itineraries, isCopied = f
                 <Td faded={ isCopied }>{ caseReason }</Td>
                 <Td faded={ isCopied }>{ stadium }</Td>
                 <Td><a href={ `/cases/${ caseId }` }>bekijk</a></Td>
+                <Td><a onClick={ onClick(index) } href="">verwijder</a></Td>
               </Tr>
             )
           })
