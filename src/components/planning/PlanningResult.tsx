@@ -1,11 +1,9 @@
 import React, { FC } from "react"
 import PlanningResultItineraries from "./PlanningResultItineraries"
 import useGlobalState from "../../hooks/useGlobalState"
-import { getTitle } from "../../lib/days"
 import formatDate from "../../lib/utils/formatDate"
 import { Spinner } from "@datapunt/asc-ui"
 import styled from "styled-components"
-import zip from "../../lib/zip"
 
 const Div = styled.div`
   margin-bottom: 24px

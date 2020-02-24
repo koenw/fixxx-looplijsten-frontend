@@ -66,10 +66,8 @@ const DayPlanning: FC = () => {
 
   const onSubmit = (event: FormEvent) => {
     event.preventDefault()
-
     const inputsNums = inputs.map(({ inputs }) => ({ inputs: inputs.map(input => parseInt(input[0], 10)) }))
     const params = createPlanningRequestBody(inputsNums, dayOfWeek)
-    console.log(params)
     generate(params)
   }
 
