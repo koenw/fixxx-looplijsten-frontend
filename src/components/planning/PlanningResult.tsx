@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import PlanningResultItineraries from "./PlanningResultItineraries"
+import PlanningResultLists from "./PlanningResultLists"
 import useGlobalState from "../../hooks/useGlobalState"
 import formatDate from "../../lib/utils/formatDate"
 import { Spinner } from "@datapunt/asc-ui"
@@ -125,13 +125,13 @@ const PlanningResult: FC = () => {
                 const itinerariesIndexed = listsMondayToIndex[index] ? listsMondayToIndex[index].itineraries[index2] : undefined
                 const subtitles = itinerariesIndexed !== undefined ? ["Ochtend", "Middag"] : undefined
                 const lists = listsMondayPrimary === "morning" ? [itineraries, itinerariesIndexed] : [itinerariesIndexed, itineraries]
-                return <PlanningResultItineraries key={ title } title={ title } subtitles={ subtitles } lists={ lists } />
+                return <PlanningResultLists key={ title } title={ title } subtitles={ subtitles } lists={ lists } />
               })
           } ) }
           { listsMondayEvening.map((list, index) => {
               return list.itineraries.map((itineraries, index2) => {
                 const title = `Maandag Avond Team ${ index2 + 1 }`
-                return <PlanningResultItineraries key={ title } title={ title } lists={ [itineraries] } />
+                return <PlanningResultLists key={ title } title={ title } lists={ [itineraries] } />
               })
           } ) }
 
@@ -141,13 +141,13 @@ const PlanningResult: FC = () => {
                 const itinerariesIndexed = listsTuesdayToIndex[index] ? listsTuesdayToIndex[index].itineraries[index2] : undefined
                 const subtitles = itinerariesIndexed !== undefined ? ["Ochtend", "Middag"] : undefined
                 const lists = listsTuesdayPrimary === "morning" ? [itineraries, itinerariesIndexed] : [itinerariesIndexed, itineraries]
-                return <PlanningResultItineraries key={ title } title={ title } subtitles={ subtitles } lists={ lists } />
+                return <PlanningResultLists key={ title } title={ title } subtitles={ subtitles } lists={ lists } />
               })
           } ) }
           { listsTuesdayEvening.map((list, index) => {
               return list.itineraries.map((itineraries, index2) => {
                 const title = `Dinsdag Avond Team ${ index2 + 1 }`
-                return <PlanningResultItineraries key={ title } title={ title } lists={ [itineraries] } />
+                return <PlanningResultLists key={ title } title={ title } lists={ [itineraries] } />
               })
           } ) }
 
@@ -157,13 +157,13 @@ const PlanningResult: FC = () => {
                 const itinerariesIndexed = listsWednesdayToIndex[index] ? listsWednesdayToIndex[index].itineraries[index2] : undefined
                 const subtitles = itinerariesIndexed !== undefined ? ["Ochtend", "Middag"] : undefined
                 const lists = listsWednesdayPrimary === "morning" ? [itineraries, itinerariesIndexed] : [itinerariesIndexed, itineraries]
-                return <PlanningResultItineraries key={ title } title={ title } subtitles={ subtitles } lists={ lists } />
+                return <PlanningResultLists key={ title } title={ title } subtitles={ subtitles } lists={ lists } />
               })
           } ) }
           { listsWednesdayEvening.map((list, index) => {
               return list.itineraries.map((itineraries, index2) => {
                 const title = `Woensdag Avond Team ${ index2 + 1 }`
-                return <PlanningResultItineraries key={ title } title={ title } lists={ [itineraries] } />
+                return <PlanningResultLists key={ title } title={ title } lists={ [itineraries] } />
               })
           } ) }
 
@@ -174,13 +174,13 @@ const PlanningResult: FC = () => {
                 const itinerariesIndexed = listsThursdayToIndex[index] ? listsThursdayToIndex[index].itineraries[index2] : undefined
                 const subtitles = itinerariesIndexed !== undefined ? ["Ochtend", "Middag"] : undefined
                 const lists = listsThursdayPrimary === "morning" ? [itineraries, itinerariesIndexed] : [itinerariesIndexed, itineraries]
-                return <PlanningResultItineraries key={ title } title={ title } subtitles={ subtitles } lists={ lists } />
+                return <PlanningResultLists key={ title } title={ title } subtitles={ subtitles } lists={ lists } />
               })
           } ) }
           { listsThursdayEvening.map((list, index) => {
               return list.itineraries.map((itineraries, index2) => {
                 const title = `Donderdag Avond Team ${ index2 + 1 }`
-                return <PlanningResultItineraries key={ title } title={ title } lists={ [itineraries] } />
+                return <PlanningResultLists key={ title } title={ title } lists={ [itineraries] } />
               })
           } ) }
 
@@ -190,27 +190,27 @@ const PlanningResult: FC = () => {
                 const itinerariesIndexed = listsFridayToIndex[index] ? listsFridayToIndex[index].itineraries[index2] : undefined
                 const subtitles = itinerariesIndexed !== undefined ? ["Ochtend", "Middag"] : undefined
                 const lists = listsFridayPrimary === "morning" ? [itineraries, itinerariesIndexed] : [itinerariesIndexed, itineraries]
-                return <PlanningResultItineraries key={ title } title={ title } subtitles={ subtitles } lists={ lists } />
+                return <PlanningResultLists key={ title } title={ title } subtitles={ subtitles } lists={ lists } />
               })
           } ) }
           { listsFridayEvening.map((list, index) => {
               return list.itineraries.map((itineraries, index2) => {
                 const title = `Vrijdag Avond Team ${ index2 + 1 }`
-                return <PlanningResultItineraries key={ title } title={ title } lists={ [itineraries] } />
+                return <PlanningResultLists key={ title } title={ title } lists={ [itineraries] } />
               })
           } ) }
 
           { listsSaturday.map((list, index) => {
               return list.itineraries.map((itineraries, index2) => {
                 const title = `Zaterdag Team ${ index2 + 1 }`
-                return <PlanningResultItineraries key={ title } title={ title } lists={ [itineraries] } />
+                return <PlanningResultLists key={ title } title={ title } lists={ [itineraries] } />
               })
           } ) }
 
           { listsSunday.map((list, index) => {
               return list.itineraries.map((itineraries, index2) => {
                 const title = `Zondag Team ${ index2 + 1 }`
-                return <PlanningResultItineraries key={ title } title={ title } lists={ [itineraries] } />
+                return <PlanningResultLists key={ title } title={ title } lists={ [itineraries] } />
               })
           } ) }
 
@@ -220,18 +220,18 @@ const PlanningResult: FC = () => {
                 const subtitles = ["Ochtend", "Middag"]
                 const itinerariesAfternoon = listsDayAfternoon[index] ? listsDayAfternoon[index].itineraries[index2] : undefined
                 const lists = itinerariesAfternoon !== undefined ? [itineraries, itinerariesAfternoon] : [itineraries]
-                return <PlanningResultItineraries key={ title } title={ title } subtitles={ subtitles } lists={ lists } />
+                return <PlanningResultLists key={ title } title={ title } subtitles={ subtitles } lists={ lists } />
               })
           } ) }
           { listsDayEvening.map((list, index) => {
               return list.itineraries.map((itineraries, index2) => {
                 const title = `Avond Team ${ index2 + 1 }`
-                return <PlanningResultItineraries key={ title } title={ title } lists={ [itineraries] } />
+                return <PlanningResultLists key={ title } title={ title } lists={ [itineraries] } />
               })
           } ) }
 
           { showUnplannedCases &&
-            <PlanningResultItineraries title="Niet ingedeeld" lists={ [unplannedCases!] } hasCopyButton={ false } />
+            <PlanningResultLists title="Niet ingedeeld" lists={ [unplannedCases!] } hasCopyButton={ false } />
           }
         </>
       }
