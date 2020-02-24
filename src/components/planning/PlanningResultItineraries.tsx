@@ -7,7 +7,7 @@ import ErrorMessage from "../global/ErrorMessage"
 
 type Props = {
   title?: string
-  lists: BWVData[][]
+  lists: (BWVData[] | undefined)[]
   subtitles?: string[]
   hasCopyButton?: boolean
 }
@@ -87,10 +87,11 @@ const createClipboardText = (lists: BWVData[][], subtitles?: string[]) => {
 const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [], hasCopyButton = true }) => {
 
   const hasTitle = title !== undefined
-  const totalLength = lists.flat().length
+  const nonEmptyLists = lists.filter(list => list !== undefined) as BWVData[][]
+  const totalLength = nonEmptyLists.flat().length
   const fullTitle = hasTitle ? `${ title } ${ totalLength > 0 ? `(${ totalLength })` : "" } ` : ""
   const [isCopied, setIsCopied] = useState(false)
-  const text = createClipboardText(lists, subtitles)
+  const text = createClipboardText(nonEmptyLists, subtitles)
   const onClick = () => setIsCopied(true)
 
   const showCopyButton = hasCopyButton && totalLength > 0
@@ -106,6 +107,7 @@ const PlanningResultItineraries: FC<Props> = ({ title, lists, subtitles = [], ha
         }
       </H1Wrap>
       { lists.map((itineraries, index) => {
+        if (itineraries === undefined) return null
         const subtitle = subtitles[index]
         const hasSubtitle = subtitle !== undefined
         const length = itineraries.length
