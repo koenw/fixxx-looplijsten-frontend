@@ -16,6 +16,7 @@ declare type StreetSuffixLetter = string
 declare type Address = [StreetName, StreetNumber, StreetSuffix | undefined]
 declare type PostalCode = string
 declare type Stadium = string
+declare type Stadia = Stadium[]
 
 declare type BWVData = {
   case_id: CaseId

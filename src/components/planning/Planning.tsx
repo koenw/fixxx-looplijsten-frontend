@@ -5,7 +5,8 @@ import useOnChangeState from "../../hooks/useOnChangeState"
 import { getTitle } from "../../lib/days"
 import DayInputs from "./DayInputs"
 import { Button, Spinner } from "@datapunt/asc-ui"
-import createPlanningRequestBody, { openingDate, openingReasons } from "../../lib/createPlanningRequestBody"
+import { openingDate, openingReasons } from "../../config/planning"
+import createPlanningRequestBody from "../../lib/createPlanningRequestBody"
 import ErrorMessage from "../global/ErrorMessage"
 
 const DayPartWrap = styled.div`
@@ -82,7 +83,7 @@ const Planning: FC = () => {
 
   const onSubmit = (event: FormEvent) => {
     event.preventDefault()
-    const inputsNums = inputs.map(({ title, inputs }) => ({ title, inputs: inputs.map(input => parseInt(input[0], 10)) }))
+    const inputsNums = inputs.map(({ inputs }) => inputs.map(input => parseInt(input[0], 10))).flat(1)
     const params = createPlanningRequestBody(inputsNums)
     generate(params)
   }
