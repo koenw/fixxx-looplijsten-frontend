@@ -1,13 +1,16 @@
+type Indices = [number, number, number]
 type Action =
   | { type: "START_FETCHING" }
   | { type: "SET_RESULTS", payload: { results: PlanningData } }
   | { type: "SET_ERROR", payload: { errorMessage: ErrorMessage } }
+  | { type: "REMOVE_ITINERARY", payload: { indices: Indices } }
   | { type: "CLEAR" }
 
 export const createStartFetching = () : Action => ({ type: "START_FETCHING" })
 export const createSetResults = (results: PlanningData) : Action => ({ type: "SET_RESULTS", payload: { results } })
 export const createSetError = (errorMessage: ErrorMessage) : Action => ({ type: "SET_ERROR", payload: { errorMessage } })
 export const createClear = () : Action => ({ type: "CLEAR" })
+export const createRemoveItinerary = (indices: Indices) : Action => ({ type: "REMOVE_ITINERARY", payload: { indices } })
 
 export const initialState: PlanningState = {
   isFetching: false,
@@ -34,6 +37,21 @@ const reducer = (state: PlanningState, action: Action) : PlanningState => {
       const { errorMessage } = action.payload
       const isFetching = false
       return { ...state, isFetching, errorMessage }
+    }
+    case "REMOVE_ITINERARY": {
+      const { indices } = action.payload
+      const { results } = state
+      if (results === undefined) return { ...state }
+      const { lists, unplanned_cases: unplannedCases } = results
+      const list = lists[indices[0]]
+      if (list === undefined) return { ...state }
+      const itineraries = list.itineraries[indices[1]]
+      if (itineraries === undefined) return { ...state }
+      const itinerary = itineraries.splice(indices[2], 1)
+      lists[indices[0]].itineraries[indices[1]] = itineraries
+      unplannedCases.push(itinerary[0])
+      const updatedResults = { ...results, lists, unplanned_cases: unplannedCases }
+      return { ...state, results: updatedResults }
     }
     case "CLEAR":
       return initialState

@@ -1,8 +1,9 @@
-import React, { FC, useState, MouseEvent } from "react"
+import React, { FC, MouseEvent } from "react"
 import displayAddress from "../../lib/displayAddress"
 import styled from "styled-components"
 import MapsButton from "../itineraries/MapsButton"
 import ErrorMessage from "../global/ErrorMessage"
+import useGlobalState from "../../hooks/useGlobalState"
 
 type Props = {
   title?: string
@@ -48,17 +49,21 @@ const ErrorMessageWrap = styled.div`
 
 const PlanningResultItineraries: FC<Props> = ({ title, itineraries, isCopied = false }) => {
 
+  const {
+    planningActions: {
+      removeItinerary
+    }
+  } = useGlobalState()
+
   const hasTitle = title !== undefined
   const length = itineraries.length
   const titleDisplay = hasTitle ? `${ title } (${ length })` : ""
   const showErrorMessage = length === 0
 
-  const [itinerariesState, setItineraries] = useState(itineraries)
   const onClick = (index: number) => (event: MouseEvent<HTMLElement>) => {
     event.preventDefault()
-    const clone = [...itinerariesState]
-    clone.splice(index, 1)
-    setItineraries(clone)
+    const itinerary = itineraries[index]
+    removeItinerary(itinerary.case_id)
   }
 
   return (
@@ -81,7 +86,7 @@ const PlanningResultItineraries: FC<Props> = ({ title, itineraries, isCopied = f
           </Tr>
         </thead>
         <tbody>
-        { itinerariesState.map((itinerary, index) => {
+        { itineraries.map((itinerary, index) => {
             const {
               street_name: streetName,
               street_number: streetNumber,

@@ -4,7 +4,8 @@ import reducer, {
   createStartFetching,
   createSetResults,
   createSetError,
-  createClear
+  createClear,
+  createRemoveItinerary
 } from "./planningReducer"
 import { post, notOk, isForbidden } from "../lib/utils/fetch"
 import { getUrl } from "../config/api"
@@ -53,7 +54,24 @@ const usePlanning = () : [PlanningState, PlanningActions] => {
     dispatch(createClear())
   }
 
-  return [state, { initialize, generate, clear }]
+  const removeItinerary = (caseId: CaseId) => {
+    const { results } = state
+    if (results === undefined) return
+    let indices: [number, number, number] | undefined = undefined
+    results.lists
+      .forEach((list, index0) =>
+        list.itineraries.forEach(
+          (itineraries, index1) => {
+            const index2 = itineraries.findIndex(itinerary => itinerary.case_id === caseId)
+            if (index2 !== -1) indices = [index0, index1, index2]
+          }
+        )
+      )
+    if (indices === undefined) return
+    dispatch(createRemoveItinerary(indices))
+  }
+
+  return [state, { initialize, generate, clear, removeItinerary }]
 }
 
 export default usePlanning

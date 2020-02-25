@@ -76,7 +76,8 @@ const value = {
     planningActions: {
       initialize: noop,
       generate: (a: any) => {},
-      clear: noop
+      clear: noop,
+      removeItinerary: (a: CaseId) => {}
     },
 
     isAnonymous: false,
