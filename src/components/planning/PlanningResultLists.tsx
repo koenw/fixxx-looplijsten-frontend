@@ -9,6 +9,7 @@ type Props = {
   lists: (BWVData[] | undefined)[]
   subtitles?: string[]
   hasCopyButton?: boolean
+  isEditable?: boolean
 }
 
 const Div = styled.div`
@@ -48,7 +49,7 @@ const createClipboardText = (lists: BWVData[][], subtitles?: string[]) => {
   }).join(nl)
 }
 
-const PlanningResultLists: FC<Props> = ({ title, lists, subtitles = [], hasCopyButton = true }) => {
+const PlanningResultLists: FC<Props> = ({ title, lists, subtitles = [], hasCopyButton = true, isEditable = true }) => {
 
   const hasTitle = title !== undefined
   const nonEmptyLists = lists.filter(list => list !== undefined) as BWVData[][]
@@ -73,7 +74,13 @@ const PlanningResultLists: FC<Props> = ({ title, lists, subtitles = [], hasCopyB
       { lists.map((itineraries, index) => {
         const title = subtitles[index]
         return itineraries !== undefined ?
-          <PlanningResultItineraries key={ index } itineraries={ itineraries } title={ title } isCopied={ isCopied } /> :
+          <PlanningResultItineraries
+            key={ index }
+            itineraries={ itineraries }
+            title={ title }
+            isCopied={ isCopied }
+            isEditable={ isEditable } />
+          :
           null
       }) }
     </Div>

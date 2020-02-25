@@ -77,7 +77,8 @@ const value = {
       initialize: noop,
       generate: (a: any) => {},
       clear: noop,
-      removeItinerary: (a: CaseId) => {}
+      removeItinerary: (a: CaseId) => {},
+      addItinerary: (a: CaseId, b: CaseId) => {}
     },
 
     isAnonymous: false,

@@ -4,11 +4,13 @@ import styled from "styled-components"
 import MapsButton from "../itineraries/MapsButton"
 import ErrorMessage from "../global/ErrorMessage"
 import useGlobalState from "../../hooks/useGlobalState"
+import PlanningResultItinerariesAddForm from "./PlanningResultItinerariesAddForm"
 
 type Props = {
   title?: string
   itineraries: BWVData[]
   isCopied?: boolean
+  isEditable?: boolean
 }
 
 const Div = styled.div`
@@ -47,7 +49,7 @@ const ErrorMessageWrap = styled.div`
   margin: 12px 0
 `
 
-const PlanningResultItineraries: FC<Props> = ({ title, itineraries, isCopied = false }) => {
+const PlanningResultItineraries: FC<Props> = ({ title, itineraries, isCopied = false, isEditable = true }) => {
 
   const {
     planningActions: {
@@ -65,6 +67,11 @@ const PlanningResultItineraries: FC<Props> = ({ title, itineraries, isCopied = f
     const itinerary = itineraries[index]
     removeItinerary(itinerary.case_id)
   }
+
+  const showAddForm = isEditable && itineraries.length > 0
+  const caseId = itineraries[0].case_id
+
+  const showDeleteButton = isEditable && itineraries.length > 1
 
   return (
     <Div className="PlanningResultItineraries">
@@ -105,7 +112,11 @@ const PlanningResultItineraries: FC<Props> = ({ title, itineraries, isCopied = f
                 <Td faded={ isCopied }>{ caseReason }</Td>
                 <Td faded={ isCopied }>{ stadium }</Td>
                 <Td><a href={ `/cases/${ caseId }` }>bekijk</a></Td>
-                <Td><a onClick={ onClick(index) } href="">verwijder</a></Td>
+                <Td>
+                  { showDeleteButton &&
+                    <a onClick={ onClick(index) } href="">verwijder</a>
+                  }
+                </Td>
               </Tr>
             )
           })
@@ -116,6 +127,10 @@ const PlanningResultItineraries: FC<Props> = ({ title, itineraries, isCopied = f
         <ErrorMessageWrap>
           <ErrorMessage text="Onvoldoende zaken beschikbaar om deze lijst te genereren" />
         </ErrorMessageWrap>
+      }
+      {
+        showAddForm &&
+        <PlanningResultItinerariesAddForm caseId={ caseId } />
       }
     </Div>
   )

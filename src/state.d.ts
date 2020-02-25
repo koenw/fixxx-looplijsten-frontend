@@ -70,4 +70,5 @@ declare type PlanningActions = {
   generate: (a: any) => void
   clear: () => void
   removeItinerary: (a: CaseId) => void
+  addItinerary: (a: CaseId, b: CaseId) => void
 }

@@ -4,9 +4,9 @@
   "private": true,
   "homepage": "/looplijsten/",
   "dependencies": {
-    "@datapunt/asc-assets": "^0.17.7",
-    "@datapunt/asc-core": "^0.17.7",
-    "@datapunt/asc-ui": "^0.17.7",
+    "@datapunt/asc-assets": "^0.18.1",
+    "@datapunt/asc-core": "^0.18.1",
+    "@datapunt/asc-ui": "^0.18.2",
     "@reach/router": "^1.2.1",
     "@types/dompurify": "^2.0.1",
     "@types/jest": "^24.0.23",

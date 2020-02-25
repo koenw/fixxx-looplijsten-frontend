@@ -231,7 +231,7 @@ const PlanningResult: FC = () => {
           } ) }
 
           { showUnplannedCases &&
-            <PlanningResultLists title="Niet ingedeeld" lists={ [unplannedCases!] } hasCopyButton={ false } />
+            <PlanningResultLists title="Niet ingedeeld" lists={ [unplannedCases!] } hasCopyButton={ false } isEditable={ false } />
           }
         </>
       }

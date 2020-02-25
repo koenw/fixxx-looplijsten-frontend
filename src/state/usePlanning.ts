@@ -5,7 +5,8 @@ import reducer, {
   createSetResults,
   createSetError,
   createClear,
-  createRemoveItinerary
+  createRemoveItinerary,
+  createAddItinerary
 } from "./planningReducer"
 import { post, notOk, isForbidden } from "../lib/utils/fetch"
 import { getUrl } from "../config/api"
@@ -71,7 +72,30 @@ const usePlanning = () : [PlanningState, PlanningActions] => {
     dispatch(createRemoveItinerary(indices))
   }
 
-  return [state, { initialize, generate, clear, removeItinerary }]
+  const addItinerary = (siblingCaseId: CaseId, caseId: CaseId) => {
+    const { results } = state
+    if (results === undefined) return
+    let indices: [number, number] | undefined = undefined
+    results.lists
+      .forEach((list, index0) =>
+        list.itineraries.forEach(
+          (itineraries, index1) => {
+            const index2 = itineraries.findIndex(itinerary => itinerary.case_id === siblingCaseId)
+            if (index2 !== -1) indices = [index0, index1]
+          }
+        )
+      )
+    console.log(indices)
+    if (indices === undefined) return
+    const { unplanned_cases: unplannedCases } = results
+    const itinerary = unplannedCases.find(itinerary => itinerary.case_id === caseId)
+    console.log(itinerary)
+    if (itinerary === undefined) return
+    console.log(itinerary, indices)
+    dispatch(createAddItinerary(itinerary, indices))
+  }
+
+  return [state, { initialize, generate, clear, removeItinerary, addItinerary }]
 }
 
 export default usePlanning
