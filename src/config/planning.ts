@@ -189,6 +189,6 @@ export const listsDay = (dayOfWeek: number) => {
     const isSunday = dayOfWeek === 6
     const start = isSunday ? 16 : dayOfWeek * 3
     const length = isWeekend ? 1 : 3
-    const lists = listsWeek.splice(start, length)
+    const lists = listsWeek.slice(start, start + length)
     return lists
   }

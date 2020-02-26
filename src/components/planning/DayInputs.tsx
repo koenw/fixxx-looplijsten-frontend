@@ -1,11 +1,11 @@
 import React, { FC } from "react"
 import styled from "styled-components"
-import Input from "../styled/Input"
+import NumberInput from "./NumberInput"
 
 type Input = [string, OnChangeHandler]
 type Inputs = Input[]
 type Props = {
-  title: string
+  title?: string
   inputs: Inputs
 }
 
@@ -19,20 +19,19 @@ const Label = styled.label`
   width: 150px
 `
 
-const StyledInput = styled(Input)`
-  margin-right: 4px
-  width: 70px
-`
-
 const DayInputs: FC<Props> = ({ title, inputs }) => {
+
+  const showTitle = title !== undefined
 
   return (
     <Div className="DayInputs">
-      <Label>{ title }</Label>
+      { showTitle &&
+        <Label>{ title }</Label>
+      }
       {
         inputs.map((input, index) => {
           const [value, onChange] = input
-          return <StyledInput key={ index } type="number" value={ value } onChange={ onChange } min="0" step="1" />
+          return <NumberInput key={ index } value={ value } onChange={ onChange } />
         })
       }
     </Div>
