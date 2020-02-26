@@ -1,4 +1,5 @@
 {
+  "directoryListing": false,
   "rewrites": [
 
     { "source": "login", "destination": "/index.html" },
