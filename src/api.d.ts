@@ -135,6 +135,11 @@ type RelatedCase = {
   case_id: string
   case_reason: string
 }
+type Statement = {
+  user: string
+  date: string
+  statement: string
+}
 declare type Case = {
   bag_data: BagData | BagDataError
   brk_data: BrkData | BrkDataError
@@ -146,6 +151,7 @@ declare type Case = {
   import_stadia: ImportStadia[]
   vakantie_verhuur: VakantieVerhuur
   related_cases: RelatedCase[]
+  statements: Statement[]
 }
 declare type Cases = Case[]
 

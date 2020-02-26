@@ -25,6 +25,10 @@ const HrSpaced = styled(Hr)`
   margin: 24px 0
 `
 
+const P = styled.p`
+  margin-bottom: 16px
+`
+
 const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
 
   console.log(caseItem)
@@ -216,6 +220,11 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
     return acc
   }, [])
 
+  // Statements
+  const statements = caseItem.statements.map(
+    ({ user, date, statement }) => <P>{ formatDate(date, true) }<br /><strong>{ user }</strong><br />{ statement }</P>)
+  const showStatements = statements !== undefined
+
   // Stadia
   const stadiums = caseItem.import_stadia.map(stadium => {
     return ({
@@ -297,7 +306,13 @@ const CaseDetail: FC<Props> = ({ caseId, caseItem }) => {
       }
       <CaseDetailSection
         title="Logboek"
-        data= { logboek.length ? logboek : ["-"] } />
+        data={ logboek.length ? logboek : ["-"] } />
+      {
+      showStatements &&
+      <CaseDetailSection
+        title="Mededelingen (kladblok)"
+        data={ statements } />
+      }
       <CaseDetailSection
         title="Stadia"
         data= { stadia } />
