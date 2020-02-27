@@ -6,17 +6,21 @@ import useOnChangeStateMultiple from "../../hooks/useOnChangeStateMultiple"
 import days from "../../lib/days"
 import NumberInput from "./NumberInput"
 import StadiaSelect from "./StadiaSelect"
+import StadiaSelectMultiple from "./StadiaSelectMultiple"
 import { Button, Spinner, Select } from "@datapunt/asc-ui"
 import { openingDate, openingReasons, listsDay } from "../../config/planning"
 import createPlanningRequestBody from "../../lib/createPlanningRequestBody"
 import ErrorMessage from "../global/ErrorMessage"
 
 const SelectWrap = styled.div`
-  width: 368px
+  width: 300px
   margin-bottom: 36px
 `
 const DayPartWrap = styled.div`
   margin-top: 36px
+  * {
+    vertical-align: top
+  }
 `
 const Div = styled.div`
   display: flex
@@ -34,12 +38,23 @@ const InlineLabel = styled(Label)`
 const LabelsWrap = styled.div`
   padding-left: 100px
 `
+const LabelInput = styled(Label)`
+  display: inline-block
+  width: 80px
+`
+const width = "240px"
+const LabelSelect = styled(Label)`
+  display: inline-block
+  width: ${ width }
+`
 const SelectsWrap = styled.div`
   display: inline-block
-  width: 200px
+  width: ${ width }
   margin-right: 4px
+  select {
+    width: ${ width }
+  }
 `
-
 const ButtonWrap = styled.div`
   display: flex
   justify-content: flex-end
@@ -158,10 +173,10 @@ const DayPlanning: FC = () => {
           </SelectWrap>
 
           <LabelsWrap>
-            <Label>Aantal lijsten</Label>
-            <Label>Primair stadium</Label>
-            <Label>Secundaire stadia</Label>
-            <Label>Geëxcludeerde stadia</Label>
+            <LabelInput>lijsten</LabelInput>
+            <LabelSelect>Primair stadium</LabelSelect>
+            <LabelSelect>Secundaire stadia</LabelSelect>
+            <LabelSelect>Geëxcludeerde stadia</LabelSelect>
           </LabelsWrap>
 
           <DayPartWrap>
@@ -171,10 +186,10 @@ const DayPlanning: FC = () => {
               <StadiaSelect disabled={ morning === "0" } selected={ [morningPrimaryStadium] } onChange={ onChangeMorningPrimaryStadium } />
             </SelectsWrap>
             <SelectsWrap>
-              <StadiaSelect disabled={ morning === "0" } multiple={ true } selected={ morningSecondaryStadia } onChange={ onChangeMorningSecondaryStadia } />
+              <StadiaSelectMultiple disabled={ morning === "0" } selected={ morningSecondaryStadia } onChange={ onChangeMorningSecondaryStadia } />
             </SelectsWrap>
             <SelectsWrap>
-              <StadiaSelect disabled={ morning === "0" } multiple={ true } selected={ morningExcludeStadia } onChange={ onChangeMorningExcludeStadia } />
+              <StadiaSelectMultiple disabled={ morning === "0" } selected={ morningExcludeStadia } onChange={ onChangeMorningExcludeStadia } />
             </SelectsWrap>
           </DayPartWrap>
           <DayPartWrap>
@@ -184,10 +199,10 @@ const DayPlanning: FC = () => {
               <StadiaSelect disabled={ afternoon === "0" } selected={ [afternoonPrimaryStadium] } onChange={ onChangeAfternoonPrimaryStadium } />
             </SelectsWrap>
             <SelectsWrap>
-              <StadiaSelect disabled={ afternoon === "0" } multiple={ true } selected={ afternoonSecondaryStadia } onChange={ onChangeAfternoonSecondaryStadia } />
+              <StadiaSelectMultiple disabled={ afternoon === "0" } selected={ afternoonSecondaryStadia } onChange={ onChangeAfternoonSecondaryStadia } />
             </SelectsWrap>
             <SelectsWrap>
-              <StadiaSelect disabled={ afternoon === "0" } multiple={ true } selected={ afternoonExcludeStadia } onChange={ onChangeAfternoonExcludeStadia } />
+              <StadiaSelectMultiple disabled={ afternoon === "0" } selected={ afternoonExcludeStadia } onChange={ onChangeAfternoonExcludeStadia } />
             </SelectsWrap>
           </DayPartWrap>
           <DayPartWrap>
@@ -197,10 +212,10 @@ const DayPlanning: FC = () => {
               <StadiaSelect disabled={ evening === "0" } selected={ [eveningPrimaryStadium] } onChange={ onChangeEveningPrimaryStadium } />
             </SelectsWrap>
             <SelectsWrap>
-              <StadiaSelect disabled={ evening === "0" } multiple={ true } selected={ eveningSecondaryStadia } onChange={ onChangeEveningSecondaryStadia } />
+              <StadiaSelectMultiple disabled={ evening === "0" } selected={ eveningSecondaryStadia } onChange={ onChangeEveningSecondaryStadia } />
             </SelectsWrap>
             <SelectsWrap>
-              <StadiaSelect disabled={ evening === "0" } multiple={ true } selected={ eveningExcludeStadia } onChange={ onChangeEveningExcludeStadia } />
+              <StadiaSelectMultiple disabled={ evening === "0" } selected={ eveningExcludeStadia } onChange={ onChangeEveningExcludeStadia } />
             </SelectsWrap>
           </DayPartWrap>
 
