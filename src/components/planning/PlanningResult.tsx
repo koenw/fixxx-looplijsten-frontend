@@ -168,7 +168,6 @@ const PlanningResult: FC = () => {
           } ) }
 
           { listsThursdayToMap.map((list, index) => {
-              console.log("Donderdag Morning", list.itineraries)
               return list.itineraries.map((itineraries, index2) => {
                 const title = `Donderdag Dag Team ${ index2 + 1 }`
                 const itinerariesIndexed = listsThursdayToIndex[index] ? listsThursdayToIndex[index].itineraries[index2] : undefined

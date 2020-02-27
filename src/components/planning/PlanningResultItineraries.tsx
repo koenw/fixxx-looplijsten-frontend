@@ -69,7 +69,7 @@ const PlanningResultItineraries: FC<Props> = ({ title, itineraries, isCopied = f
   }
 
   const showAddForm = isEditable && itineraries.length > 0
-  const caseId = itineraries[0].case_id
+  const caseId = itineraries.length > 0 ? itineraries[0].case_id : ""
 
   const showDeleteButton = isEditable && itineraries.length > 1
 
