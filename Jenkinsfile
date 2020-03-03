@@ -21,6 +21,7 @@ pipeline {
   environment {
     DOCKER_IMAGE = "fixxx/looplijsten-frontend"
     DOCKER_REGISTRY = "repo.secure.amsterdam.nl"
+    PROJECT = "fixxx-looplijsten-frontend"
   }
 
   stages {
@@ -29,6 +30,24 @@ pipeline {
         checkout scm
         script {
           env.COMMIT_HASH = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+        }
+      }
+    }
+
+    stage("Lint") {
+      steps {
+        script {
+          sh "docker-compose -p ${env.PROJECT} up --exit-code-from lint"
+          sh "docker-compose -p ${env.PROJECT} down --rmi local -v || true"
+        }
+      }
+    }
+
+    stage("Test") {
+      steps {
+        script {
+          sh "docker-compose -p ${env.PROJECT} up --exit-code-from test"
+          sh "docker-compose -p ${env.PROJECT} down --rmi local -v || true"
         }
       }
     }
